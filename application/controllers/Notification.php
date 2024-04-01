@@ -1,0 +1,95 @@
+<?php
+defined("BASEPATH") or exit("No direct script access allowed");
+
+class Notification extends MY_controller
+{
+
+	function __construct()
+    {
+        parent::__construct();
+        $this->load->library("session");
+        $this->load->model("notification_model");
+        $base_url = $this->config->item("base_url");
+        $this->smarty->assign("base_url", $base_url);
+    }
+    public function daily_attendance_log()
+    {
+        $current_date = date("Y-m-d");
+        $attendance_data = $this->notification_model->get_all_attendance($current_date);
+        // pr($attendance_data,1);
+        $employee_wise_data = [];
+        foreach ($attendance_data as $key => $value) {
+            $employee_wise_data[$value["employee_id"]][] = [
+                "attendance_date" => $value["attendance_date"],
+            ];
+        }
+
+        $insert_attendance_arr = [];
+        foreach ($employee_wise_data as $key => $value) {
+            $employee_attendance_date = array_column($value, "attendance_date");
+            if (!in_array($current_date, $employee_attendance_date)) {
+                $insert_attendance_arr[] = [
+                    "employee_id" => $key,
+                    "attendance_date" => $current_date,
+                    "attendance_in_time" => "",
+                    "attendance_out_time" => "",
+                ];
+            }
+        }
+
+        if (count($insert_attendance_arr) > 0) {
+            $inser_id = $this->notification_model->insert_attendance_log(
+                $insert_attendance_arr
+            );
+        }
+    }
+
+    public function auto_out_log()
+    {
+        $timeString = $this->config->item("shift_out_time");
+
+        // Convert time string to timestamp
+        $timestamp = strtotime($timeString);
+
+        // Convert timestamp to desired time format
+        $timeFormatted = date("H:i:s", $timestamp);
+
+        $current_date = date("Y-m-d");
+
+        $current_time = strtotime(date("H:i:s"));
+        if ($timestamp < $current_time) {
+            $attendance_data = $this->notification_model->get_all_attendance_in_data(
+                $current_date
+            );
+
+            $auto_out_arr = [];
+            foreach ($attendance_data as $key => $value) {
+                if (
+                    $value["attendance_in_time"] != "0000-00-00 00:00:00" &&
+                    $value["attendance_in_time"] != null
+                ) {
+                    if (
+                        $value["attendance_out_time"] ==
+                            "0000-00-00 00:00:00" ||
+                        $value["attendance_out_time"] != null
+                    ) {
+                        $auto_out_arr[] = [
+                            "attendance_id" => $value["attendance_id"],
+                            "attendance_out_time" =>
+                                $current_date . " " . $timeFormatted,
+                        ];
+                    }
+                }
+                # code...
+            }
+
+            if (count($auto_out_arr) > 0) {
+                $this->notification_model->auto_out_attendance($auto_out_arr);
+            }
+        }
+    }
+
+
+}
+
+?>
