@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-03-31 23:14:58
+/* Smarty version 4.3.2, created on 2024-04-01 15:20:25
   from '/var/www/html/extra_work/employee/application/views/templates/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_6609a11af36c08_01399461',
+  'unifunc' => 'content_660a8361bad5f5_87590680',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c800c7225553438cb904ed53cd59595818aa9f86' => 
     array (
       0 => '/var/www/html/extra_work/employee/application/views/templates/header.tpl',
-      1 => 1711907098,
+      1 => 1711965023,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6609a11af36c08_01399461 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660a8361bad5f5_87590680 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!--  -->
 <!doctype html>
 <html lang="en">
@@ -239,6 +239,14 @@ echo $_prefixVariable2;?>
                   <i class="ti ti-user-scan"></i>
                 </span>
                 <span class="hide-menu">Shift Master</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./employee-shift.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users-plus"></i>
+                </span>
+                <span class="hide-menu">Shift Groups</span>
               </a>
             </li>
 

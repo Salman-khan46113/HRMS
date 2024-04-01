@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-03-31 22:54:33
+/* Smarty version 4.3.2, created on 2024-04-01 16:51:51
   from '/var/www/html/extra_work/employee/application/views/templates/employee_shift.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66099c510d8db1_96995075',
+  'unifunc' => 'content_660a98cf424195_77690513',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '69a52242bf9132fb192134bbde0d70377a268707' => 
     array (
       0 => '/var/www/html/extra_work/employee/application/views/templates/employee_shift.tpl',
-      1 => 1711905217,
+      1 => 1711970510,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66099c510d8db1_96995075 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660a98cf424195_77690513 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
@@ -232,6 +232,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+									<label for="department" class="form-label">Department</label>
+									<select class="form-select department" name="department" id="department">
+										<option value="">Select Department</option>
+										<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['departments']->value, 'departments_val');
+$_smarty_tpl->tpl_vars['departments_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['departments_val']->value) {
+$_smarty_tpl->tpl_vars['departments_val']->do_else = false;
+?>
+											<option value="<?php echo $_smarty_tpl->tpl_vars['departments_val']->value['department_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['departments_val']->value['departmen_name'];?>
+ [<?php echo $_smarty_tpl->tpl_vars['departments_val']->value['department_code'];?>
+]</option>
+										<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+									</select>
+								</div>
 								<div class="mb-3">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
@@ -253,7 +272,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 								</div>
 								<div class="mb-3">
 									<label for="employee_ids" class="form-label">Employee</label>
-									<select class="form-select employee_ids" name="employee_ids" id="employee_ids">
+									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 
 										<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['employee']->value, 'employee_row', false, 'employee_index');
@@ -398,7 +417,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     width: 100% !important;
 }
 </style>
+<?php echo '<script'; ?>
+ type="text/javascript" >
+ var selected_company = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['selected_company']->value);
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
 
+<?php echo '</script'; ?>
+>
 <?php echo '<script'; ?>
  src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
 >

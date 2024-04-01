@@ -13,11 +13,15 @@ class Shift_model extends CI_Model
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
-  public function get_shift()
+  public function get_shift($department_id = '')
   {
+    $where = '';
+    if($department_id > 0){
+      $where = "AND dm.department_id = ".$department_id;
+    }
     $this->db->select("s.*,c.company_name,dm.departmen_name as departmen_name,dm.department_code as department_code");
     $this->db->from("shift_master as s");
-    $this->db->join('department_master as dm', 'dm.department_id = s.department_id');
+    $this->db->join('department_master as dm', 'dm.department_id = s.department_id '.$where);
     $this->db->join("companies as c", "c.company_id = s.company_id ");
     $company_id = getCompanyId();
         if($company_id > 0){
@@ -161,9 +165,9 @@ class Shift_model extends CI_Model
 
   public function get_employee()
   {
-    $this->db->select("*");
+    $this->db->select("em.*");
     $this->db->from("employee_master as em");
-    $this->db->where("em.role !=", "admin");
+    $this->db->where_not_in("em.role ", ["admin","arom"]);
     $this->db->where("em.sys_record_delete !=", 1);
     $company_id = getCompanyId();
     if($company_id > 0){
@@ -179,5 +183,21 @@ class Shift_model extends CI_Model
     $this->db->where("employee_shift_id", $id);
     $result = $this->db->delete("employee_shift");
     return $result;
+  }
+
+  public function get_department_employee($department_id = '')
+  {
+    $this->db->select('em.employee_id,CONCAT(em.first_name," ",em.last_name," (",em.employee_code,")") as employee_name');
+    $this->db->from("employee_master as em");
+    $this->db->where("em.department ", $department_id);
+    $this->db->where_not_in("em.role", ["admin","arom"]);
+    $this->db->where("em.sys_record_delete !=", 1);
+    $company_id = getCompanyId();
+    if($company_id > 0){
+      $this->db->where("em.company_id", $company_id);
+    }
+    $result_obj = $this->db->get();
+    $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+    return $ret_data;
   }
 }

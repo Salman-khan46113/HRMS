@@ -21808,7 +21808,12 @@ body.dashboard-page-body .main-middle-container .sub-header{
     background: #cbc3c3 !important;
 }
 
+/*disable chosen */
+.chosen-disabled * {
+    cursor: not-allowed;
+}
 
 .modal .select2-container{
     width: 100% !important;
 }
+

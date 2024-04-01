@@ -26,6 +26,7 @@
 							<!-- <th scope="col">#</th> -->
 							<th scope="col">Designation Name</th>
 							<th scope="col">Department Name</th>
+							<th scope="col">Grads</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -36,7 +37,8 @@
 							<!-- <td>{$designation_index + 1}</td> -->
 							<td>{$designation_row.designation_name}</td>
 							<td>{$designation_row.departmen_name}<br>({$designation_row.department_code})</td>
-							<td><span  class="edit_holiday me-2 text-secondary" data-id='{$designation_row.id}' data-designation='{$designation_row.designation_name}' data-departmet='{$designation_row.department_id}'><i title="Edit" class=" la-edit ti ti-edit cursor" ></i></span>
+							<td>{$designation_row.grads}</td>
+							<td><span  class="edit_holiday me-2 text-secondary" data-id='{$designation_row.id}' data-designation='{$designation_row.designation_name}' data-departmet='{$designation_row.department_id}' data-grads='{$designation_row.grads}'><i title="Edit" class=" la-edit ti ti-edit cursor" ></i></span>
               <span class="delete_designation text-danger" data-id='{$designation_row.id}' ><i class=" la-trash cursor ti ti-trash" title="Remove"></i></span></td>
 
 					</tr>
@@ -78,18 +80,32 @@
 									<label for="designationName" class="form-label">Designation Name</label>
 									<input type="text" class="form-control designation_name" id="designation_name" name="designation_name"  placeholder="Enter Designation Name">
 								</div>
-								<div class="col-12 ">
-                                <div class="department-box ">
-                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Department</p>
-                                    <div class=" select-box">
-                                    <select class="form-select form-control w-100" name="department" id="department">
-                                    	{foreach from=$departmen item=department_val}
-                                            <option value="" >Select Department</option>
-                                            <option value="{$department_val.department_id}" >{$department_val.departmen_name} [{$department_val.department_code}]</option>
-                                        {/foreach}
-                                    </select>
+								<div class="col-12 mb-3">
+	                                <div class="department-box ">
+	                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Department</p>
+	                                    <div class=" select-box">
+		                                    <select class="form-select form-control w-100" name="department" id="department">
+		                                    	{foreach from=$departmen item=department_val}
+		                                            <option value="{$department_val.department_id}" >{$department_val.departmen_name} [{$department_val.department_code}]</option>
+		                                        {/foreach}
+		                                    </select>
+	                                	</div>
+	                                </div>
                                 </div>
-                                </div>  
+                                <div class="col-12 mb-3">  
+	                                <div class="grads-box ">
+		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grads</p>
+		                                    <div class=" select-box">
+		                                    <select class="form-select form-control w-100" name="grads" id="grads">
+		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="I" >I</option>
+		                                    	 <option value="II" >II</option>
+		                                    	 <option value="III" >III</option>
+		                                          
+		                                    </select>
+		                                </div>
+	                                </div>
+
                                     
                             </div>
 								<input type="hidden" class="form-control designation_id"  name="designation_id" >

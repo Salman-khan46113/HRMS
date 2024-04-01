@@ -93,15 +93,19 @@ class Master_model extends CI_Model
 
     public function designation_action($data)
     {
-        if (empty($data["id"])) {
-            $this->db->select("*");
-            $this->db->from("designation_master");
-            $this->db->where("designation_name", $data["designation_name"]);
-            $result_obj = $this->db->get();
-            $ret_data = is_object($result_obj)
-                ? $result_obj->result_array()
-                : [];
 
+        $this->db->select("*");
+        $this->db->from("designation_master");
+        $this->db->where("designation_name", $data["designation_name"]);
+        $this->db->where("department_id", $data["department_id"]);
+        $this->db->where("grads", $data["grads"]);
+        if (!empty($data["id"])) {
+             $this->db->where("id !=", $data["id"]);
+        }
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+
+        if (empty($data["id"])) {
             if (count($ret_data) > 0) {
                 $insert_id = -1;
             } else {
@@ -111,13 +115,19 @@ class Master_model extends CI_Model
 
             return $insert_id;
         } else {
-            $this->db->where("id", $data["id"]);
-            $result = $this->db->update("designation_master", $data);
-            if ($result == 1) {
-                $updateData = "update";
-            } else {
-                $updateData = "Not update";
+            if (count($ret_data) > 0) {
+                $updateData = -1;
+            }else{
+                $this->db->set("designation_name",$data["designation_name"]);
+                $this->db->where("id", $data["id"]);
+                $result = $this->db->update("designation_master");
+                if ($result == 1) {
+                    $updateData = "update";
+                } else {
+                    $updateData = "Not update";
+                }
             }
+            
             return $updateData;
         }
     }

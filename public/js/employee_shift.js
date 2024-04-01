@@ -4,8 +4,9 @@ $(document).ready(function () {
 
   $(".add-leave").on("click", function () {
     $(".group_title").val("");
-    $(".shift_id").val("").trigger('chosen:updated');
-    $(".employee_ids").val([]).trigger('change');
+    var option_arr = '<option value="">Select Shift</option>';
+    $(".shift_id").html(option_arr).val('').trigger('chosen:updated');
+    $(".employee_ids").html('').val('').trigger('change');
     $(".employee_shift_id").val('');
     $("#start_date").val('');
     $("#end_date").val('');
@@ -30,21 +31,21 @@ $(document).ready(function () {
      selectOtherMonths: true, yearRange: "c-100:c+100"
   })
 
-  $("#shift_id").chosen();
-  $("#department,#designation").select2({
-        placeholder: "Select Employee",
-      allowClear: false,
-      autocomplete:"on",
-      multiple:false,
-    });
+  $("#department,#shift_id").chosen();
+  // $("#designation").select2({
+  //     placeholder: "Select Employee",
+  //     allowClear: false,
+  //     autocomplete:"on",
+  //     multiple:false,
+  //   });
   $("#employee_ids").select2({
-    placeholder: "Select Employee", minDate: new Date(),
+    placeholder: "Select Employee",
+     minDate: new Date(),
     allowClear: false,
-    autocomplete:"on",
+    // autocomplete:"on",
     multiple:true,
   });
   $(document).on("click", ".edit_shift", function () {
-
     var id = $(this).data("id");
     $.ajax({
       type: "POST",
@@ -56,10 +57,9 @@ $(document).ready(function () {
       success: function (response) {
         var responseObject = JSON.parse(response);
         var data = responseObject.shiftDetails;
-        console.log(response);
+        $("#department").val(data.department_id).trigger('chosen:updated');
+        get_edit_data(data.department_id,data.shift_id,data.employee_ids)
         $(".group_title").val(data.group_title);
-        $(".shift_id").val(data.shift_id).trigger('chosen:updated');
-        $(".employee_ids").val(data.employee_ids).trigger('change');
         $(".employee_shift_id").val(data.employee_shift_id);
         $("#start_date").val(data.start_date);
         $("#end_date").val(data.end_date);
@@ -68,45 +68,18 @@ $(document).ready(function () {
       error: function (error) {},
     });
   });
-  $(document).on("click", ".view_shift", function () {
+
+  $(document).on("change", "#department", function () {
     // shift_details_popup.show();
-    var id = $(this).data("id");
-    $.ajax({
-      type: "POST",
-      url: "shift/get_employee_shift_view_details",
-      data: {
-        edit: id,
-      },
-
-      success: function (response) {
-        var responseObject = JSON.parse(response);
-        var shiftDetails = responseObject.shiftDetails;
-        var employees = responseObject.employees;
-        $('.shift_employee_details').html("");
-        $("#group_title_v").text(shiftDetails.group_title);
-        $("#shift_name_v").text(shiftDetails.shift_name);
-        $("#shift_type_v").text(shiftDetails.shift_type);
-        $("#start_date_v").text(shiftDetails.start_date_display);
-        $("#end_date_v").text(shiftDetails.end_date_display);
-        $("#start_time_v").text(shiftDetails.start_time);
-        $("#end_time_v").text(shiftDetails.end_time);
-        $("#employee_count_v").text(shiftDetails.employee_count);
-        $.each(employees, function(index, employee) {
-          var fullName = employee.first_name + (employee.middle_name ? ' ' + employee.middle_name : '') + ' ' + employee.last_name;
-          var newRow = '<tr>' +
-          '<td>' + (index + 1) + '</td>' +
-          '<td>' + fullName + '</td>' +
-          '<td>' + employee.employee_code + '</td>' +
-          '<td>' + employee.department + '</td>' +
-          '</tr>';
-
-          $('.shift_employee_details').append(newRow);
-        });
-
-        shift_details_popup.show();
-      },
-      error: function (error) {},
-    });
+    var department_id = $(this).val();
+    if(department_id > 0){
+      get_edit_data(department_id)
+    }else{
+      var option_arr = '<option value="">Select Shift</option>';
+      $(".shift_id").html(option_arr).trigger('chosen:updated');
+      $(".employee_ids").html('').trigger('change');
+    }
+    
   });
 
   $(document).on("click",".delete_shift",function () {
@@ -219,3 +192,43 @@ $(document).ready(function () {
     }
   });
 });
+
+function get_edit_data(department_id = '',shift_id = '',employe_ids = ''){
+  console.log(department_id)
+  $.ajax({
+        type: "POST",
+        url: "shift/get_shits",
+        data: {
+          department_id: department_id,
+          selected_company:selected_company
+        },
+        success: function (response) {
+          var responseObject = JSON.parse(response);
+          var employee = responseObject.employee;
+          var shift = responseObject.shift;
+          var option_arr = '';
+          for (var i = 0; i < employee.length; i++) {
+            option_arr += "<option value='" + employee[i]["employee_id"] + "'>" + employee[i]["employee_name"] + "</option>";
+          }
+          
+          if(employe_ids.length > 0){
+              $("#employee_ids").html(option_arr).val(["2","3"]).trigger('change');
+          }else{
+              $("#employee_ids").html(option_arr).trigger('change')
+          }
+          option_arr = '<option value="">Select Shift</option>';
+          for (var i = 0; i < shift.length; i++) {
+            option_arr += "<option value='" + shift[i]["id"] + "'>" + shift[i]["shift_name"] + "("+shift[i]["shift_type"]+")</option>";
+          }
+
+          if(shift_id > 0){
+             $("#shift_id").html(option_arr).val(shift_id).trigger('chosen:updated');
+          }else{
+            $("#shift_id").html(option_arr).trigger('chosen:updated')
+          }
+
+          
+        },
+        error: function (error) {},
+      });
+}

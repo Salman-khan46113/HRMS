@@ -165,6 +165,15 @@
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+									<label for="department" class="form-label">Department</label>
+									<select class="form-select department" name="department" id="department">
+										<option value="">Select Department</option>
+										{foreach from=$departments item=departments_val}
+											<option value="{$departments_val.department_id}">{$departments_val.departmen_name} [{$departments_val.department_code}]</option>
+										{/foreach}
+									</select>
+								</div>
 								<div class="mb-3">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
@@ -176,7 +185,7 @@
 								</div>
 								<div class="mb-3">
 									<label for="employee_ids" class="form-label">Employee</label>
-									<select class="form-select employee_ids" name="employee_ids" id="employee_ids">
+									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 
 										{foreach $employee as $employee_index => $employee_row}
 										<option value="{$employee_row.employee_id }">{$employee_row.first_name} {$employee_row.middle_name} {$employee_row.last_name} ({$employee_row.employee_code})</option>
@@ -309,7 +318,9 @@
     width: 100% !important;
 }
 </style>
-
+<script type="text/javascript" >
+ var selected_company = {{$selected_company|json_encode}}
+</script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>

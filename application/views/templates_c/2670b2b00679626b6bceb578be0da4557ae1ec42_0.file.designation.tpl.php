@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-03-29 00:48:33
+/* Smarty version 4.3.2, created on 2024-04-01 19:25:56
   from '/var/www/html/extra_work/employee/application/views/templates/designation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_6605c2896b9f52_69134964',
+  'unifunc' => 'content_660abcecb1d439_07936750',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2670b2b00679626b6bceb578be0da4557ae1ec42' => 
     array (
       0 => '/var/www/html/extra_work/employee/application/views/templates/designation.tpl',
-      1 => 1711653511,
+      1 => 1711979756,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6605c2896b9f52_69134964 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660abcecb1d439_07936750 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -50,6 +50,7 @@ function content_6605c2896b9f52_69134964 (Smarty_Internal_Template $_smarty_tpl)
 							<!-- <th scope="col">#</th> -->
 							<th scope="col">Designation Name</th>
 							<th scope="col">Department Name</th>
+							<th scope="col">Grads</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -69,9 +70,12 @@ $_smarty_tpl->tpl_vars['designation_row']->do_else = false;
 							<td><?php echo $_smarty_tpl->tpl_vars['designation_row']->value['departmen_name'];?>
 <br>(<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['department_code'];?>
 )</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['designation_row']->value['grads'];?>
+</td>
 							<td><span  class="edit_holiday me-2 text-secondary" data-id='<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['id'];?>
 ' data-designation='<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['designation_name'];?>
 ' data-departmet='<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['department_id'];?>
+' data-grads='<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['grads'];?>
 '><i title="Edit" class=" la-edit ti ti-edit cursor" ></i></span>
               <span class="delete_designation text-danger" data-id='<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['id'];?>
 ' ><i class=" la-trash cursor ti ti-trash" title="Remove"></i></span></td>
@@ -121,28 +125,42 @@ public/assets/images/images/no_data_found_new.png" height="150" width="150" clas
 									<label for="designationName" class="form-label">Designation Name</label>
 									<input type="text" class="form-control designation_name" id="designation_name" name="designation_name"  placeholder="Enter Designation Name">
 								</div>
-								<div class="col-12 ">
-                                <div class="department-box ">
-                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Department</p>
-                                    <div class=" select-box">
-                                    <select class="form-select form-control w-100" name="department" id="department">
-                                    	<?php
+								<div class="col-12 mb-3">
+	                                <div class="department-box ">
+	                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Department</p>
+	                                    <div class=" select-box">
+		                                    <select class="form-select form-control w-100" name="department" id="department">
+		                                    	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['departmen']->value, 'department_val');
 $_smarty_tpl->tpl_vars['department_val']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['department_val']->value) {
 $_smarty_tpl->tpl_vars['department_val']->do_else = false;
 ?>
-                                            <option value="" >Select Department</option>
-                                            <option value="<?php echo $_smarty_tpl->tpl_vars['department_val']->value['department_id'];?>
+		                                            <option value="<?php echo $_smarty_tpl->tpl_vars['department_val']->value['department_id'];?>
 " ><?php echo $_smarty_tpl->tpl_vars['department_val']->value['departmen_name'];?>
  [<?php echo $_smarty_tpl->tpl_vars['department_val']->value['department_code'];?>
 ]</option>
-                                        <?php
+		                                        <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                                    </select>
+		                                    </select>
+	                                	</div>
+	                                </div>
                                 </div>
-                                </div>  
+                                <div class="col-12 mb-3">  
+	                                <div class="grads-box ">
+		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grads</p>
+		                                    <div class=" select-box">
+		                                    <select class="form-select form-control w-100" name="grads" id="grads">
+		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="I" >I</option>
+		                                    	 <option value="II" >II</option>
+		                                    	 <option value="III" >III</option>
+		                                          
+		                                    </select>
+		                                </div>
+	                                </div>
+
                                     
                             </div>
 								<input type="hidden" class="form-control designation_id"  name="designation_id" >

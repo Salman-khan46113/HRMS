@@ -162,4 +162,5 @@ function updateDisabledDates(newDisabledDates,element) {
     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
     return [newDisabledDates.indexOf(string) == -1];
   });
+  
 }

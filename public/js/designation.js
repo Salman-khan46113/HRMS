@@ -4,20 +4,21 @@ $(document).ready(function () {
     $(".add-designation").on("click", function () {
         $(".designation_name").val("");
         $(".designation_id").val("");
-        $("#department").val("").trigger('change').prop( "disabled", false );
+        $("#department").val("").prop( "disabled", false ).trigger('chosen:updated');
+        $("#grads").val("").prop( "disabled", false ).trigger('chosen:updated');
         myModal.show();
     });
 
-    $("#department").select2({
-          placeholder: "Select Week Off",
-          allowClear: false
-
-    });
+    $("#department").chosen()
+    $("#grads").chosen({disable_search: true});
 
     $(document).on("click", ".edit_holiday", function () {
         var id = $(this).attr("data-id");
         var department = $(this).attr("data-departmet");
-        $("#department").val(department).trigger('change').prop( "disabled", true );
+        var department = $(this).attr("data-departmet");
+        $("#department").val(department).prop( "disabled", true ).trigger('chosen:updated');
+        var grads = $(this).attr("data-grads");
+        $("#grads").val(grads).prop( "disabled", true ).trigger('chosen:updated');
         var designation = $(this).attr("data-designation");
         $(".designation_name").val(designation);
         $(".designation_id").val(id);
@@ -117,6 +118,12 @@ $(document).ready(function () {
       var formData = new FormData(form);
       var designation_id = $(".designation_id").val();
       formData.append('id',designation_id );
+      if(designation_id > 0){
+        var department = $("#department").val();
+        formData.append('department',department );
+        var grads = $("#grads").val();
+        formData.append('grads',grads );
+      }
       loader()
       $.ajax({
         type: "POST",
@@ -189,4 +196,5 @@ $(document).ready(function () {
     //         toaster("warning", "Please select leave dates.");
     //     }
     // });
+    
 });
