@@ -90,12 +90,13 @@ class Master extends MY_controller
         } else {
             $id = "";
         }
-
-
+        
+        
         if ($id == "") {
             $data = [
                 "designation_name" => $this->input->post("designation_name"),
                 "department_id"=>$this->input->post("department"),
+                "grads" => $this->input->post("grads"),
                 "created_by" => 0,
                 "created_on" => date("Y-m-d H:i:s"),
             ];
@@ -103,6 +104,8 @@ class Master extends MY_controller
             $data = [
                 "id" => $this->input->post("id"),
                 "designation_name" => $this->input->post("designation_name"),
+                "department_id"=>$this->input->post("department"),
+                "grads" => $this->input->post("grads"),
                 "updated_by" => 0,
                 "updated_on" => date("Y-m-d H:i:s"),
             ];
@@ -110,10 +113,10 @@ class Master extends MY_controller
         $result = $this->master_model->designation_action($data);
         if ($result < 0) {
             $success = -1;
-            $message = "Designation Already Exits.";
+            $message = "Designation configration already exits.";
         } elseif ($result == "update") {
             $success = 1;
-            $message = "Designation Updated successfully!";
+            $message = "Designation updated successfully!";
         } elseif ($result > 0) {
             $success = 1;
             $message = "Designation added successfully!";
@@ -230,6 +233,7 @@ class Master extends MY_controller
         $return_arr["success"] = $success;
         echo json_encode($return_arr);
         exit();
+        
         
     }
 

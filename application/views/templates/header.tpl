@@ -178,6 +178,14 @@
                 <span class="hide-menu">Shift Master</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./employee-shift.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users-plus"></i>
+                </span>
+                <span class="hide-menu">Shift Groups</span>
+              </a>
+            </li>
 
           </div>
 

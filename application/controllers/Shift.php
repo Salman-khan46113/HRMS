@@ -15,10 +15,8 @@ class Shift extends MY_controller
 
     public function shift_management()
     {
-        $data["data"] = $this->Shift_model->get_shift();
+        $data["data"] = $this->Shift_model->get_shift('');
         foreach ($data["data"] as $key => $value) {
-
-
                 $data["data"][$key]["action"] =
                     '<span  class="edit_shift me-2 text-secondary cursor" data-id=' .
                     $value["id"] .
@@ -135,9 +133,8 @@ class Shift extends MY_controller
     public function employee_shift()
   {
     $data["data"] = $this->Shift_model->get_employee_shift();
-    $data["shift"] = $this->Shift_model->get_shift();
+    $data["shift"] = $this->Shift_model->get_shift('');
     $data["employee"] = $this->Shift_model->get_employee();
-    // pr($data['shift'],1);
     foreach ($data["data"] as $key => $value) {
       $employee_ids_string = $value['employee_ids'];
       $employee_ids_array = explode(',', $employee_ids_string);
@@ -155,7 +152,9 @@ class Shift extends MY_controller
       ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
 
     }
-
+    $data["selected_company"] = getCompanyId();
+    $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
+    // pr($data,1);
     $this->smarty->view("employee_shift.tpl", $data);
   }
   public function get_employee_shift_view_details()
@@ -165,11 +164,13 @@ class Shift extends MY_controller
       $id = $this->input->post("edit");
       $shift_details = $this->Shift_model->get_employee_shift_details($id);
       $shift_data = $shift_details;
+      
     }
     $shiftDetails = array(
       'employee_shift_id' => $shift_data[0]['employee_shift_id'],
       'group_title' => $shift_data[0]['group_title'],
       'shift_id' => $shift_data[0]['shift_id'],
+      'department_id' => $shift_data[0]['department_id'],
       'employee_ids' => explode(",",$shift_data[0]['employee_ids']),
       'start_date' => getDatePickerFormat($shift_data[0]['start_date']),
       'end_date' => getDatePickerFormat($shift_data[0]['end_date']),
@@ -288,6 +289,14 @@ class Shift extends MY_controller
     $return_arr["message"] = $message;
     $return_arr["success"] = $success;
     echo json_encode($return_arr);
+    exit();
+  }
+
+  public function get_shits(){
+    $post_data = $this->input->post();
+    $data["shift"] = $this->Shift_model->get_shift($post_data['department_id']);
+    $data["employee"] = $this->Shift_model->get_department_employee($post_data['department_id']);
+    echo json_encode($data);
     exit();
   }
 }
