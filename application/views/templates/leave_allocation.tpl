@@ -80,7 +80,7 @@
 							<div class="row g-0 m-3">
 								<div class="mb-3">
 									<label for="shift_type" class="form-label">Designation</label>
-									<select class="form-select shift_type" name="designation_id" id="designation_id">
+									<select class="form-select designation_id" name="designation_id" id="designation_id">
 										<option value="">Select designation</option>
 
 										{foreach $designation as $designation_index => $designation_row}

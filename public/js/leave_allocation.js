@@ -1,21 +1,16 @@
 $(document).ready(function () {
   var myModal = new bootstrap.Modal(document.getElementById("Shift_popup"));
-
+  $(".designation_id").chosen()
   $(".add-leave").on("click", function () {
     $(".sick_leave").val("");
     $(".paid_leave").val("");
     $(".casual_leave").val("");
     $(".leave_allocation_id").val("");
-    $(".designation_id").val("")
+    $(".designation_id").val("").prop( "disabled", false ).trigger('chosen:updated');
     myModal.show();
   });
 
-  $('#start_time').timepicker({
 
-  });
-  $('#end_time').timepicker({
-
-  });
   $(document).on("click", ".edit_shift", function () {
 
     var id = $(this).data("id");
@@ -33,7 +28,7 @@ $(document).ready(function () {
         $(".sick_leave").val(data.sick_leave);
         $(".paid_leave").val(data.paid_leave);
         $(".casual_leave").val(data.casual_leave);
-        $(".designation_id").val(data.designation_id)
+          $(".designation_id").val(data.designation_id).prop( "disabled", true ).trigger('chosen:updated');
         myModal.show();
       },
       error: function (error) {},
@@ -143,15 +138,7 @@ $(document).ready(function () {
         },
       });
     } else {
-      
+
     }
   });
 });
-
-function updateDisabledDates(newDisabledDates,element) {
-
-  element.datepicker("option", "beforeShowDay", function(date) {
-    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    return [newDisabledDates.indexOf(string) == -1];
-  });
-}
