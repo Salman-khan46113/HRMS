@@ -51,7 +51,7 @@ class User extends MY_controller
                     $password
                 );
                 $success = 0;
-                if ($user["employee_id"] > 0) {
+                if (isset($user['employee_id'])) {
                     if (!in_array($user["status"], ["Inactive", "Pending"])) {
                         /* update login attempt */
                         $attempt = 0;
@@ -88,7 +88,7 @@ class User extends MY_controller
                                     $this->config->set_item($value['name'], $value['value']);
                                 }
                             }
-                            
+
                         }
 
                     } elseif ($user["status"] == "Inactive") {
@@ -366,7 +366,7 @@ class User extends MY_controller
 
         $mode = $this->input->post("mode");
         $employee_id = $mode == "Update" ? $this->input->post("employee_id") : "";
-        
+
         $valid = $this->user_model->employee_email_validation($email,$mode,$employee_id);
 
         if ($valid == "Yes") {
@@ -380,8 +380,8 @@ class User extends MY_controller
 
     public function employee_registration_action()
     {
-       
-        
+
+
         $upload_error = 0;
         $upload_data = [];
         if($_FILES['profile_image']['name'] != ""){
@@ -408,7 +408,7 @@ class User extends MY_controller
             }
         }
 
-        
+
         $post_data  = $this->input->post();
         if ($upload_error == 0 && $post_data['mode'] == "Add") {
             $last_employee_code = $this->user_model->get_last_employee_code();
@@ -482,7 +482,7 @@ class User extends MY_controller
                 ];
                 $this->user_model->insert_employee_week_off($week_off_arr);
 
-                /* add bank */ 
+                /* add bank */
                 $bank_insert_arr = [];
                 foreach ($post_data['bank_name'] as $key => $value) {
                     $bank_insert_arr[$key]['bank_name'] = $post_data['bank_name'][$key];
@@ -502,9 +502,9 @@ class User extends MY_controller
                     $bank_insert_arr[$key]['added_on'] = date("Y-m-d H:i:s");
                 }
                 if(count($bank_insert_arr) > 0){
-                    $this->user_model->insert_employee_bank($bank_insert_arr);    
+                    $this->user_model->insert_employee_bank($bank_insert_arr);
                 }
-                
+
                 $success = 1;
                 $message = "Employee added successfully!";
                 $send_data["email"] = $this->input->post("email");
@@ -533,7 +533,7 @@ class User extends MY_controller
             unset($old_emloyee_data['edit_json']);
             $bank_data = $this->user_model->get_bank_details($post_data['employee_id']);
             $old_bank_ids = array_column($bank_data, "id");
-            
+
             $update_arr["old_employe_data"]['employee_data'] = $old_emloyee_data;
             $update_arr["old_employe_data"]['bank_data'] = $bank_data;
             $new_bank_data = [];
@@ -607,7 +607,7 @@ class User extends MY_controller
         if ($employee_code != "") {
             $company_prifix = $this->config->item("company_prifix");
             $employee_code = $company_prifix . "-" . $employee_code;
-            $user = $this->user_model->get_user_details($employee_code);  
+            $user = $this->user_model->get_user_details($employee_code);
             if (is_array($user)) {
                 if (count($user) > 0) {
                     $attendance_pin = $user['attendance_pin'];
@@ -737,7 +737,7 @@ class User extends MY_controller
         echo json_encode($return_arr);
         exit();
     }
-   
+
 
 
     public function employedd_add_update(){
@@ -773,7 +773,7 @@ class User extends MY_controller
 
         // pr($data,1);
         $data['employement_type'] = [0 => ["id"=>"employee","val"=>"Employee"],1 => ["id"=>"manager","val"=>"Manager"],2 => ["id"=>"admin","val"=>"Admin"],3 => ["id"=>"arom","val"=>"AROM"],4 => ["id"=>"admin","val"=>"Admin"]];
-        
+
         // pr($data,1);
         $this->smarty->view("employee_add_update.tpl",$data);
     }

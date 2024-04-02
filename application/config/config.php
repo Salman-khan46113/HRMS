@@ -25,8 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // $config['base_url'] = 'https://hrms-system.000webhostapp.com/employee/';
 
-$config['base_url'] = 'http://localhost/extra_work/employee/';
-$config['site_path'] = '/opt/lampp/htdocs/student_management/';
+$config['base_url'] = 'http://localhost/HRMS/';
+$config['site_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
