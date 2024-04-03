@@ -13,18 +13,25 @@ class Leaveallocation extends MY_controller
   }
 
 
+public function get_designation()
+{
+  $department_id=  $this->input->post("department_id");
+  $data["designation"] = $this->Leaveallocation_model->get_designation($department_id);
+  echo json_encode($data);
+  exit();
+}
   public function leave_allocation()
   {
-    $data["designation"] = $this->Leaveallocation_model->get_designation();
+    $data["department"] = $this->Leaveallocation_model->get_department();
     $data["data"] = $this->Leaveallocation_model->get_leave_allocation();
     foreach ($data["data"] as $key => $value) {
       $data["data"][$key]["total_leave"] = $value['sick_leave']+$value['paid_leave']+$value['casual_leave'];
 
       $data["data"][$key]["action"] =
-      '<span  class="edit_shift me-2 text-secondary cursor" data-id=' .
+      '<span  class="edit_leave_allocation me-2 text-secondary cursor" data-id=' .
       $value["id"] .
       ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>
-      <span class="delete_shift text-danger cursor" data-id=' .
+      <span class="delete_leave_allocation text-danger cursor" data-id=' .
       $value["id"] .
       ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
 
@@ -61,6 +68,7 @@ class Leaveallocation extends MY_controller
         "sick_leave" => $this->input->post("sick_leave"),
         "paid_leave" => $this->input->post("paid_leave"),
         "casual_leave" => $this->input->post("casual_leave"),
+        "department_id" => $this->input->post("department_id"),
         "designation_id" => $this->input->post("designation_id"),
         "added_by" => 0,
         "added_on" => date("Y-m-d H:i:s"),
@@ -72,6 +80,7 @@ class Leaveallocation extends MY_controller
         "sick_leave" => $this->input->post("sick_leave"),
         "paid_leave" => $this->input->post("paid_leave"),
         "casual_leave" => $this->input->post("casual_leave"),
+        "department_id" => $this->input->post("department_id"),
         "designation_id" => $this->input->post("designation_id"),
         "updated_by" => 0,
         "updated_on" => date("Y-m-d H:i:s"),
