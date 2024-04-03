@@ -9,7 +9,7 @@
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
   <link href="public/css/plugin/line_awesome/line_awesome.css" rel="stylesheet" />
-  
+
   <!-- <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/css/all.min.css"
@@ -64,7 +64,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/data_table/select.dataTables.min.css">
     <script type="text/javascript" src="public/js/plugin/datatable/jquery.dataTables.min.js"></script>
   <!-- datatable -->
-  
+
   <!-- slect2 -->
   <script src="public/js/plugin/select2/select2.min.js"></script>
   <!-- slect2 -->
@@ -80,7 +80,7 @@
   <!-- time picker -->
      <script src="public/js/plugin/time_picker.js"></script>
   <!-- time picker -->
-     
+
   <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
@@ -189,7 +189,7 @@
 
           </div>
 
-            
+
 
             {{/if}}
             <li class="nav-small-cap">
@@ -214,9 +214,9 @@
                 <span class="hide-menu">Employee Listing</span>
               </a>
             </li>
-           
+
             {{/if}}
-        
+
           </div>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -240,6 +240,14 @@
                 <span class="hide-menu">Leave Management</span>
               </a>
             </li>
+            <li class="sidebar-item">
+           <a class="sidebar-link" href="./leave-allocation.html" aria-expanded="false">
+             <span>
+               <i class="ti ti-browser-plus"></i>
+             </span>
+             <span class="hide-menu">Leave Allocation</span>
+           </a>
+         </li>
             {{/if}}
            </div>
 
@@ -362,7 +370,7 @@
               </a>
             </li> -->
           </ul>
-          
+
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -378,7 +386,7 @@
             <a href="./home.html" class="text-nowrap logo-img">
             <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="">
             </a>
-    
+
           </div>
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -410,7 +418,7 @@
                   <div class="profile-block-div">
                     <div class="profile-basic-info">
                         <div class="profile-img">
-                            <img width="40" height="40" class="profile-initial company-logo-top" alt="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}" src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}" title="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}">   
+                            <img width="40" height="40" class="profile-initial company-logo-top" alt="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}" src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}" title="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}">
                         </div>
                         <div class="user-name">
                         {{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}
@@ -431,7 +439,7 @@
                       <div class="logout-block" title="Logout">
                          <a href="javascript:void(0)" class="sign-out-btn">Logout <i class="ti ti-login-2"></i></a>
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
@@ -513,8 +521,3 @@
       </header>
       <!--  Header End -->
       <div class="container-fluid ">
-
-       
-        
-      
-  

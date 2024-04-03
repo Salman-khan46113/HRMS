@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-02 18:47:16
+/* Smarty version 4.3.2, created on 2024-04-02 19:08:08
   from 'C:\xampp\htdocs\HRMS\application\views\templates\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660c369416ffd0_06195845',
+  'unifunc' => 'content_660c3b78426006_93905426',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c8a6c70b7687b706f3155f2b6faa451820cd1479' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\header.tpl',
-      1 => 1712075502,
+      1 => 1712077678,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_660c369416ffd0_06195845 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660c3b78426006_93905426 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!--  -->
 <!doctype html>
 <html lang="en">
@@ -32,7 +32,7 @@ function content_660c369416ffd0_06195845 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
   <link href="public/css/plugin/line_awesome/line_awesome.css" rel="stylesheet" />
-  
+
   <!-- <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/css/all.min.css"
@@ -95,7 +95,7 @@ function content_660c369416ffd0_06195845 (Smarty_Internal_Template $_smarty_tpl)
  type="text/javascript" src="public/js/plugin/datatable/jquery.dataTables.min.js"><?php echo '</script'; ?>
 >
   <!-- datatable -->
-  
+
   <!-- slect2 -->
   <?php echo '<script'; ?>
  src="public/js/plugin/select2/select2.min.js"><?php echo '</script'; ?>
@@ -119,7 +119,7 @@ function content_660c369416ffd0_06195845 (Smarty_Internal_Template $_smarty_tpl)
  src="public/js/plugin/time_picker.js"><?php echo '</script'; ?>
 >
   <!-- time picker -->
-     
+
   <?php echo '<script'; ?>
  src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"><?php echo '</script'; ?>
 >
@@ -252,7 +252,7 @@ echo $_prefixVariable2;?>
 
           </div>
 
-            
+
 
             <?php ob_start();
 }
@@ -285,13 +285,13 @@ echo $_prefixVariable4;?>
                 <span class="hide-menu">Employee Listing</span>
               </a>
             </li>
-           
+
             <?php ob_start();
 }
 $_prefixVariable5 = ob_get_clean();
 echo $_prefixVariable5;?>
 
-        
+
           </div>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -319,6 +319,14 @@ echo $_prefixVariable6;?>
                 <span class="hide-menu">Leave Management</span>
               </a>
             </li>
+            <li class="sidebar-item">
+           <a class="sidebar-link" href="./leave-allocation.html" aria-expanded="false">
+             <span>
+               <i class="ti ti-browser-plus"></i>
+             </span>
+             <span class="hide-menu">Leave Allocation</span>
+           </a>
+         </li>
             <?php ob_start();
 }
 $_prefixVariable7 = ob_get_clean();
@@ -453,7 +461,7 @@ echo $_prefixVariable9;?>
               </a>
             </li> -->
           </ul>
-          
+
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -473,7 +481,7 @@ $_prefixVariable10 = ob_get_clean();
 echo $_prefixVariable10;?>
 public/assets/images/logos/dark-logo.svg" width="140" alt="">
             </a>
-    
+
           </div>
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -539,7 +547,7 @@ echo $_prefixVariable19;?>
 echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
 $_prefixVariable20 = ob_get_clean();
 echo $_prefixVariable20;?>
-">   
+">
                         </div>
                         <div class="user-name">
                         <?php ob_start();
@@ -572,7 +580,7 @@ echo $_prefixVariable23;?>
                       <div class="logout-block" title="Logout">
                          <a href="javascript:void(0)" class="sign-out-btn">Logout <i class="ti ti-login-2"></i></a>
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
@@ -666,9 +674,5 @@ echo $_prefixVariable26;?>
       </header>
       <!--  Header End -->
       <div class="container-fluid ">
-
-       
-        
-      
-  <?php }
+<?php }
 }

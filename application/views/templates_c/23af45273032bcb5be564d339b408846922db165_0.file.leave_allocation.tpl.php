@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-02 18:51:08
+/* Smarty version 4.3.2, created on 2024-04-02 19:14:09
   from 'C:\xampp\htdocs\HRMS\application\views\templates\leave_allocation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660c377c97c6f4_80337319',
+  'unifunc' => 'content_660c3ce1834a67_82048362',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '23af45273032bcb5be564d339b408846922db165' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\leave_allocation.tpl',
-      1 => 1712064398,
+      1 => 1712078042,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660c377c97c6f4_80337319 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660c3ce1834a67_82048362 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -121,7 +121,7 @@ public/assets/images/images/no_data_found_new.png" height="150" width="150" clas
 							<div class="row g-0 m-3">
 								<div class="mb-3">
 									<label for="shift_type" class="form-label">Designation</label>
-									<select class="form-select shift_type" name="designation_id" id="designation_id">
+									<select class="form-select designation_id" name="designation_id" id="designation_id">
 										<option value="">Select designation</option>
 
 										<?php
