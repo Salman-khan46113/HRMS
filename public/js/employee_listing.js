@@ -242,6 +242,20 @@ $(document).ready(function () {
           minimumResultsForSearch: Infinity,
           autocomplete:'off'
     });
+    $("#designation_search").select2({
+      allowClear: true,
+      placeholder:{
+        id: '',
+        text: 'Select Department'
+    }
+    });
+    $("#department_search").select2({
+      allowClear: true,
+      placeholder:{
+        id: '',
+        text: 'Select Designation'
+    }
+    });
 
     $('#join_date_search').datepicker({
       showButtonPanel: true,
@@ -409,6 +423,7 @@ function resetFilter(){
   $("#employee_code_search").val('');
   $("#join_date_search").val('');
   $("#join_date_search").trigger('change')
+  $("#department_search,#designation_search").val('').trigger('change');
   $("#email_search").val('');
   $("#department_search").val('');
   $("#designation_search").val('');

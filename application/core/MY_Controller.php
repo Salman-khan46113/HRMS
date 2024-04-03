@@ -13,7 +13,11 @@ class MY_Controller extends CI_Controller
     $route_arr = array_keys($route_arr);
 
     $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html"];
-    $current_route = str_replace("/","", $_SERVER['PATH_INFO']);
+    $current_route = '';
+    if(array_key_exists('PATH_INFO',$_SERVER)){
+      // $current_route = str_replace("/","", $_SERVER['PATH_INFO']);
+      $current_route = explode('/',$_SERVER['PATH_INFO'])[1];
+    }
     if(in_array($current_route, $route_arr)){
     	if(!in_array($current_route, $authentication_arr)){
     		
