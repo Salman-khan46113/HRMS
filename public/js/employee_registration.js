@@ -694,7 +694,7 @@ $(document).ready(function () {
                 formData.append("work_mobile_number_code", "+" + countryCode);
 
                 var selectedValues = $("#week_off").val();
-                formData.append("week_off_val", selectedValues);
+                formData.append("week_off", selectedValues);
                 loader();
                 $.ajax({
                     type: "POST",
@@ -831,7 +831,6 @@ $(document).ready(function () {
 
     /* update mode */
     if (mode == "Update") {
-        console.log(employee_week_off);
         $("#week_off").val(employee_week_off).trigger("change");
         $("#mobile_number").intlTelInput("setNumber", $("#mobile_number").val());
         $("#mobile_number").change(); // Trigger change event to update flag
