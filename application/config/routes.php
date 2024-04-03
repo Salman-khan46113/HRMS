@@ -108,3 +108,5 @@ $route['daily-log'] = 'notification/daily_attendance_log';
 $route['send_email'] = 'user/send_email';
 $route['auto-out-log'] = 'notification/auto_out_log';
 
+/*leave allocation*/
+$route['leave-allocation.html'] = 'Leaveallocation/leave_allocation';
