@@ -1485,6 +1485,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	public function insert_batch($table, $set = NULL, $escape = NULL, $batch_size = 100)
 	{
+
 		if ($set === NULL)
 		{
 			if (empty($this->qb_set))

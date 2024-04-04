@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.3.2, created on 2024-04-02 14:41:08
+  from '/var/www/html/HRMS/application/views/templates/add_company.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660bcbac8406e9_78610470',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '8779b2df36b531afba7ff7ddea63dffa9f9e8099' => 
+    array (
+      0 => '/var/www/html/HRMS/application/views/templates/add_company.tpl',
+      1 => 1712048895,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:address.tpl' => 1,
+  ),
+),false)) {
+function content_660bcbac8406e9_78610470 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -36,7 +60,9 @@
     <link rel="stylesheet" href="public/css/steper.css" />
     <!-- loader  -->
     <link rel="stylesheet" href="public/css/plugin/loader.css" />
- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+ <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 
  <style>
     .file-input-wrapper {
@@ -177,26 +203,31 @@ border-radius: 5px 0px 0px 5px !important;
                     </ol>
                 </div>
                 <form action="javascript:void(0)" method="POST" id="company_form">
-                    <input id="company_id" value="{$company_data['company_id']}" type="hidden" name="company_id">
-                    <input id="mode" value="{$mode}" type="hidden" name="mode">
-                    <input id="country_code" value="{$company_data['country_code']}" type="hidden" name="country_code">
+                    <input id="company_id" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_id'];?>
+" type="hidden" name="company_id">
+                    <input id="mode" value="<?php echo $_smarty_tpl->tpl_vars['mode']->value;?>
+" type="hidden" name="mode">
+                    <input id="country_code" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['country_code'];?>
+" type="hidden" name="country_code">
                   <div class="details-block step-1 step-form">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="company_name" class="form-label">Company Name <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{$company_data['company_name']}">
+                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_name'];?>
+">
                             </div>
                         
                             <div class="col">
                                 <label for="company_email" class="form-label">Email <span class="star_required">*</span></label>
-                                <input type="text" value="{$company_data['company_email']}"" class="form-control" id="company_email" name="company_email" placeholder="Email">
+                                <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_email'];?>
+"" class="form-control" id="company_email" name="company_email" placeholder="Email">
                                 
                             </div>
 
 
                         </div>
 
-                        {if $mode eq "Add"}
+                        <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Add") {?>
                         <div class="row mb-3">
                           <div class="col">
                               <label for="company_prefix" class="form-label">Prefix <span class="star_required">*</span></label>
@@ -211,11 +242,12 @@ border-radius: 5px 0px 0px 5px !important;
 
 
                       </div>
-                        {/if}
+                        <?php }?>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="company_code" class="form-label">Company Code </label>
-                                <input type="text" value ="{$company_data['company_code']}" class="form-control" id="company_code" name="company_code" style="text-transform: uppercase;">
+                                <input type="text" value ="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_code'];?>
+" class="form-control" id="company_code" name="company_code" style="text-transform: uppercase;">
                             </div>
                             <div class="col">
                                 <label for="company_logo" class="form-label">Company Logo<span class="star_required">*</span></label>
@@ -224,17 +256,21 @@ border-radius: 5px 0px 0px 5px !important;
 
                                     <div class="input-group  update-file-block cursor don1" id="fileInputName">
                                       <label class='input-group-text fileInputBox' for="fileInput" style="border-radius: 5px 0px 0px 5px !important;">Choose file</label>
-                                      <input type="text"  id="profile_image_name" class="form-control cursor  ignoreThisClass" value="{if $company_data['company_logo'] neq ''} {$company_data['company_logo']}{else}No file choosen{/if}"  style="border-radius: 0px 5px 5px 0px !important;">
+                                      <input type="text"  id="profile_image_name" class="form-control cursor  ignoreThisClass" value="<?php if ($_smarty_tpl->tpl_vars['company_data']->value['company_logo'] != '') {?> <?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_logo'];
+} else { ?>No file choosen<?php }?>"  style="border-radius: 0px 5px 5px 0px !important;">
                                       <!-- <span class="don">
-                                        {if $company_data['company_logo'] neq ''}
-                                        {$company_data['company_logo']}
-                                        {else}
+                                        <?php if ($_smarty_tpl->tpl_vars['company_data']->value['company_logo'] != '') {?>
+                                        <?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_logo'];?>
+
+                                        <?php } else { ?>
                                          No file choosen
-                                        {/if}
+                                        <?php }?>
                                       </span> -->
                                     </div>
                                     <div id="imageContainer">
-                                      {if $mode eq 'Update' && $company_data['company_logo'] neq ''}<img src="{$company_data['log_url']}/{$company_data['company_logo']}">{/if}
+                                      <?php if ($_smarty_tpl->tpl_vars['mode']->value == 'Update' && $_smarty_tpl->tpl_vars['company_data']->value['company_logo'] != '') {?><img src="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['log_url'];?>
+/<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_logo'];?>
+"><?php }?>
                                     </div>
                                   </div>
 
@@ -248,13 +284,15 @@ border-radius: 5px 0px 0px 5px !important;
                             <div class="col">
 
                                 <label for="contact_person" class="form-label">Contact Person <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" value="{$company_data['contact_person']}" id="contact_person" name="contact_person" placeholder=" Please enter Contact Person">
+                                <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['contact_person'];?>
+" id="contact_person" name="contact_person" placeholder=" Please enter Contact Person">
 
                             </div>
                             <div class="col mobile_number">
                                 <div class="form-group mb-1">
                                     <label for="contact_number" class="w-100 form-label"> Contact Number <span class="star_required">*</span></label>
-                                    <input type="text" class="form-control tel-input" value="{$company_data['contact_number']}" id="contact_number" name="contact_number" placeholder=" Please enter Contact Number">
+                                    <input type="text" class="form-control tel-input" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['contact_number'];?>
+" id="contact_number" name="contact_number" placeholder=" Please enter Contact Number">
                                 </div>
 
                             </div>
@@ -268,9 +306,18 @@ border-radius: 5px 0px 0px 5px !important;
                                 <select class="form-select form-control custom_error" name="country" id="country" >
                                 <option value="">Select Country</option>
 
-                                {foreach from=$country item=countryname}
-                                <option value="{$countryname.id}" {if $countryname.id eq $company_data['country'] } selected {/if} >{$countryname.country_name}</option>
-                                {/foreach}
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['country']->value, 'countryname');
+$_smarty_tpl->tpl_vars['countryname']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['countryname']->value) {
+$_smarty_tpl->tpl_vars['countryname']->do_else = false;
+?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['countryname']->value['id'];?>
+" <?php if ($_smarty_tpl->tpl_vars['countryname']->value['id'] == $_smarty_tpl->tpl_vars['company_data']->value['country']) {?> selected <?php }?> ><?php echo $_smarty_tpl->tpl_vars['countryname']->value['country_name'];?>
+</option>
+                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
                                 </select>
                                 <label id="country-err" class="error" for="country"></label>
@@ -280,9 +327,18 @@ border-radius: 5px 0px 0px 5px !important;
                                 <select class="form-select form-control custom_error" name="state" id="state">
                                 <option value="">Select State</option>
 
-                                {foreach from=$state item=stateName}
-                                <option value="{$stateName.iStateId}" {if $stateName.iStateId eq $company_data['state'] } selected {/if}>{$stateName.vState}</option>
-                                {/foreach}
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['state']->value, 'stateName');
+$_smarty_tpl->tpl_vars['stateName']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['stateName']->value) {
+$_smarty_tpl->tpl_vars['stateName']->do_else = false;
+?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['stateName']->value['iStateId'];?>
+" <?php if ($_smarty_tpl->tpl_vars['stateName']->value['iStateId'] == $_smarty_tpl->tpl_vars['company_data']->value['state']) {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['stateName']->value['vState'];?>
+</option>
+                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
                                 </select>
                                 <label id="state-err" class="error" for="state"></label>
@@ -293,22 +349,26 @@ border-radius: 5px 0px 0px 5px !important;
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="city" class="form-label">City </label>
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Please enter City" value="{$company_data['city']}">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Please enter City" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['city'];?>
+">
                             </div>
                             <div class="col">
                                 <label for="address" class="form-label">Address <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Please enter Address" value="{$company_data['company_address']}">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Please enter Address" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_address'];?>
+">
                             </div>
 
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="zipcode" class="form-label">Zipcode <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Please enter Zipcode" value="{$company_data['zip_code']}">
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Please enter Zipcode" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['zip_code'];?>
+">
                             </div>
                             <div class="col">
                                 <label for="website" class="form-label">Website </label>
-                                <input type="text" class="form-control" id="website" name="website" placeholder="Please enter Website" value="{$company_data['website']}">
+                                <input type="text" class="form-control" id="website" name="website" placeholder="Please enter Website" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['website'];?>
+">
                                 
                             </div>
 
@@ -316,13 +376,15 @@ border-radius: 5px 0px 0px 5px !important;
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="gst_number" class="form-label">GST Number <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="gst_number" name="gst_number" placeholder="Please enter GST Number" value="{$company_data['gst_number']}">
+                                <input type="text" class="form-control" id="gst_number" name="gst_number" placeholder="Please enter GST Number" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['gst_number'];?>
+">
                             </div>
                             <div class="col">
                                 <label for="founding_date" class="form-label">Date of Founding<span class="star_required">*</span></label>
                                 
                                 <div class="input-group">
-                                <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="{$company_data['date_founded']}">
+                                <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['date_founded'];?>
+">
                                 <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                 
                                 </div>
@@ -334,11 +396,13 @@ border-radius: 5px 0px 0px 5px !important;
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="tan_number" class="form-label">TAN Number </label>
-                                <input type="text" class="form-control" id="tan_number" name="tan_number" placeholder="Please enter TAN Nuber" value="{$company_data['tan_number']}">
+                                <input type="text" class="form-control" id="tan_number" name="tan_number" placeholder="Please enter TAN Nuber" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['tan_number'];?>
+">
                             </div>
                             <div class="col">
                                 <label for="pan_number" class="form-label">PAN Number <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Please enter Pan Number" value="{$company_data['pan_number']}"> 
+                                <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Please enter Pan Number" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['pan_number'];?>
+"> 
                                 
                             </div>
 
@@ -347,7 +411,8 @@ border-radius: 5px 0px 0px 5px !important;
                             
                             <div class="col">
                                 <label for="description" class="form-label">Description </label>
-                                <textarea type="text" class="form-control" id="description" name="description" placeholder="Plese enter discription" value="{$company_data['description']}"> </textarea>
+                                <textarea type="text" class="form-control" id="description" name="description" placeholder="Plese enter discription" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['description'];?>
+"> </textarea>
                             </div>
                             
 
@@ -360,7 +425,8 @@ border-radius: 5px 0px 0px 5px !important;
                                             </div>
                        
                        
-                        {include file='address.tpl'}
+                        <?php $_smarty_tpl->_subTemplateRender('file:address.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
             </div>
 
           
@@ -379,23 +445,53 @@ border-radius: 5px 0px 0px 5px !important;
       </div>
     </div>
   </div>
-  <script src="public/js/plugin/loader.js"></script>
-  <script src="public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <?php echo '<script'; ?>
+ src="public/js/plugin/loader.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.6.4.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
   <!-- date picker -->
-   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>
-  <script class="iti-load-utils" async="" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js"></script>
+   <?php echo '<script'; ?>
+ src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
+>
+  <!-- <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+> -->
+  <?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ class="iti-load-utils" async="" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js"><?php echo '</script'; ?>
+>
   <!-- slect2  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
- <script src="public/js/custom_toaster.js"></script>
-  <script src="public/js/company.js"></script>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"><?php echo '</script'; ?>
+>
+ <?php echo '<script'; ?>
+ src="public/js/custom_toaster.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="public/js/company.js"><?php echo '</script'; ?>
+>
 
 </body>
 
 </html>
+<?php }
+}

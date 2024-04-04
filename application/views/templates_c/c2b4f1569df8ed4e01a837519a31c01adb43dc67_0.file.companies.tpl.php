@@ -1,4 +1,28 @@
+<?php
+/* Smarty version 4.3.2, created on 2024-04-03 20:26:57
+  from '/var/www/html/HRMS/application/views/templates/companies.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660d6e391dcac5_19945177',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'c2b4f1569df8ed4e01a837519a31c01adb43dc67' => 
+    array (
+      0 => '/var/www/html/HRMS/application/views/templates/companies.tpl',
+      1 => 1712155895,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_660d6e391dcac5_19945177 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <style>
 	.dataTables_wrapper.no-footer .dt-buttons {
     position: fixed;
@@ -163,29 +187,34 @@
 						</tr>
 					</thead>
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{foreach $data as $key=>$val}
+						<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'val', false, 'key');
+$_smarty_tpl->tpl_vars['val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->do_else = false;
+?>
 						<tr class="leave-request-row">
-							<td class="  dt-center img-box"><img src="public/img/uploads/company_logo/{$val['company_logo']}" alt="" width="70" height="70" class="rounded-circle"></td>
-							<td><a href="company-view?id={$val['company_id']}">{$val['company_name']}</a></td> 
-							<td>{$val['company_code']}</td>
-							<td>{$val['company_email']}</td>
-							<td>{$val['date_founded']}</td> 
-							<td>{$val['gst_number']}</td> 
-							<td><a href = "update-company.html?id={$val['company_id']}"><i class="la-edit ti ti-edit"></a></i></td>
+							<td class="  dt-center img-box"><img src="public/img/uploads/company_logo/<?php echo $_smarty_tpl->tpl_vars['val']->value['company_logo'];?>
+" alt="" width="70" height="70" class="rounded-circle"></td>
+							<td><a href="company-view?id=<?php echo $_smarty_tpl->tpl_vars['val']->value['company_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['val']->value['company_name'];?>
+</a></td> 
+							<td><?php echo $_smarty_tpl->tpl_vars['val']->value['company_code'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['val']->value['company_email'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['val']->value['date_founded'];?>
+</td> 
+							<td><?php echo $_smarty_tpl->tpl_vars['val']->value['gst_number'];?>
+</td> 
+							<td><a href = "update-company.html?id=<?php echo $_smarty_tpl->tpl_vars['val']->value['company_id'];?>
+"><i class="la-edit ti ti-edit"></a></i></td>
 			  			</tr>
-						{/foreach}
+						<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 					
-				{*	<tr>
-						<td colspan="4">
-							<div class="mb-5">
-								<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
-								<br />
-								<span class="mb-4 no-data-found-message">No Companies found!</span>
-							</div>
-						</td>
-					</tr>
-					*}
-				</tbody>
+								</tbody>
 			</table>
 
 			</div>
@@ -202,14 +231,38 @@
 </div>
 </div>
 
-<link rel="stylesheet" href="{{$base_url}}public/css/attendance_sheet.css" />
-<link rel="stylesheet" href="{{$base_url}}public/css/leave.css" />
-<script>
-    var no_data_message =  {{$no_data_message|json_encode}};
-    var base_url = {{$base_url|json_encode}};
-</script>
+<link rel="stylesheet" href="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+public/css/attendance_sheet.css" />
+<link rel="stylesheet" href="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+public/css/leave.css" />
+<?php echo '<script'; ?>
+>
+    var no_data_message =  <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+;
+    var base_url = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['base_url']->value);
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+;
+<?php echo '</script'; ?>
+>
 
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="public/js/company_listing.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="public/js/company_listing.js"><?php echo '</script'; ?>
+>
 
-{include file="footer.tpl" }
+<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}

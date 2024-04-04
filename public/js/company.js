@@ -132,7 +132,7 @@ const company_address = {
 
          $(document).off('click','.update-file-block');
          $(document).on('click','.update-file-block',function(){
-            $("#fileInput").trigger("click");
+            // $("#fileInput").trigger("click");
          })
 
 
@@ -229,7 +229,10 @@ const company_address = {
     },
     initializePlugin:function(){
         let that = this;
-        $('#founding_date').datepicker();
+        $('#founding_date').datepicker({
+            changeYear: true,
+            changeMonth: true
+        });
         $('#state').select2();
         $('#country').select2();
         that.validation();
@@ -254,7 +257,14 @@ const company_address = {
             $("#contact_number").intlTelInput("setCountry", country_code);
         }
     },
+    addMethod:function(){
+        $.validator.addMethod("regex", function(value, element, regexpr) {
+            return regexpr.test(value);
+        }, "Please check your input.");
+    },
     validation:function(){
+        let that = this
+        that.addMethod();
         $('#company_form').validate({
             rules: {
                 
@@ -295,6 +305,15 @@ const company_address = {
                     required:true
                 },
                 pan_number:{
+                    required:true,
+                    regex: /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+                },
+                attendance_pin:{
+                    required:true,
+                    minlength:6,
+                    maxlength:6
+                },
+                company_prefix:{
                     required:true
                 },
                 company_logo:{
@@ -342,14 +361,21 @@ const company_address = {
                     required: "Please enter GST Number"
                 },
                 founding_date:{
-                    required:"Please select Funding Date"
+                    required:"Please select Founding Date"
                 },
                 description:{
                     required:"Please enter discription"
                 },
                 pan_number:{
-                    required:"Please enter Pan Number"
-                }
+                    required:"Please enter Pan Number",
+                    regex: 'Please enter a valid PAN number'
+                },
+                attendance_pin:{
+                    required:"Please enter Attendence Pin"
+                },
+                company_prefix:{
+                    required:"Please enter Company Prefix"
+                },
                 
             },
             ignore: ".ignoreThisClass",

@@ -11,7 +11,6 @@ class MY_Controller extends CI_Controller
     // $route_arr =["add-employee.html","login.html","signup.html","home.html","attendance.html","employee-details.html","attendance-sheet.html","employee-list.html","leave-list.html","leave-management-list.html","designation.html","holiday.html","holiday-management.html","holiday.html","announcement.html","announcement_list.html","announcement_details.html","department.html","employee_add.html","bank-listing.html","shift-management.html","employee-add.html"];
     $route_arr = $this->router->routes;
     $route_arr = array_keys($route_arr);
-
     $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html"];
     $current_route = '';
     if(array_key_exists('PATH_INFO',$_SERVER)){
@@ -20,7 +19,6 @@ class MY_Controller extends CI_Controller
     }
     if(in_array($current_route, $route_arr)){
     	if(!in_array($current_route, $authentication_arr)){
-    		
     		if(!array_key_exists("login",$_SESSION)){
 		      redirect('./login.html');
 		    }else{
