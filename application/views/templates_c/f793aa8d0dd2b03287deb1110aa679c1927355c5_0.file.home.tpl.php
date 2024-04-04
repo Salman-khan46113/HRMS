@@ -1,9 +1,37 @@
+<?php
+/* Smarty version 4.3.2, created on 2024-04-02 18:47:16
+  from 'C:\xampp\htdocs\HRMS\application\views\templates\home.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660c3694da76d5_14822993',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'f793aa8d0dd2b03287deb1110aa679c1927355c5' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\home.tpl',
+      1 => 1712075502,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_660c3694da76d5_14822993 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 
 
 <div class="sub-header">
     <div class="sub-header-left pull-left">
-        <h3>Welcome, {{$user_data['first_name']}} 👋</h3>
+        <h3>Welcome, <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable27 = ob_get_clean();
+echo $_prefixVariable27;?>
+ 👋</h3>
         <div class="site-breadcrumb">Have a look at your overall summary.</div>
         
         
@@ -20,32 +48,84 @@
             <div class="my-profile-pic">
                 <img
                     alt=""
-                    src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}"
+                    src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable28 = ob_get_clean();
+echo $_prefixVariable28;?>
+public/img/uploads/employee_profile/<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
+$_prefixVariable29 = ob_get_clean();
+echo $_prefixVariable29;?>
+"
                 />
             </div>
             <div class="my-details">
-                <h3>{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}</h3>
-                <div class="my-designation">{{$user_data['designation_name']}}</div>
-                <div class="my-code">{{$user_data['employee_code']}}</div>
+                <h3><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable30 = ob_get_clean();
+echo $_prefixVariable30;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable31 = ob_get_clean();
+echo $_prefixVariable31;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable32 = ob_get_clean();
+echo $_prefixVariable32;?>
+</h3>
+                <div class="my-designation"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['designation_name'];
+$_prefixVariable33 = ob_get_clean();
+echo $_prefixVariable33;?>
+</div>
+                <div class="my-code"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['employee_code'];
+$_prefixVariable34 = ob_get_clean();
+echo $_prefixVariable34;?>
+</div>
             </div>
         </div>
         <div class="my-extra-info">
             <div class="item-cnt">
                 <div class="item-label">Email :</div>
-                <div class="item-value email">{{$user_data['email']}}</div>
+                <div class="item-value email"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['email'];
+$_prefixVariable35 = ob_get_clean();
+echo $_prefixVariable35;?>
+</div>
             </div>
             <div class="item-cnt">
                 <div class="item-label">Dept :</div>
-                <div class="item-value">{{$user_data['department_name']}}</div>
+                <div class="item-value"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['department_name'];
+$_prefixVariable36 = ob_get_clean();
+echo $_prefixVariable36;?>
+</div>
             </div>
             <div class="item-cnt">
                 <div class="item-label">Since :</div>
-                <div class="item-value">{{$joining_date_arr['y']}} Years {{$joining_date_arr['m']}} Months {{$joining_date_arr['d']}} Days</div>
+                <div class="item-value"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['y'];
+$_prefixVariable37 = ob_get_clean();
+echo $_prefixVariable37;?>
+ Years <?php ob_start();
+echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['m'];
+$_prefixVariable38 = ob_get_clean();
+echo $_prefixVariable38;?>
+ Months <?php ob_start();
+echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['d'];
+$_prefixVariable39 = ob_get_clean();
+echo $_prefixVariable39;?>
+ Days</div>
             </div>
             
             <div class="item-cnt">
                 <div class="item-label">Location :</div>
-                <div class="item-value">{{$user_data['city']}}</div>
+                <div class="item-value"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['city'];
+$_prefixVariable40 = ob_get_clean();
+echo $_prefixVariable40;?>
+</div>
             </div>
         </div>
     </div>
@@ -63,26 +143,58 @@
                     <div class="dash-card-box-content-inner">
                       <div class="wrapper-cnt d-flex">
                         <div class="avg-hours highlight-box">
-                          <div class="count">{{$working_time}}</div>
+                          <div class="count"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['working_time']->value;
+$_prefixVariable41 = ob_get_clean();
+echo $_prefixVariable41;?>
+</div>
                           <span class="item-label">Working Hours <em>Today </em> </span> 
                         </div>
 
                         <div class="bottom-action today-highlight w-100">
                           <div class="d-flex">
                             <div class="today-info">
-                            {{if $attendance_in_time != ''}}
-                              <div class="time">Attendance In : {{$attendance_in_time}}</div>
-                            {{else}}
+                            <?php ob_start();
+if ($_smarty_tpl->tpl_vars['attendance_in_time']->value != '') {
+$_prefixVariable42 = ob_get_clean();
+echo $_prefixVariable42;?>
+
+                              <div class="time">Attendance In : <?php ob_start();
+echo $_smarty_tpl->tpl_vars['attendance_in_time']->value;
+$_prefixVariable43 = ob_get_clean();
+echo $_prefixVariable43;?>
+</div>
+                            <?php ob_start();
+} else {
+$_prefixVariable44 = ob_get_clean();
+echo $_prefixVariable44;?>
+
                                 <div class="time absent-text">Absent</div>
-                            {{/if}}
+                            <?php ob_start();
+}
+$_prefixVariable45 = ob_get_clean();
+echo $_prefixVariable45;?>
+
                             </div>
-                            {{if $attendance_out_time != ""}}
+                            <?php ob_start();
+if ($_smarty_tpl->tpl_vars['attendance_out_time']->value != '') {
+$_prefixVariable46 = ob_get_clean();
+echo $_prefixVariable46;?>
+
                             <div class="today-info">
-                              <div class="time">Attendance Out : {{$attendance_out_time}}</div>
+                              <div class="time">Attendance Out : <?php ob_start();
+echo $_smarty_tpl->tpl_vars['attendance_out_time']->value;
+$_prefixVariable47 = ob_get_clean();
+echo $_prefixVariable47;?>
+</div>
                               
                             </div>
 
-                            {{/if}}
+                            <?php ob_start();
+}
+$_prefixVariable48 = ob_get_clean();
+echo $_prefixVariable48;?>
+
                             
                           </div>
                         </div>
@@ -94,9 +206,29 @@
                 <div class="dash-card-box celebrating-birthdays">
                     <div class="dash-card-box-header">
                         <div class="dash-card-box-header-title" style="padding-left: 50px; grid-gap: 0;">
-                            <div class="image-box"><img src="{{$base_url}}public/assets/images/images/birthday-cake_1.png" width="21" height="21" alt=""></div> Celebrating Birthdays
+                            <div class="image-box"><img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable49 = ob_get_clean();
+echo $_prefixVariable49;?>
+public/assets/images/images/birthday-cake_1.png" width="21" height="21" alt=""></div> Celebrating Birthdays
                             <div class="sub-title-text" style="margin: 0; color: var(--body-light-text); font-size: var(--mediumFont) !important; width: 100%; line-height: 14px; font-weight: var(--theme-font-weight-medium) !important;">
-                                {{date("d")}} {{date("D")}} to {{date("d", strtotime("+7 days"))}} {{date("D", strtotime("+7 days"))}} (Next 7 Days)
+                                <?php ob_start();
+echo date("d");
+$_prefixVariable50 = ob_get_clean();
+echo $_prefixVariable50;?>
+ <?php ob_start();
+echo date("D");
+$_prefixVariable51 = ob_get_clean();
+echo $_prefixVariable51;?>
+ to <?php ob_start();
+echo date("d",strtotime("+7 days"));
+$_prefixVariable52 = ob_get_clean();
+echo $_prefixVariable52;?>
+ <?php ob_start();
+echo date("D",strtotime("+7 days"));
+$_prefixVariable53 = ob_get_clean();
+echo $_prefixVariable53;?>
+ (Next 7 Days)
                             </div>
                         </div>
                     </div>
@@ -107,20 +239,55 @@
                                 <div class="wrapper-cnt d-flex mt-3">
                                     <div class="db-emp-thumb-list">
                                         <ul>
-                                          {foreach $bithaday as $index => $employee}
+                                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['bithaday']->value, 'employee', false, 'index');
+$_smarty_tpl->tpl_vars['employee']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_vars['employee']->value) {
+$_smarty_tpl->tpl_vars['employee']->do_else = false;
+?>
                                             <li>
-                                                <div class="emp-thumb tooltips" title="{{$employee['first_name']}} {{$employee['middle_name']}} {{$employee['last_name']}}">
+                                                <div class="emp-thumb tooltips" title="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee']->value['first_name'];
+$_prefixVariable54 = ob_get_clean();
+echo $_prefixVariable54;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee']->value['middle_name'];
+$_prefixVariable55 = ob_get_clean();
+echo $_prefixVariable55;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee']->value['last_name'];
+$_prefixVariable56 = ob_get_clean();
+echo $_prefixVariable56;?>
+">
                                                     <img
                                                         alt=""
                                                         width="50"
                                                         height="50"
-                                                        src="{{$base_url}}public/img/uploads/employee_profile/{{$employee['profile_image']}}"
+                                                        src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable57 = ob_get_clean();
+echo $_prefixVariable57;?>
+public/img/uploads/employee_profile/<?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee']->value['profile_image'];
+$_prefixVariable58 = ob_get_clean();
+echo $_prefixVariable58;?>
+"
                                                     />
                                                 </div>
 
-                                                <span class="text">{{date("d", strtotime($employee['dob']))}} {{date("M", strtotime($employee['dob']))}}</span>
+                                                <span class="text"><?php ob_start();
+echo date("d",strtotime($_smarty_tpl->tpl_vars['employee']->value['dob']));
+$_prefixVariable59 = ob_get_clean();
+echo $_prefixVariable59;?>
+ <?php ob_start();
+echo date("M",strtotime($_smarty_tpl->tpl_vars['employee']->value['dob']));
+$_prefixVariable60 = ob_get_clean();
+echo $_prefixVariable60;?>
+</span>
                                             </li>
-                                            {/foreach}
+                                            <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                         </ul>
                                     </div>
                                 </div>
@@ -145,22 +312,34 @@
               <div class="dash-card-box-content">
                 <div class="dash-card-box-content-inner">
                   <div class="wrapper-cnt d-flex mb-2">
-                    {if count($holiday) > 0} 
+                    <?php if (count($_smarty_tpl->tpl_vars['holiday']->value) > 0) {?> 
                       <div class="hoiday-date">
-                        <div class="date">{$holiday['date']}</div>
-                        <div class="month "> <span>{$holiday['month']}</span> <span>{$holiday['year']}</span> </div>
+                        <div class="date"><?php echo $_smarty_tpl->tpl_vars['holiday']->value['date'];?>
+</div>
+                        <div class="month "> <span><?php echo $_smarty_tpl->tpl_vars['holiday']->value['month'];?>
+</span> <span><?php echo $_smarty_tpl->tpl_vars['holiday']->value['year'];?>
+</span> </div>
                       </div>
-                      <div class="features-img"> <img src="{{$base_url}}public/assets/images/images/holiday-img.png" alt=""> </div>
+                      <div class="features-img"> <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable61 = ob_get_clean();
+echo $_prefixVariable61;?>
+public/assets/images/images/holiday-img.png" alt=""> </div>
                       <div class="bottom-action today-highlight w-100">
-                        <p>{$holiday['holiday_name']}</p>
+                        <p><?php echo $_smarty_tpl->tpl_vars['holiday']->value['holiday_name'];?>
+</p>
                       </div>
-                    {else}
+                    <?php } else { ?>
                     <div class="row w-100 no-holiday-found-block">
                       <div class="col-4">
                       </div>
                       <div class="col-4 text-center">
                         <div class="mt-3"> 
-                         <div class="mb-3"> <img src="{{$base_url}}public/assets/images/images/no_holiday_dash.png" alt="" width="60" height="60"> </div>
+                         <div class="mb-3"> <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable62 = ob_get_clean();
+echo $_prefixVariable62;?>
+public/assets/images/images/no_holiday_dash.png" alt="" width="60" height="60"> </div>
                         <span class="">No Holiday found!</span> 
                       </div>
                       </div>
@@ -168,7 +347,7 @@
                       </div>
                       
                      </div>
-                    {/if}
+                    <?php }?>
                   </div>
                 </div>
               </div>
@@ -442,7 +621,11 @@
           <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
               <div class="position-relative">
-                <a href="javascript:void(0)"><img src="{{$base_url}}public/assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)"><img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable63 = ob_get_clean();
+echo $_prefixVariable63;?>
+public/assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
                 <h6 class="fw-semibold fs-4">Boat Headphone</h6>
@@ -462,7 +645,11 @@
           <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
               <div class="position-relative">
-                <a href="javascript:void(0)"><img src="{{$base_url}}public/assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)"><img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable64 = ob_get_clean();
+echo $_prefixVariable64;?>
+public/assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
                 <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
@@ -482,7 +669,11 @@
           <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
               <div class="position-relative">
-                <a href="javascript:void(0)"><img src="{{$base_url}}public/assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)"><img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable65 = ob_get_clean();
+echo $_prefixVariable65;?>
+public/assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
                 <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
@@ -502,7 +693,11 @@
           <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
               <div class="position-relative">
-                <a href="javascript:void(0)"><img src="{{$base_url}}public/assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)"><img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable66 = ob_get_clean();
+echo $_prefixVariable66;?>
+public/assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
                 <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
@@ -529,5 +724,9 @@
     </div>
   </div>
     </div>
-<script src="public/assets/js/dashboard.js"></script>
- {include file="footer.tpl" }
+<?php echo '<script'; ?>
+ src="public/assets/js/dashboard.js"><?php echo '</script'; ?>
+>
+ <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}

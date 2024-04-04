@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.3.2, created on 2024-04-02 18:35:54
+  from 'C:\xampp\htdocs\HRMS\application\views\templates\login.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660c33eaa91200_30048965',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'b97337102303fd557f4cf48117080ee37069d1ff' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\login.tpl',
+      1 => 1712075502,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_660c33eaa91200_30048965 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,7 +39,9 @@
 <!-- loader -->
 <link rel="stylesheet" href="public/css/plugin/loader.css" />
 <link rel="stylesheet" href="public/css/login.css" />
- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+ <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 
     
 </head>
@@ -49,17 +74,29 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="javascript:void(0)" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="180" alt="">
+                  <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+public/assets/images/logos/dark-logo.svg" width="180" alt="">
                 </a>
                 <p class="text-center mb-4">Human Resources management System</p>
                 <form action="javascript:void(0)" method="POST" id="login_form">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="text" name="username" value="{{$user_name}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="username" value="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_name']->value;
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" name="password" value="{{$password}}" class="form-control" id="exampleInputPassword1">
+                    <input type="password" name="password" value="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['password']->value;
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+" class="form-control" id="exampleInputPassword1">
                   </div>
                   <div class="d-flex align-items-center justify-content-between mb-2 ">
                     <div class="form-check ">
@@ -68,12 +105,20 @@
                         Remeber this Device
                       </label>
                     </div>
-                    <a class="text-primary fw-bold" href="{{$base_url}}forgot.html">Forgot Password ?</a>
+                    <a class="text-primary fw-bold" href="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+forgot.html">Forgot Password ?</a>
                   </div>
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Sign In</button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
-                    <a class="text-primary fw-bold ms-2" href="{{$base_url}}signup.html">Create an account</a>
+                    <a class="text-primary fw-bold ms-2" href="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+signup.html">Create an account</a>
                   </div>
                 </form>
               </div>
@@ -84,14 +129,29 @@
     </div>
    
   </div>
-  <script src="public/js/plugin/loader.js"></script>
-   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="public/js/custom_toaster.js"></script>
-  <script src="public/js/login.js"></script>
+  <?php echo '<script'; ?>
+ src="public/js/plugin/loader.js"><?php echo '</script'; ?>
+>
+   <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.6.4.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"><?php echo '</script'; ?>
+>
+     <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="public/js/custom_toaster.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="public/js/login.js"><?php echo '</script'; ?>
+>
 
 </body>
 
-</html>
+</html><?php }
+}

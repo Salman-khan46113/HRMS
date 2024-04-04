@@ -170,7 +170,9 @@ class Home extends MY_Controller
             "width" => "15%",
             "className" => "dt-center",
         ];
-
+        $company_id = getCompanyId();
+        $ajax_json['department'] = $this->home_model->get_filter_department($company_id);
+        $ajax_json['designation'] = $this->home_model->get_filter_designation($company_id);
         $ajax_json["data"] = $column;
         $ajax_json["is_searching_enable"] = false;
         $ajax_json["is_paging_enable"] = true;
@@ -187,7 +189,7 @@ class Home extends MY_Controller
         $ajax_json["admin_url"] = base_url();
         $ajax_json["base_url"] = base_url();
         // $ajax_json['teacher_data'] = $this->session->userdata();
-
+        // pr($ajax_json['designation'],1);
         $this->smarty->view("employee_listing.tpl", $ajax_json);
     }
     public function get_employee_listing_data()
@@ -232,6 +234,7 @@ class Home extends MY_Controller
                 $employee_ids,
                 $current_month
             );
+            // pr($week_off_data,1);
             $employee_week_off_data = [];
             foreach ($week_off_data as $key => $value) {
                 $employee_week_off_data[$value["employee_id"]]["week_off_id"] =
@@ -394,6 +397,7 @@ class Home extends MY_Controller
     public function edit_employee_details()
     {
         
+        // pr("ok",1);
         $employee_id = $this->input->post("employee_id");
         $approval_type = $this->input->post("approval_type");
         $success = 0;
@@ -484,6 +488,26 @@ class Home extends MY_Controller
                 if(count($bank_update_arr) > 0){
                     $this->home_model->update_banks($bank_update_arr);
                 }
+
+                $week_off = $this->home_model->get_employee_week_off($employee_id,date("F"));
+                // pr($week_off,1);
+                if(count($week_off) > 0){
+                    $week_off_arr = [
+                        "week_off" => $post_data["week_off"],
+                        "week_off_id" => $week_off[0]['week_off_id'],
+                    ];
+                    $this->home_model->update_employee_week_off_data($week_off_arr);
+                }else{
+                    $week_off_arr = [
+                        "employee_id" => $employee_id,
+                        "employee_week_off" => $post_data["week_off"],
+                        "month" => date("F"),
+                        "added_date" => date("Y-m-d H:i:s"),
+                    ];
+                    $this->home_model->insert_employee_week_off($week_off_arr);
+                }
+               
+                
                 
                 $success = 1;
                 $message = "Employee updated successfully!";

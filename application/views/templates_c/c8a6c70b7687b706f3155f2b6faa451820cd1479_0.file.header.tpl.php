@@ -1,4 +1,27 @@
-<!--  -->
+<?php
+/* Smarty version 4.3.2, created on 2024-04-02 19:08:08
+  from 'C:\xampp\htdocs\HRMS\application\views\templates\header.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660c3b78426006_93905426',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'c8a6c70b7687b706f3155f2b6faa451820cd1479' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\header.tpl',
+      1 => 1712077678,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_660c3b78426006_93905426 (Smarty_Internal_Template $_smarty_tpl) {
+?><!--  -->
 <!doctype html>
 <html lang="en">
 
@@ -38,7 +61,9 @@
     <link rel="stylesheet" href="public/css/time_picker.css" />
   <!-- time date picker -->
 
-  <!-- <script src="public/assets/js/plugins/jquer_file.js"></script> -->
+  <!-- <?php echo '<script'; ?>
+ src="public/assets/js/plugins/jquer_file.js"><?php echo '</script'; ?>
+> -->
 
   <!-- date picker -->
   <link rel="stylesheet" type="text/css" href="public/css/plugin/date_picker.css">
@@ -54,44 +79,74 @@
   <!-- swal alert css -->
 
   <!-- jquey -->
-    <script src="public/assets/js/plugins/jquer_file.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+    <?php echo '<script'; ?>
+ src="public/assets/js/plugins/jquer_file.js"><?php echo '</script'; ?>
+>
+    <!-- <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"><?php echo '</script'; ?>
+> -->
   <!-- jquey -->
 
   <!-- datatable -->
     <link rel="stylesheet" type="text/css" href="public/css/data_table/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/data_table/searchPanes.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/data_table/select.dataTables.min.css">
-    <script type="text/javascript" src="public/js/plugin/datatable/jquery.dataTables.min.js"></script>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="public/js/plugin/datatable/jquery.dataTables.min.js"><?php echo '</script'; ?>
+>
   <!-- datatable -->
 
   <!-- slect2 -->
-  <script src="public/js/plugin/select2/select2.min.js"></script>
+  <?php echo '<script'; ?>
+ src="public/js/plugin/select2/select2.min.js"><?php echo '</script'; ?>
+>
   <!-- slect2 -->
 
   <!-- swal alert js -->
-   <script src="public/js/plugin/swal_alert/sweetalert2.js"></script>
+   <?php echo '<script'; ?>
+ src="public/js/plugin/swal_alert/sweetalert2.js"><?php echo '</script'; ?>
+>
    <!-- swal alert js -->
 
   <!-- date time picker -->
-    <script src="public/js/plugin/date_picker/date_picker.js"></script>
+    <?php echo '<script'; ?>
+ src="public/js/plugin/date_picker/date_picker.js"><?php echo '</script'; ?>
+>
   <!-- date time picker -->
 
   <!-- time picker -->
-     <script src="public/js/plugin/time_picker.js"></script>
+     <?php echo '<script'; ?>
+ src="public/js/plugin/time_picker.js"><?php echo '</script'; ?>
+>
   <!-- time picker -->
 
-  <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <?php echo '<script'; ?>
+ src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"><?php echo '</script'; ?>
+>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"><?php echo '</script'; ?>
+>
 
   <!-- chosen  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"><?php echo '</script'; ?>
+>
 </head>
 
 <body>
@@ -106,7 +161,11 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./home.html" class="text-nowrap logo-img">
-            <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="" />
+            <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+public/assets/images/logos/dark-logo.svg" width="140" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -129,7 +188,11 @@
               </a>
             </li>
           </div>
-             {{if in_array($role,['admin','arom'])}}
+             <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
@@ -191,7 +254,11 @@
 
 
 
-            {{/if}}
+            <?php ob_start();
+}
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">User</span>
@@ -205,7 +272,11 @@
                 <span class="hide-menu">Profile</span>
               </a>
             </li>
-            {{if in_array($role,['admin','arom'])}}
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="./employee-list.html" aria-expanded="false">
                 <span>
@@ -215,7 +286,11 @@
               </a>
             </li>
 
-            {{/if}}
+            <?php ob_start();
+}
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+
 
           </div>
             <li class="nav-small-cap">
@@ -231,7 +306,11 @@
                 <span class="hide-menu">Leave</span>
               </a>
             </li>
-            {{if in_array($role,['admin','arom'])}}
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+
                <li class="sidebar-item">
               <a class="sidebar-link" href="./leave-management-list.html" aria-expanded="false">
                 <span>
@@ -248,7 +327,11 @@
              <span class="hide-menu">Leave Allocation</span>
            </a>
          </li>
-            {{/if}}
+            <?php ob_start();
+}
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
+
            </div>
 
             <li class="nav-small-cap">
@@ -264,7 +347,11 @@
                 <span class="hide-menu">Holiday</span>
               </a>
             </li>
-            {{if in_array($role,['admin','arom'])}}
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="./holiday-management.html" aria-expanded="false">
                 <span>
@@ -273,7 +360,11 @@
                 <span class="hide-menu">Holiday Management</span>
               </a>
             </li>
-            {{/if}}
+            <?php ob_start();
+}
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
+
 
           </div>
             <li class="nav-small-cap">
@@ -298,22 +389,6 @@
               </a>
             </li>
             </div>
-
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Settings</span>
-            </li>
-            <div class="sub-menu">
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="./company-settings" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-settings"></i>
-                  </span>
-                  <span class="hide-menu">Company Settings</span>
-                </a>
-              </li>
-            </div>
-
             <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
                 <span>
@@ -400,7 +475,11 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div>
             <a href="./home.html" class="text-nowrap logo-img">
-            <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="">
+            <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
+public/assets/images/logos/dark-logo.svg" width="140" alt="">
             </a>
 
           </div>
@@ -419,25 +498,71 @@
                 <div class="notification bg-primary rounded-circle"></div>
               </a>
             </li>
-            {*
-              <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="./holiday.html" title="Holiday">
-                <i class="ti ti-calendar-month" style="font-size: 22px;"></i>
-              </a>
-            </li> *}
-              <li class="nav-item dropdown">
+                          <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}" alt="" width="45" height="45" class="rounded-circle">
+                  <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
+public/img/uploads/employee_profile/<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
+" alt="" width="45" height="45" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up profile-drop-down p-0" aria-labelledby="drop2">
                   <div class="profile-block-div">
                     <div class="profile-basic-info">
                         <div class="profile-img">
-                            <img width="40" height="40" class="profile-initial company-logo-top" alt="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}" src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}" title="{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}">
+                            <img width="40" height="40" class="profile-initial company-logo-top" alt="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable15 = ob_get_clean();
+echo $_prefixVariable15;?>
+" src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable16 = ob_get_clean();
+echo $_prefixVariable16;?>
+public/img/uploads/employee_profile/<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
+$_prefixVariable17 = ob_get_clean();
+echo $_prefixVariable17;?>
+" title="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable18 = ob_get_clean();
+echo $_prefixVariable18;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable19 = ob_get_clean();
+echo $_prefixVariable19;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable20 = ob_get_clean();
+echo $_prefixVariable20;?>
+">
                         </div>
                         <div class="user-name">
-                        {{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}
+                        <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable21 = ob_get_clean();
+echo $_prefixVariable21;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable22 = ob_get_clean();
+echo $_prefixVariable22;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable23 = ob_get_clean();
+echo $_prefixVariable23;?>
+
                         </div>
                       </div>
                     <div class="message-body">
@@ -460,7 +585,19 @@
                   </div>
                 </div>
               </li>
-              <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block">{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}</a>
+              <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable24 = ob_get_clean();
+echo $_prefixVariable24;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable25 = ob_get_clean();
+echo $_prefixVariable25;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable26 = ob_get_clean();
+echo $_prefixVariable26;?>
+</a>
               <div class="modal fade leave-popup-block" id="reset_Password_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered ">
                   <div class="modal-content">
@@ -537,3 +674,5 @@
       </header>
       <!--  Header End -->
       <div class="container-fluid ">
+<?php }
+}
