@@ -1,4 +1,28 @@
+<?php
+/* Smarty version 4.3.2, created on 2024-04-03 21:11:11
+  from '/var/www/html/extra_work/HRMS/application/views/templates/shift_management.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660d78973e2669_58870695',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'd91e8727d586c0a992820200a0a7f775d0ba073a' => 
+    array (
+      0 => '/var/www/html/extra_work/HRMS/application/views/templates/shift_management.tpl',
+      1 => 1712158234,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_660d78973e2669_58870695 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <div class="main-middle-container">
 	<aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -32,9 +56,20 @@
                                             <div class="input-group">
                                                <select class="form-select form-control w-100"  id="department_name_search">
                                                	<option value="" >Select Department </option>
-		                                    	{foreach from=$departments item=department_val}
-		                                            <option value="{$department_val.departmen_name} ({$department_val.department_code})" >{$department_val.departmen_name} ({$department_val.department_code})</option>
-		                                        {/foreach}
+		                                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['departments']->value, 'department_val');
+$_smarty_tpl->tpl_vars['department_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['department_val']->value) {
+$_smarty_tpl->tpl_vars['department_val']->do_else = false;
+?>
+		                                            <option value="<?php echo $_smarty_tpl->tpl_vars['department_val']->value['departmen_name'];?>
+ (<?php echo $_smarty_tpl->tpl_vars['department_val']->value['department_code'];?>
+)" ><?php echo $_smarty_tpl->tpl_vars['department_val']->value['departmen_name'];?>
+ (<?php echo $_smarty_tpl->tpl_vars['department_val']->value['department_code'];?>
+)</option>
+		                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 		                                    </select>
                                             </div>
                                         </li>
@@ -49,9 +84,18 @@
                                             <div class="input-group">
                                               <select class="form-select form-control w-100"  id="shift_name_search">
 		                                    	 <option value="" >Select Shift Name</option>
-		                                    	 {foreach from=$data key=k item=v}
-											  		  <option value="{$v['shift_name']}" >{$v['shift_name']}</option>
-												{/foreach}
+		                                    	 <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+$_smarty_tpl->tpl_vars['v']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->do_else = false;
+?>
+											  		  <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['shift_name'];?>
+" ><?php echo $_smarty_tpl->tpl_vars['v']->value['shift_name'];?>
+</option>
+												<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 		                                          
 		                                      </select>
                                             </div>
@@ -67,9 +111,18 @@
                                             <div class="input-group">
                                               <select class="form-select form-control w-100"  id="shift_type_search">
 		                                    	 <option value="" >Select Grads</option>
-		                                    	 {foreach from=$shift_type_data key=key_val item=shift_type_val}
-											 <option value="{$shift_type_val['id']}" >{$shift_type_val['val']}</option>
-										{/foreach}
+		                                    	 <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['shift_type_data']->value, 'shift_type_val', false, 'key_val');
+$_smarty_tpl->tpl_vars['shift_type_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key_val']->value => $_smarty_tpl->tpl_vars['shift_type_val']->value) {
+$_smarty_tpl->tpl_vars['shift_type_val']->do_else = false;
+?>
+											 <option value="<?php echo $_smarty_tpl->tpl_vars['shift_type_val']->value['id'];?>
+" ><?php echo $_smarty_tpl->tpl_vars['shift_type_val']->value['val'];?>
+</option>
+										<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 		                                          
 		                                      </select>
                                             </div>
@@ -200,31 +253,51 @@
 						</tr>
 					</thead>
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{if count($data) > 0}
-						{foreach $data as $data_index => $data_row}
+						<?php if (count($_smarty_tpl->tpl_vars['data']->value) > 0) {?>
+						<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'data_row', false, 'data_index');
+$_smarty_tpl->tpl_vars['data_row']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['data_index']->value => $_smarty_tpl->tpl_vars['data_row']->value) {
+$_smarty_tpl->tpl_vars['data_row']->do_else = false;
+?>
 						<tr class="leave-request-row">
-							<!-- <td>{$data_index + 1}</td> -->
-							<!-- <td>{$data_row.company_name}</td> -->
-							<td>{$data_row.departmen_name} ({$data_row.department_code})</td>
-							<td>{$data_row.shift_name}</td>
-							<td>{$data_row.shift_type}</td>
-							<td>{$data_row.start_time}</td>
-							<td>{$data_row.end_time}</td>
-							<td>{$data_row.action}</td>
+							<!-- <td><?php echo $_smarty_tpl->tpl_vars['data_index']->value+1;?>
+</td> -->
+							<!-- <td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['company_name'];?>
+</td> -->
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['departmen_name'];?>
+ (<?php echo $_smarty_tpl->tpl_vars['data_row']->value['department_code'];?>
+)</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['shift_name'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['shift_type'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['start_time'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['end_time'];?>
+</td>
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['action'];?>
+</td>
 
 						</tr>
-						{/foreach}
-						{else}
+						<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+						<?php } else { ?>
 						<tr>
 							<td colspan="6">
 								<div class="mb-5">
-									<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
+									<img alt="" src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
 									<br />
 									<span class="mb-4 no-data-found-message">No shift data found!</span>
 								</div>
 							</td>
 						</tr>
-						{/if}
+						<?php }?>
 					</tbody>
 				</table>
 			</div>
@@ -252,35 +325,65 @@
 									<label for="shift_name" class="form-label">Shift Name</label>
 									<input type="text" class="form-control shift_name" id="shift_name" name="shift_name"  placeholder="Enter Shift Name">
 								</div>
-								<div class="mb-3 select-box-block" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
+								<div class="mb-3 select-box-block" <?php if ($_smarty_tpl->tpl_vars['user_data']->value['role'] != 'arom') {?> style="display: none" <?php }?>>
                                     <label for="company_id" class="form-label">Company</label>
                                     <select class="form-select company_id" name="company_id" id="company_id">
                                         <option value="">Select Company</option>
-                                        {foreach from=$company_details item=company_name}
-                                            {if $company_name.company_id == $selected_company}
-                                                <option value="{$company_name.company_id}" selected>{$company_name.company_name}</option>
-                                            {else}
-                                                <option value="{$company_name.company_id}">{$company_name.company_name}</option>
-                                            {/if}
-                                        {/foreach}
+                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['company_details']->value, 'company_name');
+$_smarty_tpl->tpl_vars['company_name']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['company_name']->value) {
+$_smarty_tpl->tpl_vars['company_name']->do_else = false;
+?>
+                                            <?php if ($_smarty_tpl->tpl_vars['company_name']->value['company_id'] == $_smarty_tpl->tpl_vars['selected_company']->value) {?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+" selected><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php }?>
+                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     </select>
                                 </div>
                                 <div class="mb-3">
 									<label for="department" class="form-label">Department</label>
 									<select class="form-select department" name="department" id="department">
 										<option value="">Select Department</option>
-										{foreach from=$departments item=departments_val}
-											<option value="{$departments_val.department_id}">{$departments_val.departmen_name} [{$departments_val.department_code}]</option>
-										{/foreach}
+										<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['departments']->value, 'departments_val');
+$_smarty_tpl->tpl_vars['departments_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['departments_val']->value) {
+$_smarty_tpl->tpl_vars['departments_val']->do_else = false;
+?>
+											<option value="<?php echo $_smarty_tpl->tpl_vars['departments_val']->value['department_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['departments_val']->value['departmen_name'];?>
+ [<?php echo $_smarty_tpl->tpl_vars['departments_val']->value['department_code'];?>
+]</option>
+										<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 									</select>
 								</div>
 								<div class="mb-3">
 									<label for="shift_type" class="form-label">Shift type</label>
 									<select class="form-select shift_type" name="shift_type" id="shift_type">
 										<option value="">Select Shift Type</option>
-										{foreach from=$shift_type_data key=key_val item=shift_type_val}
-											 <option value="{$shift_type_val['id']}" >{$shift_type_val['val']}</option>
-										{/foreach}
+										<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['shift_type_data']->value, 'shift_type_val', false, 'key_val');
+$_smarty_tpl->tpl_vars['shift_type_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key_val']->value => $_smarty_tpl->tpl_vars['shift_type_val']->value) {
+$_smarty_tpl->tpl_vars['shift_type_val']->do_else = false;
+?>
+											 <option value="<?php echo $_smarty_tpl->tpl_vars['shift_type_val']->value['id'];?>
+" ><?php echo $_smarty_tpl->tpl_vars['shift_type_val']->value['val'];?>
+</option>
+										<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 										
 									</select>
 								</div>
@@ -323,16 +426,34 @@
 	}
 </style>
 
-<script type="text/javascript" >
- var selected_company = {{$selected_company|json_encode}}
-  var no_data_message =  {{$no_data_message|json_encode}};
-</script>
+<?php echo '<script'; ?>
+ type="text/javascript" >
+ var selected_company = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['selected_company']->value);
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+
+  var no_data_message =  <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+;
+<?php echo '</script'; ?>
+>
 
 <link rel="stylesheet" href="public/css/attendance_sheet.css" />
 <link rel="stylesheet" href="public/css/leave.css" />
 <link rel="stylesheet" href="public/css/shift_management.css" />
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
+>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-<script src="public/js/shift_management.js"></script>
-{include file="footer.tpl" }
+	 <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="public/js/shift_management.js"><?php echo '</script'; ?>
+>
+<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}

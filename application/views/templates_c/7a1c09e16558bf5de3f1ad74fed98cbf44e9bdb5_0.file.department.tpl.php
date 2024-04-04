@@ -1,6 +1,30 @@
+<?php
+/* Smarty version 4.3.2, created on 2024-04-03 20:03:44
+  from '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_660d68c8183383_95851384',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7a1c09e16558bf5de3f1ad74fed98cbf44e9bdb5' => 
+    array (
+      0 => '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl',
+      1 => 1712154821,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_660d68c8183383_95851384 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <div class="main-middle-container">
-	<aside class="right-sidebar">
+	 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between filter-title-bolock">
@@ -22,82 +46,41 @@
                             <div class="simplebar-content" style="padding: 0px 15px;">
                                 <ul id="sidebarnav" class="in">
                                     
-                                    
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Department </span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group">
-                                               <select class="form-select form-control w-100"  id="department_name_search">
-                                               	<option value="" >Select Department </option>
-		                                    	{foreach from=$departments item=department_val}
-		                                            <option value="{$department_val.departmen_name} ({$department_val.department_code})" >{$department_val.departmen_name} ({$department_val.department_code})</option>
-		                                        {/foreach}
-		                                    </select>
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Shift Name</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
+                                            <span class="hide-menu">Department Name </span>
 
-                                        <li class="sidebar-item">
-                                            <div class="input-group">
-                                              <select class="form-select form-control w-100"  id="shift_name_search">
-		                                    	 <option value="" >Select Shift Name</option>
-		                                    	 {foreach from=$data key=k item=v}
-											  		  <option value="{$v['shift_name']}" >{$v['shift_name']}</option>
-												{/foreach}
-		                                          
-		                                      </select>
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Shift Type</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
-
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <select class="form-select form-control w-100"  id="shift_type_search">
-		                                    	 <option value="" >Select Grads</option>
-		                                    	 {foreach from=$shift_type_data key=key_val item=shift_type_val}
-											 <option value="{$shift_type_val['id']}" >{$shift_type_val['val']}</option>
-										{/foreach}
-		                                          
-		                                      </select>
+                                              <input type="text" id="department_name_search" class="form-control" placeholder="Department Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Start Time</span>
+                                            <span class="hide-menu">Department Code</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="department_code_search" class="form-control" placeholder="Department Code">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Added By</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control cursor" id="start_time_search"  placeholder="Start Time">
+                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
                                             </div>
                                         </li>
                                     </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">End Time</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control cursor" id="end_time_search"  placeholder="Start Time">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <!-- 
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
                                             <span class="hide-menu">Added Date</span>
@@ -117,6 +100,7 @@
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
                                             </div>
                                         </li>
                                     </div>
@@ -128,10 +112,10 @@
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
                                             </div>
                                         </li>
-                                    </div> --> 
+                                    </div>
                                 </ul>
                                
                             </div>
@@ -153,7 +137,7 @@
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Shift Management</h3>
+			<h3>Department</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
@@ -172,13 +156,12 @@
                     </div>
                 </div>
 				<div class="timesheet-summary-lst">
-					<button type="button" class="btn btn-primary add-leave add-action">
+					<button type="button" class="btn btn-primary add-department  add-action">
 						<i class="ti ti-plus"></i>
-						<span>Add Shift</span>
+						<span>Add Department</span>
 					</button>
 				</div>
 			</div>
-			
 		</div>
 
 	</div>
@@ -186,115 +169,112 @@
 		<div class="timesheet-container">
 
 			<div class="custom-modal-content custom-content-table-with-fixed-column ">
-				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" id="shift_management" style="border-collapse: collapse;" border-color="#e1e1e1">
+				
+				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table display" style="border-collapse: collapse;" border-color="#e1e1e1">
 					<thead>
 						<tr class="text-center">
 							<!-- <th scope="col">#</th> -->
-							<!-- <th scope="col">Comapny Name</th> -->
-							<th scope="col">Department</th>
-							<th scope="col">Shift Name</th>
-							<th scope="col">Shift type</th>
-							<th scope="col">Start Time</th>
-							<th scope="col">End Time</th>
+							<th scope="col">Department Name</th>
+							<th scope="col">Department Code</th>
+							<th scope="col">Added By</th>
+							<th scope="col">Added Date</th>
+							<th scope="col">Updated By</th>
+							<th scope="col">Updated Date</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{if count($data) > 0}
-						{foreach $data as $data_index => $data_row}
-						<tr class="leave-request-row">
-							<!-- <td>{$data_index + 1}</td> -->
-							<!-- <td>{$data_row.company_name}</td> -->
-							<td>{$data_row.departmen_name} ({$data_row.department_code})</td>
-							<td>{$data_row.shift_name}</td>
-							<td>{$data_row.shift_type}</td>
-							<td>{$data_row.start_time}</td>
-							<td>{$data_row.end_time}</td>
-							<td>{$data_row.action}</td>
+						<?php if (count($_smarty_tpl->tpl_vars['department']->value) > 0) {?>
 
-						</tr>
-						{/foreach}
-						{else}
-						<tr>
-							<td colspan="6">
-								<div class="mb-5">
-									<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
-									<br />
-									<span class="mb-4 no-data-found-message">No shift data found!</span>
-								</div>
-							</td>
-						</tr>
-						{/if}
-					</tbody>
-				</table>
+						<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['department']->value, 'department_row', false, 'department_index');
+$_smarty_tpl->tpl_vars['department_row']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['department_index']->value => $_smarty_tpl->tpl_vars['department_row']->value) {
+$_smarty_tpl->tpl_vars['department_row']->do_else = false;
+?>
+						<tr class="department-request-row">
+							<!-- <td><?php echo $_smarty_tpl->tpl_vars['designation_index']->value+1;?>
+</td> -->
+							<td class="departmen_name"><?php echo $_smarty_tpl->tpl_vars['department_row']->value['departmen_name'];?>
+</td>
+							<td class="department_code"><?php echo $_smarty_tpl->tpl_vars['department_row']->value['department_code'];?>
+</td>
+							<td><?php echo display_no_character($_smarty_tpl->tpl_vars['department_row']->value['added_by_name']);?>
+</td>
+							<td><?php echo date_formater($_smarty_tpl->tpl_vars['department_row']->value['added_date']);?>
+</td>
+							<td><?php echo display_no_character($_smarty_tpl->tpl_vars['department_row']->value['updated_by_name']);?>
+</td>
+							<td><?php echo date_formater($_smarty_tpl->tpl_vars['department_row']->value['updated_date']);?>
+</td>
+							<td><span class="edit_department me-2 text-secondary cursor" data-id="<?php echo $_smarty_tpl->tpl_vars['department_row']->value['department_id'];?>
+" data-company-id="<?php echo $_smarty_tpl->tpl_vars['department_row']->value['company_id'];?>
+" title="Edit"><i class=" la-edit ti ti-edit"></i></span></td>
+							
+
+					</tr>
+					<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+					
+					<?php }?>
+				</tbody>
+			</table>
+
 			</div>
 		</div>
 	</div>
 
 </div>
 
-<div class="modal fade leave-popup-block" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+<div class="modal fade leave-popup-block" id="designation_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered ">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalToggleLabel">Shift</h5>
+				<h5 class="modal-title" id="exampleModalToggleLabel">Department</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form id="shiftForm" action="javascript:void(0)" method="post">
+			<form id="DepartmentForm" action="javascript:void(0)" method="post">
 				<div class="modal-body">
 					<div class="main-content">
 
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
-
-
 								<div class="mb-3">
-									<label for="shift_name" class="form-label">Shift Name</label>
-									<input type="text" class="form-control shift_name" id="shift_name" name="shift_name"  placeholder="Enter Shift Name">
+									<label for="designationName" class="form-label">Department Name</label>
+									<input type="text" class="form-control department_name" id="department_name" name="department_name"  placeholder="Enter Department Name">
 								</div>
-								<div class="mb-3 select-box-block" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
+                                <div class="mb-3 select-box-block" <?php if ($_smarty_tpl->tpl_vars['user_data']->value['role'] != 'arom') {?> style="display: none" <?php }?>>
                                     <label for="company_id" class="form-label">Company</label>
                                     <select class="form-select company_id" name="company_id" id="company_id">
                                         <option value="">Select Company</option>
-                                        {foreach from=$company_details item=company_name}
-                                            {if $company_name.company_id == $selected_company}
-                                                <option value="{$company_name.company_id}" selected>{$company_name.company_name}</option>
-                                            {else}
-                                                <option value="{$company_name.company_id}">{$company_name.company_name}</option>
-                                            {/if}
-                                        {/foreach}
+                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['company_details']->value, 'company_name');
+$_smarty_tpl->tpl_vars['company_name']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['company_name']->value) {
+$_smarty_tpl->tpl_vars['company_name']->do_else = false;
+?>
+                                            <?php if ($_smarty_tpl->tpl_vars['company_name']->value['company_id'] == $_smarty_tpl->tpl_vars['selected_company']->value) {?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+" selected><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php }?>
+                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-									<label for="department" class="form-label">Department</label>
-									<select class="form-select department" name="department" id="department">
-										<option value="">Select Department</option>
-										{foreach from=$departments item=departments_val}
-											<option value="{$departments_val.department_id}">{$departments_val.departmen_name} [{$departments_val.department_code}]</option>
-										{/foreach}
-									</select>
-								</div>
 								<div class="mb-3">
-									<label for="shift_type" class="form-label">Shift type</label>
-									<select class="form-select shift_type" name="shift_type" id="shift_type">
-										<option value="">Select Shift Type</option>
-										{foreach from=$shift_type_data key=key_val item=shift_type_val}
-											 <option value="{$shift_type_val['id']}" >{$shift_type_val['val']}</option>
-										{/foreach}
-										
-									</select>
+									<label for="designationName" class="form-label">Department Code</label>
+									<input type="text" class="form-control department_code" id="department_code" name="department_code"  placeholder="Enter Department Code">
 								</div>
-								<div class="mb-3">
-									<label for="start_time" class="form-label">Start Time</label>
-									<input type="text" class="form-control start_time" id="start_time" name="start_time"  placeholder="Enter Satrt Time">
-								</div>
-								<div class="mb-3">
-									<label for="end_time" class="form-label">End Time</label>
-									<input type="text" class="form-control end_time" id="end_time" name="end_time" placeholder="Enter End time" >
-								</div>
-								<input type="hidden" class="form-control shift_id"  name="id" >
-
-
+								<input type="hidden" class="form-control department_id"  name="department_id" id="department_id">
+								<input type="hidden" class="form-control mode"  name="mode" id="mode">
 							</div>
 						</div>
 					</div>
@@ -303,7 +283,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary submit-shift">Submit</button>
+					<button type="submit" class="btn btn-primary submit-holiday">Submit</button>
 				</div>
 			</form>
 		</div>
@@ -315,24 +295,30 @@
 </div>
 </div>
 </div>
-<style type="text/css">
-	.chosen-disabled *{
-	    
-	    cursor: not-allowed;
-	    /* cursor: none; */
-	}
-</style>
+<?php echo '<script'; ?>
+>
+    var no_data_message =  <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+;
+    var selected_company = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['selected_company']->value);
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
 
-<script type="text/javascript" >
- var selected_company = {{$selected_company|json_encode}}
-  var no_data_message =  {{$no_data_message|json_encode}};
-</script>
+<?php echo '</script'; ?>
+>
 
 <link rel="stylesheet" href="public/css/attendance_sheet.css" />
 <link rel="stylesheet" href="public/css/leave.css" />
-<link rel="stylesheet" href="public/css/shift_management.css" />
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-<script src="public/js/shift_management.js"></script>
-{include file="footer.tpl" }
+<link rel="stylesheet" href="public/css/department.css" />
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="public/js/department.js"><?php echo '</script'; ?>
+>
+<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}

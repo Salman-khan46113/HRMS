@@ -24,7 +24,7 @@ class Leave extends MY_controller
             $current_year,
             "list"
         );
-
+        $data_val['leave_type'] = [["id"=>"SickLeave","val"=>"Sick Leave"],["id"=>"PaidLeave","val"=>"Paid Leave"],["id"=>"CasualLeave","val"=>"Casual Leave"]];
         $this->smarty->view("employee_leave.tpl", $data_val);
     }
     public function leave_list_filter_data()
@@ -72,7 +72,12 @@ class Leave extends MY_controller
                 $start_date_value = $start_date_value->format("m/d/Y");
                 $end_date_value = new DateTime($value["leave_end_date"]);
                 $end_date_value = $end_date_value->format("m/d/Y");
-                $leave_list[$key]["action"] =
+                $currentDate = new DateTime();
+                $dateToCheck = new DateTime($value["leave_start_date"]);
+                if($dateToCheck < $currentDate){
+                    $leave_list[$key]["action"] = display_no_character('');
+                }else{
+                    $leave_list[$key]["action"] =
                     '<i class="la-edit ti ti-edit" data-start-date="' .
                     $start_date_value .
                     '" data-end-date="' .
@@ -82,6 +87,8 @@ class Leave extends MY_controller
                     '" data-leave-type="' .
                     $value["leave_type"] .
                     '"></i>';
+                }
+                
             }
 
             $leave_list[$key]["approved_by"] =
@@ -162,142 +169,182 @@ class Leave extends MY_controller
         $date = DateTime::createFromFormat("m/d/Y", $post_data["end_date"]);
         $post_data["end_date"] = $date->format("Y-m-d");
 
-        if ($post_data["mode"] == "Add") {
-            $flag = 0;
-            if (array_key_exists("leave_range_arr", $post_data)) {
-                foreach ($post_data["leave_range_arr"] as $key => $value) {
-                    if (
-                        $this->isDateInRange(
-                            $value["leave_start_date"],
-                            $post_data["start_date"],
-                            $post_data["end_date"]
-                        ) ||
-                        $this->isDateInRange(
-                            $value["leave_end_date"],
-                            $post_data["start_date"],
-                            $post_data["end_date"]
-                        )
-                    ) {
-                        $flag = 1;
-                    }
-                }
-            }
-
-            if ($flag == 0) {
-                $insert_arr = [
-                    "employee_id" => $employee_id,
-                    "leave_start_date" => $post_data["start_date"],
-                    "leave_end_date" => $post_data["end_date"],
-                    "leave_type" => $post_data["leave_type"],
-                    "reason" => $post_data["leave_reason"],
-                    "approved_by" => 0,
-                    "status" => "pending",
-                    "added_date" => date("Y-m-d H:i:s"),
-                ];
-                // pr($insert_arr,1);
-                $insert_id = $this->leave_model->insert_employee_leave(
-                    $insert_arr
-                );
-                if ($insert_id > 0) {
-                    $success = 1;
-                    $message = "Leave request added successfully.";
-                    $send_data["email"] = $session_date["email"];
-                    $send_data["name"] =
-                        $session_date["first_name"] .
-                        " " .
-                        $session_date["last_name"];
-                    $send_data["to_date"] = $post_data["end_date"];
-                    $send_data["from_date"] = $post_data["start_date"];
-                    $send_data["leave_type"] =
-                        $post_data["leave_type"] == "full_day"
-                            ? "full day"
-                            : "half day";
-                    $send_data["title"] = $send_data["subject"] =
-                        "Leave Application Received";
-                    $send_data["templete"] = "leave_email_template.tpl";
-                    $send_data["email_type"] = "request_leave";
-                    $return_arr["email_sender"] = $this->email_sender(
-                        $send_data
-                    );
-                } else {
-                    $message = "Error!";
-                }
-            } else {
+        $start_date = new DateTime($post_data["start_date"]);
+        $end_date = new DateTime($post_data["end_date"]);
+        $interval = (array) $end_date->diff($start_date);
+        $applied_leave_days_val = 0 ? 1 : $interval["days"] + 1;
+        $allocated_leaves = $this->leave_model->get_allocated_leaves($employee_id);
+        if(isset($allocated_leaves[$post_data["leave_name"]])){
+            if($applied_leave_days_val > $allocated_leaves[$post_data["leave_name"]]){
                 $success = 0;
-                $message = "Aleady leave apply between two dates.";
-            }
-        } elseif ($post_data["mode"] == "Update") {
-            $flag = 0;
-            if (array_key_exists("leave_range_arr", $post_data)) {
-                foreach ($post_data["leave_range_arr"] as $key => $value) {
-                    if (
-                        $value["leave_request_id"] ==
-                        $post_data["leave_request_id"]
-                    ) {
-                        unset($post_data["leave_range_arr"][$key]);
+                $allocated_leaves_val = $allocated_leaves[$post_data["leave_name"]];
+                $leave_name_val = strtolower(get_status($post_data['leave_name']));
+                $message = "Only $allocated_leaves_val day of $leave_name_val has been allocated.";
+            }else{
+                if ($post_data["mode"] == "Add") {
+                    $flag = 0;
+                    if (array_key_exists("leave_range_arr", $post_data)) {
+                        foreach ($post_data["leave_range_arr"] as $key => $value) {
+                            if (
+                                $this->isDateInRange(
+                                    $value["leave_start_date"],
+                                    $post_data["start_date"],
+                                    $post_data["end_date"]
+                                ) ||
+                                $this->isDateInRange(
+                                    $value["leave_end_date"],
+                                    $post_data["start_date"],
+                                    $post_data["end_date"]
+                                )
+                            ) {
+                                $flag = 1;
+                            }
+                        }
                     }
-                }
 
-                foreach ($post_data["leave_range_arr"] as $key => $value) {
-                    if (
-                        $this->isDateInRange(
-                            $value["leave_start_date"],
-                            $post_data["start_date"],
-                            $post_data["end_date"]
-                        ) ||
-                        $this->isDateInRange(
-                            $value["leave_end_date"],
-                            $post_data["start_date"],
-                            $post_data["end_date"]
-                        )
-                    ) {
-                        $flag = 1;
+                    if ($flag == 0) {
+                        $remaining_leaves = $this->leave_model->get_types_wise_leaves($employee_id,$allocated_leaves[$post_data["leave_name"]],'');
+                        if($remaining_leaves < 0 || ($remaining_leaves - $applied_leave_days_val) < 0){
+                            $success = 0;
+                            $leave_name_val = strtolower(get_status($post_data['leave_name']));
+                            if($remaining_leaves == 0){
+                                $message = "There are no $leave_name_val remaining.";
+                            }else{
+                                $message = "There are $remaining_leaves days of $leave_name_val remaining.";
+                            }
+                                                        
+                        }else{
+
+                            $insert_arr = [
+                                "employee_id" => $employee_id,
+                                "leave_start_date" => $post_data["start_date"],
+                                "leave_end_date" => $post_data["end_date"],
+                                "leave_name" => $post_data["leave_name"],
+                                "leave_type" => $post_data["leave_type"],
+                                "reason" => $post_data["leave_reason"],
+                                "approved_by" => 0,
+                                "status" => "pending",
+                                "added_date" => date("Y-m-d H:i:s"),
+                            ];
+                            
+                            $insert_id = $this->leave_model->insert_employee_leave(
+                                $insert_arr
+                            );
+                            if ($insert_id > 0) {
+                                $success = 1;
+                                $message = "Leave request added successfully.";
+                                $send_data["email"] = $session_date["email"];
+                                $send_data["name"] =
+                                    $session_date["first_name"] .
+                                    " " .
+                                    $session_date["last_name"];
+                                $send_data["to_date"] = $post_data["end_date"];
+                                $send_data["from_date"] = $post_data["start_date"];
+                                $send_data["leave_type"] =
+                                    $post_data["leave_type"] == "full_day"
+                                        ? "full day"
+                                        : "half day";
+                                $send_data["title"] = $send_data["subject"] =
+                                    "Leave Application Received";
+                                $send_data["templete"] = "leave_email_template.tpl";
+                                $send_data["email_type"] = "request_leave";
+                                $return_arr["email_sender"] = $this->email_sender(
+                                    $send_data
+                                );
+                            } else {
+                                $message = "Error!";
+                            }
+                        }
+                    } else {
+                        $success = 0;
+                        $message = "Aleady leave apply between two dates.";
                     }
+                } elseif ($post_data["mode"] == "Update") {
+                    $flag = 0;
+                    if (array_key_exists("leave_range_arr", $post_data)) {
+                        foreach ($post_data["leave_range_arr"] as $key => $value) {
+                            if (
+                                $value["leave_request_id"] ==
+                                $post_data["leave_request_id"]
+                            ) {
+                                unset($post_data["leave_range_arr"][$key]);
+                            }
+                        }
+
+                        foreach ($post_data["leave_range_arr"] as $key => $value) {
+                            if (
+                                $this->isDateInRange(
+                                    $value["leave_start_date"],
+                                    $post_data["start_date"],
+                                    $post_data["end_date"]
+                                ) ||
+                                $this->isDateInRange(
+                                    $value["leave_end_date"],
+                                    $post_data["start_date"],
+                                    $post_data["end_date"]
+                                )
+                            ) {
+                                $flag = 1;
+                            }
+                        }
+                    }
+                    if ($flag == 0) {
+                        $remaining_leaves = $this->leave_model->get_types_wise_leaves($employee_id,$allocated_leaves[$post_data["leave_name"]],$post_data["leave_request_id"]);
+                        if($remaining_leaves < 0 || ($remaining_leaves - $applied_leave_days_val) < 0){
+                            $success = 0;
+                            $leave_name_val = strtolower(get_status($post_data['leave_name']));
+                            $message = "There are $remaining_leaves days of $leave_name_val remaining.";
+                        }else{
+                            $update_arr = [
+                                "leave_id" => $post_data["leave_request_id"],
+                                "leave_start_date" => $post_data["start_date"],
+                                "leave_end_date" => $post_data["end_date"],
+                                "leave_name" => $post_data["leave_name"],
+                                "leave_type" => $post_data["leave_type"],
+                                "updated_date" => date("Y-m-d H:i:s"),
+                                "reason" => $post_data["leave_reason"],
+                            ];
+
+                            $affected_row = $this->leave_model->update_employee_leave(
+                                $update_arr
+                            );
+                            if ($affected_row > 0) {
+                                $success = 1;
+                                $message = "Leave request added successfully.";
+                                $send_data["email"] = $session_date["email"];
+                                $send_data["name"] =
+                                    $session_date["first_name"] .
+                                    " " .
+                                    $session_date["last_name"];
+                                $send_data["to_date"] = $post_data["start_date"];
+                                $send_data["from_date"] = $post_data["end_date"];
+                                $send_data["leave_type"] =
+                                    $post_data["leave_type"] == "full_day"
+                                        ? "full day"
+                                        : "half day";
+                                $send_data["title"] = $send_data["subject"] =
+                                    "Update Leave Request";
+                                $send_data["templete"] = "leave_email_template.tpl";
+                                $send_data["email_type"] = "update_leave";
+                                $return_arr["email_sender"] = $this->email_sender(
+                                    $send_data
+                                );
+                            } else {
+                                $message = "Error!";
+                            }
+                        }
+                    } else {
+                        $success = 0;
+                        $message = "Aleady leave apply between two dates.";
+                    }
+
+                    // pr($post_data['leave_range_arr'],1);
                 }
             }
-            if ($flag == 0) {
-                $update_arr = [
-                    "leave_id" => $post_data["leave_request_id"],
-                    "leave_start_date" => $post_data["start_date"],
-                    "leave_end_date" => $post_data["end_date"],
-                    "leave_type" => $post_data["leave_type"],
-                    "updated_date" => date("Y-m-d H:i:s"),
-                    "reason" => $post_data["leave_reason"],
-                ];
+        }else{
+            $success = 0;
 
-                $affected_row = $this->leave_model->update_employee_leave(
-                    $update_arr
-                );
-                if ($affected_row > 0) {
-                    $success = 1;
-                    $message = "Leave request added successfully.";
-                    $send_data["email"] = $session_date["email"];
-                    $send_data["name"] =
-                        $session_date["first_name"] .
-                        " " .
-                        $session_date["last_name"];
-                    $send_data["to_date"] = $post_data["start_date"];
-                    $send_data["from_date"] = $post_data["end_date"];
-                    $send_data["leave_type"] =
-                        $post_data["leave_type"] == "full_day"
-                            ? "full day"
-                            : "half day";
-                    $send_data["title"] = $send_data["subject"] =
-                        "Update Leave Request";
-                    $send_data["templete"] = "leave_email_template.tpl";
-                    $send_data["email_type"] = "update_leave";
-                    $return_arr["email_sender"] = $this->email_sender(
-                        $send_data
-                    );
-                } else {
-                    $message = "Error!";
-                }
-            } else {
-                $success = 0;
-                $message = "Aleady leave apply between two dates.";
-            }
-
-            // pr($post_data['leave_range_arr'],1);
+            $message = ucfirst(strtolower(get_status($post_data['leave_name'])))." not allocated by admin.";
         }
 
         $return_arr["message"] = $message;

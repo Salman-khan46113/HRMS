@@ -45,6 +45,7 @@ class Leave_model extends CI_Model
         $this->db->set("leave_start_date", $update_arr["leave_start_date"]);
         $this->db->set("leave_end_date", $update_arr["leave_end_date"]);
         $this->db->set("leave_type", $update_arr["leave_type"]);
+        $this->db->set("leave_name", $update_arr["leave_name"]);
         $this->db->set("updated_date", $update_arr["updated_date"]);
         $this->db->set("reason", $update_arr["reason"]);
         $this->db->where("leave_id", $update_arr["leave_id"]);
@@ -131,6 +132,40 @@ class Leave_model extends CI_Model
         $this->db->update("employee_leave");
         $affected_row = $this->db->affected_rows();
         return $affected_row;
+    }
+    public function get_allocated_leaves($employee_id = '')
+    {
+        $this->db->select("la.sick_leave as SickLeave,la.paid_leave as PaidLeave,la.casual_leave as CasualLeave");
+        $this->db->from("employee_master as em");
+        $this->db->join("leave_allocation as la","la.designation_id = em.designation","left");
+        $this->db->where("em.employee_id", $employee_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+        return $ret_data;
+    }
+    public function get_types_wise_leaves($employee_id = '',$allocated_leaves = 0,$employee_leave_id = '')
+    {
+        $this->db->select("el.*");
+        $this->db->from("employee_leave as el");
+        $this->db->where("el.employee_id", $employee_id);
+        if($employee_leave_id > 0){
+            $this->db->where("el.leave_id !=", $employee_leave_id);
+        }
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        $apllied_days = 0;
+        if(is_valid_array($ret_data)){
+            foreach ($ret_data as $key => $value) {
+                $start_date = new DateTime($value["leave_start_date"]);
+                $end_date = new DateTime($value["leave_end_date"]);
+                $interval = (array) $end_date->diff($start_date);
+                $apllied_days += 0 ? 1 : $interval["days"] + 1;
+            }
+        }
+
+        $remaining_leaves = $allocated_leaves - $apllied_days;
+
+        return $remaining_leaves;
     }
 }
 

@@ -30,6 +30,12 @@ $(document).ready(function(){
           	autocomplete:'off',
   	});
   	$("#leave_type").select2({
+          placeholder: "Please Select Leave Name",
+           minimumResultsForSearch: Infinity,
+          allowClear: true,
+          	autocomplete:'off',
+  	});
+  	$("#leave_name").select2({
           placeholder: "Select Leave type",
            minimumResultsForSearch: Infinity,
           allowClear: true,
@@ -105,11 +111,12 @@ $(document).ready(function(){
 	$(document).on('click',".la-edit",function(){
 		$("#mode").val("Update");
 		var start_date = $(this).parents(".leave-request-row").find(".start-date").html();
-		var  end_date = $(this).parents(".leave-request-row").find(".end-date").html();
-		 
-		 var request_id = $(this).attr("data-leave-request-id");
-		 var leave_type = $(this).attr("data-leave-type");
-		 $("#leave_type").val(leave_type).trigger('change')
+		var end_date = $(this).parents(".leave-request-row").find(".end-date").html();
+		var leave_name = $(this).parents(".leave-request-row").find(".leave-name").attr("data-leave-type");
+		$("#leave_name").val(leave_name).trigger('change')
+		var request_id = $(this).attr("data-leave-request-id");
+		var leave_type = $(this).attr("data-leave-type");
+		$("#leave_type").val(leave_type).trigger('change')
 		 var date_range = [];
 		 for (var i = 0 ; i <  date_range_arr.length; i++) {
 		 	if(!(date_range_arr[i]['start'] == start_date) && !(date_range_arr[i]['end'] == end_date)){
@@ -139,13 +146,14 @@ $(document).ready(function(){
 		var start_date = $("#start_date").val();
 		var end_date = $("#end_date").val();
 		var leave_type = $("#leave_type").val();
+		var leave_name = $("#leave_name").val();
 		
-		if(start_date != "" && end_date != "" && leave_type != "" && leave_type != null && leave_type != undefined){
+		if(start_date != "" && end_date != "" && leave_name != "" && leave_type != "" && leave_type != null && leave_type != undefined){
 			var mode = $("#mode").val();
 			var leave_request_id = $("#leave_request_id").val();
 			var leave_reason = $("#leave_reason").val();
 			loader()
-			var formData = {start_date:start_date,end_date:end_date,leave_range_arr:leave_range_arr,mode:mode,leave_request_id:leave_request_id,leave_reason:leave_reason,leave_type:leave_type};
+			var formData = {leave_name:leave_name,start_date:start_date,end_date:end_date,leave_range_arr:leave_range_arr,mode:mode,leave_request_id:leave_request_id,leave_reason:leave_reason,leave_type:leave_type};
 			// console.log(formData)
 			// return;
 		      $.ajax({
@@ -179,6 +187,8 @@ $(document).ready(function(){
 	    }else{
 	    	if(leave_type == "" || leave_type == null || leave_type == undefined){
 	    		toaster("warning","Please select  leave type.");
+	    	}else if(leave_name == ''){
+	    		toaster("warning","Please select leave name.");
 	    	}else{
 	    		toaster("warning","Please select leave dates.");
 	    	}
