@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-02 19:14:09
+/* Smarty version 4.3.2, created on 2024-04-03 16:21:22
   from 'C:\xampp\htdocs\HRMS\application\views\templates\leave_allocation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660c3ce1834a67_82048362',
+  'unifunc' => 'content_660d65e23ab303_56608179',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '23af45273032bcb5be564d339b408846922db165' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\leave_allocation.tpl',
-      1 => 1712078042,
+      1 => 1712153961,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660c3ce1834a67_82048362 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660d65e23ab303_56608179 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -47,7 +47,7 @@ function content_660c3ce1834a67_82048362 (Smarty_Internal_Template $_smarty_tpl)
 				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
 					<thead>
 						<tr class="text-center">
-
+							<th scope="col">Department Name</th>
 							<th scope="col">Designation Name</th>
 							<th scope="col">Sick Leave</th>
 							<th scope="col">paid Leave</th>
@@ -65,9 +65,11 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['data_index']->va
 $_smarty_tpl->tpl_vars['data_row']->do_else = false;
 ?>
 						<tr class="leave-request-row">
-
+							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['departmen_name'];?>
+ </td>
 							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['designation_name'];?>
-</td>
+ (Grade - <?php echo $_smarty_tpl->tpl_vars['data_row']->value['grads'];?>
+)</td>
 							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['sick_leave'];?>
 </td>
 							<td><?php echo $_smarty_tpl->tpl_vars['data_row']->value['paid_leave'];?>
@@ -85,7 +87,7 @@ $_smarty_tpl->tpl_vars['data_row']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 						<?php } else { ?>
 						<tr>
-							<td colspan="6">
+							<td colspan="7">
 								<div class="mb-5">
 									<img alt="" src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
@@ -120,22 +122,30 @@ public/assets/images/images/no_data_found_new.png" height="150" width="150" clas
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
 								<div class="mb-3">
-									<label for="shift_type" class="form-label">Designation</label>
-									<select class="form-select designation_id" name="designation_id" id="designation_id">
-										<option value="">Select designation</option>
+									<label for="department_id" class="form-label">Department</label>
+									<select class="form-select department_id" name="department_id" id="department_id">
+										<option value="">Select Department</option>
 
 										<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['designation']->value, 'designation_row', false, 'designation_index');
-$_smarty_tpl->tpl_vars['designation_row']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['designation_index']->value => $_smarty_tpl->tpl_vars['designation_row']->value) {
-$_smarty_tpl->tpl_vars['designation_row']->do_else = false;
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['department']->value, 'department_row', false, 'department_index');
+$_smarty_tpl->tpl_vars['department_row']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['department_index']->value => $_smarty_tpl->tpl_vars['department_row']->value) {
+$_smarty_tpl->tpl_vars['department_row']->do_else = false;
 ?>
-										<option value="<?php echo $_smarty_tpl->tpl_vars['designation_row']->value['id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['designation_row']->value['designation_name'];?>
-</option>
+										<option value="<?php echo $_smarty_tpl->tpl_vars['department_row']->value['department_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['department_row']->value['departmen_name'];?>
+ (<?php echo $_smarty_tpl->tpl_vars['department_row']->value['department_code'];?>
+)</option>
 										<?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+									</select>
+								</div>
+
+								<div class="mb-3">
+									<label for="designation_id" class="form-label">Designation</label>
+									<select class="form-select designation_id" name="designation_id" id="designation_id">
+										
 									</select>
 								</div>
 

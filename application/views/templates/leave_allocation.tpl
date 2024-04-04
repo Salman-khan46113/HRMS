@@ -23,7 +23,7 @@
 				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
 					<thead>
 						<tr class="text-center">
-
+							<th scope="col">Department Name</th>
 							<th scope="col">Designation Name</th>
 							<th scope="col">Sick Leave</th>
 							<th scope="col">paid Leave</th>
@@ -36,8 +36,8 @@
 						{if count($data) > 0}
 						{foreach $data as $data_index => $data_row}
 						<tr class="leave-request-row">
-
-							<td>{$data_row.designation_name}</td>
+							<td>{$data_row.departmen_name} </td>
+							<td>{$data_row.designation_name} (Grade - {$data_row.grads})</td>
 							<td>{$data_row.sick_leave}</td>
 							<td>{$data_row.paid_leave}</td>
 							<td>{$data_row.casual_leave}</td>
@@ -48,7 +48,7 @@
 						{/foreach}
 						{else}
 						<tr>
-							<td colspan="6">
+							<td colspan="7">
 								<div class="mb-5">
 									<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
 									<br />
@@ -79,13 +79,20 @@
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
 								<div class="mb-3">
-									<label for="shift_type" class="form-label">Designation</label>
-									<select class="form-select designation_id" name="designation_id" id="designation_id">
-										<option value="">Select designation</option>
+									<label for="department_id" class="form-label">Department</label>
+									<select class="form-select department_id" name="department_id" id="department_id">
+										<option value="">Select Department</option>
 
-										{foreach $designation as $designation_index => $designation_row}
-										<option value="{$designation_row.id}">{$designation_row.designation_name}</option>
+										{foreach $department as $department_index => $department_row}
+										<option value="{$department_row.department_id }">{$department_row.departmen_name} ({$department_row.department_code})</option>
 										{/foreach}
+									</select>
+								</div>
+
+								<div class="mb-3">
+									<label for="designation_id" class="form-label">Designation</label>
+									<select class="form-select designation_id" name="designation_id" id="designation_id">
+										
 									</select>
 								</div>
 

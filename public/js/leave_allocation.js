@@ -1,17 +1,43 @@
 $(document).ready(function () {
   var myModal = new bootstrap.Modal(document.getElementById("Shift_popup"));
-  $(".designation_id").chosen()
+  $(".department_id").chosen()
+  // $(".designation_id").chosen()
   $(".add-leave").on("click", function () {
     $(".sick_leave").val("");
     $(".paid_leave").val("");
     $(".casual_leave").val("");
     $(".leave_allocation_id").val("");
+    $(".department_id").val("").prop( "disabled", false ).trigger('chosen:updated');
     $(".designation_id").val("").prop( "disabled", false ).trigger('chosen:updated');
     myModal.show();
   });
 
+  $("#department_id").change(function(){
+    var department_id = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "leaveallocation/get_designation",
+      data: {
+        department_id: department_id,
+      },
 
-  $(document).on("click", ".edit_shift", function () {
+      success: function (response) {
+        var responseObject = JSON.parse(response);
+        var designations = responseObject.designation;
+        console.log(designations);
+        var selectElement = $("#designation_id");
+        selectElement.html("");
+        selectElement.append('<option value="">Select Designation</option>');
+        $.each(designations, function(index, item) {
+          selectElement.append('<option value="' + item.id + '">' + item.designation_name + ' (Grade - ' + item.grads + ')</option>');
+        });
+
+      },
+      error: function (error) {},
+    });
+
+  });
+  $(document).on("click", ".edit_leave_allocation", function () {
 
     var id = $(this).data("id");
     $.ajax({
@@ -24,18 +50,23 @@ $(document).ready(function () {
       success: function (response) {
         var responseObject = JSON.parse(response);
         var data = responseObject.data;
+        // console.log(data);
         $(".leave_allocation_id").val(data.id);
         $(".sick_leave").val(data.sick_leave);
         $(".paid_leave").val(data.paid_leave);
         $(".casual_leave").val(data.casual_leave);
-          $(".designation_id").val(data.designation_id).prop( "disabled", true ).trigger('chosen:updated');
+        var designation = $("#designation_id");
+        designation.html("");
+        designation.append('<option value='+data.designation_id+'>'+data.designation_name + ' (Grade - ' + data.grads + ')</option>');
+        $(".department_id").val(data.designation_id).prop( "disabled", true ).trigger('chosen:updated');
+        $(".designation_id").val(data.designation_id).prop( "disabled", true ).trigger('chosen:updated');
         myModal.show();
       },
       error: function (error) {},
     });
   });
 
-  $(document).on("click",".delete_shift",function () {
+  $(document).on("click",".delete_leave_allocation",function () {
     var id = $(this).data("id");
     loader()
     Swal.fire({
@@ -88,6 +119,8 @@ $(document).ready(function () {
     var sick_leave = $("#sick_leave").val();
     var paid_leave = $("#paid_leave").val();
     var casual_leave = $("#casual_leave").val();
+    var department_id = $("#department_id").val();
+
     var designation_id = $("#designation_id").val();
 
 
@@ -97,16 +130,18 @@ $(document).ready(function () {
       toaster("warning", "Please select paid leave.");
     }else if (casual_leave == "") {
       toaster("warning", "Please select casual leave.");
-    }else if (designation_id == "") {
+    }else if (department_id == "") {
+      toaster("warning", "Please select department.");
+    } else if (designation_id == "") {
       toaster("warning", "Please select designation.");
-    } else if (sick_leave != "" && paid_leave != "" && casual_leave != "" && designation_id != "") {
+    } else if (sick_leave != "" && paid_leave != "" && casual_leave != "" && department_id != "" && designation_id != "") {
       var id = $(".leave_allocation_id").val();
-
       loader();
       var formData = {
         sick_leave: sick_leave,
         paid_leave: paid_leave,
         casual_leave: casual_leave,
+        department_id:department_id,
         designation_id: designation_id,
         id: id
       };
