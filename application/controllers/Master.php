@@ -65,8 +65,13 @@ class Master extends MY_controller
     /* holiday and designation */
     public function designation()
     {
+        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Designation data found..!</div>';
+        $data["grads_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];
         $data["designation"] = $this->master_model->get_designation();
         $data["departmen"] = $this->master_model->get_department_list();
+        // pr($data,1);
         $this->smarty->view("designation.tpl", $data);
     }
 

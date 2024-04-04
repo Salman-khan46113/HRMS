@@ -16,6 +16,7 @@ class Shift extends MY_controller
     public function shift_management()
     {
         $data["data"] = $this->Shift_model->get_shift('');
+        // pr($data);
         foreach ($data["data"] as $key => $value) {
                 $data["data"][$key]["action"] =
                     '<span  class="edit_shift me-2 text-secondary cursor" data-id=' .
@@ -26,9 +27,13 @@ class Shift extends MY_controller
                     ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
 
         }
+         $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Shift Management data found..!</div>';
         $data["company_details"] = $this->Shift_model->get_companies();
         $data["selected_company"] = getCompanyId();
         $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
+        $data["shift_type_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];
         $this->smarty->view("shift_management.tpl", $data);
     }
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 18:34:02
+/* Smarty version 4.3.2, created on 2024-04-03 20:03:44
   from '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d53c22d1b31_16043084',
+  'unifunc' => 'content_660d68c8183383_95851384',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7a1c09e16558bf5de3f1ad74fed98cbf44e9bdb5' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl',
-      1 => 1711730821,
+      1 => 1712154821,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d53c22d1b31_16043084 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660d68c8183383_95851384 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	 <aside class="right-sidebar">
