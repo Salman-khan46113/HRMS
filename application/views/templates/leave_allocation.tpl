@@ -65,7 +65,7 @@
 
 </div>
 
-<div class="modal fade leave-popup-block" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade leave-popup-block" id="leave_allocation_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered ">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -92,7 +92,7 @@
 								<div class="mb-3">
 									<label for="designation_id" class="form-label">Designation</label>
 									<select class="form-select designation_id" name="designation_id" id="designation_id">
-										
+
 									</select>
 								</div>
 
@@ -120,7 +120,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary submit-shift">Submit</button>
+					<button type="submit" class="btn btn-primary submit-leave-allocation">Submit</button>
 				</div>
 			</form>
 		</div>

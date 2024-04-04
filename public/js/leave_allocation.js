@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var myModal = new bootstrap.Modal(document.getElementById("Shift_popup"));
+  var myModal = new bootstrap.Modal(document.getElementById("leave_allocation_popup"));
   $(".department_id").chosen()
   // $(".designation_id").chosen()
   $(".add-leave").on("click", function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
     var department_id = $(this).val();
     $.ajax({
       type: "POST",
-      url: "leaveallocation/get_designation",
+      url: "leave/get_designation",
       data: {
         department_id: department_id,
       },
@@ -42,7 +42,7 @@ $(document).ready(function () {
     var id = $(this).data("id");
     $.ajax({
       type: "POST",
-      url: "leaveallocation/get_leave_allocation_details",
+      url: "leave/get_leave_allocation_details",
       data: {
         edit: id,
       },
@@ -70,7 +70,7 @@ $(document).ready(function () {
     var id = $(this).data("id");
     loader()
     Swal.fire({
-      title: "Delete Shift",
+      title: "Delete Leave Allocation",
       text: "Are you sure you want to delete this Leave Allocation?",
       icon: "warning",
       showCancelButton: true,
@@ -86,7 +86,7 @@ $(document).ready(function () {
       if (result.value) {
         $.ajax({
           type: "POST",
-          url: "leaveallocation/delete_leave_allocation",
+          url: "leave/delete_leave_allocation",
           data: {
             id: id,
           },
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
   });
 
-  $(".submit-shift").on("click", function () {
+  $(".submit-leave-allocation").on("click", function () {
     var sick_leave = $("#sick_leave").val();
     var paid_leave = $("#paid_leave").val();
     var casual_leave = $("#casual_leave").val();
@@ -124,16 +124,16 @@ $(document).ready(function () {
     var designation_id = $("#designation_id").val();
 
 
-    if (sick_leave == "") {
-      toaster("warning", "Please enter sick leave.");
-    } else if (paid_leave == "") {
-      toaster("warning", "Please select paid leave.");
-    }else if (casual_leave == "") {
-      toaster("warning", "Please select casual leave.");
-    }else if (department_id == "") {
+     if (department_id == "") {
       toaster("warning", "Please select department.");
     } else if (designation_id == "") {
       toaster("warning", "Please select designation.");
+    }else if (sick_leave == "") {
+      toaster("warning", "Please enter sick leave.");
+    } else if (paid_leave == "") {
+      toaster("warning", "Please enter paid leave.");
+    }else if (casual_leave == "") {
+      toaster("warning", "Please enter casual leave.");
     } else if (sick_leave != "" && paid_leave != "" && casual_leave != "" && department_id != "" && designation_id != "") {
       var id = $(".leave_allocation_id").val();
       loader();
@@ -148,7 +148,7 @@ $(document).ready(function () {
       console.log(formData);
       $.ajax({
         type: "POST",
-        url: "leaveallocation/leave_allocation_action",
+        url: "leave/leave_allocation_action",
         data: formData,
         success: function (response) {
           var responseObject = JSON.parse(response);

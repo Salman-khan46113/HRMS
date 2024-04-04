@@ -78,6 +78,7 @@ $route['attendance-sheet.html'] = 'attendance/attendance_sheet';
 /* leave */
 $route['leave-list.html'] = 'leave/leave_list_summary';
 $route['leave-management-list.html'] = 'leave/leave_management';
+$route['leave-allocation.html'] = 'leave/leave_allocation';
 $route['send_email.html'] = 'user/send_email';
 
 /* holiday and designation */
@@ -107,6 +108,3 @@ $route['announcement_details.html'] = 'activities/announcement_details';
 $route['daily-log'] = 'notification/daily_attendance_log';
 $route['send_email'] = 'user/send_email';
 $route['auto-out-log'] = 'notification/auto_out_log';
-
-/*leave allocation*/
-$route['leave-allocation.html'] = 'Leaveallocation/leave_allocation';
