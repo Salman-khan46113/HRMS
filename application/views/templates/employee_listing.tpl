@@ -89,8 +89,14 @@
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="department_search"  placeholder="Department">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <!-- <input type="text" class="form-control" id="department_search"  placeholder="Department"> -->
+                                              <select class="form-select form-control" name="department_search" id="department_search" value="">
+                                                    <!-- <option value="" >Select Department</option> -->
+                                                    <option value=""></option>
+                                                    {{foreach from=$department key=key_val item=department_val}}
+                                                        <option value="{{$department_val['department_id']}}" >{{$department_val['department']}}</option>
+                                                    {{/foreach}}
+                                                </select>
                                             </div>
                                         </li>
                                     </div>
@@ -101,8 +107,14 @@
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="designation_search"  placeholder="Designation">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <!-- <input type="text" class="form-control" id="designation_search"  placeholder="Designation">  -->
+                                              <select class="form-select form-control" name="designation_search" id="designation_search">
+                                                    <option value="" ></option>
+                                                    
+                                                    {{foreach from=$designation key=key_val item=designation_val}}
+                                                        <option value="{{$designation_val['designation_id']}}" >{{$designation_val['designation']}}</option>
+                                                    {{/foreach}}
+                                                </select>
                                             </div>
                                         </li>
                                     </div>

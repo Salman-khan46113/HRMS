@@ -50,6 +50,7 @@
             <table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
                 <thead>
                     <tr>
+                        <th align="center" valign="middle" class="text-center att-date">Leave Name</th>
                         <th align="center" valign="middle" class="text-center att-date">From Date</th>
                         <th align="center" valign="middle" class="text-center att-time">To Date</th>
                         <th align="center" valign="middle" class="text-center att-time">Type</th>
@@ -61,9 +62,11 @@
                     </tr>
                 </thead>
                	<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
+                    
                		   {{if count($leave_list) > 0}}
                         {foreach $leave_list as $sem_index => $sem_row}
                         <tr class="leave-request-row">
+                             <td align="center" valign="middle" class="text-center att-date leave-name" data-leave-type="{{$sem_row['leave_name']}}">{{get_status($sem_row['leave_name'])}}</td>
                             <td align="center" valign="middle" class="text-center att-date start-date">{{$sem_row['leave_start_date']}}</td>
                             <td align="center" valign="middle" class="text-center att-date end-date">{{$sem_row['leave_end_date']}}</td>
                             <td align="center" valign="middle" class="text-center att-date ">{{get_status($sem_row['leave_type'])}}</td>
@@ -78,7 +81,7 @@
                         {/foreach}
                         {{else}}
                             <tr >
-                                <td colspan="8">
+                                <td colspan="10">
                                     <div class="mb-5 ">
                                      <img
                                         alt=""
@@ -182,9 +185,24 @@
                             </div>
                             <div class="col-6 p-2">
                                 <div class=" half-full-day-box ms-3">
+                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Leave Name</p>
+                                    <div class=" select-box">
+                                    <select class="form-select form-control" name="leave_name" id="leave_name">
+                                            <option value=""></option>
+                                            {foreach $leave_type as $sem_index => $sem_row}
+                                            <option value="{$sem_row['id']}" >{$sem_row['val']}</option>
+                                            {/foreach}
+                                    </select>
+                                </div>
+                                </div>  
+                                    
+                            </div>
+                            <div class="col-6 p-2">
+                                <div class=" half-full-day-box ">
                                     <p class="fs-5 mb-1 fw-bold attendance-lable">Leave Type</p>
                                     <div class=" select-box">
                                     <select class="form-select form-control" name="leave_type" id="leave_type">
+                                        <option value=""></option>
                                             <option value="half_day" >Half Day</option>
                                             <option value="full_day" >Full Day</option>
                                     </select>
@@ -192,7 +210,7 @@
                                 </div>  
                                     
                             </div>
-                            <div class="col-6 p-2">
+                            <div class="col-6 p-2 ms-3">
                             	<div class="">
 	                                <p class="fs-5 mb-1 fw-bold attendance-lable">Leave Reason</p>
 	                                <span >

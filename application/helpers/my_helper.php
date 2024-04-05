@@ -51,6 +51,15 @@ function get_status($value = ""){
 		case 'half_day':
 			$status = "Half Day";
 			break;
+		case 'SickLeave':
+			$status = "Sick Leave";
+			break;
+		case 'PaidLeave':
+			$status = "Paid Leave";
+			break;
+		case 'CasualLeave':
+			$status = "Casual Leave";
+			break;
 		
 		default:
 			$status = $value;

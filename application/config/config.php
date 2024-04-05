@@ -24,9 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'https://hrms-system.000webhostapp.com/employee/';
-
-$config['base_url'] = 'http://localhost/HRMS/';
+$config['base_url'] = 'http://localhost/extra_work/HRMS/';
 $config['site_path'] = '';
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -534,6 +535,11 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 /* custom cofig */
+$config['company_cofigs'] = array(['name'=>'email_notification','title' => 'Email Notification','value'=>'No', 'description' => 'This use for enable/disable notifications' ,'type' => 'check_box'],
+['name'=>'birthday_wishes_notification','title' => 'Birthday Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable birthday wishes email notifications' ,'type' => 'check_box'],
+['name'=>'anniversary_wishes_notification','title' => 'Anniversary Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable anniversary wishes email notifications' ,'type' => 'check_box']);
+
+
 $config['company_prifix'] = 'MDN';
 $config['shift_in_time'] = '9:30 AM';
 $config['shift_out_time'] = '7:30 PM';

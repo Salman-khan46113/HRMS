@@ -52,58 +52,76 @@ class Company extends MY_controller
     }
     // below fucntion is used to insert the data in companies
     public function addAction(){
-        $post_data = $this->input->get_post(null,true); 
-        if(!is_valid_array($post_data)){
-            return 0;
-        }
-        if(is_valid_array($_FILES) && $_FILES['company_logo']['name'] != ''){
-            $upload_data = $this->uplaodFile();
-            if(array_key_exists('errors',$upload_data) && $upload_data['errors']  == 1){
-                $render_arr['message'] = 'File extention is not supported';
-                $render_arr['success'] = 0;
-                echo json_encode($render_arr);
+        try {
+            $post_data = $this->input->get_post(null,true); 
+            if(!is_valid_array($post_data)){
                 return 0;
             }
-        }  
-        $mode = $post_data['mode'];
-        if($mode == 'Add'){
-            $company_insert_arr = [];
-            $company_insert_arr = array(
-            'company_name' => $post_data['company_name'],
-            'company_code' =>  $post_data['company_code'],
-            'company_email' =>  $post_data['company_email'],
-            'company_logo' =>  is_valid_array($_FILES) ? $upload_data['file_name']: '',
-            'company_address' =>  $post_data['address'],
-            'contact_number_code' => $post_data['phone_code'],
-            'city' =>  $post_data['city'],
-            'state' =>  $post_data['state'],
-            'country' =>  $post_data['country'],
-            'zip_code' =>  $post_data['zipcode'],
-            'website' =>  $post_data['website'],
-            'date_founded' =>  mysqlFormat($post_data['founding_date']),
-            'description' =>  $post_data['description'],
-            'pan_number' =>  $post_data['pan_number'],
-            'contact_number' =>  $post_data['contact_number'],
-            'contact_person' =>  $post_data['contact_person'],
-            'gst_number' =>  $post_data['gst_number'],
-            'tan_number' =>  $post_data['tan_number'],
-            'added_by' => $this->session->userData('employee_id'),
-            'added_on' => date("Y-m-d H:i:s")
-
-        );
-        
-        $this->db->insert('companies',$company_insert_arr);
-        $company_id = $this->db->insert_id();
-        $this->insertIntoBankMaster($post_data,$company_id);
-        $render_arr['success'] = 1;
-        $render_arr['message'] = 'Company added succesfully.';
-        }
-        else{
-            $this->updateAction($post_data);
+            //Email validation stars.
+            $company_id = array_key_exists('company_id',$post_data) ? $post_data['company_id'] : ''; 
+            $email_count = $this->company_model->getEmailCount($post_data['company_email'],$company_id);
+            if($email_count > 0){
+                throw new Exception('Email already Exits.');
+            }
+            // Email validation ends.
+            if(is_valid_array($_FILES) && $_FILES['company_logo']['name'] != ''){
+                $upload_data = $this->uplaodFile();
+                if(array_key_exists('errors',$upload_data) && $upload_data['errors']  == 1){
+                    $render_arr['message'] = 'File extention is not supported';
+                    $render_arr['success'] = 0;
+                    echo json_encode($render_arr);
+                    return 0;
+                }
+            }  
+            
+            $mode = $post_data['mode'];
+            if($mode == 'Add'){
+                $company_insert_arr = [];
+                $company_insert_arr = array(
+                'company_name' => $post_data['company_name'],
+                'company_code' =>  $post_data['company_code'],
+                'company_email' =>  $post_data['company_email'],
+                'company_logo' =>  is_valid_array($_FILES) ? $upload_data['file_name']: '',
+                'company_address' =>  $post_data['address'],
+                'contact_number_code' => $post_data['phone_code'],
+                'city' =>  $post_data['city'],
+                'state' =>  $post_data['state'],
+                'country' =>  $post_data['country'],
+                'zip_code' =>  $post_data['zipcode'],
+                'website' =>  $post_data['website'],
+                'date_founded' =>  mysqlFormat($post_data['founding_date']),
+                'description' =>  $post_data['description'],
+                'pan_number' =>  $post_data['pan_number'],
+                'contact_number' =>  $post_data['contact_number'],
+                'contact_person' =>  $post_data['contact_person'],
+                'gst_number' =>  $post_data['gst_number'],
+                'tan_number' =>  $post_data['tan_number'],
+                'added_by' => $this->session->userData('employee_id'),
+                'added_on' => date("Y-m-d H:i:s")
+    
+            );
+            // Company variable data insertion code starts here.
+            $company_config['pin'] = $post_data['attendance_pin'];
+            $company_config['prefix'] = $post_data['company_prefix'];
+            $this->db->insert('companies',$company_insert_arr);
+            $company_id = $this->db->insert_id();
+            $this->prepareCompanyConfig($company_config,$company_id);
+            $this->insertIntoBankMaster($post_data,$company_id);
             $render_arr['success'] = 1;
-            $render_arr['message'] = 'Company Updated succesfully.';
+            $render_arr['message'] = 'Company added succesfully.';
+            }
+            else{
+                $this->updateAction($post_data);
+                $render_arr['success'] = 1;
+                $render_arr['message'] = 'Company Updated succesfully.';
+            }
+            
+            
         }
-        
+        catch (Exception $e){
+            $render_arr['success'] = 0;
+            $render_arr['message'] = $e->getMessage();
+        }
         echo json_encode($render_arr);
     }
 
@@ -128,7 +146,6 @@ class Company extends MY_controller
                 'status' => 'Active'
             );
         }
-        
         if(is_valid_array($insert_arr)){
             $this->db->insert_batch("bank_master", $insert_arr);
         }
@@ -152,6 +169,7 @@ class Company extends MY_controller
                 ];
                 $upload_error = 1;
                 $upload_data['errors'] = $upload_error;
+                $upload_data['msg'] = $upload_error_msg;
             } else {
                 $upload_data = $this->upload->data();
             }
@@ -255,6 +273,17 @@ class Company extends MY_controller
         $render_data['id'] = $id;
         $this->smarty->view('company_view.tpl',$render_data);
     }
+
+    public function prepareCompanyConfig($company_config = [],$company_id){
+        $default_config = $this->config->item('company_cofigs');
+        foreach($default_config as $key => $config){
+            $default_config[$key]['company_id'] = $company_id;
+        }
+        $default_config[] = array ('name'=>'attendence_pin','title'=>'Attendence pin','value' => $company_config['pin'],'description'=>'','type'=>'input','company_id'=>$company_id);
+        $default_config[] = array('name'=>'company_prefix','title'=>'Company pin','value' => $company_config['prefix'],'description'=>'','type'=>'input','company_id'=>$company_id);
+        $this->company_model->insertIntoCompanyConfig($default_config);
+    }
+
 
 }
 

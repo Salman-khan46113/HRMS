@@ -21,17 +21,25 @@ class Company_model extends CI_Model
         return $ret_data;
     }
 
-    public function getCompanies($id = 0){
+    public function getCompanies($id = 0,$search_param = []){
+        $filter_where = $this->prepareCompanyFilter($search_param);
         $this->db->select("*");
         $result_obj = $this->db->get("companies");
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
 
+    public function prepareCompanyFilter($search_param = []){
+        if(!is_valid_array($search_param)){
+            return [];
+        }
+        
+    }
+
     public function getCompanydetails($id = 0){
         $this->db->select("c.*,tc.country_code");
         $this->db->from('companies c');
-        $this->db->join('tbl_country_master tc','c.country = tc.id');
+        $this->db->join('tbl_country_master tc','c.contact_number_code = tc.telephone_prefix');
         $this->db->where('c.company_id',$id);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
@@ -101,6 +109,25 @@ class Company_model extends CI_Model
             $ids = array_column($data,'id');
         }
         return $ids;
+    }
+
+    public function insertIntoCompanyConfig($config_data = []){
+        
+        if(is_valid_array($config_data)){
+            $this->db->insert_batch('company_variables', $config_data);
+        }
+    }
+
+    public function getEmailCount($email = '',$id  = ''){
+        $this->db->select('count(c.company_id) as email_count');
+        $this->db->from('companies c');
+        $this->db->where('c.company_email',$email);
+        if($id != ''){
+            $this->db->where('c.company_id<>',$id);
+        }
+        $query = $this->db->get();
+        $data = is_object($query) ? $query->row_array() : [];
+        return $data['email_count'];
     }
 
 }

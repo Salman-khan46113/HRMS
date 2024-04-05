@@ -1,3 +1,4 @@
+var table = '';
 $(document).ready(function () {
   var myModal = new bootstrap.Modal(document.getElementById("Shift_popup"));
 
@@ -154,6 +155,101 @@ $(document).ready(function () {
       toaster("warning", "Please select leave dates.");
     }
   });
+   table = $('#shift_management').DataTable({
+      dom: 'Bfrtilp',
+      buttons: [
+            {     
+              extend: 'csv',
+                text: '<i class="ti ti-file-type-csv"></i>',
+                init: function(api, node, config) {
+                $(node).attr('title', 'Download CSV');
+                },
+                customize: function (csv) {
+                        var lines = csv.split('\n');
+                        var modifiedLines = lines.map(function(line) {
+                            var values = line.split(',');
+                            values.splice(5, 1);
+                            return values.join(',');
+                        });
+                        return modifiedLines.join('\n');
+                    },
+                    filename : 'shift_management'
+                },
+            {
+                extend: 'pdf',
+                text: '<i class="ti ti-file-type-pdf"></i>',
+                init: function(api, node, config) {
+                    $(node).attr('title', 'Download Pdf');
+                },
+                filename: 'shift_management',
+                customize: function (doc) {
+                    doc.content[0].text = 'Shift Management List';
+                    doc.content[0].color = '#5d87ff';
+                    doc.content[1].table.widths = ['30%', '25%', '15%','15%','15%'];
+                    doc.content[1].table.body[0].forEach(function(cell) {
+                        cell.fillColor = '#5d87ff';
+                    });
+                    doc.content[1].table.body.forEach(function(row, index) {
+                        row.splice(5, 1);
+                        row.forEach(function(cell) {
+                            // Set alignment for each cell
+                            cell.alignment = 'center'; // Change to 'left' or 'right' as needed
+                        });
+                        
+                    });
+                    doc.pageSize = 'A4';
+                },
+                orientation : 'landscape',
+                
+            }
+        ],
+        searching : true,
+        "columnDefs": [
+        { "sortable": false, "targets": 3 }],
+        language: {
+            loadingRecords: "&nbsp;",
+            processing: '<div class="spinner"></div>',
+            emptyTable: no_data_message,
+            paginate: {
+                first: "<<",
+                last: ">>",
+                next: ">",
+                previous: "<",
+            },
+        },
+        infoCallback: function(settings, start, end, max, total, pre) {
+            // Get the count of visible rows after search
+            var api = this.api();
+            var rowCount = api.rows({search:'applied'}).count();
+            if(rowCount == 0){
+                $(".dataTables_empty").html(no_data_message)
+            }
+            // Construct the info string with the actual count
+            var info = 'Showing ' + start + ' to ' + end + ' of ' + rowCount + ' entries';
+
+            // Optionally, you can append any other information you want to show
+            // For example: 'Showing 1 to 10 of 57 entries'
+
+            return info;
+        }
+
+    });
+   $(".dataTables_length")
+        .find("label")
+        .contents()
+        .filter(function () {
+            return this.nodeType === 3; // Filter out text nodes
+        })
+        .remove();
+  $('#start_time_search,#end_time_search').mdtimepicker();
+  $("#shift_name_search,#department_name_search,#shift_type_search").select2();
+    $(".search-filter").on("click", function () {
+        serachParams();
+        $(".close-filter-btn").trigger("click");
+    });
+    $(".reset-filter").on("click", function () {
+        resetFilter();
+    });
 });
 
 function updateDisabledDates(newDisabledDates,element) {
@@ -163,4 +259,30 @@ function updateDisabledDates(newDisabledDates,element) {
     return [newDisabledDates.indexOf(string) == -1];
   });
   
+}
+function serachParams() {
+    var designation_name = $("#department_name_search").val();
+    table.column(0).search(designation_name).draw();
+    var department_name = $("#shift_name_search").val();
+    table.column(1).search(department_name).draw();
+    var shift_type_search = $("#shift_type_search").val();
+    if(shift_type_search == ""){
+      table.column(2).search(shift_type_search).draw();
+    }else{
+      table.column(2).search("^" + $.fn.dataTable.util.escapeRegex(shift_type_search) + "$", true, false).draw();
+    }
+
+    var start_time_search = $("#start_time_search").val();
+    table.column(3).search(start_time_search).draw();
+    var end_time_search = $("#end_time_search").val();
+    table.column(4).search(end_time_search).draw();
+}
+function resetFilter() {
+    $("#shift_name_search").val("").trigger("change");
+    $("#department_name_search").val("").trigger("change");
+    $("#shift_type_search").val("").trigger("change");
+    $("#start_time_search").val("").trigger("change");
+    $("#end_time_search").val("").trigger("change");
+
+    serachParams();
 }

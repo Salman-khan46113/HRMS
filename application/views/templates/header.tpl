@@ -298,6 +298,22 @@
               </a>
             </li>
             </div>
+
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Settings</span>
+            </li>
+            <div class="sub-menu">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./company-settings" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-settings"></i>
+                  </span>
+                  <span class="hide-menu">Company Settings</span>
+                </a>
+              </li>
+            </div>
+
             <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
                 <span>

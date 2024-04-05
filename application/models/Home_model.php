@@ -130,13 +130,13 @@ class Home_model extends CI_Model
             }
             if ($search_params["department"] != "") {
                 $this->db->where(
-                    "d.departmen_name",
+                    "d.department_id",
                     $search_params["department"]
                 );
             }
             if ($search_params["designation"] != "") {
                 $this->db->where(
-                    "de.designation_name",
+                    "de.id",
                     $search_params["designation"]
                 );
             }
@@ -218,6 +218,16 @@ class Home_model extends CI_Model
                 "attendance_id"
             );
         }
+        return $affected_row;
+    }
+    public function update_employee_week_off_data($update_arr = [])
+    {
+        $this->db->set("employee_week_off", $update_arr["week_off"]);
+        $this->db->where("week_off_id", $update_arr["week_off_id"]);
+        $this->db->update("employee_week_off");
+        $affected_row = $this->db->affected_rows();
+        $affected_row = $affected_row == 0 ? 1 : $affected_row;
+
         return $affected_row;
     }
     public function update_employee_week_off($update_arr = [])
@@ -375,5 +385,27 @@ class Home_model extends CI_Model
     {
         $this->db->insert_batch('bank_master', $bank_insert_arr);
     }
+    public function get_filter_department($id = ""){
+        $this->db->select("CONCAT(dm.departmen_name,' (',dm.department_code,')') as department,dm.department_id as department_id");
+        $this->db->from("department_master as dm");
+        if($id > 0){
+            $this->db->where("dm.company_id ",$id);
+        }
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function get_filter_designation($id = ""){
+        $this->db->select("dn.designation_name as designation,dn.id as designation_id");
+        $this->db->from("designation_master as dn");
+        $this->db->join("department_master as d","d.department_id = dn.department_id","left");
+        if($id > 0){
+            $this->db->where("d.company_id ",$id);
+        }
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+
 } ?>
 

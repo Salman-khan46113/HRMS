@@ -196,10 +196,26 @@ border-radius: 5px 0px 0px 5px !important;
 
                         </div>
 
+                        {if $mode eq "Add"}
+                        <div class="row mb-3">
+                          <div class="col">
+                              <label for="company_prefix" class="form-label">Prefix <span class="star_required">*</span></label>
+                              <input type="text" class="form-control" id="company_prefix" name="company_prefix" placeholder="Please enter Company Prefix" value="">
+                          </div>
+                      
+                          <div class="col">
+                              <label for="attendance_pin" class="form-label">Attendence Pin <span class="star_required">*</span></label>
+                              <input type="text" value="" class="form-control" id="attendance_pin" name="attendance_pin" placeholder="Please enter Attendence Pin">
+                              
+                          </div>
+
+
+                      </div>
+                        {/if}
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="company_code" class="form-label">Company Code </label>
-                                <input type="text" value ="{$company_data['company_code']}" class="form-control" id="company_code" name="company_code" placeholder="Please enter Company Code">
+                                <input type="text" value ="{$company_data['company_code']}" class="form-control" id="company_code" name="company_code" style="text-transform: uppercase;">
                             </div>
                             <div class="col">
                                 <label for="company_logo" class="form-label">Company Logo<span class="star_required">*</span></label>
@@ -330,7 +346,7 @@ border-radius: 5px 0px 0px 5px !important;
                         <div class="row mb-3">
                             
                             <div class="col">
-                                <label for="description" class="form-label">Description <span class="star_required">*</span></label>
+                                <label for="description" class="form-label">Description </label>
                                 <textarea type="text" class="form-control" id="description" name="description" placeholder="Plese enter discription" value="{$company_data['description']}"> </textarea>
                             </div>
                             
