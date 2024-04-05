@@ -159,41 +159,43 @@ class Shift extends MY_controller
     }
     $data["selected_company"] = getCompanyId();
     $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
-    // pr($data,1);
+    $data["no_data_message"] =
+            '<div class="p-3"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee shift data found..!</div>';
     $this->smarty->view("employee_shift.tpl", $data);
   }
   public function get_employee_shift_view_details()
   {
-
-    if (isset($_POST["edit"])) {
-      $id = $this->input->post("edit");
+    $mode = $this->input->post("mode");
+   
+      $id = $this->input->post("id");
       $shift_details = $this->Shift_model->get_employee_shift_details($id);
       $shift_data = $shift_details;
-      
-    }
-    $shiftDetails = array(
-      'employee_shift_id' => $shift_data[0]['employee_shift_id'],
-      'group_title' => $shift_data[0]['group_title'],
-      'shift_id' => $shift_data[0]['shift_id'],
-      'department_id' => $shift_data[0]['department_id'],
-      'employee_ids' => explode(",",$shift_data[0]['employee_ids']),
-      'start_date' => getDatePickerFormat($shift_data[0]['start_date']),
-      'end_date' => getDatePickerFormat($shift_data[0]['end_date']),
-      'start_date_display' => $shift_data[0]['start_date'],
-      'end_date_display' => $shift_data[0]['end_date'],
-      'added_by' => $shift_data[0]['added_by'],
-      'added_on' => $shift_data[0]['added_on'],
-      'updated_by' => $shift_data[0]['updated_by'],
-      'updated_on' => $shift_data[0]['updated_on'],
-      'status' => $shift_data[0]['status'],
-      'id' => $shift_data[0]['id'],
-      'company_id' => $shift_data[0]['company_id'],
-      'shift_name' => $shift_data[0]['shift_name'],
-      'shift_type' => $shift_data[0]['shift_type'],
-      'start_time' => $shift_data[0]['start_time'],
-      'end_time' => $shift_data[0]['end_time'],
-      'employee_count'=> count(explode(",", $shift_data[0]['employee_ids']))
-    );
+    
+      $shiftDetails = array(
+        'employee_shift_id' => $shift_data[0]['employee_shift_id'],
+        'group_title' => $shift_data[0]['group_title'],
+        'shift_id' => $shift_data[0]['shift_id'],
+        'department_id' => $shift_data[0]['department_id'],
+        'employee_ids' => explode(",",$shift_data[0]['employee_ids']),
+        'start_date' => getDatePickerFormat($shift_data[0]['start_date']),
+        'end_date' => getDatePickerFormat($shift_data[0]['end_date']),
+        'start_date_display' => $shift_data[0]['start_date'],
+        'end_date_display' => $shift_data[0]['end_date'],
+        'added_by' => $shift_data[0]['added_by'],
+        'added_on' => $shift_data[0]['added_on'],
+        'updated_by' => $shift_data[0]['updated_by'],
+        'updated_on' => $shift_data[0]['updated_on'],
+        'status' => $shift_data[0]['status'],
+        'id' => $shift_data[0]['id'],
+        'company_id' => $shift_data[0]['company_id'],
+        'shift_name' => $shift_data[0]['shift_name'],
+        'shift_type' => $shift_data[0]['shift_type'],
+        'start_time' => $shift_data[0]['start_time'],
+        'end_time' => $shift_data[0]['end_time'],
+        'employee_count'=> count(explode(",", $shift_data[0]['employee_ids']))
+      );
 
     $employees = array();
     foreach ($shift_data as $entry) {
@@ -204,14 +206,18 @@ class Shift extends MY_controller
         'last_name' => $entry['last_name'],
         'employee_code' => $entry['employee_code'],
         'role' => $entry['role'],
-        'department' => $entry['department']." [".$entry['department_code']."]",
+        'department' => $entry['department']." (".$entry['department_code'].")",
         'designation' => $entry['designation']
       );
       $employees[] = $employee;
     }
     $data['shiftDetails'] = $shiftDetails;
     $data['employees'] =$employees;
-    // pr($data,1);
+    $data['html'] = '';
+    if($mode == "details"){
+      $data['html'] = $this->smarty->fetch("employee_shift_details.tpl", $data);
+    }
+    
     echo json_encode($data);
     exit();
   }
