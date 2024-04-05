@@ -1,10 +1,135 @@
 <div class="main-middle-container">
+	<aside class="right-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between filter-title-bolock">
+            <a href="javascript:void(0)" class="text-nowrap logo-img">
+                Filter
+            </a>
+            <div class="close-filter-btn d-xl-none d-block filter-popup cursor-pointer" >
+                <i class="ti ti-x fs-8"></i>
+            </div>
+        </div>
+
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar filter-block" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: 0px -24px;">
+                <div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div>
+                <div class="simplebar-mask">
+                    <div class="simplebar-offset" style="right: -7px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow-y: scroll;">
+                            <div class="simplebar-content" style="padding: 0px 15px;">
+                                <ul id="sidebarnav" class="in">
+                                    
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Department Name </span>
+
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="department_name_search" class="form-control" placeholder="Department Name">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Department Code</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="department_code_search" class="form-control" placeholder="Department Code">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Added By</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Added Date</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Updated By</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Updated Date</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
+                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                            </div>
+                                        </li>
+                                    </div>
+                                </ul>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="simplebar-placeholder" style="width: auto; height: 810px;"></div>
+            </div>
+            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div>
+            <div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 214px; display: block; transform: translate3d(0px, 0px, 0px);"></div></div>
+        </nav>
+         <div class="filter-popup-btn">
+            <button class="btn btn-primary reset-filter">Reset</button>
+            <button class="btn btn-primary search-filter">Search</button>
+        </div>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
 			<h3>Employee Shift</h3>
 		</div>
 		<div class="sub-header-right pull-right">
-			<div class="timesheet-summary">
+			<div class="timesheet-summary icon-box">
+				<div class="timesheet-summary-lst">
+                   <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
+                        <button class="btn btn-secondary top-btn-row" type="button"  >
+                            <i class="ti ti-refresh " style="color: black"></i> 
+                        </button>
+                    </div>
+                </div>
+            <div class="timesheet-summary-lst">
+                   <div class="dropdown grid-drop-down filter-popup" title="Filter">
+                        <button class="btn btn-secondary top-btn-row" type="button"  >
+                            <i class="ti ti-filter " style="color: black"></i> 
+                        </button>
+                    </div>
+                </div>
 				<div class="timesheet-summary-lst">
 					<button type="button" class="btn btn-primary add-leave add-action">
 						<i class="ti ti-plus"></i>
@@ -19,7 +144,7 @@
 		<div class="timesheet-container">
 
 			<div class="custom-modal-content custom-content-table-with-fixed-column ">
-				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
+				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" id="employee_shift" style="border-collapse: collapse;" border-color="#e1e1e1">
 					<thead>
 						<tr class="text-center">
 							<!-- <th scope="col">#</th> -->
@@ -218,61 +343,7 @@
 			</div>
 
 
-			<div class="modal-body border-bottom">
-
-				<!-- Details satrt-->
-				<div class="details">
-
-
-					<!-- Grp detatils start -->
-					<table class="table">
-						<tbody >
-							<tr>
-								<td>	
-									<p > <label class="fs-4 mb-1 ">Group Title:</label> <b class="val-box"><span id="group_title_v"></span></b>
-
-									</p>
-								</td>
-								<td><p ><label class="fs-4 mb-1 ">Shift Name: </label> <b class="val-box"><span id="shift_name_v"></span></b></p>
-								</td>
-							</tr>
-							<tr>
-								<td><p><label class="fs-4 mb-1 ">Start Date: </label> <b class="val-box"><span id="start_date_v"></span></b></p>
-								</td>
-								<td><p><label class="fs-4 mb-1 ">End Date: </label> <b class="val-box"><span id="end_date_v"></span></b></p>
-								</td>
-							</tr>
-							<tr>
-								<td><p><label class="fs-4 mb-1 ">Start Time: </label> <b class="val-box"><span id="start_time_v"></span></b></p>
-								</td>
-								<td><p><label class="fs-4 mb-1 ">End Time: </label> <b class="val-box"><span id="end_time_v"></span></b></p>
-								</td>
-							</tr>
-							<tr>
-								<td><p><label class="fs-4 mb-1 ">Shift Type: </label> <b class="val-box"><span id="shift_type_v"></span></b></p>
-								</td>
-								<td><p><label class="fs-4 mb-1 ">Total Employee: </label> <b class="val-box"><span id="employee_count_v"></span></b></p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<!--grp detail end  -->
-					<h5 class="mb-3">Employee Details</h5>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Name</th>
-								<th scope="col">Employee Code</th>
-								<th scope="col">Department</th>
-							</tr>
-						</thead>
-						<tbody class="shift_employee_details">
-
-						</tbody>
-					</table>
-				</div>
+			<div class="modal-body border-bottom employee-shift-conatiner">
 
 			</div>
 
@@ -319,8 +390,10 @@
 }
 </style>
 <script type="text/javascript" >
- var selected_company = {{$selected_company|json_encode}}
+ var selected_company = {{$selected_company|json_encode}};
+ var no_data_message = {{$no_data_message|json_encode}};
 </script>
+<link rel="stylesheet" href="public/css/employee_shift.css" />
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>

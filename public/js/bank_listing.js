@@ -34,11 +34,13 @@ function makeTable(data) {
       dom: 'Bfrtilp',
       buttons: [
             {
-              extend: 'csv',
+              extend: "csv",
                 text: '<i class="ti ti-file-type-csv"></i>',
-                init: function(api, node, config) {
-                $(node).attr('title', 'Download CSV');
-                }
+                init: function (api, node, config) {
+                    $(node).attr("title", "Download CSV");
+                },
+                    filename : 'bank_list'
+                
             },
             {
                 extend: 'pdf',
@@ -46,7 +48,7 @@ function makeTable(data) {
                 init: function(api, node, config) {
                     $(node).attr('title', 'Download Pdf');
                 },
-                filename: 'bank_list  ',
+                filename: 'bank_list',
                 customize: function (doc) {
                   doc.content[0].text = 'Bank List';
                   doc.content[0].color = '#5d87ff';

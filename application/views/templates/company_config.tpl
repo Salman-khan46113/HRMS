@@ -13,7 +13,7 @@
     <div class="inner-container" style="position: static; zoom: 1;">
     	<div class="timesheet-container">
     		<input type="hidden" name="company_id" id="company_id" value="{$company_id}">
-    		<!-- {{pr($company_config)}} -->
+    		
     	<div class="setting-block">
     		 {foreach from=$company_config key=company_key item=company_setting}
 	    		<div class="config-box {if $company_key == (count($company_config) - 1)}mb-4{/if} " id="{$company_setting.id}">
@@ -39,7 +39,7 @@
     		{/foreach}
     		<div class="setting-btn text-center">
     			<button type="button" class="btn btn-primary fs-6 submit-config">Submit</button>
-				<button type="button" class="btn btn-danger fs-6" >Discard</button>
+				<a type="button" class="btn btn-danger fs-6" href="./home.html">Discard</a>
     		</div>
     	</div>
     	</div>

@@ -312,7 +312,7 @@ i.la-times-circle {
     height: calc(100vh - 220px);
     overflow: auto;
     padding: 0 0px 0px 0px;
-    box-shadow: none !important;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px !important;
     border-radius: 12px;
 }
  td.cell-month {

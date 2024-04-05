@@ -45,6 +45,24 @@ $(document).ready(function () {
     // autocomplete:"on",
     multiple:true,
   });
+  $(document).on("click", ".view_shift", function () {
+    var id = $(this).attr("data-id");
+    $.ajax({
+      type: "POST",
+      url: "shift/get_employee_shift_view_details",
+      data: {
+        mode: "details",
+         id: id,
+      },
+      success: function (response) {
+        var responseObject = JSON.parse(response);
+        console.log(responseObject)
+        $(".employee-shift-conatiner").html(responseObject.html)
+        shift_details_popup.show();
+      },
+      error: function (error) {},
+    });
+  });
   $(document).on("click", ".edit_shift", function () {
     var id = $(this).data("id");
     $.ajax({
@@ -52,6 +70,7 @@ $(document).ready(function () {
       url: "shift/get_employee_shift_view_details",
       data: {
         edit: id,
+        id:"edit"
       },
 
       success: function (response) {
@@ -191,6 +210,92 @@ $(document).ready(function () {
       toaster("warning","");
     }
   });
+
+  // datatable initialise 
+
+  table = $("#employee_shift").DataTable({
+        dom: "Bfrtilp",
+        buttons: [
+            {
+                extend: "csv",
+                text: '<i class="ti ti-file-type-csv"></i>',
+                init: function (api, node, config) {
+                    $(node).attr("title", "Download CSV");
+                },
+                customize: function (csv) {
+                        var lines = csv.split('\n');
+                        var modifiedLines = lines.map(function(line) {
+                            var values = line.split(',');
+                            values.splice(8, 1);
+                            return values.join(',');
+                        });
+                        return modifiedLines.join('\n');
+                    },
+                    filename : 'employee_shift_list'
+                },
+          
+            {
+                extend: "pdf",
+                text: '<i class="ti ti-file-type-pdf"></i>',
+                init: function (api, node, config) {
+                    $(node).attr("title", "Download Pdf");
+                },
+                filename: "employee_shift_list",
+                customize: function (doc) {
+                    doc.pageMargins = [15, 15, 15, 15];
+                    doc.content[0].text = "Employee Shift List";
+                    doc.content[0].color = "#5d87ff";
+                    doc.content[1].table.widths = ["15%", "15%", "8%", "13%", "13%", "13%", "13%", "10%"];
+                    doc.content[1].table.body[0].forEach(function (cell) {
+                        cell.fillColor = "#5d87ff";
+                    });
+                    doc.content[1].table.body.forEach(function (row, index) {
+                        row.splice(8, 1);
+                        row.forEach(function (cell) {
+                            // Set alignment for each cell
+                            cell.alignment = "center"; // Change to 'left' or 'right' as needed
+                        });
+                    });
+                },
+            },
+        ],
+        searching: true,
+        columnDefs: [{ sortable: false, targets: 8}],
+        language: {
+            loadingRecords: "&nbsp;",
+            processing: '<div class="spinner"></div>',
+            emptyTable: no_data_message,
+            paginate: {
+                first: "<<",
+                last: ">>",
+                next: ">",
+                previous: "<",
+            },
+        },
+        infoCallback: function (settings, start, end, max, total, pre) {
+            // Get the count of visible rows after search
+            var api = this.api();
+            var rowCount = api.rows({ search: "applied" }).count();
+            if (rowCount == 0) {
+                $(".dataTables_empty").html(no_data_message);
+            }
+            // Construct the info string with the actual count
+            var info = "Showing " + start + " to " + end + " of " + rowCount + " entries";
+
+            // Optionally, you can append any other information you want to show
+            // For example: 'Showing 1 to 10 of 57 entries'
+
+            return info;
+        },
+    });
+   $(".dataTables_length")
+        .find("label")
+        .contents()
+        .filter(function () {
+            return this.nodeType === 3; // Filter out text nodes
+        })
+        .remove();
+
 });
 
 function get_edit_data(department_id = '',shift_id = '',employe_ids = ''){
