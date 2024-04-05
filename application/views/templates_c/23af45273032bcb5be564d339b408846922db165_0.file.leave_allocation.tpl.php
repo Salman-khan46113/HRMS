@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 16:21:22
+/* Smarty version 4.3.2, created on 2024-04-04 17:11:33
   from 'C:\xampp\htdocs\HRMS\application\views\templates\leave_allocation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d65e23ab303_56608179',
+  'unifunc' => 'content_660ec325d7e754_72516931',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '23af45273032bcb5be564d339b408846922db165' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HRMS\\application\\views\\templates\\leave_allocation.tpl',
-      1 => 1712153961,
+      1 => 1712243483,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d65e23ab303_56608179 (Smarty_Internal_Template $_smarty_tpl) {
+function content_660ec325d7e754_72516931 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -108,7 +108,7 @@ public/assets/images/images/no_data_found_new.png" height="150" width="150" clas
 
 </div>
 
-<div class="modal fade leave-popup-block" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade leave-popup-block" id="leave_allocation_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered ">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -145,7 +145,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 								<div class="mb-3">
 									<label for="designation_id" class="form-label">Designation</label>
 									<select class="form-select designation_id" name="designation_id" id="designation_id">
-										
+
 									</select>
 								</div>
 
@@ -173,7 +173,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary submit-shift">Submit</button>
+					<button type="submit" class="btn btn-primary submit-leave-allocation">Submit</button>
 				</div>
 			</form>
 		</div>
