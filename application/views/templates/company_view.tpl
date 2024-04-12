@@ -5,12 +5,14 @@
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+            {if in_array($user_data['role'],["arom"])}
             <div class="timesheet-summary-lst"  >
               <a href="add-company.html?id={$id}" title="Edit"><button type="button" class="btn btn-primary add-designation add-leave add-action">
                 <span>Edit</span>
               </button>
                     </a>
             </div>
+            {/if}
 
           </div>
         </div>
@@ -141,7 +143,7 @@
                     
                     <div class="col-3">
                         <div class="title-div">
-                        <strong>Pincode</strong>
+                        <strong>Zipcode</strong>
                       </div>
                       <div>
                         <span>{$company_data.zip_code}</span>
@@ -346,12 +348,15 @@
    margin-bottom: 1px !important;
        font-size: 18px;
        color: var(--bs-nav-tabs-link-active-color);
+       padding-bottom: 8px;
    }
    .employee-profile-box .nav.nav-tabs{
       border: none;
    }
    .employee-profile-box .nav-link:hover{
      margin-bottom: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
    }
    .employee-profile-box .nav-link:hover:after {
 
@@ -377,12 +382,14 @@
       width: 54% !important;
       background: #898989;
       height: 3px;
-      margin-top: 7px;
+      margin-top: 5px;
       transition: width .3s;
 
   }
   .employee-profile-box .nav-tabs .nav-link.active {
       color: #206DFF;
+          padding-bottom: 0px !important;
+          margin-bottom: 0px !important;
   }
 </style>
 {include file="footer.tpl" }

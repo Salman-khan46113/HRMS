@@ -52,26 +52,32 @@
         <div class="row justify-content-center w-100">
           <div class="col-md-8 col-lg-6 col-xxl-8 main-block">
             <div class="card mb-0">
-              <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="180" alt="">
-                </a>
-                <p class="text-center">Your Social Campaigns</p>
+              <div class="card-body pb-0">
+                
+                
                 <div class="row mb-3">
+                	
 						<div class="col-4 image-block">
+							<a href="javascript:void(0)" class="text-nowrap logo-img text-center d-block py-3 w-100 mb-4">
+                  <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="">
+                </a>
 				            <div class="cover-image">
 				            	<img src="{{$base_url}}public/assets/images/cover.avif"  alt="" >
 				            </div>
 				        </div>
 				        <div class="col attendance-code-entry-box" >
-				        	<div class="attendance-block ">
-				        		<div class="attendance-input ">
-				        			<div class="row mb-2 mt-2">
+				        	
+				        	<a href="javascript:void(0)" class="tab-show-logo text-nowrap logo-img text-center  py-3 w-100 mb-4 " {if $type eq 'web'}style="display:none"{/if}>
+    <img src="http://localhost/extra_work/HRMS/public/assets/images/logos/dark-logo.svg" width="120" alt="">
+</a>
+				        	<div class="attendance-block mt-2 mb-4">
+				        		<div class="attendance-input mb-4">
+				        			<div class="row mt-2 p-3">
 				        				<div class="col text-right">
 				        					<span class="titel-box">{{$prefix}}-</span>
 				        				</div>
 				        				<div class="col text-left">
-				        						<input type="text" class="form-control  w-50" id="employee-code" name="employee-code" value="" >
+				        						<input type="text" class="form-control  w-100" id="employee-code" name="employee-code" value="" >
 				        				</div>
 				        			</div>
 				        			
@@ -109,7 +115,7 @@
 									</table>
 
 				        		</div>
-				        		<div class="submit-btn-box text-center mt-3">
+				        		<div class="submit-btn-box text-center mt-4">
 				        			<button class="btn btn-primary w-100 pb-2 pt-2" id="sumbmit_attendance">Submit</button>
 				        		</div>
 				        	</div>
@@ -184,8 +190,10 @@
     </div>
     
   </div>
+ 
    <script>
     var type =  {{$type|json_encode}};
+    var prefix = {{$prefix|json_encode}};
    </script>
     <script src="public/js/plugin/loader.js"></script>
    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

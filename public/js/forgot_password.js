@@ -127,6 +127,23 @@ $(document).ready(function () {
       });
     },
   });
+  $(".password-icon").on('click',function(){
+    var element = $(this).parents("div.password-box");
+
+     if($(this).hasClass('ti-eye')){
+        $(this).removeClass("ti-eye").addClass('ti-eye-off');
+        element.find('input').attr("type","text");
+        var element_val = $(this);
+        setTimeout(function(){
+          element_val.removeClass("ti-eye-off").addClass('ti-eye');
+      element.find('input').attr("type","password");
+      },5000)
+    }else{
+      $(this).removeClass("ti-eye-off").addClass('ti-eye');
+      element.find('input').attr("type","password");
+    }
+    
+  });
 
 });
 

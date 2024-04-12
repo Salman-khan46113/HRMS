@@ -37,8 +37,30 @@ $(document).ready(function(){
     resetAttendancePinModal.show();
   });
 
+  $(".password-icon").on('click',function(){
+    var element = $(this).parents("div.password-box");
+
+    if($(this).hasClass('ti-eye')){
+        $(this).removeClass("ti-eye").addClass('ti-eye-off');
+        element.find('input').attr("type","text");
+        var element_val = $(this);
+        setTimeout(function(){
+          element_val.removeClass("ti-eye-off").addClass('ti-eye');
+      element.find('input').attr("type","password");
+      },5000)
+    }else{
+      $(this).removeClass("ti-eye-off").addClass('ti-eye');
+      element.find('input').attr("type","password");
+    }
+    
+  });
+
   $("#ResetPasswordForm").validate({
     rules: {
+      old_pass: {
+        required: true,
+        minlength: 8,
+      },
       new_pass: {
         required: true,
         minlength: 8,
@@ -51,6 +73,11 @@ $(document).ready(function(){
       }
     },
     messages: {
+      old_pass: {
+        required: "Please enter old password.",
+        minlength: "Password must be at least 8 characters long.",
+
+      },
       new_pass: {
         required: "Please enter new password.",
         minlength: "Password must be at least 8 characters long.",

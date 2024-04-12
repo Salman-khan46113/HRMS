@@ -157,15 +157,23 @@ class Master_model extends CI_Model
     }
 
     /* password */
-    public function update_password($password = '',$employee_id='')
+    public function update_password($old_pass = '',$password = '',$employee_id='')
     {
+        $this->db->select("*");
+        $this->db->from("employee_master");
+        $this->db->where("password", $old_pass);
+        $this->db->where("employee_id", $employee_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
         $affected_row = 0;
-        if ($employee_id > 0) {
+        if ($employee_id > 0 && isset($ret_data['employee_id'])) {
             $this->db->set("password",$password);
             $this->db->where("employee_id", $employee_id);
             $result = $this->db->update("employee_master");
             $affected_row = $this->db->affected_rows();
             $affected_row = $affected_row == 0 ? 1 : $affected_row;
+        }else{
+            $affected_row = -1;
         }
         return $affected_row;
     }

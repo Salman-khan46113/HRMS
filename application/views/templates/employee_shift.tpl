@@ -260,37 +260,50 @@
 <!-- view shift details popup -->
 
 <div class="modal fade" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered ">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalToggleLabel">Employee Shift</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<form id="shiftForm" action="javascript:void(0)" method="post">
-				<div class="modal-body">
+				<div class="modal-body ">
 					<div class="main-content">
 
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
-								<div class="mb-3">
+								<div class="col-6 mb-3">
 									<label for="group_title" class="form-label">Group Title</label>
 									<input type="text" class="form-control group_title" id="group_title" name="group_title"  placeholder="Enter Group Title">
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
                                     <label for="start_date" class="form-label">Start Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="start_date" name="start_date" value="" placeholder="Select Start Date" />
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class=" col-6 mb-3">
                                     <label for="end_date" class="form-label">End Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="end_date" name="end_date" value="" placeholder="Select End Date" />
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-6  mb-3 select-box-block" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
+                                    <label for="company_id" class="form-label">Company</label>
+                                    <select class="form-select company_id" name="company_id" id="company_id">
+                                        <option value="">Select Company</option>
+                                        {foreach from=$company_details item=company_name}
+                                            {if $company_name.company_id == $selected_company}
+                                                <option value="{$company_name.company_id}" selected>{$company_name.company_name}</option>
+                                            {else}
+                                                <option value="{$company_name.company_id}">{$company_name.company_name}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                <div class="col-6  mb-3">
 									<label for="department" class="form-label">Department</label>
 									<select class="form-select department" name="department" id="department">
 										<option value="">Select Department</option>
@@ -299,7 +312,7 @@
 										{/foreach}
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
 										<option value="">Select Shift</option>
@@ -308,7 +321,7 @@
 										{/foreach}
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
 									<label for="employee_ids" class="form-label">Employee</label>
 									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 
@@ -387,6 +400,23 @@
 	}
 	.leave-box .input-group {
     width: 100% !important;
+}
+.employee-shift-conatiner .table{
+    border: 1px solid #dadada;
+}
+.employee-shift-conatiner .table tr,.employee-shift-conatiner .table th {
+    border: none !important;
+}
+.employee-shift-conatiner .table>thead,.employee-shift-conatiner .table>thead>th ,.employee-shift-conatiner .table tr{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    
+}
+.employee-shift-conatiner .table>tbody{
+        display: block;
+    max-height: 150px;
+    overflow-y: scroll;
 }
 </style>
 <script type="text/javascript" >

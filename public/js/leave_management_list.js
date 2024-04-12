@@ -4,21 +4,30 @@ $(document).ready(function () {
     var myModal = new bootstrap.Modal(document.getElementById('leave_aprove_reject'))
     
     $(document).on('click',".la-check-circle",function(){
-    	$("#approveAll").prop('checked', false);
-    	$("#allReqs").prop('checked', false);
-    	var employee_data = $(this).attr("data-user-details");
-    	$("#user_details_input").val(employee_data)
-    	employee_data = JSON.parse(atob(employee_data));
-    	$("#leave_request_id").val(employee_data.leave_id)
-    	$(".image-block").html(employee_data.image)
-    	$(".department-block .val-box").html(employee_data.department)
-    	$(".location-block .val-box").html(employee_data.location)
-    	$(".designation-block .val-box").html(employee_data.designation)
-    	$(".from-date-block .val-box").html(employee_data.from_date)
-    	$(".to-date-block .val-box").html(employee_data.to_date)
-    	$(".employee-name-block").html(employee_data.employee_name)
-    	$(".emp-grid-code").html(employee_data.employee_code)
-        myModal.show()
+        var employee_data = $(this).attr("data-user-details");
+        employee_data = JSON.parse(atob(employee_data));
+        var leave_id = $(this).attr("data-id");
+        loader();
+        $.ajax({
+                type: "POST",
+                url: "leave/get_leave_request_data",
+                data: {leave_id:leave_id},
+                success: function (response) {
+                  var responseObject = JSON.parse(response);
+                  setTimeout(function(){
+                      $("#leave_aprove_reject .main-content").html(responseObject)
+                      myModal.show()
+                      hide_loader();
+                   },1000)
+                },
+                error: function (error) {
+                  
+                },
+              });
+
+
+    	
+     //    
     });
     $(".dropdown-menu li").on('click',function(){
         $(".dropdown-menu li").removeClass("active");

@@ -5,7 +5,7 @@
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
     <div class="sub-header-left pull-left">
-        <h3>Add Employee</h3>
+        <h3>{if $mode == 'Add'}Add Employee{else}Update Employee{/if}</h3>
         
     </div>
     <div class="sub-header-right pull-right">
@@ -140,17 +140,15 @@
                                                 </div>
                                                 {if $mode == "Add"}
                                                 <div class="row mb-3">
-                                                    <div class="col">
+                                                    <div class="col password-box">
                                                         <label for="password" class="form-label">Password <span class="star_required">*</span></label>
                                                         <input type="password" class="form-control" id="password" name="password" placeholder="*******" />
-                                                        <i class="las la-eye-slash password-icon cursor" id="passwordIconHide"></i>
-                                                        <i class="las la-eye password-icon cursor" id="passwordIconShow"></i>
+                                                         <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col password-box">
                                                         <label for="confirm-password" class="form-label">Confirm Password <span class="star_required">*</span></label>
                                                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="*******" />
-                                                        <i class="las la-eye-slash password-icon cursor" id="confirmPasswordIconHide"></i>
-                                                        <i class="las la-eye password-icon cursor" id="confirmPasswordIconShow"></i>
+                                                       <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
                                                     </div>
                                                 </div>
 
@@ -179,6 +177,7 @@
                                                 </div>
 
                                             </div>
+                                            <div {if $role eq 'employee'} style="display: none"{/if}>
                                             <div class="row mb-3 title-block">
                                                 <label class="h3">Work Details</label>
                                             </div>
@@ -317,8 +316,8 @@
                                                     </div>
                                                     
                                                 </div>
-
                                             </div>
+                                        </div>
                                         </div>
                                         <div class="attachment-details step-second-form" style="display: none;">
                                             <div class="row mb-3 title-block">
@@ -538,6 +537,7 @@
         var work_mobile_number = {{$employee_data['work_mobile_number']|json_encode}};
         var profile_image = {{$employee_data['profile_image']|json_encode}};
         var index= {{$index|json_encode}};
+        var role= {{$role|json_encode}};
     </script>
      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>

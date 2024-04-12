@@ -157,7 +157,10 @@ class Shift_model extends CI_Model
   {
     $this->db->select("*");
     $this->db->from("department_master");
-    $this->db->where("company_id", $id);
+    if($id > 0){
+      $this->db->where("company_id", $id);
+    }
+    
     $result_obj = $this->db->get();
     $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
     return $ret_data;
@@ -196,6 +199,15 @@ class Shift_model extends CI_Model
     if($company_id > 0){
       $this->db->where("em.company_id", $company_id);
     }
+    $result_obj = $this->db->get();
+    $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+    return $ret_data;
+  }
+  public function get_all_employee_shift($shift_arr = [])
+  {
+    $this->db->select("es.shift_id");
+    $this->db->from("employee_shift as es");
+    $this->db->where_in("es.shift_id",$shift_arr);
     $result_obj = $this->db->get();
     $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
     return $ret_data;

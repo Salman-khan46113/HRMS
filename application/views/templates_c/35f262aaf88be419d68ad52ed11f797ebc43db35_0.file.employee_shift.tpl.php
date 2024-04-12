@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-04 21:02:34
+/* Smarty version 4.3.2, created on 2024-04-09 18:02:27
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_shift.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660ec8129fddd6_81657101',
+  'unifunc' => 'content_6615355b65d306_60849649',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35f262aaf88be419d68ad52ed11f797ebc43db35' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_shift.tpl',
-      1 => 1712244753,
+      1 => 1712665946,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660ec8129fddd6_81657101 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6615355b65d306_60849649 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 	<aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -327,37 +327,61 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 <!-- view shift details popup -->
 
 <div class="modal fade" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered ">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalToggleLabel">Employee Shift</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<form id="shiftForm" action="javascript:void(0)" method="post">
-				<div class="modal-body">
+				<div class="modal-body ">
 					<div class="main-content">
 
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
-								<div class="mb-3">
+								<div class="col-6 mb-3">
 									<label for="group_title" class="form-label">Group Title</label>
 									<input type="text" class="form-control group_title" id="group_title" name="group_title"  placeholder="Enter Group Title">
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
                                     <label for="start_date" class="form-label">Start Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="start_date" name="start_date" value="" placeholder="Select Start Date" />
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class=" col-6 mb-3">
                                     <label for="end_date" class="form-label">End Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="end_date" name="end_date" value="" placeholder="Select End Date" />
                                     	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-6  mb-3 select-box-block" <?php if ($_smarty_tpl->tpl_vars['user_data']->value['role'] != 'arom') {?> style="display: none" <?php }?>>
+                                    <label for="company_id" class="form-label">Company</label>
+                                    <select class="form-select company_id" name="company_id" id="company_id">
+                                        <option value="">Select Company</option>
+                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['company_details']->value, 'company_name');
+$_smarty_tpl->tpl_vars['company_name']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['company_name']->value) {
+$_smarty_tpl->tpl_vars['company_name']->do_else = false;
+?>
+                                            <?php if ($_smarty_tpl->tpl_vars['company_name']->value['company_id'] == $_smarty_tpl->tpl_vars['selected_company']->value) {?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+" selected><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['company_name']->value['company_name'];?>
+</option>
+                                            <?php }?>
+                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                                    </select>
+                                </div>
+                                <div class="col-6  mb-3">
 									<label for="department" class="form-label">Department</label>
 									<select class="form-select department" name="department" id="department">
 										<option value="">Select Department</option>
@@ -376,7 +400,7 @@ $_smarty_tpl->tpl_vars['departments_val']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
 										<option value="">Select Shift</option>
@@ -395,7 +419,7 @@ $_smarty_tpl->tpl_vars['shift_row']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="col-6  mb-3">
 									<label for="employee_ids" class="form-label">Employee</label>
 									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 
@@ -486,6 +510,23 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 	}
 	.leave-box .input-group {
     width: 100% !important;
+}
+.employee-shift-conatiner .table{
+    border: 1px solid #dadada;
+}
+.employee-shift-conatiner .table tr,.employee-shift-conatiner .table th {
+    border: none !important;
+}
+.employee-shift-conatiner .table>thead,.employee-shift-conatiner .table>thead>th ,.employee-shift-conatiner .table tr{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    
+}
+.employee-shift-conatiner .table>tbody{
+        display: block;
+    max-height: 150px;
+    overflow-y: scroll;
 }
 </style>
 <?php echo '<script'; ?>

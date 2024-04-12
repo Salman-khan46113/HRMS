@@ -16,15 +16,23 @@ class Shift extends MY_controller
     public function shift_management()
     {
         $data["data"] = $this->Shift_model->get_shift('');
-        // pr($data);
+        if(count($data['data'] > 0)){
+          $shift_ids = array_column($data['data'], "id");
+          $user_shift = $this->Shift_model->get_all_employee_shift($shift_ids);
+          if(count($user_shift) > 0){
+            $user_shift = array_unique(array_column($user_shift, "shift_id"));
+          }
+        }
         foreach ($data["data"] as $key => $value) {
                 $data["data"][$key]["action"] =
                     '<span  class="edit_shift me-2 text-secondary cursor" data-id=' .
                     $value["id"] .
-                    ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>
-              <span class="delete_shift text-danger cursor" data-id=' .
+                    ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
+              if(!in_array($value['id'], $user_shift)){
+                $data["data"][$key]["action"] .='<span class="delete_shift text-danger cursor" data-id=' .
                     $value["id"] .
                     ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
+              }
 
         }
          $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
@@ -35,6 +43,17 @@ class Shift extends MY_controller
         $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
         $data["shift_type_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];
         $this->smarty->view("shift_management.tpl", $data);
+    }
+    public function get_department(){
+      $company_id = $this->input->post("company_id");
+      $data["departments"] = [];
+      if($company_id > 0){
+          $data["departments"] = $this->Shift_model->get_department($company_id);
+      }
+      // pr($data,1);
+      echo json_encode($data);
+      exit();
+      
     }
 
     public function get_shift_details()
@@ -148,15 +167,21 @@ class Shift extends MY_controller
       $data["data"][$key]["action"] =
       '<span  class="view_shift me-2 text-secondary cursor" data-id=' .
       $value["employee_shift_id"] .
-      ' title="View Details"><i class="ti ti-eye"></i></span>
-      <span  class="edit_shift me-2 text-secondary cursor" data-id=' .
+      ' title="View Details"><i class="ti ti-eye"></i></span>';
+      $currentDate = new DateTime();
+      $startDateObj = new DateTime($value['start_date']);
+
+      if(!($startDateObj <= $currentDate)){
+          $data["data"][$key]["action"] .= '<span  class="edit_shift me-2 text-secondary cursor" data-id=' .
       $value["employee_shift_id"] .
       ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>
       <span class="delete_shift text-danger cursor" data-id=' .
       $value["employee_shift_id"] .
       ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
+      }
 
     }
+    $data["company_details"] = $this->Shift_model->get_companies();
     $data["selected_company"] = getCompanyId();
     $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
     $data["no_data_message"] =
@@ -172,7 +197,7 @@ class Shift extends MY_controller
       $id = $this->input->post("id");
       $shift_details = $this->Shift_model->get_employee_shift_details($id);
       $shift_data = $shift_details;
-    
+      // pr($shift_data,1);
       $shiftDetails = array(
         'employee_shift_id' => $shift_data[0]['employee_shift_id'],
         'group_title' => $shift_data[0]['group_title'],
@@ -194,7 +219,9 @@ class Shift extends MY_controller
         'shift_type' => $shift_data[0]['shift_type'],
         'start_time' => $shift_data[0]['start_time'],
         'end_time' => $shift_data[0]['end_time'],
-        'employee_count'=> count(explode(",", $shift_data[0]['employee_ids']))
+        'employee_count'=> count(explode(",", $shift_data[0]['employee_ids'])),
+        'department_name'=> $shift_data[0]['department'],
+        'department_code'=> $shift_data[0]['department_code']
       );
 
     $employees = array();
@@ -214,6 +241,7 @@ class Shift extends MY_controller
     $data['shiftDetails'] = $shiftDetails;
     $data['employees'] =$employees;
     $data['html'] = '';
+   
     if($mode == "details"){
       $data['html'] = $this->smarty->fetch("employee_shift_details.tpl", $data);
     }

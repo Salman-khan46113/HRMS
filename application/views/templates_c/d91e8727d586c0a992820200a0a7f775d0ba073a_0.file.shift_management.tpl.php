@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 21:11:11
+/* Smarty version 4.3.2, created on 2024-04-09 16:49:18
   from '/var/www/html/extra_work/HRMS/application/views/templates/shift_management.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d78973e2669_58870695',
+  'unifunc' => 'content_66152436e5e330_74655679',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd91e8727d586c0a992820200a0a7f775d0ba073a' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/shift_management.tpl',
-      1 => 1712158234,
+      1 => 1712661388,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d78973e2669_58870695 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66152436e5e330_74655679 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<aside class="right-sidebar">

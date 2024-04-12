@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="col-6 mb-2">
-          <div class="form-group">
+          <div class="form-group">  
             <label for="announcement_date">Announcement Date <span class="star_required">*</span></label>
             <input type="text" class="form-control" id="announcement_date" name="announcement_date" placeholder="dd-mm-yyyy" value="{$announcement.announcement_date}">
           </div>

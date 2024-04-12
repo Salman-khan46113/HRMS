@@ -14,7 +14,6 @@ $(document).ready(function () {
 
      // Update custom file input text when a file is selected
     $("#profile_image").change(function () {
-        console.log($(this).val());
         var fileName = $(this).val().split("\\").pop(); // Get the file name
         $("#customFileInput input").val(fileName);
 
@@ -71,14 +70,13 @@ $(document).ready(function () {
         var id_val = $(this)[0]["id"];
         if ($(this)[0]["checked"]) {
             $(".banck-details-rows .form-check-input").each(function (i) {
-                console.log($(this)[0]["id"]);
+                
                 if ($(this)[0]["id"] != id_val) {
                     $(this).prop("checked", false);
                 }
             });
         }
 
-        console.log($(this));
     });
 
     $(".previous").on("click", function () {
@@ -123,10 +121,11 @@ $(document).ready(function () {
 
     var phoneNumber = mobile_number;
     var countryCode = mobile_code;
+
     if (mode == "Update") {
-        countryCode = "IN";
+        countryCode = countryCode;
     } else {
-        countryCode = "auto";
+        countryCode = "IN";
     }
 
     $("#mobile_number").intlTelInput({
@@ -159,7 +158,7 @@ $(document).ready(function () {
     if (mode == "Update") {
         countryCode = countryCode;
     } else {
-        countryCode = "auto";
+        countryCode = "IN";
     }
     $("#secondary_number").intlTelInput({
         geoIpLookup: function (callback) {
@@ -191,7 +190,7 @@ $(document).ready(function () {
     if (mode == "Update") {
         countryCode = countryCode;
     } else {
-        countryCode = "auto";
+        countryCode = "IN";
     }
     $("#work_mobile_number").intlTelInput({
         geoIpLookup: function (callback) {
@@ -219,7 +218,11 @@ $(document).ready(function () {
     });
 
     $("#dob,#employement_date").datepicker({ showButtonPanel: true, changeMonth: true, changeYear: true, showOtherMonths: true, selectOtherMonths: true, yearRange: "c-100:c+100" });
-    $("#country,#state").select2({
+    $("#state").select2({
+        placeholder: "Select State",
+        allowClear: true,
+    });
+    $("#country").select2({
         placeholder: "Select Country",
         allowClear: true,
     });
@@ -245,8 +248,8 @@ $(document).ready(function () {
         var type = $("#employement_type").val();
         var department = $("#department").val();
         var company_id = $("#company").val();
-        console.log(company_id)
         if (department > 0 && type != "" && company_id > 0) {
+            loader();
             var formData = { department: department, type: type,company_id:company_id };
             $.ajax({
                 type: "POST",
@@ -254,13 +257,15 @@ $(document).ready(function () {
                 data: formData,
                 success: function (response) {
                     var responseObject = JSON.parse(response);
-                    console.log(responseObject);
                     var option_arr = '<option value="">Select Reporting Senior</option>';
                     for (var i = 0; i < responseObject.length; i++) {
                         option_arr += "<option value='" + responseObject[i]["employee_id"] + "'>" + responseObject[i]["name"] + "</option>";
                     }
-
                     $("#manager").html(option_arr).trigger("change");
+                    setTimeout(function(){
+                        hide_loader();
+                    },500)
+                    
                 },
                 error: function (error) {},
             });
@@ -272,13 +277,14 @@ $(document).ready(function () {
         var company_id = $("#company").val();
         if (company_id > 0) {
             var formData = { company_id: company_id};
+            loader();
             $.ajax({
                 type: "POST",
                 url: "user/get_department",
                 data: formData,
                 success: function (response) {
                     var responseObject = JSON.parse(response);
-                    console.log(responseObject);
+                    
                     var option_arr = '<option value="">Select Department</option>';
                     for (var i = 0; i < responseObject.length; i++) {
                         option_arr += "<option value='" + responseObject[i]["department_id"] + "'>" + responseObject[i]["departmen_name"] + "["+responseObject[i]["department_code"]+"]</option>";
@@ -288,6 +294,9 @@ $(document).ready(function () {
                     $("#designation").html(option_arr).trigger("change");
                     var option_arr = '<option value="">Select Reporting Senior</option>';
                     $("#manager").html(option_arr).trigger("change");
+                    setTimeout(function(){
+                        hide_loader();
+                    },500)
                 },
                 error: function (error) {},
             });
@@ -299,19 +308,23 @@ $(document).ready(function () {
         var department = $("#department").val();
         if (department > 0) {
             var formData = { department: department};
+            loader();
             $.ajax({
                 type: "POST",
                 url: "user/get_designation",
                 data: formData,
                 success: function (response) {
                     var responseObject = JSON.parse(response);
-                    console.log(responseObject);
+                    
                     var option_arr = '<option value="">Select Designation</option>';
                     for (var i = 0; i < responseObject.length; i++) {
                         option_arr += "<option value='" + responseObject[i]["id"] + "'>" + responseObject[i]["designation_name"] + "</option>";
                     }
                     $("#designation").html(option_arr).trigger("change");
-                    $("#employement_type").trigger("change")
+                    $("#employement_type").trigger("change");
+                    setTimeout(function(){
+                        hide_loader();
+                    },500)
                 },
                 error: function (error) {},
             });
@@ -321,9 +334,21 @@ $(document).ready(function () {
     /* custom validation  */
 
     // Custom method for PAN card number validation
-    $.validator.addMethod("pattern", function (value, element) {
-        return this.optional(element) || /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
-    });
+    $.validator.addMethod("panNumberCheck", function(value, element) {
+        return this.optional(element) || /[A-Za-z]{5}\d{4}[A-Za-z]{1}/.test(value);
+    }, "Please enter a valid PAN card number");
+
+    $.validator.addMethod("aadharNumberCheck", function(value, element) {
+        return this.optional(element) || /^\d{12}$/.test(value);
+    }, "Please enter valid aadhar number.");
+
+    $.validator.addMethod("account_holder_name_valid", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+    }, "Please enter valid account holder name.");
+
+    $.validator.addMethod("valid_ifsc_code", function(value, element) {
+        return this.optional(element) || /^[A-Z]{4}0[A-Z0-9]{6}$/.test(value);
+    }, "Please enter valid ifsc code.");
 
     $.validator.addMethod("ageValidation", function (value, element) {
         var today = new Date();
@@ -336,13 +361,7 @@ $(document).ready(function () {
         return age >= 18;
     });
 
-    $.validator.addMethod(
-        "aadhar_number_validation",
-        function (value, element) {
-            return this.optional(element) || /^\d{12}$/.test(value);
-        },
-        "Please enter a valid Aadhar card number."
-    );
+    
     $("#employee_registration").validate({
         rules: {
             first_name: {
@@ -436,11 +455,11 @@ $(document).ready(function () {
             },
             aadhar_number: {
                 required: true,
-                // aadhar_number_validation: true
+                aadharNumberCheck:true
             },
             pan_card_number: {
                 required: true,
-                // pattern: true
+                panNumberCheck: true
             },
             degree_name: {
                 required: true,
@@ -495,6 +514,8 @@ $(document).ready(function () {
             },
             "ifsc_code[0]": {
                 required: true,
+                valid_ifsc_code: true
+
             },
             "account_type[0]": {
                 required: true,
@@ -504,6 +525,7 @@ $(document).ready(function () {
             },
             "account_holder_name[0]": {
                 required: true,
+                account_holder_name_valid: true
             },
             manager: {
                 required: true,
@@ -563,11 +585,11 @@ $(document).ready(function () {
             },
             aadhar_number: {
                 required: "Please enter aadhar number.",
-                aadhar_number_validation: "Please enter valid aadhar number.",
+                aadharNumberCheck: "Please enter valid aadhar number.",
             },
             pan_card_number: {
                 required: "Please enter pan card number.",
-                pattern: "Please enter valid pan card number.",
+                panNumberCheck: "Please enter valid pan card number.",
             },
             degree_name: {
                 required: "Please enter degree.",
@@ -636,6 +658,7 @@ $(document).ready(function () {
             },
             "account_holder_name[0]": {
                 required: "Please enter account holder name.",
+                account_holder_name_valid:"Please enter valid account holder name.",
             },
             manager: {
                 required: "Please select reporting senior.",
@@ -643,7 +666,7 @@ $(document).ready(function () {
         },
 
         errorPlacement: function (error, element) {
-            console.log(element, error);
+            
             if (element[0]["id"] == "mobile_number" || element[0]["id"] == "work_mobile_number" || element[0]["id"] == "secondary_number") {
                 $("." + element[0]["id"] + " .form-group").after(error);
             } else if (element[0]["id"] == "male" || element[0]["id"] == "single" || element[0]["id"] == "yes") {
@@ -673,7 +696,7 @@ $(document).ready(function () {
             var step3 = $(".step-third-form").hasClass("validate-form");
             var flag = 0;
             $(".banck-details-rows .form-contain .action-box .form-check-input").each(function (i) {
-                console.log($(this).prop("checked"));
+               
                 if ($(this).prop("checked")) {
                     flag = 1;
                 }
@@ -713,7 +736,13 @@ $(document).ready(function () {
                                 // toastr.success(msg);
                                 toaster("success", msg);
                                 setTimeout(function () {
-                                    window.location.href = "employee-list.html";
+                                    
+                                    if(role == "employee" && mode == 'Update'){
+                                        window.location.href = "employee-details.html";
+                                    }else{
+                                        window.location.href = "employee-list.html"; 
+                                    }
+                                    
                                 }, 2000);
                             } else {
                                 // toastr.error(msg);
@@ -726,7 +755,7 @@ $(document).ready(function () {
                     },
                 });
             } else if (flag == 0) {
-                toaster("warning", "Please select one default banck");
+                toaster("warning", "Please select default bank.");
             } else {
                 return false;
             }
@@ -755,17 +784,19 @@ $(document).ready(function () {
                         required: "Please enter bank name.",
                     },
                 });
-                console.log("#branch_address_" + index);
+                
                 $("#branch_address_" + index).rules("add", {
                     required: true,
                     messages: {
                         required: "Please enter branch address.",
                     },
                 });
-                $("#ifsc_code" + index).rules("add", {
+                $("#ifsc_code_" + index).rules("add", {
                     required: true,
+                    valid_ifsc_code:true,
                     messages: {
                         required: "Please enter ifsc code.",
+                        valid_ifsc_code: "Please enter valid ifsc code."
                     },
                 });
                 $("#account_type_" + index).rules("add", {
@@ -782,6 +813,7 @@ $(document).ready(function () {
                 });
                 $("#account_holder_name_" + index).rules("add", {
                     required: true,
+                    account_holder_name_valid:true,
                     messages: {
                         required: "Please enter account holder name.",
                     },
@@ -820,7 +852,6 @@ $(document).ready(function () {
                 } else {
                     $(element).parents(".form-contain").remove();
                 }
-                console.log($(".banck-details-rows .form-contain"));
 
                 // hide_loader();
             } else {
@@ -844,7 +875,7 @@ function check_validation(element) {
 
         if (!$("[name='" + name_filed + "']").valid()) {
             flag = 1;
-            console.log(name_filed);
+            
         }
     });
     return flag;

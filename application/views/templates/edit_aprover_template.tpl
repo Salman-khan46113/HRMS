@@ -26,7 +26,7 @@
 
                 <div class="row g-0 m-3">
                     <div class="col-2">
-                        <div class="image-block p-2"><img src="http://localhost/extra_work/employee/public/img/uploads/employee_profile/favicon.png" alt="" width="100" height="100" class="rounded-circle" /></div>
+                        <div class="image-block p-2"><img src="{{$base_url}}public/img/uploads/employee_profile/{{$data['new_employe_data']['profile_image_name']}}" alt="" width="100" height="100" class="rounded-circle" /></div>
                     </div>
                     <div class="col-10 employee-detils">
                         <div class="row">

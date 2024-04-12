@@ -5,6 +5,7 @@ class Master extends MY_controller
 {
     function __construct()
     {
+
         parent::__construct();
         $this->load->model("master_model");
         $base_url = $this->config->item("base_url");
@@ -160,19 +161,24 @@ class Master extends MY_controller
     {
         
         $new_pass = $this->input->post("new_pass");
+        $old_pass = $this->input->post("old_pass");
 
         $affected_row = 0;
-        if($new_pass != ""){
+        if($new_pass != "" && $old_pass != ''){
             $employee_id = $_SESSION['employee_id'];
             $new_pass = md5($new_pass);
-            $affected_row = $this->master_model->update_password($new_pass,$employee_id);
+            $old_pass = md5($old_pass);
+            $affected_row = $this->master_model->update_password($old_pass,$new_pass,$employee_id);
         }
         
 
         if ($affected_row > 0)  {
             $success = 1;
             $message = "Password reset successfully!";
-        } else {
+        } else if($affected_row == -1){
+            $success = 0;
+            $message = "Please enter the correct old password!";
+        }else {
             $success = 0;
             $message = "something went wrong!.";
         }

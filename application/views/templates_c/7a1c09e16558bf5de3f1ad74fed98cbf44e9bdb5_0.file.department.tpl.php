@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 20:03:44
+/* Smarty version 4.3.2, created on 2024-04-09 18:10:27
   from '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d68c8183383_95851384',
+  'unifunc' => 'content_6615373b052cd6_93217217',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7a1c09e16558bf5de3f1ad74fed98cbf44e9bdb5' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl',
-      1 => 1712154821,
+      1 => 1712666234,
       2 => 'file',
     ),
   ),
@@ -21,9 +21,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d68c8183383_95851384 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
+
 	 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
     <div>
@@ -137,7 +138,7 @@ function content_660d68c8183383_95851384 (Smarty_Internal_Template $_smarty_tpl)
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Department</h3>
+			<h3>Departments</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">

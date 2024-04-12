@@ -118,6 +118,28 @@ class Leave_model extends CI_Model
 
         return $ret_data;
     }
+    public function get_leave_request_data($leave_id = '') {
+        $this->db->select(
+            'el.leave_id as leave_id,CONCAT(em.first_name," ",em.last_name) as employee_name,em.profile_image as image,em.employee_code as employee_code,el.leave_start_date as from_date,el.leave_end_date as to_date,el.reason as reason,el.status as status,CONCAT(dm.designation_name,"(",dm.grads,")") as designation_name,CONCAT(dp.departmen_name,"(",dp.department_code,")") as department_name,em.employee_week_off as employee_week_off,em.city as location,em.email as email,em.employee_id as employee_id'
+        );
+        $this->db->from("employee_leave as el");
+        $this->db->join(
+            "employee_master as em",
+            "em.employee_id = el.employee_id",
+            "left"
+        );
+        $this->db->join("department_master as dp", "dp.department_id = em.department ");
+        $this->db->join("designation_master as dm", "dm.id = em.designation ");
+        $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("em.company_id", $company_id);
+        }
+        $this->db->where("el.leave_id",$leave_id);
+        $this->db->where("em.sys_record_delete !=", 1);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+        return $ret_data;
+    }
     public function update_leave(
         $status = "",
         $request_id = "",
@@ -158,6 +180,10 @@ class Leave_model extends CI_Model
     {
       $this->db->select("*");
       $this->db->from("department_master");
+      $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("company_id", $company_id);
+      }
       $result_obj = $this->db->get();
       $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
       return $ret_data;
@@ -245,6 +271,47 @@ class Leave_model extends CI_Model
         $remaining_leaves = $allocated_leaves - $apllied_days;
 
         return $remaining_leaves;
+    }
+    public function get_employee_details($employee_id = '')
+    {
+      $this->db->select("em.*,CONCAT(dm.designation_name,'(',dm.grads,')') as designation_name,CONCAT(dp.departmen_name,'(',dp.department_code,')') as department_name");
+      $this->db->from("employee_master as em");
+      $this->db->join("department_master as dp", "dp.department_id = em.department ");
+      $this->db->join("designation_master as dm", "dm.id = em.designation ");
+      $this->db->where("em.employee_id", $employee_id);
+      $result_obj = $this->db->get();
+      $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+      return $ret_data;
+    }
+    public function get_employee_leave_details($employee_id = '',$allocated_leaves = [],$leave_id = 0)
+    {
+      $this->db->select("el.*");
+      $this->db->from("employee_leave as el");
+      $this->db->where("el.employee_id", $employee_id);
+      $this->db->where_in("el.status",["approve","Pending"]);
+      if($leave_id > 0){
+        $this->db->where("el.leave_id !=",$leave_id);
+      }
+      $result_obj = $this->db->get();
+      $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+      $type_wise_leave = ["SickLeave"=>0,"PaidLeave"=>0,"CasualLeave"=>0];
+      
+      foreach ($ret_data as $key => $value) {
+        $start_date = new DateTime($value["leave_start_date"]);
+        $end_date = new DateTime($value["leave_end_date"]);
+        $interval = (array) $end_date->diff($start_date);
+        $applied_leave_days_val = 0 ? 1 : $interval["days"] + 1;
+        if($value['leave_type'] == "half_day"){
+            $type_wise_leave[$value['leave_name']] += $applied_leave_days_val/2;
+             
+        }else{
+            $type_wise_leave[$value['leave_name']] += $applied_leave_days_val;
+        }
+      }
+      foreach ($allocated_leaves as $key => $value) {
+          $allocated_leaves[$key] = $value - $type_wise_leave[$key];
+      }
+      return $allocated_leaves;
     }
 }
 

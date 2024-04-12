@@ -5,7 +5,7 @@
 
 .cover-image img{
 	border-radius: 8px;
-	    height: 466px;
+	    height: 480px;
 	        width: 359px;
 }
 
@@ -25,6 +25,7 @@
 }
 
 .attendance-input input{
+    
 	border: none !important;
     box-shadow: none;
     position: relative;
@@ -35,6 +36,7 @@
 }
 .attendance-input {
 	border-bottom: 1px solid #f1e2e2;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     /*border-radius: 8px;*/
 }
 
@@ -43,11 +45,12 @@
 }
 .attendance-btn td {
 	border: none !important;
-	padding: 8px 13px;
+	padding: 16px 13px;
 }
 .attendance-btn{
 	    /*border*/: 1px solid #e7dddd;
     padding: 15px 15px 3px 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     /*border-radius: 5px;*/
 }
 .attendance-btn td button{
@@ -137,6 +140,9 @@ color: #5D87FF;
     .image-block{
         display: none !important;
     }
+    .tab-show-logo {
+        display: block !important;
+    }
     
 }
 
@@ -210,4 +216,27 @@ color: #5D87FF;
 }
 .submit-block .btn-outline-primary {
     width: 40% !important;
+        padding: 12px !important;
+
+}
+#sumbmit_attendance {
+   
+        padding: 12px !important;
+
+}
+.attendance-in-out-block .card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px;
+}
+.attendance-in-block .card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px;
+}
+.btn-label-danger {
+    color: #fff;
+    background-color: #d24250;
+    border-color: #d24250;
+}
+.btn-label-danger:hover {
+    color: #fff;
+    background-color: #dc1f31;
+    border-color: #dc1f31;
 }

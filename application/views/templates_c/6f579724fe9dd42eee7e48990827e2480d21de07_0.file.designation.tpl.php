@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 21:22:21
+/* Smarty version 4.3.2, created on 2024-04-09 18:18:38
   from '/var/www/html/extra_work/HRMS/application/views/templates/designation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d7b359f3ee0_15660044',
+  'unifunc' => 'content_661539264588a9_75992403',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6f579724fe9dd42eee7e48990827e2480d21de07' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/designation.tpl',
-      1 => 1712159539,
+      1 => 1712666896,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d7b359f3ee0_15660044 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661539264588a9_75992403 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	
@@ -88,14 +88,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Grads</span>
+                                            <span class="hide-menu">Grade</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <div class="input-group">
                                               <select class="form-select form-control w-100"  id="grad_search">
-		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="" >Select Grade</option>
 		                                    	 <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['grads_data']->value, 'v', false, 'k');
 $_smarty_tpl->tpl_vars['v']->do_else = true;
@@ -179,7 +179,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Designation</h3>
+			<h3>Designations</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
@@ -217,7 +217,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 							<!-- <th scope="col">#</th> -->
 							<th scope="col">Designation Name</th>
 							<th scope="col">Department Name</th>
-							<th scope="col">Grads</th>
+							<th scope="col">Grade</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -317,10 +317,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </div>
                                 <div class="col-12 mb-3">  
 	                                <div class="grads-box ">
-		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grads</p>
+		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grade</p>
 		                                    <div class=" select-box">
 		                                    <select class="form-select form-control w-100" name="grads" id="grads">
-		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="" >Select Grade</option>
 		                                    	 <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['grads_data']->value, 'v', false, 'k');
 $_smarty_tpl->tpl_vars['v']->do_else = true;

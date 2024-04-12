@@ -1,4 +1,7 @@
-<div class="attendance-in-out-block">
+<a href="javascript:void(0)" class="tab-show-logo text-nowrap logo-img text-center  py-3 w-100 mb-4 " {if $type eq 'web'}style="display:none"{/if}>
+    <img src="http://localhost/extra_work/HRMS/public/assets/images/logos/dark-logo.svg" width="120" alt="">
+</a>
+<div class="attendance-in-out-block mt-4">
 	<input type="hidden" class="employee_id_val" value="{{$employee_id_val}}">
     <div class="card mb-3">
         <div class="row g-0">
@@ -10,13 +13,13 @@
                     <h5 class="card-title employee-code">{{$employee_code}}</h5>
                     <p class="card-text mb-2 employee-name">{{$first_name}} {{$middle_name}} {{$last_name}}</p>
                     <p class="card-text employee-designation">{{$designation_name}}</p>
-                </div>
+                </div>                                                                                                                                      
             </div>
         </div>
     </div>
 </div>
-<div class="attendance-in-block">
-    <div class="card mb-3  {{if $attendance_in_time != '' }}disable-box{{/if}}">
+<div class="attendance-in-block mt-4 pt-3">
+    <div class="card mb-4  {{if $attendance_in_time != '' }}disable-box{{/if}}">
         <div class="row g-0 m-3">
             <div class="{{if $type == "Tab"}}col-2{{else}}col-1{{/if}}">
                 <i class="las la-fingerprint"></i>
@@ -35,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="card mb-3 {{if $attendance_out_time != '' || $attendance_in_time == ''}}disable-box{{/if}}">
+    <div class="card mb-3 mt-4 {{if $attendance_out_time != '' || $attendance_in_time == ''}}disable-box{{/if}}">
         <div class="row g-0 m-3">
             <div class="{{if $type == "Tab"}}col-2{{else}}col-1{{/if}}">
                 <i class="las la-sign-out-alt"></i>

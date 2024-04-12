@@ -289,8 +289,20 @@ function makeTable(data) {
                   text: '<i class="ti ti-file-type-csv"></i>',
                   init: function(api, node, config) {
                   $(node).attr('title', 'Download CSV');
-                  }
-              },
+                  },
+                  customize: function (csv) {
+                        var lines = csv.split('\n');
+                        var modifiedLines = lines.map(function(line) {
+                            var values = line.split(',');
+                            values.splice(0, 1);
+                            values.splice(8, 1);
+                            return values.join(',');
+                        });
+                        return modifiedLines.join('\n');
+                    },
+                    filename : 'employee_list'
+                },
+            
               {
                 extend: 'pdf',
                 text: '<i class="ti ti-file-type-pdf"></i>',

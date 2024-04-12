@@ -1,5 +1,6 @@
 
 <div class="main-middle-container">
+
 	 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
     <div>
@@ -113,7 +114,7 @@
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Department</h3>
+			<h3>Departments</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">

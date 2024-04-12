@@ -5,8 +5,7 @@ class User_model extends CI_Model
     {
         parent::__construct();
     }
-    public function get_company_config($company_id = '')
-    {
+    public function get_company_config($company_id = ''){
         $this->db->select("cv.*");
         $this->db->from("company_variables as cv");
         $this->db->where("cv.company_id", $company_id);
@@ -121,19 +120,19 @@ class User_model extends CI_Model
         $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
         return $ret_data;
     }
-    public function get_last_employee_code()
+    public function get_last_employee_code($company_id = '')
     {
         $this->db->select("em.*");
         $this->db->from("employee_master as em");
+        $this->db->where("em.company_id",$company_id);
         $this->db->order_by("em.employee_id", "desc");
         $this->db->limit(1);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
-
         $employee_code = 0;
         if (count($ret_data)) {
             if ($ret_data[0]["employee_code"] != "") {
-                $company_prifix = $this->config->item("company_prifix");
+                $company_prifix = $this->get_compnay_prefix($company_id);
                 $employee_code = (int) str_replace(
                     $company_prifix . "-",
                     "",
@@ -142,6 +141,16 @@ class User_model extends CI_Model
             }
         }
         return $employee_code;
+    }
+    public function get_compnay_prefix($company_id = '')
+    {
+        $this->db->select("c.*");
+        $this->db->from("company_variables as c");
+        $this->db->where("c.company_id", $company_id);
+        $this->db->where("c.name", "company_prifix");
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+        return isset($ret_data['value']) ? $ret_data['value'] : '';
     }
 
     public function get_user_details($employee_code)
@@ -390,6 +399,16 @@ class User_model extends CI_Model
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
 
+        return $ret_data;
+    }
+    public function check_company_code($company_code = "")
+    {
+        $this->db->select("cv.*");
+        $this->db->from("company_variables as cv");
+        $this->db->where("cv.name", 'company_prifix');
+        $this->db->where("cv.value", $company_code);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
 

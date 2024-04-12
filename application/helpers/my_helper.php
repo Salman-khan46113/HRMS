@@ -26,6 +26,16 @@ function display_no_character($value = ''){
 	}
 	return $value;
 }
+function get_entiry_url($module_name = '',$mode = "",$id=""){
+	$url = '';
+	switch ($module_name) {
+		case 'company':
+			$url = base_url()."company-view?id=".$id;
+			break;
+	}
+
+	return $url;
+}
 
 function get_status($value = ""){
 	$status = "";

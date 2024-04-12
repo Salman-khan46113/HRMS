@@ -108,3 +108,6 @@ $route['announcement_details.html'] = 'activities/announcement_details';
 $route['daily-log'] = 'notification/daily_attendance_log';
 $route['send_email'] = 'user/send_email';
 $route['auto-out-log'] = 'notification/auto_out_log';
+
+/* API */
+$route['check_company_exit'] = 'user/check_company_code';

@@ -7,6 +7,8 @@ $(document).ready(function () {
         $(".designation_id").val("");
         $("#department").val("").prop( "disabled", false ).trigger('chosen:updated');
         $("#grads").val("").prop( "disabled", false ).trigger('chosen:updated');
+        $(".error").removeClass(".error");
+        $("label.error").remove();
         myModal.show();
     });
 
@@ -14,12 +16,14 @@ $(document).ready(function () {
     $("#grads").chosen({disable_search: true});
 
     $(document).on("click", ".edit_holiday", function () {
+        $(".error").removeClass(".error");
+        $("label.error").remove();
         var id = $(this).attr("data-id");
         var department = $(this).attr("data-departmet");
         var department = $(this).attr("data-departmet");
-        $("#department").val(department).prop( "disabled", true ).trigger('chosen:updated');
+        $("#department").val(department).trigger('chosen:updated');
         var grads = $(this).attr("data-grads");
-        $("#grads").val(grads).prop( "disabled", true ).trigger('chosen:updated');
+        $("#grads").val(grads).trigger('chosen:updated');
         var designation = $(this).attr("data-designation");
         $(".designation_name").val(designation);
         $(".designation_id").val(id);
@@ -98,13 +102,20 @@ $(document).ready(function () {
       designation_name: {
         required: true,
       },
-      department: {
+      grads: {
         required: true,
+      },
+      department: {
+        required: true
       }
     },
     messages: {
       designation_name: {
         required: "Please enter designation name."
+
+      },
+      grads: {
+        required: "Please enter grade."
 
       },
       department: {
@@ -113,8 +124,14 @@ $(document).ready(function () {
     },
 
     errorPlacement: function (error, element) {
+        if (element[0]["localName"] == "select") {
+                var parents = $(element).parent(".select-box");
+                $(parents).find(".chosen-container").after(error);
+        }else{
         error.insertAfter(element);
+        }
     },
+    ignore: ":hidden:not(select)",
     submitHandler: function (form) {
       var formData = new FormData(form);
       var designation_id = $(".designation_id").val();

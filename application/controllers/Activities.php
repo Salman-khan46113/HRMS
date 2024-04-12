@@ -14,15 +14,16 @@ class Activities extends MY_controller
     public function announcement()
     {
         $id = $this->input->get("id");
+        $data = [];
         if (isset($id)) {
             $announcement = $this->activities_model->get_announcement_details(
                 $id
             );
             $data["announcement"] = $announcement[0];
-            $this->smarty->view("announcement.tpl", $data);
-        } else {
-            $this->smarty->view("announcement.tpl");
+            
         }
+            $this->smarty->view("announcement.tpl",$data);
+        
     }
     public function announcement_details()
     {
@@ -75,18 +76,19 @@ class Activities extends MY_controller
             }
         }
 
-        foreach ($data["announcement"] as $key => $value) {
-            if (
-                ($data["announcement"][$key]["email_sent"] == "Yes" &&
-                    $_SESSION["role"] == "employee") ||
-                $_SESSION["role"] == "admin"
-            ) {
-                $this->smarty->view("announcement_list.tpl", $data);
-            } else {
-                $data["announcement"][$key] = [];
-                $this->smarty->view("announcement_list.tpl", $data);
-            }
-        }
+        // foreach ($data["announcement"] as $key => $value) {
+        //     if (
+        //         ($data["announcement"][$key]["email_sent"] == "Yes" &&
+        //             $_SESSION["role"] == "employee") ||
+        //         $_SESSION["role"] == "admin"
+        //     ){
+        //         // $this->smarty->view("announcement_list.tpl", $data);
+        //     } else {
+        //         $data["announcement"][$key] = [];
+        //         // $this->smarty->view("announcement_list.tpl", $data);
+        //     }
+        // }
+        $this->smarty->view("announcement_list.tpl", $data);
 
         //   foreach ($data['announcement'] as $key => $value) {
         //     // print_r($value);

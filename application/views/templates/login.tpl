@@ -57,23 +57,24 @@
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" name="username" value="{{$user_name}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
-                  <div class="mb-4">
+                  <div class="mb-4 password-box">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" name="password" value="{{$password}}" class="form-control" id="exampleInputPassword1">
+                    <i class=" ti ti-eye password-icon cursor"  style=""></i>
                   </div>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Sign In</button>
+                  <!-- <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
+                    <a class="text-primary fw-bold ms-2" href="{{$base_url}}signup.html">Create an account</a>
+                  </div> -->
                   <div class="d-flex align-items-center justify-content-between mb-2 ">
                     <div class="form-check ">
-                      <input class="form-check-input primary" type="checkbox" value="" name="remember" checked>
+                      <input class="form-check-input primary" type="checkbox" value="" name="remember" {if $remember_data eq 'Yes'}checked{/if}>
                       <label class="form-check-label text-dark " for="flexCheckChecked">
                         Remeber this Device
                       </label>
                     </div>
                     <a class="text-primary fw-bold" href="{{$base_url}}forgot.html">Forgot Password ?</a>
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Sign In</button>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
-                    <a class="text-primary fw-bold ms-2" href="{{$base_url}}signup.html">Create an account</a>
                   </div>
                 </form>
               </div>

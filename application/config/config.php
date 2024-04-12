@@ -539,11 +539,11 @@ $config['company_cofigs'] = array(['name'=>'email_notification','title' => 'Emai
 ['name'=>'birthday_wishes_notification','title' => 'Birthday Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable birthday wishes email notifications' ,'type' => 'check_box'],
 ['name'=>'anniversary_wishes_notification','title' => 'Anniversary Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable anniversary wishes email notifications' ,'type' => 'check_box']);
 
-
-$config['company_prifix'] = 'MDN';
+$config['company_prifix'] = '';
 $config['shift_in_time'] = '9:30 AM';
 $config['shift_out_time'] = '7:30 PM';
 $config['email_notification'] = 'No';
 $config['attendance_pin'] = '569178';
 $config['page_length'] = [[10,50,100,200], [10,50,100,200]];
 $config['company_logo_path'] = "public/img/uploads/company_logo/";
+$config['default_company'] = 'IN';

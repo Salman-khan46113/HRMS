@@ -97,12 +97,19 @@ class Home extends MY_Controller
     public function employee_profile()
     {
         $id = $_SESSION["employee_id"];
+        $image = $this->session->userdata("profile_image");
         if (array_key_exists("id", $this->input->get())) {
             if ($this->input->get("id") > 0) {
                 $id = $this->input->get("id");
+                $image = "";
             }
         }
         $data["data"] = $this->home_model->get_employee_details($id);
+        if(count($data["data"]) > 0 && $image != ''){
+            $data["data"][0]['profile_image'] = $image;
+        }
+        
+        
         $data["bank_data"] = $this->home_model->get_bank_details($id);
         $data["employee_id"] = $id;
         $this->smarty->view("employee_details.tpl", $data);
@@ -182,7 +189,7 @@ class Home extends MY_Controller
         $ajax_json["no_data_message"] =
             '<div class="p-3"><img class="p-2" src="' .
             base_url() .
-            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No teacher data found..!</div>';
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Employee data found..!</div>';
         $ajax_json["is_top_searching_enable"] = true;
         $ajax_json["sorting_column"] = json_encode([]);
         $ajax_json["page_length_arr"] = $this->config->item("page_length");
@@ -388,6 +395,7 @@ class Home extends MY_Controller
         $employee_data['data']['new_employe_data']['dob'] = date_formate($employee_data['data']['new_employe_data']['dob']);
         $employee_data['data']['new_employe_data']['employement_date'] = date_formate($employee_data['data']['new_employe_data']['employement_date']);
         $employee_data['updated_by'] = $data['updated_by'];
+        // pr($employee_data,1);           
         $html = $this->smarty->fetch("edit_aprover_template.tpl",$employee_data);
         // pr($html);
         $return_arr["html"] = $html;

@@ -53,14 +53,14 @@
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Grads</span>
+                                            <span class="hide-menu">Grade</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
 
                                         <li class="sidebar-item">
                                             <div class="input-group">
                                               <select class="form-select form-control w-100"  id="grad_search">
-		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="" >Select Grade</option>
 		                                    	 {foreach from=$grads_data key=k item=v}
 											  		  <option value="{$v['id']}" >{$v['val']}</option>
 												{/foreach}
@@ -135,7 +135,7 @@
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Designation</h3>
+			<h3>Designations</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
@@ -173,7 +173,7 @@
 							<!-- <th scope="col">#</th> -->
 							<th scope="col">Designation Name</th>
 							<th scope="col">Department Name</th>
-							<th scope="col">Grads</th>
+							<th scope="col">Grade</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -242,10 +242,10 @@
                                 </div>
                                 <div class="col-12 mb-3">  
 	                                <div class="grads-box ">
-		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grads</p>
+		                                    <p class="fs-5 mb-1 fw-bold attendance-lable">Grade</p>
 		                                    <div class=" select-box">
 		                                    <select class="form-select form-control w-100" name="grads" id="grads">
-		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="" >Select Grade</option>
 		                                    	 {foreach from=$grads_data key=k item=v}
 											  		  <option value="{$v['id']}" >{$v['val']}</option>
 												{/foreach}
