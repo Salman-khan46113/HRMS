@@ -82,7 +82,7 @@ class Home_model extends CI_Model
         $search_params = ""
     ) {
         $this->db->select(
-            'em.employee_id as employee_id,em.profile_image as image, CONCAT(em.first_name," ",IF(em.middle_name != "",em.middle_name, ""),IF(em.middle_name != ""," ", ""),em.last_name) as name,em.employee_code as employee_code,em.employee_code as employee_code,em.employment_date as joining_date,em.email as email,d.departmen_name as department,de.designation_name as designation,em.status as status,em.is_edit as is_edit,em.created_by as added_by,em.updated_by as updated_by'
+            'em.employee_id as employee_id,em.profile_image as image, CONCAT(em.first_name," ",IF(em.middle_name != "",em.middle_name, ""),IF(em.middle_name != ""," ", ""),em.last_name) as name,em.employee_code as employee_code,em.employee_code as employee_code,em.employment_date as joining_date,em.email as email,CONCAT(d.departmen_name," (",d.department_code,")") as department,de.designation_name as designation,em.status as status,em.is_edit as is_edit,em.created_by as added_by,em.updated_by as updated_by'
         );
         $this->db->from("employee_master as em");
         $this->db->join("tbl_country_master as tc", "tc.id = em.country",'left');
@@ -286,10 +286,9 @@ class Home_model extends CI_Model
     {
         $this->db->select("e.*");
         $this->db->from("employee_master as e");
-        // $this->db->where("MONTH(e.dob) >= ",  date('m', strtotime($current_date)));
+        $this->db->group_start();
         $this->db->where("(DAY(e.dob) >=".date('d', strtotime($current_date))." AND MONTH(e.dob) >= ".date('m', strtotime($current_date)).") OR (MONTH(e.dob) <= ".date('m', strtotime($next_date))." AND DAY(e.dob) <= ".date('d', strtotime($next_date)).") ");
-        // $this->db->where("MONTH(e.dob) <=", date('m', strtotime($next_date)));
-        // $this->db->where("DAY(e.dob) <=", date('d', strtotime($next_date)));
+        $this->db->group_end();
         $this->db->where("e.sys_record_delete !=", 1);
         $company_id = getCompanyId();
         if($company_id > 0){
@@ -298,7 +297,6 @@ class Home_model extends CI_Model
         $this->db->limit(5);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
-        // pr($this->db->last_query(),1);
         return $ret_data;
     }
 

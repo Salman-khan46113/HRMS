@@ -176,17 +176,19 @@
                         <p class="lead fw-normal mb-2 ms-1">Work Information</p>
                         <div class="p-4 rounded-2" style="background-color: #ecedef;">
                            <div class="row">
-                              {if $user_data['role'] == 'arom'}
                               <div class="col-3 mb-2">
                                  <div class="title-div">
                                     <strong>Company</strong>
                                     
                                  </div>
-                                 <div>
+                                 <div class="value-div">
+                                    {if in_array($user_data['role'],["arom","admin"])}
+                                    <span><a href="{get_entiry_url('company','View',$data[0].company_id)}">{{$data[0].company_name}}</a></span>
+                                    {else}
                                     <span>{{$data[0].company_name}}</span>
+                                    {/if}
                                  </div>
                               </div>
-                              {/if}
                               <div class="col-3 mb-2">
                                  <div class="title-div">
                                     <strong>Department</strong>

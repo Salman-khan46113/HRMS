@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-04 20:06:17
+/* Smarty version 4.3.2, created on 2024-04-05 22:04:40
   from '/var/www/html/extra_work/HRMS/application/views/templates/companies.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660ebae1c6f604_54224304',
+  'unifunc' => 'content_6610282059e8f8_16126957',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b8f6604381a71336f0b89b87d1d01eb9c561ea36' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/companies.tpl',
-      1 => 1712239385,
+      1 => 1712334868,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660ebae1c6f604_54224304 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6610282059e8f8_16126957 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <style>
 	.dataTables_wrapper.no-footer .dt-buttons {

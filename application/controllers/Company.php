@@ -33,12 +33,15 @@ class Company extends MY_controller
             $company_data['log_url'] = $this->config->item('base_url').$this->config->item('company_logo_path');
             $mode = 'Update';
         }
+        $render_arr["back_url"] = "company.html";
         $render_arr['mode'] = $mode;
         $render_arr['company_data'] = $company_data;
         $render_arr['bank_data'] = $bank_data;
         $render_arr["country"] = $this->company_model->get_country();
         $render_arr["state"] = $this->company_model->get_state();
         $render_arr['index'] = 0;
+        $render_arr['default_company'] = $this->config->item("default_company");
+        // pr($render_arr,1);
         $this->smarty->view("add_company.tpl",$render_arr);
     }
 
@@ -179,6 +182,7 @@ class Company extends MY_controller
 
     // below function is used to update the company details.
     public function updateAction($post_data = []){
+        
         $company_update_arr  = $bank_insert_arr = $bank_update_arr = [];
         $company_id = $post_data['company_id'];
         $delete_ids = [];

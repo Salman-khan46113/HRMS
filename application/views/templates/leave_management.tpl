@@ -169,64 +169,7 @@
           </div>
           <div class="modal-body">
             <div class="main-content">
-                <div class="card mb-3 user-details-block">
-                     <input type="hidden"  value="" id="leave_request_id">
-                     <input type="hidden" value="" name="" id="user_details_input">
-                        <div class="row g-0 m-3">
-                            
-                            <div class="col-2">
-                                <div class=" image-block">
-                                    <img src="{{$base_url}}/public/img/uploads/employee_profile/{{$profile_image}}" width="100" height="100" >                                   
-                                </div>
-                            </div>
-                            <div class="col-10 employee-detils">
-                                <div class="row">
-                                	<div class="col-4 p-1">
-                                		<span class="employee-name employee-name-block">{{$first_name}} {{$middle_name}} {{$last_name}}</span> 
-                            			<span class="emp-grid-code" id="employee_code">{{$employee_code}}</span>
-                                	</div>
-                                	<div class="col-4 p-1 location-block">
-                                		<span class="title-box">Location</span> 
-                            			<span class="val-box" >{{$city}}</span>
-                                	</div>
-                                	<div class="col-4 p-1 designation-block">
-                                		<span class="title-box" >Designation</span> 
-                            			<span class="val-box" >{{$designation}}</span>
-                                	</div>
-                                	<div class="col-4 p-1 department-block" >
-                                		<span class="title-box">Department</span> 
-                            			<span class="val-box" >{{$department}}</span>
-                                	</div>
-                                	<div class="col-4 p-1 from-date-block">
-                                		<span class="title-box">From Date</span> 
-                            			<span class="val-box" >{{$employee_week_off}}</span>
-                                	</div>
-                                	<div class="col-4 p-1 to-date-block">
-                                		<span class="title-box">To Date</span> 
-                            			<span class="val-box" >{{$employee_week_off}}</span>
-                                	</div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3 leave-box">
-                        <div class="row g-0 m-3">
-                            
-                            <div class="col-12 text-center">
-                                <div class="ms-3">
-                                    <div class="radio-toolbar leave_aprove_reject_check">
-									    <input type="radio" id="approveAll" name="allReqs" value="approve">
-									    <label for="approveAll" class="me-3"><i class="fas fa-check-circle"></i> Approve </label>
-
-									    <input type="radio" id="denyAll" name="allReqs" value="reject">
-									    <label for="denyAll"><i class="fas fa-times-circle"></i> Reject </label>
-									  </div>                                   
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                
             </div>
           </div>
           <div class="modal-footer">

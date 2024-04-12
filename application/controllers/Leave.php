@@ -10,6 +10,7 @@ class Leave extends MY_controller
         $this->load->model("leave_model");
         $base_url = $this->config->item("base_url");
         $this->smarty->assign("base_url", $base_url);
+        
     }
 
     public function leave_list_summary()
@@ -25,6 +26,7 @@ class Leave extends MY_controller
             "list"
         );
         $data_val['leave_type'] = [["id"=>"SickLeave","val"=>"Sick Leave"],["id"=>"PaidLeave","val"=>"Paid Leave"],["id"=>"CasualLeave","val"=>"Casual Leave"]];
+        // pr($data_val,1);
         $this->smarty->view("employee_leave.tpl", $data_val);
     }
     public function leave_list_filter_data()
@@ -63,8 +65,7 @@ class Leave extends MY_controller
             $current_year,
             "list"
         );
-        // pr($leave_list,1);
-
+        
         foreach ($leave_list as $key => $value) {
             $leave_list[$key]["action"] = "--";
             if ($value["status"] == "pending") {
@@ -110,7 +111,7 @@ class Leave extends MY_controller
         foreach ($dateRange as $date) {
             $months[] = $date->format("F Y");
         }
-        $data_val = $this->session->userdata();
+        $data_val = $this->leave_model->get_employee_details($this->session->userdata("employee_id"));
         $data_val["months"] = $months;
         $data_val["leave_list"] = $leave_list;
         if ($type == "list") {
@@ -125,15 +126,17 @@ class Leave extends MY_controller
             $leave_range_arr = [];
             $date_range_arr = [];
             foreach ($appled_leave_list as $key => $value) {
-                array_push($leave_range_arr, [
-                    "leave_start_date" => $value["leave_start_date"],
-                    "leave_end_date" => $value["leave_end_date"],
-                    "leave_request_id" => $value["leave_id"],
-                ]);
-                array_push($date_range_arr, [
-                    "start" => $value["leave_start_date"],
-                    "end" => $value["leave_end_date"],
-                ]);
+                if($value['status'] != "reject"){
+                    array_push($leave_range_arr, [
+                        "leave_start_date" => $value["leave_start_date"],
+                        "leave_end_date" => $value["leave_end_date"],
+                        "leave_request_id" => $value["leave_id"],
+                    ]);
+                    array_push($date_range_arr, [
+                        "start" => $value["leave_start_date"],
+                        "end" => $value["leave_end_date"],
+                    ]);
+                 }
             }
 
             $leave_start_dates = array_column(
@@ -151,6 +154,8 @@ class Leave extends MY_controller
             $data_val["leave_range_arr"] = $leave_range_arr;
             $data_val["date_range_arr"] = $date_range_arr;
         }
+        $allocated_leaves = $this->leave_model->get_allocated_leaves($this->session->userdata("employee_id"));
+        $data_val['allocated_leaves'] = $this->leave_model->get_employee_leave_details($this->session->userdata("employee_id"),$allocated_leaves,0);
 
         return $data_val;
     }
@@ -175,12 +180,6 @@ class Leave extends MY_controller
         $applied_leave_days_val = 0 ? 1 : $interval["days"] + 1;
         $allocated_leaves = $this->leave_model->get_allocated_leaves($employee_id);
         if(isset($allocated_leaves[$post_data["leave_name"]])){
-            if($applied_leave_days_val > $allocated_leaves[$post_data["leave_name"]]){
-                $success = 0;
-                $allocated_leaves_val = $allocated_leaves[$post_data["leave_name"]];
-                $leave_name_val = strtolower(get_status($post_data['leave_name']));
-                $message = "Only $allocated_leaves_val day of $leave_name_val has been allocated.";
-            }else{
                 if ($post_data["mode"] == "Add") {
                     $flag = 0;
                     if (array_key_exists("leave_range_arr", $post_data)) {
@@ -203,17 +202,7 @@ class Leave extends MY_controller
                     }
 
                     if ($flag == 0) {
-                        $remaining_leaves = $this->leave_model->get_types_wise_leaves($employee_id,$allocated_leaves[$post_data["leave_name"]],'');
-                        if($remaining_leaves < 0 || ($remaining_leaves - $applied_leave_days_val) < 0){
-                            $success = 0;
-                            $leave_name_val = strtolower(get_status($post_data['leave_name']));
-                            if($remaining_leaves == 0){
-                                $message = "There are no $leave_name_val remaining.";
-                            }else{
-                                $message = "There are $remaining_leaves days of $leave_name_val remaining.";
-                            }
-                                                        
-                        }else{
+                       
 
                             $insert_arr = [
                                 "employee_id" => $employee_id,
@@ -254,7 +243,7 @@ class Leave extends MY_controller
                             } else {
                                 $message = "Error!";
                             }
-                        }
+                        
                     } else {
                         $success = 0;
                         $message = "Aleady leave apply between two dates.";
@@ -289,12 +278,7 @@ class Leave extends MY_controller
                         }
                     }
                     if ($flag == 0) {
-                        $remaining_leaves = $this->leave_model->get_types_wise_leaves($employee_id,$allocated_leaves[$post_data["leave_name"]],$post_data["leave_request_id"]);
-                        if($remaining_leaves < 0 || ($remaining_leaves - $applied_leave_days_val) < 0){
-                            $success = 0;
-                            $leave_name_val = strtolower(get_status($post_data['leave_name']));
-                            $message = "There are $remaining_leaves days of $leave_name_val remaining.";
-                        }else{
+                        
                             $update_arr = [
                                 "leave_id" => $post_data["leave_request_id"],
                                 "leave_start_date" => $post_data["start_date"],
@@ -332,7 +316,7 @@ class Leave extends MY_controller
                             } else {
                                 $message = "Error!";
                             }
-                        }
+                        
                     } else {
                         $success = 0;
                         $message = "Aleady leave apply between two dates.";
@@ -340,7 +324,7 @@ class Leave extends MY_controller
 
                     // pr($post_data['leave_range_arr'],1);
                 }
-            }
+            
         }else{
             $success = 0;
 
@@ -534,9 +518,7 @@ class Leave extends MY_controller
                 $leave_list[$key]["action"] =
                     '<i class="la-check-circle ti ti-calendar-check" data-id="' .
                     $value["leave_id"] .
-                    '"  data-user-details="' .
-                    $employee_json .
-                    '" title="Aprove Reject"></i>';
+                    '"  data-user-details="' .$employee_json .'" title="Aprove Reject"></i>';
             }
         }
         // pr($leave_list,1);
@@ -549,6 +531,16 @@ class Leave extends MY_controller
         $data["recordsTotal"] = count($total_record);
         $data["recordsFiltered"] = count($total_record);
         echo json_encode($data);
+        exit();
+    }
+    public function get_leave_request_data(){
+        $post_data = $this->input->post();
+        $data['leave_list'] = $this->leave_model->get_leave_request_data($post_data['leave_id']);
+        $data['leave_list']["image"] = $this->config->item("base_url") ."public/img/uploads/employee_profile/" .$data['leave_list']["image"];
+        $allocated_leaves = $this->leave_model->get_allocated_leaves($data['leave_list']["employee_id"]);
+        $data['allocated_leaves'] = $this->leave_model->get_employee_leave_details($this->session->userdata("employee_id"),$allocated_leaves,$post_data['leave_id']);
+        $html = $this->smarty->fetch("leave_request_approve.tpl", $data);
+        echo json_encode($html);
         exit();
     }
     public function update_leave_status()
@@ -671,10 +663,10 @@ class Leave extends MY_controller
           $message = "Leave Already Allocated.";
         } elseif ($result == "update") {
           $success = 1;
-          $message = "Leave allocation updated successfully!";
+          $message = "Leave allocation updated successfully.";
         } elseif ($result > 0) {
           $success = 1;
-          $message = "Leave allocation successful!";
+          $message = "Leave allocation successful.";
         } else {
           $success = 0;
           $message = "Error add data.";
@@ -695,7 +687,7 @@ class Leave extends MY_controller
 
         if ($result) {
           $success = 1;
-          $message = "Leave allocation successfully deleted!";
+          $message = "Leave allocation successfully deleted.";
         } else {
           $success = 0;
           $message = "An error occurred. Please try again.!";

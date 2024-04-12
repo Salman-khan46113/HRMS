@@ -6,6 +6,15 @@ class Company_model extends CI_Model
         parent::__construct();
     }
 
+    public function get_config()
+    {
+        pr("ok",1);
+        // $this->db->select("*");
+        // $result_obj = $this->db->get("tbl_country_master");
+        // $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        // return $ret_data;
+    }
+
     public function get_country()
     {
         $this->db->select("*");
@@ -24,6 +33,10 @@ class Company_model extends CI_Model
     public function getCompanies($id = 0,$search_param = []){
         $filter_where = $this->prepareCompanyFilter($search_param);
         $this->db->select("*");
+        $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("company_id", $company_id);
+        }
         $result_obj = $this->db->get("companies");
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
@@ -54,10 +67,12 @@ class Company_model extends CI_Model
         $this->db->where('entity_id',$id);
         $query = $this->db->get();
         $data = is_object($query) ? $query->result_array() : [];
+        // pr($this->db->last_query());
         return $data;
     }
 
     public function updateCompanyData($ret_arr = []){
+        // pr($ret_arr,1);
         $company_data = $ret_arr['company_insert_arr'];
         $bank_insert = $ret_arr['bank_insert_arr'];
         $company_id = $ret_arr['company_id'];
@@ -77,9 +92,11 @@ class Company_model extends CI_Model
             $this->db->insert_batch('bank_master', $bank_insert);
 
         }
+        // pr($this->db->last_query());
         if(is_valid_array($bank_update)){
             $this->db->update_batch('bank_master',$bank_update, 'id'); 
         }
+        // pr($this->db->last_query());
     }
 
     public function getCompanydetailsView($id = 0){

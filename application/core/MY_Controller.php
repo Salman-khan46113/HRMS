@@ -5,13 +5,14 @@ class MY_Controller extends CI_Controller
   function __construct()
   {
     parent::__construct();
+
+   // pr($this->config);
    	$base_url = $this->config->item('base_url');
     $this->smarty->assign("base_url", $base_url);
     
-    // $route_arr =["add-employee.html","login.html","signup.html","home.html","attendance.html","employee-details.html","attendance-sheet.html","employee-list.html","leave-list.html","leave-management-list.html","designation.html","holiday.html","holiday-management.html","holiday.html","announcement.html","announcement_list.html","announcement_details.html","department.html","employee_add.html","bank-listing.html","shift-management.html","employee-add.html"];
     $route_arr = $this->router->routes;
     $route_arr = array_keys($route_arr);
-    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html"];
+    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit"];
     $current_route = '';
     if(array_key_exists('PATH_INFO',$_SERVER)){
       // $current_route = str_replace("/","", $_SERVER['PATH_INFO']);
@@ -26,11 +27,28 @@ class MY_Controller extends CI_Controller
 		        redirect('./login.html');
 		      }
 		    }
+
+            $this->load->model('user_model');
+            $config = $this->user_model->get_company_config();
+            /* set config */
+            if(getCompanyId() > 0){
+                $config = $this->user_model->get_company_config(getCompanyId());
+                if(count($config) > 0){
+                    foreach ($config as $key => $value) {
+                        $this->config->set_item($value['name'], $value['value']);
+                    }
+                }
+            }
+
+            // pr($this->config);
+
+
 		    $ajax_json = $this->session->userdata();
 		    // pr($ajax_json);
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $ajax_json = $this->session->userdata();
-            // pr($ajax_json,1);
+            $config = (array) $this->config;
+            $ajax_json['config'] = $config['config'];
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $html = $this->smarty->fetch("header.tpl",$ajax_json);
 	    	echo $html;
@@ -39,9 +57,6 @@ class MY_Controller extends CI_Controller
     	}
     	
     }
-
-
-    
 
   }
   public function email_sender($data = array()){

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     company_address.init();
     
 })
@@ -6,6 +7,7 @@ $(document).ready(function(){
 
 const company_address = {
     init:function(){
+
         let that = this;
         that.initializePlugin();
         $('.next').off('click');
@@ -64,8 +66,8 @@ const company_address = {
             let ele = $(this);
             loader()
             Swal.fire({
-                title: "Delete Address",
-                text: "Are you sure you want to delete this address?",
+                title: "Delete Account",
+                text: "Are you sure you want to delete this account?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -137,9 +139,12 @@ const company_address = {
 
 
 
-        //  if($('#mode') == 'Update'){
-        //     let img_url = 
-        //  }
+         if($('#mode').val() == 'Update'){
+            console.log(bank_data)
+            for (var i = 0;i < bank_data.length ; i++) {
+                that.addRules(i);
+            }   
+         }
 
 
     },
@@ -170,9 +175,10 @@ const company_address = {
         });
         $('#ifsc_code_'+index).rules('add', {
             required: true,
-            minlength: 3,
+            regex:/^[A-Z]{4}0[A-Z0-9]{6}$/,
             messages: {
-                required: "Please enter IFSC Code"
+                required: "Please enter IFSC Code",
+                regex: "Please enter valid IFSC Code"
             }
         });
         $('#acc_type_'+index).rules('add', {
@@ -191,9 +197,10 @@ const company_address = {
         });
         $('#acc_holder_'+index).rules('add', {
             required: true,
-           
+            regex: /^[a-zA-Z\s]+$/,
             messages: {
                 required: "Please enter Account Holder",
+                regex: "Please enter valid Account Number"
               
             }
         });
@@ -231,13 +238,14 @@ const company_address = {
         let that = this;
         $('#founding_date').datepicker({
             changeYear: true,
-            changeMonth: true
+            changeMonth: true,
+            maxDate: 0 
         });
         $('#state').select2();
         $('#country').select2();
         that.validation();
         that.telInput();
-        $('#acc_type_0').select2()
+        $('.acc_type').select2()
         that.addRules(0);
         
     },
@@ -293,17 +301,19 @@ const company_address = {
                     required: true
                 },
                 zipcode:{
-                    required: true
+                    required: true,
+                    regex: /^\d{6}$/
                 },
                 gst_number: {
-                    required: true
+                    required: true,
+                    regex: /^([0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9A-Z]{1})$/
                 },
                 founding_date:{
                     required:true
                 },
-                description:{
-                    required:true
-                },
+                // description:{
+                //     required:true
+                // },
                 pan_number:{
                     required:true,
                     regex: /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
@@ -355,10 +365,12 @@ const company_address = {
                     required: "Please enter Address"
                 },
                 zipcode:{
-                    required: "Please enter Zipcode"
+                    required: "Please enter Zipcode",
+                    regex:"Please enter valid Zipcode",
                 },
                 gst_number: {
-                    required: "Please enter GST Number"
+                    required: "Please enter GST Number",
+                    regex:"Please enter valid GST Number"
                 },
                 founding_date:{
                     required:"Please select Founding Date"
@@ -386,8 +398,11 @@ const company_address = {
                 }
                 else if(id == 'fileInput'){
                     $(".don1").after(error);
-                }
-                else{
+                }else if (element[0]["localName"] == "select") {
+                    var parents = $(element).parent(".col");
+                    console.log(parents)
+                    $(parents).find(".select2-container").after(error);
+                }else{
                   error.insertAfter(element);
                 }
               },
@@ -404,7 +419,7 @@ const company_address = {
                 formData.append('phone_code', "+"+countryCode);
                 formData.append('mode', mode);
                 if($('.default-check:checked').length == 0){
-                    toaster("fails",'Please Select default address');
+                    toaster("fails",'Please select deafult bank account.');
                     return 0;
                 };
                 loader()
@@ -422,7 +437,7 @@ const company_address = {
                     setTimeout(function(){
                       hide_loader();
                       if (parseInt(success) == 1) {
-                        toastr.success(msg);
+                        // toaster.success(msg);
                         toaster("success",msg);
                         setTimeout(function () {
                           window.location.href = "company.html";

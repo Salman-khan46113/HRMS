@@ -32,7 +32,7 @@ $(document).ready(function(){
 		loader()
 		var employee_code = $("#employee-code").val();
 		if(employee_code != "" && employee_code != undefined && employee_code != null && employee_code > 0){
-			var formData = {"employee_code":employee_code,type:type}
+			var formData = {"employee_code":employee_code,type:type,prefix:prefix}
 			$.ajax({
 	        type: "POST",
 	        url: "user/attendance_action",
@@ -114,7 +114,7 @@ function attendance_in_out(employee_id,type){
 	    return new Promise((resolve) => {
 	      if (value == attendance_pin) {
 	        loader()
-			var formData = {"employee_id":employee_id,type:type}
+			var formData = {"employee_id":employee_id,type:type,prefix:prefix}
 			$.ajax({
 			type: "POST",
 			url: "user/attendance_in_out_action",

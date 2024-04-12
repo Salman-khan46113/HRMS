@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 18:20:04
+/* Smarty version 4.3.2, created on 2024-04-12 19:51:43
   from '/var/www/html/extra_work/HRMS/application/views/templates/login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d507c04fc25_54083106',
+  'unifunc' => 'content_66194377508c41_44415918',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '18e0185c0789beb5d7481d719dd003159b8e10b4' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/login.tpl',
-      1 => 1711784779,
+      1 => 1712931701,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_660d507c04fc25_54083106 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66194377508c41_44415918 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -90,35 +90,36 @@ $_prefixVariable2 = ob_get_clean();
 echo $_prefixVariable2;?>
 " class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
-                  <div class="mb-4">
+                  <div class="mb-4 password-box">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" name="password" value="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['password']->value;
 $_prefixVariable3 = ob_get_clean();
 echo $_prefixVariable3;?>
 " class="form-control" id="exampleInputPassword1">
+                    <i class=" ti ti-eye password-icon cursor"  style=""></i>
                   </div>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Sign In</button>
+                  <!-- <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
+                    <a class="text-primary fw-bold ms-2" href="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+signup.html">Create an account</a>
+                  </div> -->
                   <div class="d-flex align-items-center justify-content-between mb-2 ">
                     <div class="form-check ">
-                      <input class="form-check-input primary" type="checkbox" value="" name="remember" checked>
+                      <input class="form-check-input primary" type="checkbox" value="" name="remember" <?php if ($_smarty_tpl->tpl_vars['remember_data']->value == 'Yes') {?>checked<?php }?>>
                       <label class="form-check-label text-dark " for="flexCheckChecked">
                         Remeber this Device
                       </label>
                     </div>
                     <a class="text-primary fw-bold" href="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
-forgot.html">Forgot Password ?</a>
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Sign In</button>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
-                    <a class="text-primary fw-bold ms-2" href="<?php ob_start();
-echo $_smarty_tpl->tpl_vars['base_url']->value;
 $_prefixVariable5 = ob_get_clean();
 echo $_prefixVariable5;?>
-signup.html">Create an account</a>
+forgot.html">Forgot Password ?</a>
                   </div>
                 </form>
               </div>

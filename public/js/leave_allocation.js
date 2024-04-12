@@ -12,6 +12,8 @@ $(document).ready(function () {
     myModal.show();
   });
 
+  $("#designation_id").chosen();
+
   $("#department_id").change(function(){
     var department_id = $(this).val();
     $.ajax({
@@ -31,6 +33,7 @@ $(document).ready(function () {
         $.each(designations, function(index, item) {
           selectElement.append('<option value="' + item.id + '">' + item.designation_name + ' (Grade - ' + item.grads + ')</option>');
         });
+        $("#designation_id").trigger("chosen:updated")
 
       },
       error: function (error) {},
@@ -50,7 +53,7 @@ $(document).ready(function () {
       success: function (response) {
         var responseObject = JSON.parse(response);
         var data = responseObject.data;
-        // console.log(data);
+        console.log(data);
         $(".leave_allocation_id").val(data.id);
         $(".sick_leave").val(data.sick_leave);
         $(".paid_leave").val(data.paid_leave);

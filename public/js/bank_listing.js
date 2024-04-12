@@ -87,10 +87,7 @@ function makeTable(data) {
             url: "bank/get_bank_listing_data",
             type: "POST",
         },
-        "columnDefs": [
-   { "sortable": false, "targets": 0 },
-   { "sortable": true, "targets": 0}
- ],
+        "columnDefs": [ ],
 order: [[1, 'asc']],
 
 

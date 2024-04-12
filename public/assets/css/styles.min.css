@@ -21810,10 +21810,101 @@ body.dashboard-page-body .main-middle-container .sub-header{
 
 /*disable chosen */
 .chosen-disabled * {
+
     cursor: not-allowed;
+    background-color: #eee !important;
+    color: #000 !important;
 }
+
+
+/*disable select2 */
+.select2-container--disabled{
+    cursor: not-allowed;
+    opacity: .7 !important;
+}
+span.select2-selection__rendered {
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+        color: #5A6A85 !important;
+
+}
+
 
 .modal .select2-container{
     width: 100% !important;
 }
 
+.no-birthday-block strong {
+    font-size: 12px !important;
+}
+
+.value-div span a{
+    color: #000;
+}
+/* password icon */
+.password-icon {
+    position: relative;
+    float: right;
+    top: -28px;
+    right: 5px;
+}
+
+/*nav bar*/
+.employee-profile-box .nav-link.active {
+    margin-bottom: 0px !important;
+   /*border-bottom: 3px solid gray !important;*/
+   border-radius: 0px;
+   background: none !important;
+   border: unset;
+   }
+   .employee-profile-box .nav-tabs .nav-link{
+          font-weight: 600;
+   border: unset;
+   padding-left: 19px;
+   padding-right: 19px;
+   margin-bottom: 1px !important;
+       font-size: 18px;
+       color: var(--bs-nav-tabs-link-active-color);
+       padding-bottom: 8px;
+   }
+   .employee-profile-box .nav.nav-tabs{
+      border: none;
+   }
+   .employee-profile-box .nav-link:hover{
+     margin-bottom: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
+   }
+   .employee-profile-box .nav-link:hover:after {
+
+       width: 53px;
+    }
+  .employee-profile-box .nav-link:after {
+      bottom: 0;
+  }
+  .employee-profile-box .nav-link.active:after {
+      content: '';
+    display: block;
+    position: relative;
+    width: 54% !important;
+    margin-top: 6px;
+    background: #898989;
+    height: 3px;
+
+  }
+  .employee-profile-box .nav-link:hover:after {
+      content: '';
+      display: block;
+      position: relative;
+      width: 54% !important;
+      background: #898989;
+      height: 3px;
+      margin-top: 5px;
+      transition: width .3s;
+
+  }
+  .employee-profile-box .nav-tabs .nav-link.active {
+      color: #206DFF;
+          padding-bottom: 0px !important;
+          margin-bottom: 0px !important;
+  }

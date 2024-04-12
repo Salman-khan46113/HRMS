@@ -1,11 +1,15 @@
+var department_id = '';
 $(document).ready(function () {
   var myModal = new bootstrap.Modal(document.getElementById('Shift_popup'))
   var shift_details_popup = new bootstrap.Modal(document.getElementById('employee_shift_details'))
 
   $(".add-leave").on("click", function () {
     $(".group_title").val("");
+    department_id = '';
     var option_arr = '<option value="">Select Shift</option>';
+    $("#company_id").val(selected_company).trigger("change").prop('disabled',false);
     $(".shift_id").html(option_arr).val('').trigger('chosen:updated');
+    $("#department").val('').trigger('chosen:updated');
     $(".employee_ids").html('').val('').trigger('change');
     $(".employee_shift_id").val('');
     $("#start_date").val('');
@@ -30,6 +34,39 @@ $(document).ready(function () {
      changeYear: true, showOtherMonths: true, 
      selectOtherMonths: true, yearRange: "c-100:c+100"
   })
+  $("#company_id").select2();
+  $(document).on("change", "#company_id", function () {
+    var id = $(this).val();
+     var opt_val = '<option value="">Select Department</option>';
+    if(id > 0){
+    $.ajax({
+      type: "POST",
+      url: "shift/get_department",
+      data: {
+        company_id: id,
+      },
+
+      success: function (response) {
+        var responseObject = JSON.parse(response);
+        var departments = responseObject.departments;
+        if(departments.length > 0){
+          for (var i = 0; i < departments.length; i++) {
+            opt_val += `<option value="${departments[i]['department_id']}">${departments[i]['departmen_name']} [${departments[i]['department_code']}]</option>`;
+          }
+        }
+        $("#department").html(opt_val);
+        $("#department").trigger("chosen:updated");
+        if(department_id > 0){
+          $(".department").val(department_id).prop('disabled', true).trigger("chosen:updated");
+        }
+      },
+      error: function (error) {},
+    });
+    }else{
+        $("#department").html(opt_val);
+        $("#department").trigger("chosen:updated");
+    }
+  });
 
   $("#department,#shift_id").chosen();
   // $("#designation").select2({
@@ -69,14 +106,16 @@ $(document).ready(function () {
       type: "POST",
       url: "shift/get_employee_shift_view_details",
       data: {
-        edit: id,
-        id:"edit"
+        edit: "edit",
+        id:id
       },
 
       success: function (response) {
         var responseObject = JSON.parse(response);
         var data = responseObject.shiftDetails;
-        $("#department").val(data.department_id).trigger('chosen:updated');
+        $("#company_id").val(data.company_id).trigger("change").prop('disabled',false);
+        // $("#department").val(data.department_id).trigger('chosen:updated');
+        department_id = data.department_id;
         get_edit_data(data.department_id,data.shift_id,data.employee_ids)
         $(".group_title").val(data.group_title);
         $(".employee_shift_id").val(data.employee_shift_id);
@@ -299,7 +338,7 @@ $(document).ready(function () {
 });
 
 function get_edit_data(department_id = '',shift_id = '',employe_ids = ''){
-  console.log(department_id)
+  loader()
   $.ajax({
         type: "POST",
         url: "shift/get_shits",
@@ -317,7 +356,7 @@ function get_edit_data(department_id = '',shift_id = '',employe_ids = ''){
           }
           
           if(employe_ids.length > 0){
-              $("#employee_ids").html(option_arr).val(["2","3"]).trigger('change');
+              $("#employee_ids").html(option_arr).val(employe_ids).trigger('change');
           }else{
               $("#employee_ids").html(option_arr).trigger('change')
           }
@@ -331,7 +370,10 @@ function get_edit_data(department_id = '',shift_id = '',employe_ids = ''){
           }else{
             $("#shift_id").html(option_arr).trigger('chosen:updated')
           }
-
+          setTimeout(function(){
+            hide_loader();
+          },500)
+          
           
         },
         error: function (error) {},

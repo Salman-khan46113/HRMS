@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-04 18:58:11
+/* Smarty version 4.3.2, created on 2024-04-08 23:08:49
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660eaaebcaf068_51886838',
+  'unifunc' => 'content_66142ba9ed6076_20721352',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35902323a0aeb94f9765903986ed798d8a726ee2' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl',
-      1 => 1712237279,
+      1 => 1712595569,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660eaaebcaf068_51886838 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66142ba9ed6076_20721352 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -285,7 +285,7 @@ echo $_prefixVariable25;?>
                                 	<div class="col-4 p-1">
                                 		<span class="title-box" >Designation</span> 
                             			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['designation']->value;
+echo $_smarty_tpl->tpl_vars['designation_name']->value;
 $_prefixVariable26 = ob_get_clean();
 echo $_prefixVariable26;?>
 </span>
@@ -293,7 +293,7 @@ echo $_prefixVariable26;?>
                                 	<div class="col-4 p-1">
                                 		<span class="title-box">Department</span> 
                             			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['department']->value;
+echo $_smarty_tpl->tpl_vars['department_name']->value;
 $_prefixVariable27 = ob_get_clean();
 echo $_prefixVariable27;?>
 </span>
@@ -307,6 +307,40 @@ echo $_prefixVariable28;?>
 </span>
                                 	</div>
 
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card mb-3 user-details-block">
+                        <div class="row g-0 m-3">
+                            <div class="col-12 employee-detils">
+                                <div class="row">
+                                    <div class="col-4 p-1">
+                                        <span class="title-box">Sick Leave</span> 
+                                        <span class="val-box" ><?php ob_start();
+echo $_smarty_tpl->tpl_vars['allocated_leaves']->value['SickLeave'];
+$_prefixVariable29 = ob_get_clean();
+echo $_prefixVariable29;?>
+ Days</span>
+                                    </div>
+                                    <div class="col-4 p-1">
+                                        <span class="title-box" >Paid Leave</span> 
+                                        <span class="val-box" ><?php ob_start();
+echo $_smarty_tpl->tpl_vars['allocated_leaves']->value['PaidLeave'];
+$_prefixVariable30 = ob_get_clean();
+echo $_prefixVariable30;?>
+ Days</span>
+                                    </div>
+                                    <div class="col-4 p-1">
+                                        <span class="title-box">Casual Leave</span> 
+                                        <span class="val-box" ><?php ob_start();
+echo $_smarty_tpl->tpl_vars['allocated_leaves']->value['CasualLeave'];
+$_prefixVariable31 = ob_get_clean();
+echo $_prefixVariable31;?>
+ Days</span>
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -411,23 +445,23 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
  type="text/javascript" >
         var month_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['months']->value);
-$_prefixVariable29 = ob_get_clean();
-echo $_prefixVariable29;?>
+$_prefixVariable32 = ob_get_clean();
+echo $_prefixVariable32;?>
 ;
         var leave_dates = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['leave_dates']->value);
-$_prefixVariable30 = ob_get_clean();
-echo $_prefixVariable30;?>
+$_prefixVariable33 = ob_get_clean();
+echo $_prefixVariable33;?>
 ;
         var leave_range_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['leave_range_arr']->value);
-$_prefixVariable31 = ob_get_clean();
-echo $_prefixVariable31;?>
+$_prefixVariable34 = ob_get_clean();
+echo $_prefixVariable34;?>
 ;
         var date_range_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['date_range_arr']->value);
-$_prefixVariable32 = ob_get_clean();
-echo $_prefixVariable32;?>
+$_prefixVariable35 = ob_get_clean();
+echo $_prefixVariable35;?>
 
     <?php echo '</script'; ?>
 >

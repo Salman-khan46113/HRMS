@@ -101,10 +101,11 @@
                         </div>
                     </div>
                     <div class="dash-card-box-content">
+                      {if count($bithaday) > 0}
                         <div class="dash-card-box-content-inner">
-                           
                             <div class="birthday-list-block">
                                 <div class="wrapper-cnt d-flex mt-3">
+                                  
                                     <div class="db-emp-thumb-list">
                                         <ul>
                                           {foreach $bithaday as $index => $employee}
@@ -126,6 +127,23 @@
                                 </div>
                             </div>
                         </div>
+                      {else}
+                        <div class="birthday-list-block">
+                          <div class="wrapper-cnt d-flex mt-2">
+                          <div class="db-emp-thumb-list text-center mt-0 no-birthday-block">
+                            <div class="mb-1">
+                              <img
+                                  alt=""
+                                  width="35"
+                                  height="35"
+                                  src="{{$base_url}}public/assets/images/images/no_birthaday.png"
+                              />
+                            </div>
+                            <strong >No Birthday Found!</strong>
+                          </div>
+                          </div>
+                        </div>
+                                  {/if}
                     </div>
                 </div>
 

@@ -24,10 +24,12 @@ class User extends MY_controller
         $remember_data = ["user_name" => "", "password" => ""];
         if (array_key_exists("remember_me_user", $this->input->cookie())) {
             $data = $this->input->cookie("remember_me_user");
+            $remember_data["remember_data"] = "No";
             if ($data != "") {
                 $data = (array) json_decode($data);
                 $remember_data["user_name"] = $data["user_name"];
                 $remember_data["password"] = $data["password"];
+                $remember_data["remember_data"] = "Yes";
             }
         }
 
@@ -77,20 +79,11 @@ class User extends MY_controller
                                 time() - 3600
                             );
                         } else {
+
                             $this->input->set_cookie("remember_me_user", "");
                         }
 
-                        /* set config */
-                        if(getCompanyId() > 0){
-                            $config = $this->user_model->get_company_config(getCompanyId());
-                            if(count($config) > 0){
-                                foreach ($config as $key => $value) {
-                                    $this->config->set_item($value['name'], $value['value']);
-                                }
-                            }
-
-                        }
-
+                        
                     } elseif ($user["status"] == "Inactive") {
                         $message = "User temporary inactive!";
                     } elseif ($user["status"] == "Pending") {
@@ -257,12 +250,15 @@ class User extends MY_controller
     public function attendance()
     {
         $type = $this->input->get();
+
         $company_prifix["type"] = "web";
         if (array_key_exists("type", $type)) {
             $company_prifix["type"] = "Tab";
         }
-        $company_prifix["prefix"] = $this->config->item("company_prifix");
+        $company_prifix["prefix"] = base64_decode($type['prefix']);
         $this->smarty->view("attendance.tpl", $company_prifix);
+       
+        
     }
 
     public function send_email()
@@ -411,8 +407,9 @@ class User extends MY_controller
 
         $post_data  = $this->input->post();
         if ($upload_error == 0 && $post_data['mode'] == "Add") {
-            $last_employee_code = $this->user_model->get_last_employee_code();
-            $company_prifix = $this->config->item("company_prifix");
+            $last_employee_code = $this->user_model->get_last_employee_code($post_data['company']);
+
+            $company_prifix = $this->user_model->get_compnay_prefix($post_data['company']);
             $employee_code =
                 $company_prifix .
                 "-" .
@@ -524,7 +521,7 @@ class User extends MY_controller
                 $message = "Error add data.";
             }
         }else if($post_data['mode'] == "Update" && $upload_error == 0){
-
+            // pr($post_data,1);
             if(count($upload_data) > 0){
                 $post_data['profile_image_name']  =  $upload_data["file_name"];
             }
@@ -571,7 +568,6 @@ class User extends MY_controller
                     $message = "Error add data.";
                 }
             }
-
         }else {
             $message = $upload_error_msg['error'];
             $success = 0;
@@ -599,13 +595,14 @@ class User extends MY_controller
     {
         $employee_code = $this->input->post("employee_code");
         $type = $this->input->post("type");
+        $company_prifix = $this->input->post("prefix");
 
         $success = 0;
         $message = "Employee not exit with this code!";
         $html = "";
         $attendance_pin = "";
         if ($employee_code != "") {
-            $company_prifix = $this->config->item("company_prifix");
+            // $company_prifix = $this->config->item("company_prifix");
             $employee_code = $company_prifix . "-" . $employee_code;
             $user = $this->user_model->get_user_details($employee_code);
             if (is_array($user)) {
@@ -812,6 +809,31 @@ class User extends MY_controller
         $return_arr = $this->user_model->get_designation_list($department_id);
         echo json_encode($return_arr);
         exit();
+    }
+    public function check_company_code(){
+        $company_code = $this->input->get('company_code');
+        $data['success'] = 0;
+        $data['message'] = "Please enter company_code";
+        $data['data'] = array();
+        if($company_code != ''){
+            $return_arr = $this->user_model->check_company_code($company_code);
+            if(count($return_arr) > 0){
+                $data['success'] = 1;
+                $data['message'] = "company data found successfully.";
+                $return_arr[0]['redirect_url'] = base_url().'attendance.html?prefix='.base64_encode($return_arr[0]['value']);
+                $data['data'] = $return_arr[0];
+            }else{
+                $data['success'] = 1;
+                $data['message'] = "company data not found.";
+            }
+        }
+        // Convert data to JSON format
+        $json_response = json_encode($data);
+
+        // Set headers
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output($json_response);
     }
 }
 

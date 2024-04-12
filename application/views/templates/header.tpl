@@ -134,6 +134,7 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
             </li>
+          
            <div class="sub-menu">
             <li class="sidebar-item">
               <a class="sidebar-link" href="./company.html" aria-expanded="false">
@@ -289,14 +290,16 @@
                 <span class="hide-menu">Time Sheet</span>
               </a>
             </li>
+            {{if $config['company_prifix'] != ''}}
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./attendance.html" aria-expanded="false">
+              <a class="sidebar-link" href="./attendance.html?prefix={base64_encode($config['company_prifix'])}" aria-expanded="false">
                 <span>
                   <i class="ti ti-calendar-time"></i>
                 </span>
                 <span class="hide-menu">Attendance In Out</span>
               </a>
             </li>
+            {/if}
             </div>
 
             <li class="nav-small-cap">
@@ -474,13 +477,20 @@
 
                             <div class="card mb-3 leave-box">
                               <div class="row g-0 m-3">
-                                <div class="mb-3">
-                                  <label for="designationName" class="form-label">New Password</label>
-                                  <input type="text" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
+                                <div class="mb-3 password-box">
+                                  <label for="designationName" class="form-label">Old Password</label>
+                                  <input type="password" class="form-control old_pass" id="old_pass" name="old_pass"  placeholder="Enter Old Password">
+                                  <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 password-box">
+                                  <label for="designationName" class="form-label">New Password</label>
+                                  <input type="password" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
+                                   <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                </div>
+                                <div class="mb-3 password-box">
                                   <label for="designationName" class="form-label">Confirm Password</label>
-                                  <input type="text" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
+                                  <input type="password" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
+                                   <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
                                 </div>
                               </div>
                             </div>

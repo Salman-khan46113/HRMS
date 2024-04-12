@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-04 16:17:33
+/* Smarty version 4.3.2, created on 2024-04-08 23:06:46
   from '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660e8545925916_44813548',
+  'unifunc' => 'content_66142b2e90a093_19467979',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6cad605d831d85edeb156290add8bfa433416976' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl',
-      1 => 1711477371,
+      1 => 1712597687,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660e8545925916_44813548 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66142b2e90a093_19467979 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -209,108 +209,7 @@ echo $_prefixVariable3;?>
           </div>
           <div class="modal-body">
             <div class="main-content">
-                <div class="card mb-3 user-details-block">
-                     <input type="hidden"  value="" id="leave_request_id">
-                     <input type="hidden" value="" name="" id="user_details_input">
-                        <div class="row g-0 m-3">
-                            
-                            <div class="col-2">
-                                <div class=" image-block">
-                                    <img src="<?php ob_start();
-echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
-/public/img/uploads/employee_profile/<?php ob_start();
-echo $_smarty_tpl->tpl_vars['profile_image']->value;
-$_prefixVariable5 = ob_get_clean();
-echo $_prefixVariable5;?>
-" width="100" height="100" >                                   
-                                </div>
-                            </div>
-                            <div class="col-10 employee-detils">
-                                <div class="row">
-                                	<div class="col-4 p-1">
-                                		<span class="employee-name employee-name-block"><?php ob_start();
-echo $_smarty_tpl->tpl_vars['first_name']->value;
-$_prefixVariable6 = ob_get_clean();
-echo $_prefixVariable6;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['middle_name']->value;
-$_prefixVariable7 = ob_get_clean();
-echo $_prefixVariable7;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['last_name']->value;
-$_prefixVariable8 = ob_get_clean();
-echo $_prefixVariable8;?>
-</span> 
-                            			<span class="emp-grid-code" id="employee_code"><?php ob_start();
-echo $_smarty_tpl->tpl_vars['employee_code']->value;
-$_prefixVariable9 = ob_get_clean();
-echo $_prefixVariable9;?>
-</span>
-                                	</div>
-                                	<div class="col-4 p-1 location-block">
-                                		<span class="title-box">Location</span> 
-                            			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['city']->value;
-$_prefixVariable10 = ob_get_clean();
-echo $_prefixVariable10;?>
-</span>
-                                	</div>
-                                	<div class="col-4 p-1 designation-block">
-                                		<span class="title-box" >Designation</span> 
-                            			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['designation']->value;
-$_prefixVariable11 = ob_get_clean();
-echo $_prefixVariable11;?>
-</span>
-                                	</div>
-                                	<div class="col-4 p-1 department-block" >
-                                		<span class="title-box">Department</span> 
-                            			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['department']->value;
-$_prefixVariable12 = ob_get_clean();
-echo $_prefixVariable12;?>
-</span>
-                                	</div>
-                                	<div class="col-4 p-1 from-date-block">
-                                		<span class="title-box">From Date</span> 
-                            			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['employee_week_off']->value;
-$_prefixVariable13 = ob_get_clean();
-echo $_prefixVariable13;?>
-</span>
-                                	</div>
-                                	<div class="col-4 p-1 to-date-block">
-                                		<span class="title-box">To Date</span> 
-                            			<span class="val-box" ><?php ob_start();
-echo $_smarty_tpl->tpl_vars['employee_week_off']->value;
-$_prefixVariable14 = ob_get_clean();
-echo $_prefixVariable14;?>
-</span>
-                                	</div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3 leave-box">
-                        <div class="row g-0 m-3">
-                            
-                            <div class="col-12 text-center">
-                                <div class="ms-3">
-                                    <div class="radio-toolbar leave_aprove_reject_check">
-									    <input type="radio" id="approveAll" name="allReqs" value="approve">
-									    <label for="approveAll" class="me-3"><i class="fas fa-check-circle"></i> Approve </label>
-
-									    <input type="radio" id="denyAll" name="allReqs" value="reject">
-									    <label for="denyAll"><i class="fas fa-times-circle"></i> Reject </label>
-									  </div>                                   
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                
             </div>
           </div>
           <div class="modal-footer">
@@ -331,59 +230,59 @@ echo $_prefixVariable14;?>
 >
     var column_details =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['data']->value);
-$_prefixVariable15 = ob_get_clean();
-echo $_prefixVariable15;?>
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
 ;
     var page_length_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['page_length_arr']->value);
-$_prefixVariable16 = ob_get_clean();
-echo $_prefixVariable16;?>
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
 
     var is_searching_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_searching_enable']->value);
-$_prefixVariable17 = ob_get_clean();
-echo $_prefixVariable17;?>
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
 ;
     var is_top_searching_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_top_searching_enable']->value);
-$_prefixVariable18 = ob_get_clean();
-echo $_prefixVariable18;?>
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
 ;
     var is_paging_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_paging_enable']->value);
-$_prefixVariable19 = ob_get_clean();
-echo $_prefixVariable19;?>
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
 ;
     var is_serverSide =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_serverSide']->value);
-$_prefixVariable20 = ob_get_clean();
-echo $_prefixVariable20;?>
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
 ;
     var no_data_message =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
-$_prefixVariable21 = ob_get_clean();
-echo $_prefixVariable21;?>
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
 ;
     var is_ordering =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_ordering']->value);
-$_prefixVariable22 = ob_get_clean();
-echo $_prefixVariable22;?>
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
 ;
     var sorting_column = <?php ob_start();
 echo $_smarty_tpl->tpl_vars['sorting_column']->value;
-$_prefixVariable23 = ob_get_clean();
-echo $_prefixVariable23;?>
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
 
     var api_name =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['api_name']->value);
-$_prefixVariable24 = ob_get_clean();
-echo $_prefixVariable24;?>
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
 ;
     var page_name = 'teacher_page';
     var base_url = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['base_url']->value);
-$_prefixVariable25 = ob_get_clean();
-echo $_prefixVariable25;?>
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
 ;
 <?php echo '</script'; ?>
 >

@@ -1,8 +1,10 @@
 var table = '';
+var department_id = '';
 $(document).ready(function () {
   var myModal = new bootstrap.Modal(document.getElementById("Shift_popup"));
 
   $(".add-leave").on("click", function () {
+    department_id = '';
     $(".shift_name").val("");
     $(".shift_type").val("");
     $(".start_time").val("");
@@ -16,6 +18,38 @@ $(document).ready(function () {
   $('#start_time,#end_time').mdtimepicker();
 
   $("#company_id").select2();
+  $(document).on("change", "#company_id", function () {
+    var id = $(this).val();
+     var opt_val = '<option value="">Select Department</option>';
+    if(id > 0){
+    $.ajax({
+      type: "POST",
+      url: "shift/get_department",
+      data: {
+        company_id: id,
+      },
+
+      success: function (response) {
+        var responseObject = JSON.parse(response);
+        var departments = responseObject.departments;
+        if(departments.length > 0){
+          for (var i = 0; i < departments.length; i++) {
+            opt_val += `<option value="${departments[i]['department_id']}">${departments[i]['departmen_name']} [${departments[i]['department_code']}]</option>`;
+          }
+        }
+        $("#department").html(opt_val);
+        $("#department").trigger("chosen:updated");
+        if(department_id > 0){
+          $(".department").val(department_id).prop('disabled', true).trigger("chosen:updated");
+        }
+      },
+      error: function (error) {},
+    });
+    }else{
+        $("#department").html(opt_val);
+        $("#department").trigger("chosen:updated");
+    }
+  });
   $(document).on("click", ".edit_shift", function () {
 
     var id = $(this).data("id");
@@ -31,9 +65,9 @@ $(document).ready(function () {
         var data = responseObject.data;
         $('#start_time,#end_time').mdtimepicker('destroy');        
         $("#company_id").val(data.company_id).trigger("change").prop('disabled',true);
+        department_id = data.department_id;
         $(".shift_id").val(data.id);
         $(".shift_name").val(data.shift_name);
-        $(".department").val(data.department_id).prop('disabled', true).trigger("chosen:updated");
         $(".shift_type").val(data.shift_type).prop('disabled', true).trigger("chosen:updated").prop('disabled',true);
         $(".start_time").val(data.start_time);
         $(".end_time").val(data.end_time);

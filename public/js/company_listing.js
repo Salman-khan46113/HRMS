@@ -21,15 +21,27 @@ const data_table_obj = {
     },
     makeTable:function(){
         table =  new DataTable("#company_table", {
-            dom: 'Bfrtip',
+            dom: 'Bfrtilp',
             buttons: [
                   {     
                     extend: 'csv',
                       text: '<i class="ti ti-file-type-csv"></i>',
                       init: function(api, node, config) {
                       $(node).attr('title', 'Download CSV');
-                      }
-                  },
+                      },
+                      customize: function (csv) {
+                            var lines = csv.split('\n');
+                            var modifiedLines = lines.map(function(line) {
+                                var values = line.split(',');
+                                values.splice(0, 1);
+                                values.splice(5, 1);
+                                return values.join(',');
+                            });
+                            return modifiedLines.join('\n');
+                        },
+                        filename : 'company_list'
+                    },
+                  
                   {
                       extend: 'pdf',
                       text: '<i class="ti ti-file-type-pdf"></i>',
@@ -45,8 +57,8 @@ const data_table_obj = {
                               cell.fillColor = '#5d87ff';
                           });
                           doc.content[1].table.body.forEach(function(row, index) {
-                              row.splice(1, 1);
                               row.splice(0, 1);
+                              row.splice(5, 1);
                               row.forEach(function(cell) {
                                   // Set alignment for each cell
                                   cell.alignment = 'center'; // Change to 'left' or 'right' as needed
@@ -79,6 +91,13 @@ const data_table_obj = {
               },
       
           });
+        // $(".dataTables_length")
+        // .find("label")
+        // .contents()
+        // .filter(function () {
+        //     return this.nodeType === 3; // Filter out text nodes
+        // })
+        // .remove();
     },
     getSearchParams:function(){
         $('.filter-input input').each(function(index,val){

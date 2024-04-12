@@ -66,13 +66,15 @@
                     <label for="exampleInputEmail1" class="form-label">Otp</label>
                     <input type="number" name="otp" class="form-control" >
                   </div> 
-                  <div class="mb-2">
+                  <div class="mb-2 password-box">
                     <label for="exampleInputEmail1" class="form-label">New Password</label>
-                    <input type="text" name="password" class="form-control" id="password">
+                    <input type="password" name="password" class="form-control" id="password">
+                    <i class=" ti ti-eye password-icon cursor"  style=""></i>
                   </div>                  
-                  <div class="mb-2">
+                  <div class="mb-2 password-box">
                     <label for="exampleInputEmail1" class="form-label">Conform Password</label>
-                    <input type="text" name="confirm_password" class="form-control" >
+                    <input type="password" name="confirm_password" class="form-control" >
+                    <i class=" ti ti-eye password-icon cursor"  style=""></i>
                   </div> 
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 mt-3">Submit</button>
                   

@@ -142,17 +142,39 @@
                                 	</div>
                                 	<div class="col-4 p-1">
                                 		<span class="title-box" >Designation</span> 
-                            			<span class="val-box" >{{$designation}}</span>
+                            			<span class="val-box" >{{$designation_name}}</span>
                                 	</div>
                                 	<div class="col-4 p-1">
                                 		<span class="title-box">Department</span> 
-                            			<span class="val-box" >{{$department}}</span>
+                            			<span class="val-box" >{{$department_name}}</span>
                                 	</div>
                                 	<div class="col-4 p-1">
                                 		<span class="title-box">Week Off</span> 
                             			<span class="val-box" >{{$employee_week_off}}</span>
                                 	</div>
 
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card mb-3 user-details-block">
+                        <div class="row g-0 m-3">
+                            <div class="col-12 employee-detils">
+                                <div class="row">
+                                    <div class="col-4 p-1">
+                                        <span class="title-box">Sick Leave</span> 
+                                        <span class="val-box" >{{$allocated_leaves['SickLeave']}} Days</span>
+                                    </div>
+                                    <div class="col-4 p-1">
+                                        <span class="title-box" >Paid Leave</span> 
+                                        <span class="val-box" >{{$allocated_leaves['PaidLeave']}} Days</span>
+                                    </div>
+                                    <div class="col-4 p-1">
+                                        <span class="title-box">Casual Leave</span> 
+                                        <span class="val-box" >{{$allocated_leaves['CasualLeave']}} Days</span>
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>

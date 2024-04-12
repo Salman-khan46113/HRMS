@@ -92,7 +92,7 @@
 								<div class="mb-3">
 									<label for="designation_id" class="form-label">Designation</label>
 									<select class="form-select designation_id" name="designation_id" id="designation_id">
-
+										<option value="">Select Designation</option>
 									</select>
 								</div>
 

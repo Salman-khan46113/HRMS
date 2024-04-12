@@ -34,7 +34,7 @@
         </div>
         <div class="col">
             <label for="acc_type" class="form-label">Account Type <span class="star_required">*</span></label>
-            <select class="form-select form-control" name="acc_type[{$index}]" id="acc_type_{{$index}}" >
+            <select class="form-select form-control acc_type" name="acc_type[{$index}]" id="acc_type_{{$index}}" >
                 <option value="">Select Account Type</option>
                 <option value="Current">Current</option>
                 <option value="Domestic">Domestic</option>
@@ -57,7 +57,6 @@
     </div>
 </div>
 {else}
-
 {foreach from=$bank_data key=index item=item_val}
 <div class="address-sub-block form-contain border border-primary rounded-2 border border-2 p-3">
     <input type="hidden" id="bank_id_{{$index}}" value="{$item_val['id']}" name="bank_id[{$index}]">
@@ -68,7 +67,7 @@
             <i class="ti ti-trash remove-address"></i>
         </div> -->
     <div class="row action-box">
-        <input type="hidden" name="bank_id[0]" value="14" />
+        <!-- <input type="hidden" name="bank_id[0]" value="{$item_val['id']}" /> -->
         <div class="col-10"></div>
         <div class="col-2">
             <i class="ti ti-trash h2 pe-3 ps-2 float-right cursor remove-address" data-id="14"></i>
@@ -95,7 +94,7 @@
         </div>
         <div class="col">
             <label for="acc_type" class="form-label">Account Type <span class="star_required">*</span></label>
-            <select class="form-select form-control" name="acc_type[{$index}]" id="acc_type_{{$index}}" >
+            <select class="form-select form-control acc_type" name="acc_type[{$index}]" id="acc_type_{{$index}}" >
                 <option value="">Select Account Type</option>
                 <option value="Current" {if $item_val['account_type'] == 'Current'} selected {/if}>Current</option>
                 <option value="Domestic" {if $item_val['account_type'] == 'Domestic'} selected {/if}>Domestic</option>
