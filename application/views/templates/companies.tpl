@@ -45,7 +45,7 @@
 										</div>
 										<div class="filter-row">
 											<li class="nav-small-cap">
-												<span class="hide-menu filter-label">Company Code</span>
+												<span class="hide-menu filter-label">Code</span>
 												<span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
 											</li>
 											<li class="sidebar-item">
@@ -67,13 +67,13 @@
 										</div>
 										<div class="filter-row">
 											<li class="nav-small-cap">
-												<span class="hide-menu filter-label">Founding Date</span>
+												<span class="hide-menu filter-label">Date Of Founding</span>
 												<span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
 											</li>
 											<li class="sidebar-item">
 												<div class="input-group filter-input">
 												  <input type="text" class="form-control" id="founding_search"  placeholder="Founding Date" data-column="4">
-												  <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+												  <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span> 
 												</div>
 											</li>
 										</div>
@@ -117,6 +117,20 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+			<div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 			 <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -130,7 +144,8 @@
                             <i class="ti ti-filter " style="color: black"></i> 
                         </button>
                     </div>
-                </div>
+            </div>
+                <button id="downloadPDFBtn">PDF</button>
 
 			<div class="timesheet-summary">
 				<div class="timesheet-summary-lst">

@@ -11,7 +11,6 @@ $(document).ready(function(){
   	});
   	$("#month_drop_down").on("change",function(){
   		var value = $(this).val();
-  		console.log(value)
   		if(value != "" && value != null && value != undefined){
   			filterSheetDate(value);
   		}
@@ -107,7 +106,7 @@ function filterSheetDate(value){
 		          if (parseInt(success) == 1) {
 		            	$("#total_working_hrs").html(responseObject.total_working_hours+" Hrs");
 		            	$("#attendence_sheet_data").html(responseObject.html);
-						toaster("success",msg);
+						// toaster("success",msg);
 		          } else {
 		            toaster("fails",msg);
 		          }

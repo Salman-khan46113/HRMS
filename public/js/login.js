@@ -26,9 +26,11 @@ $(document).ready(function () {
     },
 
     errorPlacement: function (error, element) {
-    
-      
-        error.insertAfter(element);
+        // if(element[0]['name'] == 'password'){
+          $("#"+element[0]['id']).parents(".input-group").after(error)
+        // }else{
+        //   error.insertAfter(element);
+        // }
       
     },
     submitHandler: function (form) {

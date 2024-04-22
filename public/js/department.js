@@ -3,15 +3,20 @@ $(document).ready(function () {
     var myModal = new bootstrap.Modal(document.getElementById("designation_popup"));
 
     $(".add-department").on("click", function () {
+        $(".error").removeClass(".error");
+        $("label.error").remove();
         $(".department_name").val("");
         $(".department_id").val("");
         $("#company_id").val(selected_company).trigger("change").prop("disabled", false);
+        $("#department_code").val('').trigger("change").prop("disabled", false);
 
         $(".mode").val("Add");
         myModal.show();
     });
     $("#company_id").select2();
     $(document).on("click", ".edit_department", function () {
+        $(".error").removeClass(".error");
+        $("label.error").remove();
         var id = $(this).attr("data-id");
         var company_id = $(this).attr("data-company-id");
         var parent_div = $(this).parents(".department-request-row");
@@ -149,13 +154,7 @@ $(document).ready(function () {
         },
     });
 
-    $("#updated_date_search,#added_date_search").datepicker({
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true,
-        showOtherMonths: true,
-        selectOtherMonths: true,
-    });
+    
 
     table = $(".leave-list-table").DataTable({
         dom: "Bfrtilp",
@@ -240,10 +239,15 @@ $(document).ready(function () {
             return this.nodeType === 3; // Filter out text nodes
         })
         .remove();
-    $("#department_code_filter").on("keyup", function () {
-        table.column(1).search(this.value).draw();
+    // filter
+    $("#updated_date_search,#added_date_search").datepicker({
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "yy-mm-dd"
     });
-
     $(".search-filter").on("click", function () {
         serachParams();
         $(".close-filter-btn").trigger("click");
@@ -261,18 +265,10 @@ function serachParams() {
     var added_by = $("#added_by_search").val();
     table.column(2).search(added_by).draw();
     var added_date = $("#added_date_search").val();
-    if (added_date != "") {
-        var parts = added_date.split("/");
-        added_date = `${parts[2]}-${parts[0]}-${parts[1]}`;
-    }
     table.column(3).search(added_date).draw();
     var updated_by = $("#updated_by_search").val();
     table.column(4).search(updated_by).draw();
     var updated_date = $("#updated_date_search").val();
-    if (updated_date != "") {
-        var parts = updated_date.split("/");
-        updated_date = `${parts[2]}-${parts[0]}-${parts[1]}`;
-    }
     table.column(5).search(updated_date).draw();
 }
 function resetFilter() {

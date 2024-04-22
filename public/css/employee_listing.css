@@ -35,38 +35,7 @@ font-weight: 700 !important;
 .dataTables_wrapper.no-footer .dataTables_scrollBody{
 	border-bottom: none !important;
 }
-.status-row .active {
-    border: none !important;
-    background: #43A047 !important;
-    padding: 5px 10px;
-    color: #ffffff !important;
-}
-.status-row .inactive {
-    border: none !important;
-    background: #f71919 !important;
-    padding: 5px 10px;
-    color: #ffffff !important;
-}
-.status-row .pending {
-    border: none !important;
-    background: #FFA500 !important;
-    padding: 5px 10px;
-    color: #ffffff !important;
-}
-.status-row .block {
-    border: none !important;
-    background: #4EB5E5 !important;
-    padding: 5px 10px;
-    color: #ffffff !important;
-}
-.status-row span {
-    border-radius: 5px;
-    padding: 5px 10px !important;
-    border-radius: 7px !important;
-    font-size: 16px !important;
-    height: 26px !important;
-    line-height: 26px !important;
-}
+
 
 /* aprove block */
 .user-details-block {

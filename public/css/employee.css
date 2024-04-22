@@ -46,10 +46,10 @@ label {
   background-color: rgba(0, 123, 199, 0.3);
 }
 .password-icon {
-  position: relative;
+  /*position: relative;
   float: right;
   top: -28px;
-  right: 5px;
+  right: 5px;*/
 }
 .password-login-icon{
   position: relative;
@@ -106,8 +106,8 @@ label.error{
 }
 
 .input-group .input-group-text{
-    background: rgba(0, 0, 0, 0.05) !important;
-    border: var(--bs-border-width) solid #DFE5EF !important;
+    background: rgba(0, 0, 0, 0.05) ;
+    border: var(--bs-border-width) solid #DFE5EF ;
         border-radius: 0px 5px 5px 0px !important;
 }
 .input-group .input-group-text i{
@@ -247,3 +247,4 @@ label.error{
         width: 50%;
     height: 72px;
 }
+

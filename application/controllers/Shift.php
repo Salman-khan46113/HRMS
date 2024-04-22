@@ -70,6 +70,7 @@ class Shift extends MY_controller
     }
     public function shift_action()
     {
+      // pr($this->input->post_data(),1);
         if (isset($_POST["id"])) {
             $id = $this->input->post("id");
         } else {
@@ -85,7 +86,7 @@ class Shift extends MY_controller
         if ($difference["invert"] == 0 && ($difference["h"] > 0 || $difference["i"] > 0)) {
           if ($id == "") {
               $data = [
-                  "company_id" => $_SESSION['company_id'],
+                  "company_id" => $this->input->post('company_id'),
                   "shift_name" => $this->input->post("shift_name"),
                   "department_id"=>$this->input->post("department_id"),
                   "shift_type" => $this->input->post("shift_type"),
@@ -187,7 +188,8 @@ class Shift extends MY_controller
     $data["no_data_message"] =
             '<div class="p-3"><img class="p-2" src="' .
             base_url() .
-            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee shift data found..!</div>';
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No shift groups data found..!</div>';
+    $data["shift_type_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];
     $this->smarty->view("employee_shift.tpl", $data);
   }
   public function get_employee_shift_view_details()
@@ -252,7 +254,6 @@ class Shift extends MY_controller
 
   public function employee_shift_action()
   {
-    
     if (isset($_POST["employee_shift_id"])) {
       $id = $this->input->post("employee_shift_id");
     } else {
@@ -261,7 +262,7 @@ class Shift extends MY_controller
 
     if (isset($_POST["employee_ids"])) {
       $employee_ids = $this->input->post("employee_ids");
-      $employee_ids_string = implode(',', $employee_ids);
+      $employee_ids_string = $employee_ids;
     }
 
     if ($id == "") {

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-05 22:21:43
+/* Smarty version 4.3.2, created on 2024-04-13 15:25:09
   from '/var/www/html/extra_work/HRMS/application/views/templates/attendance_sheet.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66102c1f1b83b4_90470497',
+  'unifunc' => 'content_661a567dde9026_77912216',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '349a857a93ce8e0119a2136680b50c3fde17c73d' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/attendance_sheet.tpl',
-      1 => 1710827023,
+      1 => 1713002076,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66102c1f1b83b4_90470497 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661a567dde9026_77912216 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="main-middle-container">
@@ -83,6 +83,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                     <li title="Present" class="pl-3"><span class="color-box present"></span>Present</li>
                     <li title="Absent" class="pl-3"><span class="color-box absent"></span>Absent</li>
                     <li title="Week Off" class="pl-3"><span class="color-box week_off"></span>Week Off</li>
+                    <li title="Correction" class="pl-3"><span class="color-box correction"></span>Correction</li>
                     
                   </ul>
                 </div>
@@ -127,85 +128,60 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['sem_index']->val
 $_smarty_tpl->tpl_vars['sem_row']->do_else = false;
 ?>
                     <tr class="<?php ob_start();
-if ($_smarty_tpl->tpl_vars['sem_row']->value['week_off'] == 'Yes') {
+echo $_smarty_tpl->tpl_vars['sem_row']->value['row_class'];
 $_prefixVariable6 = ob_get_clean();
 echo $_prefixVariable6;?>
-timesheet-week-off<?php ob_start();
-} elseif ($_smarty_tpl->tpl_vars['sem_row']->value['attendance'] == 'A') {
-$_prefixVariable7 = ob_get_clean();
-echo $_prefixVariable7;?>
-timesheet-absent<?php ob_start();
-} else {
-$_prefixVariable8 = ob_get_clean();
-echo $_prefixVariable8;?>
-timesheet-present<?php ob_start();
-}
-$_prefixVariable9 = ob_get_clean();
-echo $_prefixVariable9;?>
 ">
                         <td align="center" valign="middle" class="text-center att-date"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['sem_row']->value['attendance_date'];
-$_prefixVariable10 = ob_get_clean();
-echo $_prefixVariable10;?>
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-time timesheet-shift-row"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['attendance_in']->value;
-$_prefixVariable11 = ob_get_clean();
-echo $_prefixVariable11;?>
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-time"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['sem_row']->value['attendance_in_time'];
-$_prefixVariable12 = ob_get_clean();
-echo $_prefixVariable12;?>
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
 </td>
                         
 
                         <td align="center" valign="middle" class="text-center att-time timesheet-shift-row"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['attendance_out']->value;
-$_prefixVariable13 = ob_get_clean();
-echo $_prefixVariable13;?>
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-time"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['sem_row']->value['attendance_out_time'];
-$_prefixVariable14 = ob_get_clean();
-echo $_prefixVariable14;?>
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-hrs"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['sem_row']->value['working_hr'];
-$_prefixVariable15 = ob_get_clean();
-echo $_prefixVariable15;?>
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-status"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['sem_row']->value['attendance'];
-$_prefixVariable16 = ob_get_clean();
-echo $_prefixVariable16;?>
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
 </td>
                         <td align="center" valign="middle" class="text-center att-action"><?php ob_start();
-if ($_smarty_tpl->tpl_vars['sem_row']->value['attendance_in_time'] != '--' && $_smarty_tpl->tpl_vars['sem_row']->value['attendance_in_time'] != '') {
-$_prefixVariable17 = ob_get_clean();
-echo $_prefixVariable17;?>
-<i class="la-edit ti ti-edit" data-id="<?php ob_start();
-echo $_smarty_tpl->tpl_vars['sem_row']->value['attendance_id'];
-$_prefixVariable18 = ob_get_clean();
-echo $_prefixVariable18;?>
-"></i><?php ob_start();
-} else {
-$_prefixVariable19 = ob_get_clean();
-echo $_prefixVariable19;?>
--<?php ob_start();
-}
-$_prefixVariable20 = ob_get_clean();
-echo $_prefixVariable20;?>
+echo $_smarty_tpl->tpl_vars['sem_row']->value['btn_html'];
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
 </td>
-                        
                     </tr>
                     <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 <?php ob_start();
 } else {
-$_prefixVariable21 = ob_get_clean();
-echo $_prefixVariable21;?>
+$_prefixVariable15 = ob_get_clean();
+echo $_prefixVariable15;?>
 
                     <tr >
                         <td colspan="8">
@@ -214,8 +190,8 @@ echo $_prefixVariable21;?>
                                 alt=""
                                 src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable22 = ob_get_clean();
-echo $_prefixVariable22;?>
+$_prefixVariable16 = ob_get_clean();
+echo $_prefixVariable16;?>
 public/assets/images/images/no_data_found_new.png"
                                 height="150"
                                 width="150"
@@ -230,8 +206,8 @@ public/assets/images/images/no_data_found_new.png"
 
                 <?php ob_start();
 }
-$_prefixVariable23 = ob_get_clean();
-echo $_prefixVariable23;?>
+$_prefixVariable17 = ob_get_clean();
+echo $_prefixVariable17;?>
  
 
                     
@@ -303,8 +279,8 @@ echo $_prefixVariable23;?>
  type="text/javascript" >
         var month_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['months']->value);
-$_prefixVariable24 = ob_get_clean();
-echo $_prefixVariable24;?>
+$_prefixVariable18 = ob_get_clean();
+echo $_prefixVariable18;?>
 ;
     <?php echo '</script'; ?>
 >

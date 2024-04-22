@@ -43,7 +43,7 @@ class User extends MY_controller
         /* get login attempt */
         $user_login_attempt = $this->user_model->check_login_attempt($email);
         /* get login attempt */
-        if (count($user_login_attempt) > 0) {
+        if (isset($user_login_attempt['employee_id'])) {
             if (
                 $user_login_attempt["status"] != "Block" &&
                 $user_login_attempt["login_attempt_failed"] < 3
@@ -762,6 +762,8 @@ class User extends MY_controller
             $data["designation"] = $this->user_model->get_designation_list($data["employee_data"]['department']);
             $data["manager"] = $this->user_model->get_reporting_senior($data["employee_data"]['department'],'',$data["selected_company"]);
             // pr($data,1);
+        }else{
+            $data["department"] = $this->user_model->get_department_list($data["selected_company"]);
         }
         $data["country"] = $this->user_model->get_country();
         $data["state"] = $this->user_model->get_state();

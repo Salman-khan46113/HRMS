@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-08 23:08:49
+/* Smarty version 4.3.2, created on 2024-04-17 00:03:31
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66142ba9ed6076_20721352',
+  'unifunc' => 'content_661ec47b5e1dd9_02448135',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35902323a0aeb94f9765903986ed798d8a726ee2' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl',
-      1 => 1712595569,
+      1 => 1713290642,
       2 => 'file',
     ),
   ),
@@ -21,12 +21,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66142ba9ed6076_20721352 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661ec47b5e1dd9_02448135 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
     <div class="sub-header-left pull-left">
-        <h3>Leave Request</h3>
+        <h3>Leave</h3>
         
     </div>
     <div class="sub-header-right pull-right">
@@ -354,7 +354,7 @@ echo $_prefixVariable31;?>
                                     <span >
                                     	<div class="input-group ">
 										  <input type="text" class="form-control" id="start_date"  placeholder="Start Date">
-										  <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+										  <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
 										</div>
                                     	
                                     </span>                                    
@@ -365,7 +365,7 @@ echo $_prefixVariable31;?>
                                 <span >
                                     	<div class="input-group ">
 										  <input type="text" class="form-control" id="end_date"  placeholder="End Date">
-										  <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+										  <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
 										</div>
                                     	
                                 </span>  
@@ -411,7 +411,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                             	<div class="">
 	                                <p class="fs-5 mb-1 fw-bold attendance-lable">Leave Reason</p>
 	                                <span >
-	                                    	<textarea class="form-control" id="leave_reason" placeholder="Leave reason" id="floatingTextarea"></textarea>
+	                                    	<textarea class="form-control" id="leave_reason" placeholder="Leave reason" ></textarea>
 	                                    	
 	                                </span>
 	                            </div>  

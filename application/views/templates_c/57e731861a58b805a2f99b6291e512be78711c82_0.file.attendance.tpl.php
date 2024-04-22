@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 22:25:16
+/* Smarty version 4.3.2, created on 2024-04-13 00:14:22
   from '/var/www/html/extra_work/HRMS/application/views/templates/attendance.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66196774edc676_23310350',
+  'unifunc' => 'content_6619810685d912_59944973',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '57e731861a58b805a2f99b6291e512be78711c82' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/attendance.tpl',
-      1 => 1712940909,
+      1 => 1712947440,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66196774edc676_23310350 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6619810685d912_59944973 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 
@@ -103,7 +103,11 @@ public/assets/images/cover.avif"  alt="" >
 				        <div class="col attendance-code-entry-box" >
 				        	
 				        	<a href="javascript:void(0)" class="tab-show-logo text-nowrap logo-img text-center  py-3 w-100 mb-4 " <?php if ($_smarty_tpl->tpl_vars['type']->value == 'web') {?>style="display:none"<?php }?>>
-    <img src="http://localhost/extra_work/HRMS/public/assets/images/logos/dark-logo.svg" width="120" alt="">
+    <img src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+public/assets/images/logos/dark-logo.svg" width="120" alt="">
 </a>
 				        	<div class="attendance-block mt-2 mb-4">
 				        		<div class="attendance-input mb-4">
@@ -111,8 +115,8 @@ public/assets/images/cover.avif"  alt="" >
 				        				<div class="col text-right">
 				        					<span class="titel-box"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['prefix']->value;
-$_prefixVariable3 = ob_get_clean();
-echo $_prefixVariable3;?>
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
 -</span>
 				        				</div>
 				        				<div class="col text-left">
@@ -234,13 +238,13 @@ echo $_prefixVariable3;?>
 >
     var type =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['type']->value);
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
 ;
     var prefix = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['prefix']->value);
-$_prefixVariable5 = ob_get_clean();
-echo $_prefixVariable5;?>
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
 ;
    <?php echo '</script'; ?>
 >

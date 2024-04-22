@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-08 23:06:46
+/* Smarty version 4.3.2, created on 2024-04-16 14:50:25
   from '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66142b2e90a093_19467979',
+  'unifunc' => 'content_661e42d91273d5_95089753',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6cad605d831d85edeb156290add8bfa433416976' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl',
-      1 => 1712597687,
+      1 => 1713253160,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66142b2e90a093_19467979 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661e42d91273d5_95089753 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -90,7 +90,7 @@ function content_66142b2e90a093_19467979 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="start_date_search"  placeholder="From Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -102,7 +102,7 @@ function content_66142b2e90a093_19467979 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="end_date_search"  placeholder="To Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -131,6 +131,20 @@ function content_66142b2e90a093_19467979 (Smarty_Internal_Template $_smarty_tpl)
         </div>
         <div class="sub-header-right pull-right">
             <div class="timesheet-summary icon-box">
+            <div class="timesheet-summary-lst">
+            <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
                 <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >

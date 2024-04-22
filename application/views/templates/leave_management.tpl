@@ -66,7 +66,7 @@
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="start_date_search"  placeholder="From Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -78,7 +78,7 @@
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="end_date_search"  placeholder="To Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -107,6 +107,20 @@
         </div>
         <div class="sub-header-right pull-right">
             <div class="timesheet-summary icon-box">
+            <div class="timesheet-summary-lst">
+            <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
                 <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >

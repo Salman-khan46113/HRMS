@@ -1,7 +1,7 @@
 
 <div class="main-middle-container">
 	
-	 <aside class="right-sidebar">
+<aside class="right-sidebar">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between filter-title-bolock">
@@ -69,51 +69,6 @@
                                             </div>
                                         </li>
                                     </div>
-                                    <!-- <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added Date</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group">
-                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated Date</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              
-                                            </div>
-                                        </li>
-                                    </div> --> 
                                 </ul>
                                
                             </div>
@@ -139,6 +94,20 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+                <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >

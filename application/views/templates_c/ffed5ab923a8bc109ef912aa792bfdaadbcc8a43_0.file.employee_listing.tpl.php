@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-05 11:31:56
+/* Smarty version 4.3.2, created on 2024-04-16 11:42:50
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_listing.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660f93d481fc97_47049671',
+  'unifunc' => 'content_661e16e28a8c05_19539197',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ffed5ab923a8bc109ef912aa792bfdaadbcc8a43' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_listing.tpl',
-      1 => 1711996887,
+      1 => 1713247968,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660f93d481fc97_47049671 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661e16e28a8c05_19539197 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
     <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -91,7 +91,7 @@ function content_660f93d481fc97_47049671 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="join_date_search"  placeholder="Joining Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text time-picker-addon date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -207,6 +207,20 @@ echo $_prefixVariable8;?>
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+          <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
             <div class="timesheet-summary-lst">
                 <div class="dropdown grid-drop-down">
                   <button class="btn btn-secondary top-btn-row" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -443,6 +457,13 @@ echo $_prefixVariable22;?>
 ;
 <?php echo '</script'; ?>
 >
+<?php echo '<script'; ?>
+ type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"><?php echo '</script'; ?>
+>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <?php echo '<script'; ?>
  src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
 >

@@ -66,7 +66,7 @@
                                         <li class="sidebar-item">
                                             <div class="input-group">
                                               <select class="form-select form-control w-100"  id="shift_type_search">
-		                                    	 <option value="" >Select Grads</option>
+		                                    	 <option value="" >Select Shift Type</option>
 		                                    	 {foreach from=$shift_type_data key=key_val item=shift_type_val}
 											 <option value="{$shift_type_val['id']}" >{$shift_type_val['val']}</option>
 										{/foreach}
@@ -82,7 +82,8 @@
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control cursor" id="start_time_search"  placeholder="Start Time">
+                                              <input type="text" class="form-control time-picker-input" id="start_time_search"  placeholder="Start Time">
+                                              <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -93,7 +94,8 @@
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control cursor" id="end_time_search"  placeholder="Start Time">
+                                              <input type="text" class="form-control time-picker-input" id="end_time_search"  placeholder="End Time">
+                                               <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -157,6 +159,20 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -234,7 +250,7 @@
 </div>
 
 <div class="modal fade leave-popup-block" id="Shift_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered ">
+	<div class="modal-dialog modal-dialog-centered  modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalToggleLabel">Shift</h5>
@@ -246,13 +262,11 @@
 
 						<div class="card mb-3 leave-box">
 							<div class="row g-0 m-3">
-
-
-								<div class="mb-3">
+								<div class="mb-3 select-box col-6">
 									<label for="shift_name" class="form-label">Shift Name</label>
 									<input type="text" class="form-control shift_name" id="shift_name" name="shift_name"  placeholder="Enter Shift Name">
 								</div>
-								<div class="mb-3 select-box-block" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
+								<div class="mb-3 select-box-block select-box col-6" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
                                     <label for="company_id" class="form-label">Company</label>
                                     <select class="form-select company_id" name="company_id" id="company_id">
                                         <option value="">Select Company</option>
@@ -265,16 +279,16 @@
                                         {/foreach}
                                     </select>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 select-box col-6">
 									<label for="department" class="form-label">Department</label>
-									<select class="form-select department" name="department" id="department">
+									<select class="form-select department" name="department_id" id="department_id">
 										<option value="">Select Department</option>
 										{foreach from=$departments item=departments_val}
 											<option value="{$departments_val.department_id}">{$departments_val.departmen_name} [{$departments_val.department_code}]</option>
 										{/foreach}
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="mb-3 select-box col-6">
 									<label for="shift_type" class="form-label">Shift type</label>
 									<select class="form-select shift_type" name="shift_type" id="shift_type">
 										<option value="">Select Shift Type</option>
@@ -284,13 +298,19 @@
 										
 									</select>
 								</div>
-								<div class="mb-3">
+								<div class="mb-3 col-6">
 									<label for="start_time" class="form-label">Start Time</label>
-									<input type="text" class="form-control start_time" id="start_time" name="start_time"  placeholder="Enter Satrt Time">
+                                    <div class="input-group ">
+									<input type="text" class="form-control start_time time-picker-input" id="start_time" name="start_time"  placeholder="Enter Satrt Time">
+                                    <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
+                                    </div>
 								</div>
-								<div class="mb-3">
+								<div class="mb-3 col-6">
 									<label for="end_time" class="form-label">End Time</label>
-									<input type="text" class="form-control end_time" id="end_time" name="end_time" placeholder="Enter End time" >
+                                    <div class="input-group ">
+									<input type="text" class="form-control end_time time-picker-input" id="end_time" name="end_time" placeholder="Enter End time" >
+                                     <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
+                                    </div>
 								</div>
 								<input type="hidden" class="form-control shift_id"  name="id" >
 
@@ -329,7 +349,6 @@
 </script>
 
 <link rel="stylesheet" href="public/css/attendance_sheet.css" />
-<link rel="stylesheet" href="public/css/leave.css" />
 <link rel="stylesheet" href="public/css/shift_management.css" />
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">

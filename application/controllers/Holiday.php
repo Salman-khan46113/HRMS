@@ -36,17 +36,115 @@ class Holiday extends MY_controller
     public function holiday_management()
     {
         $current_year = date("Y");
-        $data["holiday"] = $this->holiday_model->get_holiday($current_year, "");
+        $start_year = 2020;
+        $year_arr = [];
+        for ($i=$start_year; $i <=$current_year ; $i++) { 
+            array_push($year_arr, $i);
+        }
+        // $data["holiday"] = $this->holiday_model->get_holiday($current_year, "");
         $holiday_dates = [];
-        foreach ($data["holiday"] as $key => $value) {
-            array_push($holiday_dates, $value["holiday_date"]);
+        // foreach ($data["holiday"] as $key => $value) {
+        //     array_push($holiday_dates, $value["holiday_date"]);
+        //     $currentDate = new DateTime();
+        //     $holidayDate = DateTime::createFromFormat(
+        //         "Y-m-d",
+        //         $value["holiday_date"]
+        //     );
+        //     if ($holidayDate >= $currentDate) {
+        //         $data["holiday"][$key]["action"] =
+        //             '<span  class="edit_holiday me-2 text-secondary cursor" data-id=' .
+        //             $value["id"] .
+        //             ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>
+        //       <span class="delete_holiday text-danger cursor" data-id=' .
+        //             $value["id"] .
+        //             ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
+        //     } else {
+        //         $data["holiday"][$key]["action"] = "--";
+        //     }
+        // }
+        $ajax_json['year_arr'] = $year_arr;
+        $ajax_json["holiday_dates"] = $holiday_dates;
+        $column[] = [
+            "data" => "holiday_name",
+            "title" => "Holiday Name",
+            "width" => "8%",
+            "className" => "dt-center img-box",
+        ];
+        $column[] = [
+            "data" => "holiday_date",
+            "title" => "Holiday Date",
+            "width" => "12%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "action",
+            "title" => "Action",
+            "width" => "10%",
+            "className" => "dt-center",
+        ];
+        
+
+        $ajax_json["data"] = $column;
+        $ajax_json["is_searching_enable"] = false;
+        $ajax_json["is_paging_enable"] = true;
+        $ajax_json["is_serverSide"] = true;
+        $ajax_json["is_ordering"] = true;
+        $ajax_json["is_heading_color"] = "#a18f72";
+        $ajax_json["no_data_message"] =
+            '<div class="p-3"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No holiday management data found..!</div>';
+        $ajax_json["is_top_searching_enable"] = true;
+        $ajax_json["sorting_column"] = json_encode([]);
+        $ajax_json["page_length_arr"] = $this->config->item("page_length");
+        $ajax_json["admin_url"] = base_url();
+        $ajax_json["base_url"] = base_url();
+
+        $this->smarty->view("holiday_management.tpl", $ajax_json);
+    }
+     public function holiday_management_data(){
+        $post_data = $this->input->post();
+
+        $column_index = array_column($post_data["columns"], "data");
+        $order_by = "";
+        foreach ($post_data["order"] as $key => $val) {
+            if ($key == 0) {
+                $order_by .= $column_index[$val["column"]] . " " . $val["dir"];
+            } else {
+                $order_by .=
+                    "," . $column_index[$val["column"]] . " " . $val["dir"];
+            }
+        }
+
+        $condition_arr["order_by"] = $order_by;
+        $condition_arr["start"] = $post_data["start"];
+        $condition_arr["length"] = $post_data["length"];
+        $order_by = "";
+        foreach ($post_data["order"] as $key => $val) {
+            if ($key == 0) {
+                $order_by .= $column_index[$val["column"]] . " " . $val["dir"];
+            } else {
+                $order_by .=
+                    "," . $column_index[$val["column"]] . " " . $val["dir"];
+            }
+        }
+        $condition_arr["order_by"] = $order_by;
+        $condition_arr["start"] = $post_data["start"];
+        $condition_arr["length"] = $post_data["length"];
+        $filter_arr = [];
+        $holiday = $this->holiday_model->get_holiday($post_data['search']['year'], "",$condition_arr);
+        $holiday_dates = [];
+        foreach ($holiday as $key => $value) {
+            if($post_data['search']['year'] == date("Y")){
+                array_push($holiday_dates, $value["holiday_date"]);
+            }
             $currentDate = new DateTime();
             $holidayDate = DateTime::createFromFormat(
                 "Y-m-d",
                 $value["holiday_date"]
             );
             if ($holidayDate >= $currentDate) {
-                $data["holiday"][$key]["action"] =
+                $holiday[$key]["action"] =
                     '<span  class="edit_holiday me-2 text-secondary cursor" data-id=' .
                     $value["id"] .
                     ' title="Edit"><i class=" la-edit ti ti-edit"></i></span>
@@ -54,12 +152,17 @@ class Holiday extends MY_controller
                     $value["id"] .
                     ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
             } else {
-                $data["holiday"][$key]["action"] = "--";
+                $holiday[$key]["action"] = "--";
             }
         }
         $data["holiday_dates"] = $holiday_dates;
-        $this->smarty->view("holiday_management.tpl", $data);
-    }
+        $data["data"] = $holiday;
+        $total_record = $this->holiday_model->get_holiday('','',[]);
+        $data["recordsTotal"] = count($holiday);
+        $data["recordsFiltered"] = count($holiday);
+        echo json_encode($data);
+        exit();
+     }
 
     public function get_holiday_details()
     {
@@ -80,6 +183,7 @@ class Holiday extends MY_controller
     }
     public function holiday_action()
     {
+        // pr($this->input->post(),1);
         if (isset($_POST["id"])) {
             $id = $this->input->post("id");
         } else {

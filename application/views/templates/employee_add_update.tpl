@@ -82,7 +82,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" id="dob" name="dob" value="{getDatePickerFormat($employee_data['dob'])}" placeholder="Select Date of Birth" />
 
-                                                            <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                                            <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,13 +142,22 @@
                                                 <div class="row mb-3">
                                                     <div class="col password-box">
                                                         <label for="password" class="form-label">Password <span class="star_required">*</span></label>
-                                                        <input type="password" class="form-control" id="password" name="password" placeholder="*******" />
-                                                         <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                                        <div class="input-group">
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="*******" />
+                                                            <span class="input-group-text date-picker-addon">
+                                                            <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                                          </span>
+                                                        </div>
                                                     </div>
                                                     <div class="col password-box">
                                                         <label for="confirm-password" class="form-label">Confirm Password <span class="star_required">*</span></label>
-                                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="*******" />
-                                                       <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                                        <div class="input-group">
+                                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="*******" />
+                                                            <span class="input-group-text date-picker-addon">
+                                                            <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                                          </span>
+                                                            <!-- <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i> -->
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -269,7 +278,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" id="employement_date" name="employement_date" placeholder="Joning Date" value="{getDatePickerFormat($employee_data['employment_date'])}" />
 
-                                                            <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                                            <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                                         </div>
                                                     </div>
                                                     <div class="col ">

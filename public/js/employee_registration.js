@@ -686,6 +686,8 @@ $(document).ready(function () {
             } else if (element[0]["localName"] == "select") {
                 var parents = $(element).parent(".col");
                 $(parents).find(".select2-container").after(error);
+            } else if(element[0]['name'] == 'password' || element[0]['name'] == 'confirm_password'){
+                $("#"+element[0]['id']).parents(".input-group").after(error)
             } else {
                 error.insertAfter(element);
             }
@@ -881,14 +883,26 @@ function check_validation(element) {
     return flag;
 }
 
-function showPassword(hidePasswordIcon, passwordAttributeId, showPasswordIcon) {
-    $(passwordAttributeId).attr("type", "text");
-    $(hidePasswordIcon).hide();
-    $(showPasswordIcon).show();
+function serachParams() {
+    var department_name = $("#department_name_search").val();
+    table.column(0).search(department_name).draw();
+    var department_code = $("#department_code_search").val();
+    table.column(1).search(department_code).draw();
+    var added_by = $("#added_by_search").val();
+    table.column(2).search(added_by).draw();
+    var added_date = $("#added_date_search").val();
+    table.column(3).search(added_date).draw();
+    var updated_by = $("#updated_by_search").val();
+    table.column(4).search(updated_by).draw();
+    var updated_date = $("#updated_date_search").val();
+    table.column(5).search(updated_date).draw();
 }
-
-function hidePassword(hidePasswordIcon, passwordAttributeId, showPasswordIcon) {
-    $(passwordAttributeId).attr("type", "password");
-    $(hidePasswordIcon).hide();
-    $(showPasswordIcon).show();
+function resetFilter() {
+    $("#department_name_search").val("");
+    $("#department_code_search").val("");
+    $("#added_by_search").val("");
+    $("#added_date_search").val("").trigger("change");
+    $("#updated_date_search").val("").trigger("change");
+    $("#updated_by_search").val("");
+    serachParams();
 }

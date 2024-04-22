@@ -23,7 +23,7 @@ $(document).ready(function(){
 		myModal.show()
 	})
     $("#month_drop_down").select2({
-          placeholder: "Select Country",
+          placeholder: "Select Month",
           allowClear: true,
           minimumResultsForSearch: Infinity,
           // minimumResultsForSearch: 0,	

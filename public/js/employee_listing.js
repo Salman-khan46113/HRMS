@@ -257,13 +257,28 @@ $(document).ready(function () {
     }
     });
 
-    $('#join_date_search').datepicker({
-      showButtonPanel: true,
-      changeMonth: true,
-      changeYear: true,
-      showOtherMonths: true,
-      selectOtherMonths: true 
-    })
+    // $('#join_date_search').daterangepicker({
+    //   showButtonPanel: true,
+    //   changeMonth: true,
+    //   changeYear: true,
+    //   showOtherMonths: true,
+    //   selectOtherMonths: true ,
+    //   dateFormat: "yy-mm-dd"
+    // })
+    $('#join_date_search').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+    });
+
+    $('#join_date_search').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+
+    $('#join_date_search').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
 
     $(".search-filter").on("click",function(){
         var data = serachParams();
@@ -433,8 +448,10 @@ function resetFilter(){
   $("#status_drop_down").val('').trigger('change');
   $("#employee_name_search").val('');
   $("#employee_code_search").val('');
-  $("#join_date_search").val('');
-  $("#join_date_search").trigger('change')
+  $('#join_date_search').daterangepicker('setDate', '')
+  $('#join_date_search').val('');
+  $('#join_date_search').daterangepicker('setDate', '')
+  $('#join_date_search').val('');
   $("#department_search,#designation_search").val('').trigger('change');
   $("#email_search").val('');
   $("#department_search").val('');

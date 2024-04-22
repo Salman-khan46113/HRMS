@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize</title>
+  <title>HRMS</title>
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
   <link href="public/css/plugin/line_awesome/line_awesome.css" rel="stylesheet" />
@@ -17,7 +17,9 @@
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
   /> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" />
+  <!-- chosen -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" /> -->
+  <link rel="stylesheet" href="public/css/plugin/chosen/chosen.css" />
   <!--  tabler css -->
   <link rel="stylesheet" href="public/css/plugin/tabler_css/tabler_icons.css" />
   <!--  tabler css -->
@@ -91,7 +93,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- chosen  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+   <script src="public/js/plugin/chosen/chosen.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script> -->
 </head>
 
 <body>
@@ -136,6 +139,7 @@
             </li>
           
            <div class="sub-menu">
+            {{if in_array($role,['arom'])}}
             <li class="sidebar-item">
               <a class="sidebar-link" href="./company.html" aria-expanded="false">
                 <span>
@@ -145,6 +149,7 @@
                 <span class="hide-menu">Companies</span>
               </a>
             </li>
+            {{/if}}
             <li class="sidebar-item">
               <a class="sidebar-link" href="./department.html" aria-expanded="false">
                 <span>
@@ -189,6 +194,33 @@
             </li>
 
           </div>
+          {{if in_array($role,['admin','arom'])}}
+          <div>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Salary</span>
+            </li>
+            <div class="sub-menu">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./salary-component.html" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-layers-subtract"></i>
+
+                  </span>
+                  <span class="hide-menu">Salary component  </span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./salary-structure.html" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-license"></i>
+                  </span>
+                  <span class="hide-menu">Salary Structure</span>
+                </a>
+              </li>
+            </div>
+          </div>
+          {{/if}}
 
 
 
@@ -297,6 +329,16 @@
                   <i class="ti ti-calendar-time"></i>
                 </span>
                 <span class="hide-menu">Attendance In Out</span>
+              </a>
+            </li>
+            {/if}
+            {{if in_array($role,['admin','arom'])}}
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./attendance-correction.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-calendar-check"></i>
+                </span>
+                <span class="hide-menu">Attendance Correction</span>
               </a>
             </li>
             {/if}
@@ -444,10 +486,13 @@
                         </div>
                       </div>
                     <div class="message-body">
-                      <a href="./employee-details.html" class="d-flex align-items-center gap-2 dropdown-item mt-2 mb-2">
+                      <!-- <a href="./employee-details.html" class="d-flex align-items-center gap-2 dropdown-item mt-2 mb-2">
                         <i class="ti ti-user fs-6"></i>
                         <p class="mb-0 fs-3">My Profile</p>
-                      </a>
+                      </a> -->
+                      <div class="logout-block" title="My Profile">
+                         <a href="./employee-details.html" class="">My Profile <i class="ti ti-user-square-rounded"></i></a>
+                      </div>
                       <div class="logout-block" title="Reset Attendance Pin">
                          <a href="javascript:void(0)" class="reset-attendance-pin-btn">Reset Attendance Pin <i class="ti ti-calendar-cog"></i></a>
                       </div>
@@ -479,18 +524,30 @@
                               <div class="row g-0 m-3">
                                 <div class="mb-3 password-box">
                                   <label for="designationName" class="form-label">Old Password</label>
-                                  <input type="password" class="form-control old_pass" id="old_pass" name="old_pass"  placeholder="Enter Old Password">
-                                  <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                  <div class="input-group">
+                                      <input type="password" class="form-control old_pass" id="old_pass" name="old_pass"  placeholder="Enter Old Password">
+                                      <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
                                 </div>
                                 <div class="mb-3 password-box">
                                   <label for="designationName" class="form-label">New Password</label>
-                                  <input type="password" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
-                                   <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                  <div class="input-group">
+                                      <input type="password" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
+                                      <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
                                 </div>
                                 <div class="mb-3 password-box">
                                   <label for="designationName" class="form-label">Confirm Password</label>
-                                  <input type="password" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
-                                   <i class="las la-eye-slash ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                  <div class="input-group">
+                                      <input type="password" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
+                                   <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>

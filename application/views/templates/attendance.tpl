@@ -68,7 +68,7 @@
 				        <div class="col attendance-code-entry-box" >
 				        	
 				        	<a href="javascript:void(0)" class="tab-show-logo text-nowrap logo-img text-center  py-3 w-100 mb-4 " {if $type eq 'web'}style="display:none"{/if}>
-    <img src="http://localhost/extra_work/HRMS/public/assets/images/logos/dark-logo.svg" width="120" alt="">
+    <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="120" alt="">
 </a>
 				        	<div class="attendance-block mt-2 mb-4">
 				        		<div class="attendance-input mb-4">

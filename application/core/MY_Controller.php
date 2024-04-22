@@ -5,14 +5,15 @@ class MY_Controller extends CI_Controller
   function __construct()
   {
     parent::__construct();
-
+       
+        
    // pr($this->config);
    	$base_url = $this->config->item('base_url');
     $this->smarty->assign("base_url", $base_url);
     
     $route_arr = $this->router->routes;
     $route_arr = array_keys($route_arr);
-    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit"];
+    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit","pdf.html"];
     $current_route = '';
     if(array_key_exists('PATH_INFO',$_SERVER)){
       // $current_route = str_replace("/","", $_SERVER['PATH_INFO']);

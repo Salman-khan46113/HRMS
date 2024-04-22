@@ -153,8 +153,20 @@ function makeTable(data) {
                 text: '<i class="ti ti-file-type-csv"></i>',
                 init: function(api, node, config) {
                 $(node).attr('title', 'Download CSV');
-                }
-            },
+                },
+                customize: function (csv) {
+                        var lines = csv.split('\n');
+                        var modifiedLines = lines.map(function(line) {
+                            var values = line.split(',');
+                            values.splice(0, 1);
+                            values.splice(7, 1);
+                            return values.join(',');
+                        });
+                        return modifiedLines.join('\n');
+                    },
+                    filename : 'leave_request'
+                },
+            
             {
                 extend: 'pdf',
                 text: '<i class="ti ti-file-type-pdf"></i>',
@@ -170,7 +182,7 @@ function makeTable(data) {
                         // Change the value of the first field in each row to "New Value"
                         var cellElement = $('#example').DataTable().cell(i-1, 0).node();
                         var image = $(cellElement).find("img").attr("src");
-                        doc.content[1].table.body[i][0].text = image;
+                        doc.content[1].table.body[i][0].text = image;  // [i][0] => 0 is the index of which data you modify
                     }
                     doc.content[1].table.widths = ['15%', '19%', '13%', '13%','15%', '15%', '10%'];
                     doc.content[1].table.body[0].forEach(function(cell) {
@@ -193,7 +205,7 @@ function makeTable(data) {
         lengthMenu: page_length_arr,
         // "sDom":is_top_searching_enable,
         columns: column_details,
-        processing: true,
+        processing: false,
         serverSide: is_serverSide,
         sordering: true,
         searching: is_searching_enable,
@@ -258,7 +270,7 @@ function makeTable(data) {
           }
           setTimeout(function(){
             hide_loader()
-          },1000)
+          },300)
           
          
             // setHeigt();
