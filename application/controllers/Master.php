@@ -16,7 +16,7 @@ class Master extends MY_controller
     	$data["department"] = $department;
         $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
             base_url() .
-            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Department data found..!</div>';
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No department data found..!</div>';
         $data["company_details"] = $this->master_model->get_companies();
         $data["selected_company"] = getCompanyId();
         $this->smarty->view("department.tpl", $data);
@@ -68,7 +68,7 @@ class Master extends MY_controller
     {
         $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
             base_url() .
-            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Designation data found..!</div>';
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No designation data found..!</div>';
         $data["grads_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];
         $data["designation"] = $this->master_model->get_designation();
         $data["departmen"] = $this->master_model->get_department_list();
@@ -219,9 +219,9 @@ class Master extends MY_controller
 
     public function company_config()
     {
+        $data['company_id'] = $this->session->userdata("company_id");
+        $data['company_config'] = $this->master_model->get_company_config($this->session->userdata("company_id"));
         
-        $data['company_config'] = $this->master_model->get_company_config();
-        $data['company_id'] = $_SESSION['company_id'];
         $this->smarty->view("company_config.tpl",$data);
     }
 

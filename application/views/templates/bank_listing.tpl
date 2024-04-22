@@ -172,6 +172,20 @@
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+          <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
              <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -296,6 +310,9 @@
     position: absolute;
     top: -57px;
     right: 176px;
+}
+.timesheet-container .custom-content-table-with-fixed-column th:first-child, .timesheet-container .custom-content-table-with-fixed-column td{
+    padding-left: 10px !important;
 }
 
 </style>

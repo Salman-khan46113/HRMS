@@ -6,11 +6,10 @@ class Holiday_model extends CI_Model
         parent::__construct();
         // $this->load->database();
     }
-    public function get_holiday($year, $type)
+    public function get_holiday($year = '', $type = '',$condition_arr = [])
     {
         $this->db->select("h.*");
         $this->db->from("holiday_master as h");
-        $this->db->order_by("h.holiday_date", "ASC");
         if ($year != "" && $year != null) {
             $this->db->where("YEAR(h.holiday_date)", $year);
             if ($type == "dashbord") {
@@ -20,6 +19,14 @@ class Holiday_model extends CI_Model
         $company_id = getCompanyId();
         if($company_id > 0){
             $this->db->where("h.company_id", $company_id);
+        }
+        if (count($condition_arr) > 0) {
+            $this->db->limit($condition_arr["length"], $condition_arr["start"]);
+            if ($condition_arr["order_by"] != "") {
+                $this->db->order_by($condition_arr["order_by"]);
+            }
+        }else{
+             $this->db->order_by("h.holiday_date", "ASC");
         }
         $result_obj = $this->db->get();
         // pr($this->db->last_query(),1);

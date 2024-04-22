@@ -190,7 +190,7 @@
                                 
                                 <div class="input-group">
                                 <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="{$company_data['date_founded']}">
-                                <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                 
                                 </div>
                                 

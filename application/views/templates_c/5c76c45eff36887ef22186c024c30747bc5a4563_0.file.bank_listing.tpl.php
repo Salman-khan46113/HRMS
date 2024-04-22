@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 19:59:59
+/* Smarty version 4.3.2, created on 2024-04-16 11:39:59
   from '/var/www/html/extra_work/HRMS/application/views/templates/bank_listing.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660d67e7591ff9_61557612',
+  'unifunc' => 'content_661e1637127da3_83173476',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5c76c45eff36887ef22186c024c30747bc5a4563' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/bank_listing.tpl',
-      1 => 1711631576,
+      1 => 1713247798,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660d67e7591ff9_61557612 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661e1637127da3_83173476 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
    <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -196,6 +196,20 @@ function content_660d67e7591ff9_61557612 (Smarty_Internal_Template $_smarty_tpl)
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+          <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
              <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -336,6 +350,9 @@ echo $_prefixVariable3;?>
     position: absolute;
     top: -57px;
     right: 176px;
+}
+.timesheet-container .custom-content-table-with-fixed-column th:first-child, .timesheet-container .custom-content-table-with-fixed-column td{
+    padding-left: 10px !important;
 }
 
 </style>

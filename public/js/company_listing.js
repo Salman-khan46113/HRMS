@@ -10,6 +10,7 @@ const data_table_obj = {
         $('.search-filter').off('click');
         $('.search-filter').on('click',function(e){
            that.getSearchParams();
+           $(".close-filter-btn").trigger( "click" )
         })
         $('.reset-filter').off('click');
         $(".reset-filter").on("click",function(){
@@ -18,6 +19,15 @@ const data_table_obj = {
             })
             that.getSearchParams();
         })
+        $('#founding_search').datepicker({
+          showButtonPanel: true,
+          changeMonth: true,
+          changeYear: true,
+          showOtherMonths: true,
+          selectOtherMonths: true,
+          dateFormat: "yy-mm-dd"
+        })
+
     },
     makeTable:function(){
         table =  new DataTable("#company_table", {
@@ -89,15 +99,31 @@ const data_table_obj = {
                       previous: "<",
                   },
               },
+              infoCallback: function (settings, start, end, max, total, pre) {
+              // Get the count of visible rows after search
+              var api = this.api();
+              var rowCount = api.rows({ search: "applied" }).count();
+              if (rowCount == 0) {
+                  $(".dataTables_empty").html(no_data_message);
+              }
+              // Construct the info string with the actual count
+              var info = "Showing " + start + " to " + end + " of " + rowCount + " entries";
+
+              // Optionally, you can append any other information you want to show
+              // For example: 'Showing 1 to 10 of 57 entries'
+
+              return info;
+          },
       
           });
-        // $(".dataTables_length")
-        // .find("label")
-        // .contents()
-        // .filter(function () {
-        //     return this.nodeType === 3; // Filter out text nodes
-        // })
-        // .remove();
+        
+        $(".dataTables_length")
+        .find("label")
+        .contents()
+        .filter(function () {
+            return this.nodeType === 3; // Filter out text nodes
+        })
+        .remove();
     },
     getSearchParams:function(){
         $('.filter-input input').each(function(index,val){

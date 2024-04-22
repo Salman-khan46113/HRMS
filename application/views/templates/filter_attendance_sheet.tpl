@@ -1,5 +1,5 @@
 {{if count($attendance_sheet) > 0}} {foreach $attendance_sheet as $sem_index => $sem_row}
-<tr class="{{if $sem_row['week_off']=='Yes'}}timesheet-week-off{{else if $sem_row['attendance']=='A'}}timesheet-absent{{else}}timesheet-present{{/if}}">
+<tr class="{{$sem_row['row_class']}}">
     <td align="center" valign="middle" class="text-center att-date">{{$sem_row['attendance_date']}}</td>
     <td align="center" valign="middle" class="text-center att-time timesheet-shift-row">{{$attendance_in}}</td>
     <td align="center" valign="middle" class="text-center att-time">{{$sem_row['attendance_in_time']}}</td>
@@ -9,7 +9,7 @@
     <td align="center" valign="middle" class="text-center att-hrs">{{$sem_row['working_hr']}}</td>
     <td align="center" valign="middle" class="text-center att-status">{{$sem_row['attendance']}}</td>
     <td align="center" valign="middle" class="text-center att-action">
-        {{if $sem_row['attendance_in_time'] != '--' && $sem_row['attendance_in_time']!= ""}}<i class="las la-edit" data-id="{{$sem_row['attendance_id']}}"></i>{{else}}-{{/if}}
+        {$sem_row['btn_html']}
     </td>
 </tr>
 {/foreach} {{else}}

@@ -67,7 +67,7 @@
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="join_date_search"  placeholder="Joining Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text time-picker-addon date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -143,6 +143,20 @@
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+          <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
             <div class="timesheet-summary-lst">
                 <div class="dropdown grid-drop-down">
                   <button class="btn btn-secondary top-btn-row" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -317,6 +331,9 @@
     var page_name = 'teacher_page';
     var base_url = {{$base_url|json_encode}};
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="public/js/employee_listing.js"></script>
 {include file="footer.tpl" }

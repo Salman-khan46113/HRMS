@@ -2,7 +2,7 @@
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
     <div class="sub-header-left pull-left">
-        <h3>Leave Request</h3>
+        <h3>Leave</h3>
         
     </div>
     <div class="sub-header-right pull-right">
@@ -188,7 +188,7 @@
                                     <span >
                                     	<div class="input-group ">
 										  <input type="text" class="form-control" id="start_date"  placeholder="Start Date">
-										  <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+										  <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
 										</div>
                                     	
                                     </span>                                    
@@ -199,7 +199,7 @@
                                 <span >
                                     	<div class="input-group ">
 										  <input type="text" class="form-control" id="end_date"  placeholder="End Date">
-										  <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+										  <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
 										</div>
                                     	
                                 </span>  
@@ -236,7 +236,7 @@
                             	<div class="">
 	                                <p class="fs-5 mb-1 fw-bold attendance-lable">Leave Reason</p>
 	                                <span >
-	                                    	<textarea class="form-control" id="leave_reason" placeholder="Leave reason" id="floatingTextarea"></textarea>
+	                                    	<textarea class="form-control" id="leave_reason" placeholder="Leave reason" ></textarea>
 	                                    	
 	                                </span>
 	                            </div>  

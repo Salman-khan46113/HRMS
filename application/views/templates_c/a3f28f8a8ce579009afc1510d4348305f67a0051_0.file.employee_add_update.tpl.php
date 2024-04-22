@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 21:58:32
+/* Smarty version 4.3.2, created on 2024-04-21 13:07:07
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_add_update.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66196130e47785_35410369',
+  'unifunc' => 'content_6624c223c83a32_53727808',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a3f28f8a8ce579009afc1510d4348305f67a0051' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_add_update.tpl',
-      1 => 1712939311,
+      1 => 1713685010,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66196130e47785_35410369 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6624c223c83a32_53727808 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css" />
 <link rel="stylesheet" href="public/css/employee.css" />
@@ -115,7 +115,7 @@ function content_66196130e47785_35410369 (Smarty_Internal_Template $_smarty_tpl)
                                                             <input type="text" class="form-control" id="dob" name="dob" value="<?php echo getDatePickerFormat($_smarty_tpl->tpl_vars['employee_data']->value['dob']);?>
 " placeholder="Select Date of Birth" />
 
-                                                            <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                                            <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,13 +225,22 @@ echo $_prefixVariable12;?>
                                                 <div class="row mb-3">
                                                     <div class="col password-box">
                                                         <label for="password" class="form-label">Password <span class="star_required">*</span></label>
-                                                        <input type="password" class="form-control" id="password" name="password" placeholder="*******" />
-                                                         <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                                        <div class="input-group">
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="*******" />
+                                                            <span class="input-group-text date-picker-addon">
+                                                            <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                                          </span>
+                                                        </div>
                                                     </div>
                                                     <div class="col password-box">
                                                         <label for="confirm-password" class="form-label">Confirm Password <span class="star_required">*</span></label>
-                                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="*******" />
-                                                       <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i>
+                                                        <div class="input-group">
+                                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="*******" />
+                                                            <span class="input-group-text date-picker-addon">
+                                                            <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                                          </span>
+                                                            <!-- <i class=" ti ti-eye password-icon cursor" id="passwordIconHide" style=""></i> -->
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -419,7 +428,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                                             <input type="text" class="form-control" id="employement_date" name="employement_date" placeholder="Joning Date" value="<?php echo getDatePickerFormat($_smarty_tpl->tpl_vars['employee_data']->value['employment_date']);?>
 " />
 
-                                                            <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                                            <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                                         </div>
                                                     </div>
                                                     <div class="col ">

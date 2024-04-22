@@ -594,6 +594,13 @@ class Leave extends MY_controller
       public function leave_allocation()
       {
         $data["department"] = $this->leave_model->get_department();
+        $data['designation_arr'] = [];
+        if(count($data["department"]) > 0){
+            $department_ids = array_column($data["department"],'department_id');
+           
+            $data["designation_arr"] = $this->leave_model->get_designations($department_ids);
+        }
+        // pr($data);
         $data["data"] = $this->leave_model->get_leave_allocation();
         foreach ($data["data"] as $key => $value) {
           $data["data"][$key]["total_leave"] = $value['sick_leave']+$value['paid_leave']+$value['casual_leave'];
@@ -607,6 +614,9 @@ class Leave extends MY_controller
           ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
 
         }
+        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No leave allocation data found..!</div>';
 
         $this->smarty->view("leave_allocation.tpl", $data);
       }
@@ -666,7 +676,7 @@ class Leave extends MY_controller
           $message = "Leave allocation updated successfully.";
         } elseif ($result > 0) {
           $success = 1;
-          $message = "Leave allocation successful.";
+          $message = "Leave allocated successfully.";
         } else {
           $success = 0;
           $message = "Error add data.";

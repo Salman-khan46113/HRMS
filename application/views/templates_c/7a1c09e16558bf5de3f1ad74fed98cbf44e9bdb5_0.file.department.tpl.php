@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-09 18:10:27
+/* Smarty version 4.3.2, created on 2024-04-16 11:38:25
   from '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_6615373b052cd6_93217217',
+  'unifunc' => 'content_661e15d94b3c02_78713116',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7a1c09e16558bf5de3f1ad74fed98cbf44e9bdb5' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/department.tpl',
-      1 => 1712666234,
+      1 => 1713247704,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661e15d94b3c02_78713116 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 
@@ -90,6 +90,7 @@ function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group">
                                               <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -101,7 +102,7 @@ function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              
                                             </div>
                                         </li>
                                     </div>
@@ -113,7 +114,7 @@ function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                             <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -142,6 +143,20 @@ function content_6615373b052cd6_93217217 (Smarty_Internal_Template $_smarty_tpl)
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+                <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >

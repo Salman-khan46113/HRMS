@@ -202,7 +202,7 @@ class Home extends MY_Controller
     public function get_employee_listing_data()
     {
         
-        $post_data = $_POST;
+        $post_data = $this->input->post();
         $column_index = array_column($post_data["columns"], "data");
         $order_by = "";
         foreach ($post_data["order"] as $key => $val) {
@@ -229,6 +229,14 @@ class Home extends MY_Controller
         $condition_arr["start"] = $post_data["start"];
         $condition_arr["length"] = $post_data["length"];
         $base_url = $this->config->item("base_url");
+
+        if($post_data["search"]['join_date'] != ""){
+            $joining_date_values = explode("-", $post_data["search"]['join_date']);
+            $post_data["search"]['join_date_from'] = date("Y-m-d", strtotime($joining_date_values[0]));
+            $post_data["search"]['join_date_to'] = date("Y-m-d", strtotime($joining_date_values[1]));
+            
+        }
+        
         $list_data = $this->home_model->get_employee_listing_data(
             $condition_arr,
             $post_data["search"]
@@ -284,7 +292,7 @@ class Home extends MY_Controller
                     )
                 ) {
                     $action_btn_arr[] = ["class"=>"la-times-circle","title"=>"Deactivate","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
 
                     $list_data[$key]["action"] =
                         '<i class=" la-times-circle ti ti-circle-x" title="Deactivate" data-id="' .
@@ -300,9 +308,9 @@ class Home extends MY_Controller
                         ];
                 } else {
                     $action_btn_arr[] = ["class"=>"la-calendar ","title"=>"Week Off","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
                     $action_btn_arr[] = ["class"=>"la-times-circle ","title"=>"Deactivate","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
 
                     $list_data[$key]["action"] =
                         '<i class=" la-calendar ti ti-calendar-month" title="Week Off" data-id="' .
@@ -334,7 +342,7 @@ class Home extends MY_Controller
                 }
 
                 $action_btn_arr[] = ["class"=>"la-check-circle ","title"=>"Activate","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
 
                 $list_data[$key]["action"] =
                     '<i class="la-check-circle ti ti-circle-check" title="Activate" data-id="' .
@@ -349,20 +357,24 @@ class Home extends MY_Controller
 
             
             if( $list_data[$key]['is_edit'] == "Yes"){
-                $action_btn_arr[] = ["class"=>"edit-approve","title"=>"Edit approve","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
-                     $list_data[$key]["action"] .= '<i class="ti ti-user-edit edit-approve" data-id="' .
+                $action_btn_arr[] = ["class"=>"edit-approve","title"=>"Approve Edit","extra_par"=>'data-id="' .
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
+                     $list_data[$key]["action"] .= '<i class="ti ti-user-edit edit-approve" title="Approve Edit" data-id="' .
                         $value["employee_id"] .
                         '"></i>';
                         
             }   
 
             $action_btn_arr[] = ["class"=>" delet-employee","title"=>"Delete","extra_par"=>'data-id="' .
-                        $value["employee_id"].'"'];
+                        $value["employee_id"].'"',"href"=>"javascript:void(0)"];
             $list_data[$key]["action"] .=
                 '<i class="ti ti-trash delet-employee" title="Delete" data-id="' .
                 $value["employee_id"] .
                 '"></i>';
+
+            $action_btn_arr[] = ["class"=>"extend","title"=>"Salary Structure","extra_par"=>'',"href"=>get_entiry_url("employee_salary_component","List",$value["employee_id"])];
+            $list_data[$key]["action"] .='<a href="'.get_entiry_url("employee_salary_component","List",$value["employee_id"]).'"><i class="ti ti-license" title="Salary Structure" ></i></a>';
+            
 
             $btn_html = getGridButton($action_btn_arr);
             $list_data[$key]["other_Action"] = $btn_html;

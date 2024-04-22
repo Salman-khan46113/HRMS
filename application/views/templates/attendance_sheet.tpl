@@ -32,6 +32,7 @@
                     <li title="Present" class="pl-3"><span class="color-box present"></span>Present</li>
                     <li title="Absent" class="pl-3"><span class="color-box absent"></span>Absent</li>
                     <li title="Week Off" class="pl-3"><span class="color-box week_off"></span>Week Off</li>
+                    <li title="Correction" class="pl-3"><span class="color-box correction"></span>Correction</li>
                     
                   </ul>
                 </div>
@@ -66,7 +67,7 @@
                 <tbody id="attendence_sheet_data" tabindex="5001" style="overflow: hidden; outline: none;">
                 {{if count($attendance_sheet) > 0}}
                     {foreach $attendance_sheet as $sem_index => $sem_row}
-                    <tr class="{{if $sem_row['week_off']=='Yes'}}timesheet-week-off{{else if $sem_row['attendance']=='A'}}timesheet-absent{{else}}timesheet-present{{/if}}">
+                    <tr class="{{$sem_row['row_class']}}">
                         <td align="center" valign="middle" class="text-center att-date">{{$sem_row['attendance_date']}}</td>
                         <td align="center" valign="middle" class="text-center att-time timesheet-shift-row">{{$attendance_in}}</td>
                         <td align="center" valign="middle" class="text-center att-time">{{$sem_row['attendance_in_time']}}</td>
@@ -76,8 +77,7 @@
                         <td align="center" valign="middle" class="text-center att-time">{{$sem_row['attendance_out_time']}}</td>
                         <td align="center" valign="middle" class="text-center att-hrs">{{$sem_row['working_hr']}}</td>
                         <td align="center" valign="middle" class="text-center att-status">{{$sem_row['attendance']}}</td>
-                        <td align="center" valign="middle" class="text-center att-action">{{if $sem_row['attendance_in_time'] != '--' && $sem_row['attendance_in_time']!= ""}}<i class="la-edit ti ti-edit" data-id="{{$sem_row['attendance_id']}}"></i>{{else}}-{{/if}}</td>
-                        
+                        <td align="center" valign="middle" class="text-center att-action">{{$sem_row['btn_html']}}</td>
                     </tr>
                     {/foreach}
                 {{else}}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-09 19:51:22
+/* Smarty version 4.3.2, created on 2024-04-15 16:18:21
   from '/var/www/html/extra_work/HRMS/application/views/templates/add_company.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66154ee2dadad0_77058579',
+  'unifunc' => 'content_661d05f52fbe99_63868244',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b40364d803d48086edd352bfba0599a8e0363103' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/add_company.tpl',
-      1 => 1712672415,
+      1 => 1713178098,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66154ee2dadad0_77058579 (Smarty_Internal_Template $_smarty_tpl) {
+function content_661d05f52fbe99_63868244 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css" />
 <link rel="stylesheet" href="public/css/employee.css" />
@@ -252,7 +252,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 <div class="input-group">
                                 <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="<?php echo $_smarty_tpl->tpl_vars['company_data']->value['date_founded'];?>
 ">
-                                <span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                 
                                 </div>
                                 

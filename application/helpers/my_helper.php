@@ -26,14 +26,64 @@ function display_no_character($value = ''){
 	}
 	return $value;
 }
-function get_entiry_url($module_name = '',$mode = "",$id=""){
+function get_entiry_url($module_name = '',$mode = '',$id=""){
+
 	$url = '';
 	switch ($module_name) {
 		case 'company':
 			$url = base_url()."company-view?id=".$id;
 			break;
+		case 'employee':
+			switch ($mode) {
+				case 'View':
+					$url = base_url()."employee-details.html?id=".$id;
+					break;
+			}
+			break;
+		case 'salary_structure':
+			switch ($mode) {
+				case 'Add':
+					$url = base_url()."salary-structure-add.html";
+					break;
+				case 'Update':
+					$url = base_url()."salary-structure-update.html?id=".$id;
+					break;
+				case 'List':
+					$url = base_url()."salary-structure.html";
+					break;
+			}
+			break;
+		case 'salary_component':
+			switch ($mode) {
+				case 'Add':
+					$url = base_url()."salary-component-add.html";
+					break;
+				case 'List':
+					$url = base_url()."salary-component.html";
+					break;
+			}
+			break;
+		case 'employee_salary_component':
+			switch ($mode) {
+				case 'List':
+					$url = base_url()."employee-salary-structure.html?id=".$id;
+					break;
+			}
+			break;
+		case 'employee_salary_structure':
+			switch ($mode) {
+				case 'Extend':
+					$url = base_url()."employee-salary-structure-extend.html?id=".$id;
+					break;
+				case 'Update':
+					$url = base_url()."employee-salary-structure-update.html?id=".$id;
+					break;
+			}
+			break;
 	}
-
+	if($url == '' || $url == null){
+		$url = 'javascript:void(0)';
+	}
 	return $url;
 }
 
@@ -109,6 +159,16 @@ function is_valid_array($data = []){
     return false;
 }
 
+function timeFormate($date_time = ''){
+	$time_formate = '';
+	if ($date_time != '') {
+		$date_time = new DateTime($date_time);
+        $time_formate = $date_time->format("g:i A");
+	}
+
+	return $time_formate;
+	
+}
 // function mysqlFormat($dateString = ''){
 //     $date = DateTime::createFromFormat('m/d/Y', $dateString);
 //     $mysqlDate = $date->format('Y-m-d');
@@ -136,25 +196,37 @@ function getDatePickerFormat($dateString = ''){
 function getGridButton($button_arr = array()){
 
 	$button_html = "";
-	if(count($button_arr) > 0){
-		$button_html .='<a class="'.$button_arr[0]["class"].' btn view-btn" href="javascript:void(0)" type="button" '.$button_arr[0]["extra_par"].' title="'.$button_arr[0]["title"].'">'.$button_arr[0]["title"].'</a>';
+	if(count($button_arr) > 1){
+		$button_html .='<a class="'.$button_arr[0]["class"].' btn view-btn" href="'.$button_arr[0]["href"].'" type="button" '.$button_arr[0]["extra_par"].' title="'.$button_arr[0]["title"].'">'.$button_arr[0]["title"].'</a>';
 		$button_html .= '<div class="dropdown">';
 		$button_html .= '<button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button><ul class="dropdown-menu mt-2" >';
 		foreach ($button_arr as $key => $value) {
 			if($key > 0){
-				$button_html .= '<li><a class="dropdown-item '.$button_arr[$key]["class"].'" '.$button_arr[$key]["extra_par"].' href="javascript:void(0)" title="'.$button_arr[$key]["title"].'">'.$button_arr[$key]["title"].'</a></li>';
+				$button_html .= '<li><a class="dropdown-item '.$button_arr[$key]["class"].'" '.$button_arr[$key]["extra_par"].' href="'.$button_arr[$key]["href"].'" title="'.$button_arr[$key]["title"].'">'.$button_arr[$key]["title"].'</a></li>';
 			}
 		}
 
 		$button_html .= '</ul></div>';
 
 	}else{
-		$button_html = '<div class="dropdown">';
-		$button_html .='<button class="toggle-btn '.$button_arr[0]["class"].'" type="button" '.$button_arr[0]["extra_par"].' title="'.$button_arr[0]["title"].'">'.$button_arr[0]["title"].'</button>';
+		$button_html ='<a class="btn view-btn '.$button_arr[0]["class"].'" href="'.$button_arr[0]["href"].'" '.$button_arr[0]["extra_par"].' title="'.$button_arr[0]["title"].'">'.$button_arr[0]["title"].'</a>';
 	}
 
 	return $button_html;
-	pr($button_arr,1);
+	
+}
+
+function getNumberFormate($value = ''){
+	$number = trim($value);
+	if ($number == '' || $number <= 0) {
+		return '0';
+	} else {
+	    $number = number_format($number, 2, '.', ',');
+		return $number;
+	}
+}
+function removeNumberFormate($value = ''){
+	return str_replace(",", "",$value);
 }
 
 

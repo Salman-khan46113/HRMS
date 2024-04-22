@@ -91,7 +91,8 @@ $(document).ready(function(){
     },
 
     errorPlacement: function (error, element) {
-        error.insertAfter(element);
+        // error.insertAfter(element);
+        $("#"+element[0]['id']).parents(".input-group").after(error)
     },
     submitHandler: function (form) {
 

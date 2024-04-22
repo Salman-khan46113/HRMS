@@ -23,71 +23,88 @@
                                     
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Department Name </span>
+                                            <span class="hide-menu">Group Name </span>
 
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="department_name_search" class="form-control" placeholder="Department Name">
+                                              <input type="text" id="group_name_search" class="form-control" placeholder="Group Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Department Code</span>
+                                            <span class="hide-menu">Shift Name</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="department_code_search" class="form-control" placeholder="Department Code">
+                                              <input type="text" id="shift_name_search" class="form-control" placeholder="Shift Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Added By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added Date</span>
+                                            <span class="hide-menu">Shift Type</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
+                                             <select class="form-select " name="shift_type_search" id="shift_type_search">
+                                                <option value="">Select Shift Type</option>
+                                                {foreach from=$shift_type_data item=shift_type}
+                                                    <option value="{$shift_type.id}" >{$shift_type.val}</option>
+                                                {/foreach}
+                                                </select>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated By</span>
+                                            <span class="hide-menu">Start Date</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                            <div class="input-group">
+                                              <input type="text" id="start_date_search" class="form-control"  placeholder="Start Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated Date</span>
+                                            <span class="hide-menu">End Date</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <input type="text" class="form-control" id="end_date_search"  placeholder="End Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                     <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Start Time</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control time-picker-input" id="start_time_search"  placeholder="Start Time">
+                                              <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                     <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">End Time</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control time-picker-input" id="end_time_search"  placeholder="End Time">
+                                              <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -112,10 +129,24 @@
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Employee Shift</h3>
+			<h3>Shift Groups</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -280,17 +311,17 @@
                                     <label for="start_date" class="form-label">Start Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="start_date" name="start_date" value="" placeholder="Select Start Date" />
-                                    	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                    	<span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
                                 <div class=" col-6 mb-3">
                                     <label for="end_date" class="form-label">End Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="end_date" name="end_date" value="" placeholder="Select End Date" />
-                                    	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                    	<span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="col-6  mb-3 select-box-block" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
+                                <div class="col-6  mb-3 select-box-block select-box" {if $user_data['role'] != 'arom'} style="display: none" {/if}>
                                     <label for="company_id" class="form-label">Company</label>
                                     <select class="form-select company_id" name="company_id" id="company_id">
                                         <option value="">Select Company</option>
@@ -303,16 +334,16 @@
                                         {/foreach}
                                     </select>
                                 </div>
-                                <div class="col-6  mb-3">
+                                <div class="col-6  mb-3 select-box">
 									<label for="department" class="form-label">Department</label>
-									<select class="form-select department" name="department" id="department">
+									<select class="form-select department " name="department" id="department">
 										<option value="">Select Department</option>
 										{foreach from=$departments item=departments_val}
 											<option value="{$departments_val.department_id}">{$departments_val.departmen_name} [{$departments_val.department_code}]</option>
 										{/foreach}
 									</select>
 								</div>
-								<div class="col-6  mb-3">
+								<div class="col-6  mb-3 select-box">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
 										<option value="">Select Shift</option>
@@ -321,7 +352,7 @@
 										{/foreach}
 									</select>
 								</div>
-								<div class="col-6  mb-3">
+								<div class="col-6  mb-3 select-box">
 									<label for="employee_ids" class="form-label">Employee</label>
 									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 

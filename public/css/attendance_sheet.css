@@ -115,6 +115,9 @@ body table.dataTable tbody td, body .custom-content-table table tr td{
 .timesheet-absent td{
   background:#FBEAFB !important
 }
+.timesheet-correction td{
+  background:#c9e6ff !important;
+}
 @media only screen and (max-width: 1366px){
   
 
@@ -159,7 +162,7 @@ body table.dataTable tbody td, body .custom-content-table table tr td{
 }
 .timesheet-container .custom-content-table-with-fixed-column td{
   border-color:var(--body-bg) !important;
-  color:var(--td-color) !important;
+  color:var(--td-color);
 }
 
 .timesheet-actions li .inputpicker-clear{
@@ -257,34 +260,39 @@ body.dashboard-page-body .main-middle-container .sub-header{
 .sub-header .sub-header-left h3 {
   color: black;
   margin-bottom: 0px !important;
-  font-size: 21px !important;
+  font-size: 20px !important;
 }
-i.la-edit {
+.container-fluid i.la-edit {
   font-size: 25px !important;
   color: #5D87FF !important;
   cursor: pointer;
 }
-i.la-check-circle {
+.container-fluid i.la-check-circle {
    font-size: 33px !important;
     color: #62b862 !important;
     cursor: pointer;
 }
-i.la-check-circle {
+.container-fluid i.la-check-circle {
    font-size: 33px !important;
     color: #62b862 !important;
     cursor: pointer;
 }
-i.la-times-circle {
+.container-fluid i.la-times-circle {
   font-size: 33px !important;
     color: #ff0000 !important;
     cursor: pointer;
 }
-i.ti-user-edit {
+.container-fluid i.ti-user-edit {
   font-size: 33px !important;
     color: #11d611 !important;
     cursor: pointer;
 }
-i.ti-trash {
+.container-fluid i.ti-trash {
+  font-size: 33px !important;
+    color: #f71919 !important;
+    cursor: pointer;
+}
+.container-fluid i.ti-license {
   font-size: 33px !important;
     color: #f71919 !important;
     cursor: pointer;
@@ -419,6 +427,9 @@ i.ti-trash {
 }
 .dropdown-menu li span.week_off{
   background: #FFFFE1 !important;
+}
+.dropdown-menu li span.correction{
+  background: #c9e6ff !important
 }
 .dropdown-menu li span.present{
   background: #f5f5fa !important;

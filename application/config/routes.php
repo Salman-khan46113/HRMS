@@ -75,6 +75,7 @@ $route['employee-add.html'] = 'user/employedd_add_update';
 /* attendance */
 $route['attendance.html'] = 'user/attendance';
 $route['attendance-sheet.html'] = 'attendance/attendance_sheet';
+$route['attendance-correction.html'] = 'attendance/attendance_correction';
 /* leave */
 $route['leave-list.html'] = 'leave/leave_list_summary';
 $route['leave-management-list.html'] = 'leave/leave_management';
@@ -108,6 +109,18 @@ $route['announcement_details.html'] = 'activities/announcement_details';
 $route['daily-log'] = 'notification/daily_attendance_log';
 $route['send_email'] = 'user/send_email';
 $route['auto-out-log'] = 'notification/auto_out_log';
+
+/* salary */
+$route['salary-component.html'] = 'salary';
+$route['salary-component-add.html'] = 'salary/add_action';
+$route['salary-structure.html'] = 'salary/salary_strucuture';
+$route['salary-structure-add.html'] = 'salary/salary_strucuture_action';
+$route['salary-structure-update.html'] = 'salary/salary_strucuture_action';
+$route['employee-salary-structure.html'] = 'salary/employee_salary_strucuture';
+$route['employee-salary-structure-extend.html'] = 'salary/employee_salary_strucuture_action';
+$route['employee-salary-structure-update.html'] = 'salary/employee_salary_strucuture_update_action';
+$route['pdf.html'] = 'salary/generate_pdf';
+
 
 /* API */
 $route['check_company_exit'] = 'user/check_company_code';

@@ -31,7 +31,7 @@ class Master_model extends CI_Model
         return $ret_data;
     }
 
-    public function insert_department($data)
+    public function insert_department($data = [])
     {
         
         $this->db->insert("department_master", $data);
@@ -81,7 +81,7 @@ class Master_model extends CI_Model
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
-    public function get_designation_details($id)
+    public function get_designation_details($id = [])
     {
         $this->db->select("*");
         $this->db->from("designation_master");
@@ -91,7 +91,7 @@ class Master_model extends CI_Model
         return $ret_data;
     }
 
-    public function designation_action($data)
+    public function designation_action($data = [])
     {
 
         $this->db->select("*");
@@ -132,7 +132,7 @@ class Master_model extends CI_Model
         }
     }
 
-    public function delete_designation($id)
+    public function delete_designation($id = '')
     {
         $this->db->where("id", $id);
         $result = $this->db->delete("designation_master");
@@ -191,14 +191,14 @@ class Master_model extends CI_Model
     }
 
     /* company config */
-    public function get_company_config()
+    public function get_company_config($company_id = '')
     {
         $this->db->select("*");
         $this->db->from("company_variables");
         // $company_id = getCompanyId();
-        // if($company_id > 0){
-        //     $this->db->where("company_id", $company_id);
-        // }
+        if($company_id > 0){
+            $this->db->where("company_id", $company_id);
+        }
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;

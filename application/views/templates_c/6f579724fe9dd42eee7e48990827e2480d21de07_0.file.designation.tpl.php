@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-09 18:18:38
+/* Smarty version 4.3.2, created on 2024-04-21 01:50:51
   from '/var/www/html/extra_work/HRMS/application/views/templates/designation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661539264588a9_75992403',
+  'unifunc' => 'content_662423a38b9c34_37051192',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6f579724fe9dd42eee7e48990827e2480d21de07' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/designation.tpl',
-      1 => 1712666896,
+      1 => 1713255822,
       2 => 'file',
     ),
   ),
@@ -21,11 +21,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661539264588a9_75992403 (Smarty_Internal_Template $_smarty_tpl) {
+function content_662423a38b9c34_37051192 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	
-	 <aside class="right-sidebar">
+<aside class="right-sidebar">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between filter-title-bolock">
@@ -113,51 +113,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                             </div>
                                         </li>
                                     </div>
-                                    <!-- <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added Date</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group">
-                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated Date</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              
-                                            </div>
-                                        </li>
-                                    </div> --> 
                                 </ul>
                                
                             </div>
@@ -183,6 +138,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+                <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >

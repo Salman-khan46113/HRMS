@@ -6,6 +6,17 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary">
+				<div class="timesheet-summary-lst year-drop-down ">
+                <select class="form-select form-control" name="month_drop_down" id="year_drop_down">
+                    {foreach from=$year_arr key=key_val item=year}
+                        {{if $key_val+1 == count($year_arr)}}
+                            <option value="{$year}" selected>{$year}</option>
+                        {{else}}
+                         <option value="{$year}" >{$year}</option>
+                        {{/if}}
+                    {/foreach}
+                </select>
+            </div>
 				<div class="timesheet-summary-lst">
 					<button type="button" class="btn btn-primary add-leave add-action">
 						<i class="ti ti-plus"></i>
@@ -20,38 +31,15 @@
 		<div class="timesheet-container">
 
 			<div class="custom-modal-content custom-content-table-with-fixed-column ">
-				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
+				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1" id="holiday-management-table">
 					<thead>
-						<tr class="text-center">
-							<!-- <th scope="col">#</th> -->
-							<th scope="col">Holiday Name</th>
-							<th scope="col">Holiday Date</th>
-							<th scope="col">Action</th>
-						</tr>
-					</thead>
-					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{if count($holiday) > 0}
-						{foreach $holiday as $holiday_index => $holiday_row}
-						<tr class="leave-request-row">
-							<!-- <td>{$holiday_index + 1}</td> -->
-							<td>{$holiday_row.holiday_name}</td>
-							<td>{$holiday_row.holiday_date|date_format:"%d %B %Y"}</td>
-							<td>{$holiday_row.action}</td>
-
-					</tr>
-					{/foreach}
-					{else}
-					<tr>
-						<td colspan="4">
-							<div class="mb-5">
-								<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
-								<br />
-								<span class="mb-4 no-data-found-message">No holiday data found!</span>
-							</div>
-						</td>
-					</tr>
-					{/if}
-				</tbody>
+                        <tr>
+                            {{foreach from=$data key=key item=val}}
+                            <th><b>Search {{$val['title']}}</b></th>
+                            {{/foreach}}
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
 				</table>
 			</div>
 		</div>
@@ -80,9 +68,14 @@
 								</div>
 								<div class="mb-3">
 									<label for="holidayDate" class="form-label">Holiday Date</label>
-									<input type="text" class="form-control holiday_date" id="holiday_date" name="holiday_date" placeholder="dd-mm-yy" >
+									<div class="input-group">
+										<input type="text" class="form-control holiday_date" id="holiday_date" name="holiday_date" placeholder="Select Holiday Date" >
+									<span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
+                                
+                                </div>
+                                
 								</div>
-								<input type="hidden" class="form-control holiday_id"  name="id" >
+								<input type="hidden" class="form-control holiday_id"  name="id" value="" id="holiday_id">
 
 
 							</div>
@@ -106,11 +99,30 @@
 </div>
 </div>
 <script type="text/javascript" >
-        var holiday_dates = {{$holiday_dates|json_encode}};
+    var holiday_dates = {{$holiday_dates|json_encode}};
+    var column_details =  {{$data|json_encode}};
+    var page_length_arr = {{$page_length_arr|json_encode}}
+    var is_searching_enable =  {{$is_searching_enable|json_encode}};
+    var is_top_searching_enable =  {{$is_top_searching_enable|json_encode}};
+    var is_paging_enable =  {{$is_paging_enable|json_encode}};
+    var is_serverSide =  {{$is_serverSide|json_encode}};
+    var no_data_message =  {{$no_data_message|json_encode}};
+    var is_ordering =  {{$is_ordering|json_encode}};
+    var sorting_column = {{$sorting_column}}
+    var api_name =  {{$api_name|json_encode}};
+    var page_name = 'teacher_page';
+    var base_url = {{$base_url|json_encode}};
     </script>
-<link rel="stylesheet" href="public/css/attendance_sheet.css" />
-<link rel="stylesheet" href="public/css/leave.css" />
 
+<link rel="stylesheet" href="public/css/attendance_sheet.css" />
+<link rel="stylesheet" href="public/css/holiday_management.css" />
+<style type="text/css">
+	.timesheet-container .custom-content-table-with-fixed-column {
+    overflow-y: auto;
+    height: unset;
+
+}
+</style>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="public/js/holiday-management.js"></script>
 {include file="footer.tpl" }

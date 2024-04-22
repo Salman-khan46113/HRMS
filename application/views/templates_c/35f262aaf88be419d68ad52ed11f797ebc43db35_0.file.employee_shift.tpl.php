@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-09 18:02:27
+/* Smarty version 4.3.2, created on 2024-04-18 11:27:08
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_shift.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_6615355b65d306_60849649',
+  'unifunc' => 'content_6620b6343462d5_39128212',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35f262aaf88be419d68ad52ed11f797ebc43db35' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_shift.tpl',
-      1 => 1712665946,
+      1 => 1713247954,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6615355b65d306_60849649 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6620b6343462d5_39128212 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 	<aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -47,71 +47,97 @@ function content_6615355b65d306_60849649 (Smarty_Internal_Template $_smarty_tpl)
                                     
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Department Name </span>
+                                            <span class="hide-menu">Group Name </span>
 
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="department_name_search" class="form-control" placeholder="Department Name">
+                                              <input type="text" id="group_name_search" class="form-control" placeholder="Group Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Department Code</span>
+                                            <span class="hide-menu">Shift Name</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="department_code_search" class="form-control" placeholder="Department Code">
+                                              <input type="text" id="shift_name_search" class="form-control" placeholder="Shift Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Added By</span>
-                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="added_by_search"  placeholder="Added By">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div class="filter-row">
-                                        <li class="nav-small-cap">
-                                            <span class="hide-menu">Added Date</span>
+                                            <span class="hide-menu">Shift Type</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
+                                             <select class="form-select " name="shift_type_search" id="shift_type_search">
+                                                <option value="">Select Shift Type</option>
+                                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['shift_type_data']->value, 'shift_type');
+$_smarty_tpl->tpl_vars['shift_type']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['shift_type']->value) {
+$_smarty_tpl->tpl_vars['shift_type']->do_else = false;
+?>
+                                                    <option value="<?php echo $_smarty_tpl->tpl_vars['shift_type']->value['id'];?>
+" ><?php echo $_smarty_tpl->tpl_vars['shift_type']->value['val'];?>
+</option>
+                                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                                                </select>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated By</span>
+                                            <span class="hide-menu">Start Date</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_by_search"  placeholder="Updated By">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                            <div class="input-group">
+                                              <input type="text" id="start_date_search" class="form-control"  placeholder="Start Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Updated Date</span>
+                                            <span class="hide-menu">End Date</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="updated_date_search"  placeholder="Updated Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <input type="text" class="form-control" id="end_date_search"  placeholder="End Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                     <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Start Time</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control time-picker-input" id="start_time_search"  placeholder="Start Time">
+                                              <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                     <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">End Time</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group ">
+                                              <input type="text" class="form-control time-picker-input" id="end_time_search"  placeholder="End Time">
+                                              <span class="input-group-text time-picker-addon"><i class="ti ti-clock"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -136,10 +162,24 @@ function content_6615355b65d306_60849649 (Smarty_Internal_Template $_smarty_tpl)
 </aside>
 	<div class="sub-header att-sub-header">
 		<div class="sub-header-left pull-left">
-			<h3>Employee Shift</h3>
+			<h3>Shift Groups</h3>
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
 				<div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -347,17 +387,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     <label for="start_date" class="form-label">Start Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="start_date" name="start_date" value="" placeholder="Select Start Date" />
-                                    	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                    	<span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
                                 <div class=" col-6 mb-3">
                                     <label for="end_date" class="form-label">End Date <span class="star_required">*</span></label>
                                     <div class="input-group">
                                     	<input type="text" class="form-control" id="end_date" name="end_date" value="" placeholder="Select End Date" />
-                                    	<span class="input-group-text"><i class="las la-calendar-alt"></i></span>
+                                    	<span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="col-6  mb-3 select-box-block" <?php if ($_smarty_tpl->tpl_vars['user_data']->value['role'] != 'arom') {?> style="display: none" <?php }?>>
+                                <div class="col-6  mb-3 select-box-block select-box" <?php if ($_smarty_tpl->tpl_vars['user_data']->value['role'] != 'arom') {?> style="display: none" <?php }?>>
                                     <label for="company_id" class="form-label">Company</label>
                                     <select class="form-select company_id" name="company_id" id="company_id">
                                         <option value="">Select Company</option>
@@ -381,9 +421,9 @@ $_smarty_tpl->tpl_vars['company_name']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                     </select>
                                 </div>
-                                <div class="col-6  mb-3">
+                                <div class="col-6  mb-3 select-box">
 									<label for="department" class="form-label">Department</label>
-									<select class="form-select department" name="department" id="department">
+									<select class="form-select department " name="department" id="department">
 										<option value="">Select Department</option>
 										<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['departments']->value, 'departments_val');
@@ -400,7 +440,7 @@ $_smarty_tpl->tpl_vars['departments_val']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 									</select>
 								</div>
-								<div class="col-6  mb-3">
+								<div class="col-6  mb-3 select-box">
 									<label for="shift_id" class="form-label">Shift</label>
 									<select class="form-select shift_id" name="shift_id" id="shift_id">
 										<option value="">Select Shift</option>
@@ -419,7 +459,7 @@ $_smarty_tpl->tpl_vars['shift_row']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 									</select>
 								</div>
-								<div class="col-6  mb-3">
+								<div class="col-6  mb-3 select-box">
 									<label for="employee_ids" class="form-label">Employee</label>
 									<select class="form-select employee_ids" name="employee_ids" id="employee_ids" placeholder="Select Employee">
 

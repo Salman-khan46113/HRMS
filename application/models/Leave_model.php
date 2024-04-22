@@ -58,7 +58,7 @@ class Leave_model extends CI_Model
 
     public function get_employee_leave_list(
         $condition_arr = [],
-        $search_params = ""
+        $search_params = []
     ) {
         $this->db->select(
             'el.leave_id as leave_id,CONCAT(em.first_name," ",em.last_name) as employee_name,em.profile_image as image,em.employee_code as employee_code,el.leave_start_date as from_date,el.leave_end_date as to_date,el.reason as reason,el.status as status,em.designation as designation,em.department as department,em.employee_week_off as employee_week_off,em.city as location,em.email as email,em.employee_id as employee_id'
@@ -158,7 +158,7 @@ class Leave_model extends CI_Model
     // leave Allocation
     public function get_leave_allocation()
     {
-      $this->db->select("la.*,dm.designation_name,dm.grads,d.departmen_name");
+      $this->db->select("la.*,dm.designation_name,dm.grads,d.departmen_name,d.department_code");
       $this->db->from("leave_allocation as la");
       $this->db->join("designation_master as dm", "dm.id = la.designation_id ");
       $this->db->join("department_master as d", "d.department_id = la.department_id ");
@@ -171,6 +171,15 @@ class Leave_model extends CI_Model
       $this->db->select("*");
       $this->db->from("designation_master");
       $this->db->where("department_id", $department_id);
+      $result_obj = $this->db->get();
+      $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+      return $ret_data;
+    }
+    public function get_designations($department_ids)
+    {
+      $this->db->select("*");
+      $this->db->from("designation_master");
+      $this->db->where_in("department_id", $department_ids);
       $result_obj = $this->db->get();
       $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
       return $ret_data;

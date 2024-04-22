@@ -118,8 +118,12 @@ class Home_model extends CI_Model
             }
             if ($search_params["join_date"] != "") {
                 $this->db->where(
-                    "em.employment_date",
-                    mysqlFormat($search_params["join_date"])
+                    "em.employment_date >=",
+                    mysqlFormat($search_params["join_date_from"])
+                );
+                $this->db->where(
+                    "em.employment_date <=",
+                    mysqlFormat($search_params["join_date_to"])
                 );
             }
             if ($search_params["email"] != "") {
@@ -404,6 +408,16 @@ class Home_model extends CI_Model
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
+
+    public function get_extended_salary_structure($employee_id = '',$year = ''){
+        $this->db->select("ex.*");
+        $this->db->from("employee_extended_salary_structure as ex");
+        $this->db->where("YEAR(ex.effective_from) ",$year);
+        $this->db->where("ex.employee_id ",$employee_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }   
 
 } ?>
 
