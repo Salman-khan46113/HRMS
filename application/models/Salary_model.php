@@ -298,6 +298,112 @@ class Salary_model extends CI_Model
         return $affected_row;
     }
 
+    public function getEmployeeData($month_name = ''){
+        // $company_id = $this->session->userData('company_id');
+        $this->db->select('em.employee_id,em.designation,em.department,c.company_name,d.departmen_name,ds.designation_name,co.country_name,s.vState,bm.bank_name,bm.account_no,CONCAT(if(em.city is null,"",em.city)," ", s.vState," ", co.country_name) as address
+        ,concat(em.first_name," ",em.last_name) as full_name,em.employee_code,em.employment_date,em.pf_number,ew.employee_week_off as week_off');
+        $this->db->from('employee_master em');
+        $this->db->join('companies c','c.company_id = em.company_id');
+        $this->db->join('department_master d','d.department_id = em.department');
+        $this->db->join('designation_master	ds','ds.id = em.designation');
+        $this->db->join('tbl_country_master	co','em.country = co.id');
+        $this->db->join('state_master s','s.iStateId = em.state');
+        $this->db->join('bank_master bm','bm.entity_type = "Employee" AND bm.entity_id = em.employee_id');
+        $this->db->join('employee_week_off ew',"ew.employee_id = em.employee_id AND ew.month = '$month_name'",'left');
+        // $this->db->where('em.company_id',$company_id);
+        $query = $this->db->get();
+        $employee_data = is_object($query) ? $query->result_array() : [];
+        return $employee_data;
+    }
+    public function getDesignationComponenetData(){
+        // $company_id = $this->session->userData('company_id');
+        $this->db->select('ds.designation_id,ds.department_id,ds.ctc_value,dsc.*,"Designation" as type');
+        $this->db->from('designation_salary_structure ds');
+        $this->db->join('designation_salary_structure_component dsc','ds.designation_salary_structure_id = dsc.designation_salary_structure_id');
+        // $this->db->where('ds.company_id',$company_id);
+        $query = $this->db->get();
+        $designation_wise_data = is_object($query) ? $query->result_array() : [];
+        return $designation_wise_data;
+    }
+
+    public function getEmployeeComponenetData($emp_ids = []){
+        // $company_id = $this->session->userData('company_id');
+        $this->db->select('em.employee_id,em.ctc_value,esc.*,"Employee" as type');
+        $this->db->from('employee_extended_salary_structure em');
+        $this->db->join('employee_extended_salary_structure_component esc','em.employee_extended_salary_structure_id = esc.employee_extended_salary_structure_id');
+        // $this->db->where_in('em.employee_id',$emp_ids);
+        $this->db->where('em.is_default',"Yes");
+        $query = $this->db->get();
+        $employee_wise_data = is_object($query) ? $query->result_array() : [];
+        return $employee_wise_data;
+    }
+
+    public function UpdateDefaultStructure($id = '',$e_id){
+        $id = $id ?? 0;
+        if($id == 0) return 0;
+        //change the structure to default no.
+        $data = array('is_default' => "No");
+        $this->db->where('employee_id', $e_id);
+        $this->db->update('employee_extended_salary_structure', $data);
+        $data = array('is_default' => "Yes");
+        $this->db->where('employee_extended_salary_structure_id', $id);
+        $this->db->update('employee_extended_salary_structure', $data);
+        $affected_row = $this->db->affected_rows();
+        return $affected_row;
+
+    }
+
+    public function getLeavesData($date_arr = [],$employee_ids = []){
+        $start_date = $date_arr['start_date'];
+        $end_date = $date_arr['end_date'];
+        $this->db->select('el.leave_start_date,el.leave_end_date,el.employee_id,el.leave_type');
+        $this->db->from('employee_leave el');
+        $this->db->where("el.leave_start_date >= '$start_date' AND el.leave_end_date <= '$end_date'");
+        $this->db->where_in('el.employee_id',$employee_ids);
+        // $this->db->group_by('el.employee_id');
+        $query = $this->db->get();
+        $employee_wise_data = is_object($query) ? $query->result_array() : [];
+        return $employee_wise_data;
+    }
+
+    public function getAllocatedLeaves($deparment_ids = [],$designation_ids = []){
+        $this->db->select('la.designation_id,la.department_id,la.total_leaves');
+        $this->db->from('leave_allocation la');
+        $this->db->where_in('la.designation_id',$designation_ids);
+        $this->db->where_in('la.department_id',$deparment_ids);
+        $query = $this->db->get();
+        $leaves_data = is_object($query) ? $query->result_array() : [];
+        return $leaves_data;
+    }
+
+    public function getHolidayList($date_arr = []){
+        $this->db->select('hm.holiday_date');
+        $this->db->from('holiday_master hm');
+        $this->db->where('hm.holiday_date >=',$date_arr['start_date']);
+        $this->db->where('hm.holiday_date <=',$date_arr['end_date']);
+        $query = $this->db->get();
+        $holiday_list = is_object($query) ? $query->result_array() : [];
+        return $holiday_list;
+    }
+
+    public function getAttancedence($date_arr = []){
+        $this->db->select('et.attendance_date,et.employee_id,et.attendance_in_time,et.attendance_out_time');
+        $this->db->from('employee_attendance et');
+        $this->db->where('et.attendance_date >=',$date_arr['start_date']);
+        $this->db->where('et.attendance_date <=',$date_arr['end_date']);
+        $query = $this->db->get();
+        $attendencde_dates_raw = is_object($query) ? $query->result_array() : [];
+        $attendence_data = [];
+        if(is_valid_array($attendencde_dates_raw)){
+            foreach($attendencde_dates_raw as $key=>$value){
+                if($value['attendance_in_time'] != '0000-00-00 00:00:00' && $value['attendance_out_time'] != '0000-00-00 00:00:00'){
+                    $attendence_data[$value['employee_id']] []= $value['attendance_date'];
+                }
+            }
+        }
+        
+        return $attendence_data;
+    }
 }
 
 ?>

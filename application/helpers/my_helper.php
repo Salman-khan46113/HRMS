@@ -14,7 +14,7 @@ function pr($data,$exit = 0)
         echo("<pre>");
 
         print_r($data);
-        echo("<pre>");
+        echo("</pre>");
 
         if($exit == 1){
         	exit;

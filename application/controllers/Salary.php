@@ -3,9 +3,14 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 class Salary extends MY_controller
 {
+    public $holiday_arr = [];
+    public $working_day_arr = [];
     function __construct()
     {
         parent::__construct();
+        include "application/libraries/phpqrcode/qrlib.php";
+        include "application/libraries/fpdf/fpdf.php";
+        require_once(APPPATH.'libraries/tcpdf/tcpdf.php');
         $this->load->model("salary_model");
     }
     public function index(){
@@ -373,9 +378,12 @@ class Salary extends MY_controller
             }else{
                 $employee_salary_structure[$key]['updated_by_name'] = display_no_character('');
             }
+            $is_checked = $value['is_default'] == 'Yes' ? 'checked' : '';
             $employee_salary_structure[$key]['ctc_value'] = getNumberFormate($value['ctc_value']);
             $employee_salary_structure[$key]['status'] = strtolower($value['status']);
             $employee_salary_structure[$key]['action'] = '<a href="'.get_entiry_url('employee_salary_structure',"Update",$value['employee_extended_salary_structure_id']).'"><i class="ti ti-edit" title="Edit"></i> </a>';
+            $employee_salary_structure[$key]['default'] = '<input type="checkbox" class="form-check-input default-check" id= "defaut_check_'.$value['employee_extended_salary_structure_id'].'" name="default-box[]" value="Yes" data-structure-id = "'.$value['employee_extended_salary_structure_id'].'" 
+            data-employee_id = "'.$value['employee_id'].'" '.$is_checked.'>';
         }
         $data['employee_salary_structure'] = $employee_salary_structure;
         // pr($data,1);
@@ -486,16 +494,30 @@ class Salary extends MY_controller
         
     }
 
-    public function generate_pdf(){
-        include "application/libraries/phpqrcode/qrlib.php";
-        include "application/libraries/fpdf/fpdf.php";
-        require_once(APPPATH.'libraries/tcpdf/tcpdf.php');
-
-               
-        $file_path = "test.pdf";
-        $htm_str = $this->smarty->fetch("salary_slip.tpl");
-        // pr($htm_str,1);
-        // create new PDF document
+    public function generate_pdf($data = []){
+        // $directory_path = FCPATH . "public/uploads/salary_pdfs/".$data['employee_id'] .'/'. $data['year'].'/'.$data['month'];
+        // $file_path = $directory_path . '/salary_pdf.pdf';
+        $base_directory = FCPATH."public/uploads/salary_slip";
+        $employee_path = $base_directory.'/'.$data['employee_id'];
+        
+        if (!is_dir($employee_path)) {
+            mkdir($employee_path, 0777);
+        }
+        $year_path = $employee_path.'/'.$data['year'];
+        
+        if (!is_dir($year_path)) {
+            mkdir($year_path, 0777);
+        }
+        $month_path = $year_path.'/'.$data['month'];
+       
+        if (!is_dir($month_path)) {
+            mkdir($month_path, 0777);
+        }
+        $employee_directory = $base_directory . $data['employee_id'] . '/';
+        $year_month_directory = $employee_directory . $data['year'] . '/' . $data['month'] . '/';
+        $file_path = $year_month_directory . 'salary_pdf.pdf';
+        $htm_str = $this->smarty->fetch("salary_slip.tpl",$data);
+        pr($htm_str);
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         
         $pdf->SetMargins(0, 7, 7, 0);
@@ -507,10 +529,289 @@ class Salary extends MY_controller
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
         $pdf->writeHTML($htm_str, true, false, true, false, '');
+        $file_path = $month_path.'/salary_slip.pdf';
+        $output = $pdf->Output($file_path, 'F');
         
-        $pdf->Output($file_path, 'I');
+    }
+
+    public function employeeSalaryCalculation(){
+        $designation_filter_data = $component_data = $employee_filter_data =  $allocated_leaves = $filtered_allocerted_leave = $calulated_array = $leaves_dates =  [];
+        $cur_date = new DateTime('now');
+        // $last_day_of_month = $cur_date->modify('last day of this month');
+        // $formated_last_date = $last_day_of_month->format('Y-m-d');
+        $date_arr = $this->getMonthStartEndDate();
+        $date_month_arr = explode('-',$date_arr['start_date']);
+        $month_name = date("F", mktime(0, 0, 0, $date_month_arr[1], 10));
+        $employee_data = $this->salary_model->getEmployeeData($month_name);
+        $attandence_data = $this->salary_model->getAttancedence($date_arr);
+        $employee_ids_main = array_column($employee_data,'employee_id');
+        // pr($employee_ids_main,1);
+        $deparment_ids = array_column($employee_data,'department');
+        $designation_ids = array_column($employee_data,'designation');
+        $leaves_data_raw = $this->salary_model->getLeavesData($date_arr,$employee_ids_main);
+        // $leaves_assoc = array_column($leaves_data_raw,'leaves','employee_id');
+        if(is_valid_array($leaves_data_raw)){
+            foreach($leaves_data_raw as $leave_key => $leav_val){
+                $leaves_dates[$leav_val['employee_id']] = $leav_val;
+            }
+        }
+        $designation_wise_raw_data = $this->salary_model->getDesignationComponenetData();
+        $employee_wise_raw_data = $this->salary_model->getEmployeeComponenetData($employee_ids_main);
+        $employee_ids = is_valid_array($employee_wise_raw_data) ? array_unique(array_column($employee_wise_raw_data,'employee_id')) : [];
+        
+        if(is_valid_array($designation_wise_raw_data))
+        {
+            //designation and department wise component
+            foreach($designation_wise_raw_data as $index => $data){
+                $designation_filter_data[$data['designation_id']][$data['department_id']][] = $data;
+            }
+        }
+        if(is_valid_array($employee_wise_raw_data))
+        {   
+            //emloyee wise component
+            foreach($employee_wise_raw_data as $index => $data){
+                $employee_filter_data[$data['employee_id']][] = $data;
+            }
+        }
+        
+        $allocated_leaves = $this->salary_model->getAllocatedLeaves($deparment_ids,$designation_ids);
+        
+        if(is_valid_array($employee_data)){
+            foreach($employee_data as $key => $val){
+                $income_arr = $deduction_arr = [];
+                $total_income = $total_deduction = $leaves_days = $absent_days_count = 0;
+                $working_days_data = $this->getWorkingDays(explode(',',$val['week_off']));
+                $week_off_count = $working_days_data['week_off_count'];
+                $working_data_arr = $working_days_data['working_arr'];
+                
+                if(in_array($val['employee_id'],$employee_ids)){
+                    // will getting the data from employee extented structure
+                    $component_data = $employee_filter_data[$val['employee_id']];
+
+                }else{
+                    // will getting the data from designation
+                    $component_data =isset($designation_filter_data[$val['designation']]) && isset($designation_filter_data[$val['designation']][$val['department']]) ? $designation_filter_data[$val['designation']][$val['department']] : [];
+                }
+                if(!is_valid_array($component_data)) return 0;
+                $calulated_array = $this->getMonthlyCalculation($component_data,$date_arr);
+                
+                $insert_array[] = array(
+                    'employee_id' => $val['employee_id'],
+                    'year'  => $component_data[0]['year'],
+                    'month' => $date_month_arr[1],
+                    'salary_json' => json_encode($calulated_array),
+                    'type' => $component_data[0]['type'],
+                    'refrence_id' => $component_data[0]['type'] == 'Employee' ? $component_data[0]['employee_extended_salary_structure_id'] : $component_data[0]['designation_salary_structure_id'] 
+                );
+                
+                //below code for calculating the absent days.
+                if(is_valid_array($working_data_arr)){
+                    foreach($working_data_arr as $working_key => $working_value){
+                        if(array_key_exists($val['employee_id'],$attandence_data) && !in_array($working_value,$attandence_data[$val['employee_id']])){
+                            $leave_data_temp = array_key_exists($val['employee_id'],$leaves_dates) ? $leaves_dates[$val['employee_id']] : [];
+                            $atotal_incomebsent_flag  = $this->compareThreeDatas($leave_data_temp,$working_value);
+                            if(!$atotal_incomebsent_flag){
+                                $absent_days_count += 1;
+                            }
+                        }
+                    }
+                    if(!array_key_exists($val['employee_id'],$attandence_data)){
+                        $absent_days_count = $working_days_data['working_days'];
+                    }
+                }
+               
+                foreach($calulated_array as $key => $val_in){
+                    if ($val_in['component_type'] == 'Income'){
+                        $income_arr[] = $val_in;
+                        $total_income += $val_in['component_value'];
+                    }else{
+                        $deduction_arr[] = $val_in;
+                        $total_deduction += $val_in['component_value'];
+                    }
+                }
+                if(is_valid_array($leaves_dates) && array_key_exists($val['employee_id'],$leaves_dates)){
+                    foreach($leaves_dates as $l_date_k => $l_date_val){
+                        $leaves_days += $this->calculateDaysBetweenDates($l_date_val['leave_start_date'],$l_date_val['leave_end_date'],$l_date_val['leave_type']);
+                    }
+                }
+            
+                $new_amount = $total_income - $total_deduction;
+                $per_day = $new_amount/$working_days_data['days_in_month'];
+                $net_amount_with_absent = $new_amount - ($absent_days_count * $per_day);
+                $pdf_data['employee_data'] = $val;
+                $pdf_data['income_arr'] = $income_arr;
+                $pdf_data['deduction_arr'] = $deduction_arr;
+                $pdf_data['total_income'] = $total_income;
+                $pdf_data['total_deduction'] = $total_deduction;
+                $pdf_data['total_net_amount'] = number_format($net_amount_with_absent,2);
+                $pdf_data['month'] = $month_name;
+                $pdf_data['year'] =  $date_month_arr[0];
+                $pdf_data['employee_id'] = $val['employee_id'];
+                $pdf_data['working_days'] = $working_days_data['working_days'];
+                $pdf_data['leaves'] =  $leaves_days;
+                $pdf_data['present_days'] = array_key_exists($val['employee_id'],$attandence_data) ? count($attandence_data[$val['employee_id']]) : 0;
+                $pdf_data['holidays'] = count($this->holiday_arr);
+                $pdf_data['week_off'] = $week_off_count;
+                $pdf_data['absent_days'] = $absent_days_count;
+                $this->generate_pdf($pdf_data);
+                
+            }
+        }
+        
+        if(is_valid_array($insert_array)){
+            $this->db->insert_batch('employee_monthly_salary_log',$insert_array);
+        }
+        
+    }
+    
+    public function compareThreeDatas($leaves_dates = [],$work_date = ''){
+        if(!is_valid_array($leaves_dates) || $work_date == '') return 0;
+        foreach($leaves_dates as $date_k => $date_v){
+            $w_day = new DateTime($work_date);
+            $st_leave_date = new DateTime($date_v['leave_start_date']);
+            $e_leave_date= new DateTime($date_v['leave_end_date']);
+            if ($w_day >= $st_leave_date && $w_day <= $e_leave_date) {
+                return true;
+            } 
+        }
+
+        return false;
+    }
+
+    public function calculateDaysBetweenDates($s_date = '',$e_date = '',$type = ''){
+        if($s_date == '' || $e_date == '') return 0;
+        $date1 = new DateTime($s_date);
+        $date2 = new DateTime($e_date);
+        $interval = $date1->diff($date2);
+        $days = $interval->days;
+        if($date1 == $date2 && $type == 'half_day'){
+            $days = 0.5;
+        }else{
+            $days += 1;
+        }
+        return $days;
+    }
+    public function getMonthlyCalculation($component_data = [],$date_arr = []){
+        if(!is_valid_array($component_data)) return 0;
+        $recevable_ctc = $total_income = $total_deduction =  0;
+        $caculated_array = [];
+        $recevable_ctc = $component_data[0]['ctc_value'] / 12;
+        foreach($component_data as $index => $value){
+            if($value['value_type'] == 'Decimal'){
+                $montly_amount = $value['component_value'] / 12;
+            }else{
+                $amount = ($value['component_value'] * $value['ctc_value']) / 100;
+                $montly_amount = $amount/12;
+            }
+            if($value['component_type'] == 'Income'){
+                $total_income += $montly_amount;
+            }else{
+                $total_deduction += $montly_amount;
+            }
+            $caculated_array[]= array(
+                'component_name' =>$value['component_name'],
+                'year' => $value['year'],
+                'component_value' => $montly_amount,
+                'component_type' => $value['component_type'],
+                'description' => $value['description'],
+                'recevable_amount' => $recevable_ctc,
+                'total_income' => $total_income,
+                'total_deduction' => $total_deduction
+            );
+        }
+        return $caculated_array;
+        
+    }
+
+    public function updateDefaultStructure(){
+        $post_data = $this->input->get_post(null,true);
+        $return_arr  = [];
+        if(!is_valid_array($post_data)) return [];
+        $id = $post_data['id'] ?? 0;
+        $e_id = $post_data['e_id'] ?? 0;
+        if ($id == 0 || $e_id == 0) return [];
+        $affected_row = $this->salary_model->UpdateDefaultStructure($post_data['id'],$e_id);
+        if($affected_row > 0){
+            $return_arr['msg'] = 'Default Structure Updated Sucessfully.';
+            $return_arr['success'] = 1; 
+        }
+        else{
+            $return_arr['msg'] = 'Falied to Update Default structure.';
+            $return_arr['success'] = 0; 
+        }
+        echo json_encode($return_arr);
+    }
+    public function getMonthStartEndDate(){
+        $return_arr = [];
+        $month = $this->getPriviousMonth();
+        $year = date("Y");
+        $firstDay = date("Y-m-01", mktime(0, 0, 0, $month, 1, $year));
+        $lastDay = date("Y-m-t", mktime(0, 0, 0, $month, 1, $year));
+        $return_arr['start_date'] = $firstDay;
+        $return_arr['end_date'] = $lastDay;
+        return $return_arr;
+    }
+
+    public function getPriviousMonth(){
+        $currentMonth = date('n');
+        $previousMonth = $currentMonth - 1;
+        $previousMonth = $previousMonth < 1 ? 12 :$previousMonth;
+        return $previousMonth;
+    }
+
+    public function getWorkingDays($week_off_days = []){
+        $month = $this->getPriviousMonth();
+        $year = date('Y');
+        $workingDays = 0;
+        $working_arr = [];
+        $date_arr = $this->getMonthStartEndDate();
+        $holidays_raw_arr = $this->salary_model->getHolidayList($date_arr);
+        $this->holiday_arr = $holidays_raw_arr;
+        $week_off_arr = $this->dateByday($year,$month,$week_off_days);
+        $holidays = array_column($holidays_raw_arr,'holiday_date');
+        $week_off_holiday = array_unique(array_merge($holidays,$week_off_arr));
+        $firstDay = new DateTime("{$year}-{$month}-01");
+        $lastDay = clone $firstDay;
+        $lastDay = $lastDay->modify('+1 month -1 day');
+        $intervalDay = new DateInterval('P1D');
+        $period = new DatePeriod($firstDay, $intervalDay, $lastDay->modify('+1 day'));
+        $days_in_month =  cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        foreach ($period as $day) {
+            $dayOfWeek = $day->format('N');
+            $dayDate = $day->format('Y-m-d');
+            if (!in_array($dayDate,$week_off_holiday)) {
+                $workingDays++;
+                $working_arr[] = $dayDate;
+            }
+        }
+        
+        $return_arr['working_arr'] = $working_arr;
+        $return_arr['working_days'] = $workingDays;
+        $return_arr['week_off_count'] = count($week_off_arr);
+        $return_arr['week_off_arr'] = $week_off_arr; 
+        $return_arr['week_off_holiday'] = $week_off_holiday;
+        $return_arr['days_in_month'] = $days_in_month;
+        // pr($return_arr);
+        return $return_arr;
+    }
+
+    public function dateByday($year = '',$month = '' , $days = []){
+        if(!is_valid_array($days)) return 0;
+        $day_dates = [];
+        foreach ($days as $day_k => $day_val){
+                $date = new DateTime("{$year}-{$month}-01"); 
+                $date->modify("first $day_val of this month"); 
+                while ($date->format('m') == $month) {
+                    $day_dates[] = $date->format('Y-m-d'); 
+                    $date->modify('+1 week'); 
+                }
+                
+            }
+            return $day_dates;
     }
 
 }
+
+
 
 ?>

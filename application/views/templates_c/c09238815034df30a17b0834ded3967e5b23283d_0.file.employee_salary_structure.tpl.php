@@ -1,4 +1,28 @@
+<?php
+/* Smarty version 4.3.2, created on 2024-04-23 16:06:51
+  from '/var/www/html/HRMS/application/views/templates/employee_salary_structure.tpl' */
 
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_66278f436619a7_11699988',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'c09238815034df30a17b0834ded3967e5b23283d' => 
+    array (
+      0 => '/var/www/html/HRMS/application/views/templates/employee_salary_structure.tpl',
+      1 => 1713867822,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_66278f436619a7_11699988 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <div class="main-middle-container">
 	<aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -43,9 +67,18 @@
                                             <div class="input-group">
                                                <select class="form-select " name="component_type_search" id="component_type_search">
 			                                        <option value="">Select Component Type</option>
-			                                        {foreach from=$component_type_arr item=component_type}
-			                                            <option value="{$component_type.id}">{$component_type.val}</option>
-			                                        {/foreach}
+			                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['component_type_arr']->value, 'component_type');
+$_smarty_tpl->tpl_vars['component_type']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['component_type']->value) {
+$_smarty_tpl->tpl_vars['component_type']->do_else = false;
+?>
+			                                            <option value="<?php echo $_smarty_tpl->tpl_vars['component_type']->value['id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['component_type']->value['val'];?>
+</option>
+			                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 			                                    </select>
                                             </div>
                                         </li>
@@ -70,10 +103,19 @@
                                             <div class="input-group">
                                                <select class="form-select " name="type_search" id="type_search">
 			                                        <option value="">Select Value Type</option>
-			                                        {foreach from=$value_type_arr item=value_type}
-			                                            <option value="{$value_type.id}">{$value_type.val}</option>
+			                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['value_type_arr']->value, 'value_type');
+$_smarty_tpl->tpl_vars['value_type']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['value_type']->value) {
+$_smarty_tpl->tpl_vars['value_type']->do_else = false;
+?>
+			                                            <option value="<?php echo $_smarty_tpl->tpl_vars['value_type']->value['id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['value_type']->value['val'];?>
+</option>
 			                                            
-			                                        {/foreach}
+			                                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 			                                    </select>
                                             </div>
                                         </li>
@@ -139,13 +181,36 @@
 				</div>
 				 <div class="timesheet-summary-lst year-drop-down ">
                 <select class="form-select form-control" name="year_drop_down" id="year_drop_down">
-                    {foreach from=$year_arr key=key_val item=year}
-					    {{if $key_val+1 == count($year_arr)}}
-					        <option value="{$year}" selected>{$year}</option>
-					    {{else}}
-							<option value="{$year}" >{$year}</option>
-					    {{/if}}
-					{/foreach}
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['year_arr']->value, 'year', false, 'key_val');
+$_smarty_tpl->tpl_vars['year']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key_val']->value => $_smarty_tpl->tpl_vars['year']->value) {
+$_smarty_tpl->tpl_vars['year']->do_else = false;
+?>
+					    <?php ob_start();
+if ($_smarty_tpl->tpl_vars['key_val']->value+1 == count($_smarty_tpl->tpl_vars['year_arr']->value)) {
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+
+					        <option value="<?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+" selected><?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+</option>
+					    <?php ob_start();
+} else {
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+
+							<option value="<?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+" ><?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+</option>
+					    <?php ob_start();
+}
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+
+					<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 </select>
             </div>
             <div class="timesheet-summary-lst">
@@ -176,15 +241,24 @@
                         </button>
                     </div>
             </div>
-           {{if $extended_salary_structure_id gt 0}}
+           <?php ob_start();
+if ($_smarty_tpl->tpl_vars['extended_salary_structure_id']->value > 0) {
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+
 			<div class="timesheet-summary-lst">
-					<a href="{get_entiry_url('employee_salary_structure','Extend',$employee_id)}" class="btn btn-primary add-department  add-action">
+					<a href="<?php echo get_entiry_url('employee_salary_structure','Extend',$_smarty_tpl->tpl_vars['employee_id']->value);?>
+" class="btn btn-primary add-department  add-action">
 						<i class="ti ti-plus"></i>
 						<span>Extend Structure</span>
 					</a>
 				</div>
 			
-			{{/if}}
+			<?php ob_start();
+}
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+
             </div>
 		</div>
 
@@ -213,26 +287,79 @@
 					</thead>
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
 
-						{foreach $employee_salary_structure as $employee_salary_structure_index => $employee_salary_structure_row}
+						<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['employee_salary_structure']->value, 'employee_salary_structure_row', false, 'employee_salary_structure_index');
+$_smarty_tpl->tpl_vars['employee_salary_structure_row']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['employee_salary_structure_index']->value => $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value) {
+$_smarty_tpl->tpl_vars['employee_salary_structure_row']->do_else = false;
+?>
 							<tr class="department-request-row">
                                 <td class="text-center">
-                                    {$employee_salary_structure_row['default']}
+                                    <?php echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['default'];?>
+
                                 </td>
-								<td>{{$employee_salary_structure_row.employee_name}}</td>
-								<td>{{$employee_salary_structure_row.refrence_number}}</td>
-								<td>{{$employee_salary_structure_row.ctc_value}}</td>
-								<td>{{date_formater($employee_salary_structure_row.effective_from)}}</td>
-								<td>{{date_formater($employee_salary_structure_row.effective_to)}}</td>
-								<td>{{display_no_character($employee_salary_structure_row.added_by_name)}}</td>
-								<td>{{date_formater($employee_salary_structure_row.added_date)}}</td>
-								<td>{{display_no_character($employee_salary_structure_row.updated_by_name)}}</td>
-								<td>{{date_formater($employee_salary_structure_row.updated_date)}}</td>
-								<td class="status-row"><span class="{{$employee_salary_structure_row['status']}}">{{get_status($employee_salary_structure_row['status'])}}</span></td>
-							<td>{$employee_salary_structure_row['action']}</td>
+								<td><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['employee_name'];
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+</td>
+								<td><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['refrence_number'];
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
+</td>
+								<td><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['ctc_value'];
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
+</td>
+								<td><?php ob_start();
+echo date_formater($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['effective_from']);
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
+</td>
+								<td><?php ob_start();
+echo date_formater($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['effective_to']);
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
+</td>
+								<td><?php ob_start();
+echo display_no_character($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['added_by_name']);
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
+</td>
+								<td><?php ob_start();
+echo date_formater($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['added_date']);
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
+</td>
+								<td><?php ob_start();
+echo display_no_character($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['updated_by_name']);
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
+</td>
+								<td><?php ob_start();
+echo date_formater($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['updated_date']);
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
+</td>
+								<td class="status-row"><span class="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['status'];
+$_prefixVariable15 = ob_get_clean();
+echo $_prefixVariable15;?>
+"><?php ob_start();
+echo get_status($_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['status']);
+$_prefixVariable16 = ob_get_clean();
+echo $_prefixVariable16;?>
+</span></td>
+							<td><?php echo $_smarty_tpl->tpl_vars['employee_salary_structure_row']->value['action'];?>
+</td>
 								
 								
 							</tr>
-						{/foreach}
+						<?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 				</tbody>
 			</table>
 
@@ -249,14 +376,30 @@
 </div>
 </div>
 </div>
-<script>
-    var no_data_message =  {{$no_data_message|json_encode}};
-    var selected_company = {{$selected_company|json_encode}}
-</script>
+<?php echo '<script'; ?>
+>
+    var no_data_message =  <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
+$_prefixVariable17 = ob_get_clean();
+echo $_prefixVariable17;?>
+;
+    var selected_company = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['selected_company']->value);
+$_prefixVariable18 = ob_get_clean();
+echo $_prefixVariable18;?>
+
+<?php echo '</script'; ?>
+>
 
 <link rel="stylesheet" href="public/css/attendance_sheet.css" />
 <link rel="stylesheet" href="public/css/leave.css" />
 <link rel="stylesheet" href="public/css/salary_component.css" />
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="public/js/employee_salary_structure.js"></script>
-{include file="footer.tpl" }
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="public/js/employee_salary_structure.js"><?php echo '</script'; ?>
+>
+<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}
