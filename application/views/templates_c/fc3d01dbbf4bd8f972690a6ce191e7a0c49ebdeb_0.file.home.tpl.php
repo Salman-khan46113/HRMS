@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-01 23:04:36
+/* Smarty version 4.3.2, created on 2024-04-23 10:10:21
   from '/var/www/html/HRMS/application/views/templates/home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660af02c04f0a2_60939753',
+  'unifunc' => 'content_66273bb53ef703_96369367',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc3d01dbbf4bd8f972690a6ce191e7a0c49ebdeb' => 
     array (
       0 => '/var/www/html/HRMS/application/views/templates/home.tpl',
-      1 => 1711982604,
+      1 => 1713846708,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660af02c04f0a2_60939753 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66273bb53ef703_96369367 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -29,8 +29,8 @@ function content_660af02c04f0a2_60939753 (Smarty_Internal_Template $_smarty_tpl)
     <div class="sub-header-left pull-left">
         <h3>Welcome, <?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
-$_prefixVariable27 = ob_get_clean();
-echo $_prefixVariable27;?>
+$_prefixVariable33 = ob_get_clean();
+echo $_prefixVariable33;?>
  👋</h3>
         <div class="site-breadcrumb">Have a look at your overall summary.</div>
         
@@ -50,38 +50,38 @@ echo $_prefixVariable27;?>
                     alt=""
                     src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable28 = ob_get_clean();
-echo $_prefixVariable28;?>
+$_prefixVariable34 = ob_get_clean();
+echo $_prefixVariable34;?>
 public/img/uploads/employee_profile/<?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
-$_prefixVariable29 = ob_get_clean();
-echo $_prefixVariable29;?>
+$_prefixVariable35 = ob_get_clean();
+echo $_prefixVariable35;?>
 "
                 />
             </div>
             <div class="my-details">
                 <h3><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
-$_prefixVariable30 = ob_get_clean();
-echo $_prefixVariable30;?>
+$_prefixVariable36 = ob_get_clean();
+echo $_prefixVariable36;?>
  <?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
-$_prefixVariable31 = ob_get_clean();
-echo $_prefixVariable31;?>
+$_prefixVariable37 = ob_get_clean();
+echo $_prefixVariable37;?>
  <?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
-$_prefixVariable32 = ob_get_clean();
-echo $_prefixVariable32;?>
+$_prefixVariable38 = ob_get_clean();
+echo $_prefixVariable38;?>
 </h3>
                 <div class="my-designation"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['designation_name'];
-$_prefixVariable33 = ob_get_clean();
-echo $_prefixVariable33;?>
+$_prefixVariable39 = ob_get_clean();
+echo $_prefixVariable39;?>
 </div>
                 <div class="my-code"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['employee_code'];
-$_prefixVariable34 = ob_get_clean();
-echo $_prefixVariable34;?>
+$_prefixVariable40 = ob_get_clean();
+echo $_prefixVariable40;?>
 </div>
             </div>
         </div>
@@ -90,32 +90,32 @@ echo $_prefixVariable34;?>
                 <div class="item-label">Email :</div>
                 <div class="item-value email"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['email'];
-$_prefixVariable35 = ob_get_clean();
-echo $_prefixVariable35;?>
+$_prefixVariable41 = ob_get_clean();
+echo $_prefixVariable41;?>
 </div>
             </div>
             <div class="item-cnt">
                 <div class="item-label">Dept :</div>
                 <div class="item-value"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['department_name'];
-$_prefixVariable36 = ob_get_clean();
-echo $_prefixVariable36;?>
+$_prefixVariable42 = ob_get_clean();
+echo $_prefixVariable42;?>
 </div>
             </div>
             <div class="item-cnt">
                 <div class="item-label">Since :</div>
                 <div class="item-value"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['y'];
-$_prefixVariable37 = ob_get_clean();
-echo $_prefixVariable37;?>
+$_prefixVariable43 = ob_get_clean();
+echo $_prefixVariable43;?>
  Years <?php ob_start();
 echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['m'];
-$_prefixVariable38 = ob_get_clean();
-echo $_prefixVariable38;?>
+$_prefixVariable44 = ob_get_clean();
+echo $_prefixVariable44;?>
  Months <?php ob_start();
 echo $_smarty_tpl->tpl_vars['joining_date_arr']->value['d'];
-$_prefixVariable39 = ob_get_clean();
-echo $_prefixVariable39;?>
+$_prefixVariable45 = ob_get_clean();
+echo $_prefixVariable45;?>
  Days</div>
             </div>
             
@@ -123,8 +123,8 @@ echo $_prefixVariable39;?>
                 <div class="item-label">Location :</div>
                 <div class="item-value"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['city'];
-$_prefixVariable40 = ob_get_clean();
-echo $_prefixVariable40;?>
+$_prefixVariable46 = ob_get_clean();
+echo $_prefixVariable46;?>
 </div>
             </div>
         </div>
@@ -145,8 +145,8 @@ echo $_prefixVariable40;?>
                         <div class="avg-hours highlight-box">
                           <div class="count"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['working_time']->value;
-$_prefixVariable41 = ob_get_clean();
-echo $_prefixVariable41;?>
+$_prefixVariable47 = ob_get_clean();
+echo $_prefixVariable47;?>
 </div>
                           <span class="item-label">Working Hours <em>Today </em> </span> 
                         </div>
@@ -156,44 +156,44 @@ echo $_prefixVariable41;?>
                             <div class="today-info">
                             <?php ob_start();
 if ($_smarty_tpl->tpl_vars['attendance_in_time']->value != '') {
-$_prefixVariable42 = ob_get_clean();
-echo $_prefixVariable42;?>
+$_prefixVariable48 = ob_get_clean();
+echo $_prefixVariable48;?>
 
                               <div class="time">Attendance In : <?php ob_start();
 echo $_smarty_tpl->tpl_vars['attendance_in_time']->value;
-$_prefixVariable43 = ob_get_clean();
-echo $_prefixVariable43;?>
+$_prefixVariable49 = ob_get_clean();
+echo $_prefixVariable49;?>
 </div>
                             <?php ob_start();
 } else {
-$_prefixVariable44 = ob_get_clean();
-echo $_prefixVariable44;?>
+$_prefixVariable50 = ob_get_clean();
+echo $_prefixVariable50;?>
 
                                 <div class="time absent-text">Absent</div>
                             <?php ob_start();
 }
-$_prefixVariable45 = ob_get_clean();
-echo $_prefixVariable45;?>
+$_prefixVariable51 = ob_get_clean();
+echo $_prefixVariable51;?>
 
                             </div>
                             <?php ob_start();
 if ($_smarty_tpl->tpl_vars['attendance_out_time']->value != '') {
-$_prefixVariable46 = ob_get_clean();
-echo $_prefixVariable46;?>
+$_prefixVariable52 = ob_get_clean();
+echo $_prefixVariable52;?>
 
                             <div class="today-info">
                               <div class="time">Attendance Out : <?php ob_start();
 echo $_smarty_tpl->tpl_vars['attendance_out_time']->value;
-$_prefixVariable47 = ob_get_clean();
-echo $_prefixVariable47;?>
+$_prefixVariable53 = ob_get_clean();
+echo $_prefixVariable53;?>
 </div>
                               
                             </div>
 
                             <?php ob_start();
 }
-$_prefixVariable48 = ob_get_clean();
-echo $_prefixVariable48;?>
+$_prefixVariable54 = ob_get_clean();
+echo $_prefixVariable54;?>
 
                             
                           </div>
@@ -208,35 +208,36 @@ echo $_prefixVariable48;?>
                         <div class="dash-card-box-header-title" style="padding-left: 50px; grid-gap: 0;">
                             <div class="image-box"><img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable49 = ob_get_clean();
-echo $_prefixVariable49;?>
+$_prefixVariable55 = ob_get_clean();
+echo $_prefixVariable55;?>
 public/assets/images/images/birthday-cake_1.png" width="21" height="21" alt=""></div> Celebrating Birthdays
                             <div class="sub-title-text" style="margin: 0; color: var(--body-light-text); font-size: var(--mediumFont) !important; width: 100%; line-height: 14px; font-weight: var(--theme-font-weight-medium) !important;">
                                 <?php ob_start();
 echo date("d");
-$_prefixVariable50 = ob_get_clean();
-echo $_prefixVariable50;?>
+$_prefixVariable56 = ob_get_clean();
+echo $_prefixVariable56;?>
  <?php ob_start();
 echo date("D");
-$_prefixVariable51 = ob_get_clean();
-echo $_prefixVariable51;?>
+$_prefixVariable57 = ob_get_clean();
+echo $_prefixVariable57;?>
  to <?php ob_start();
 echo date("d",strtotime("+7 days"));
-$_prefixVariable52 = ob_get_clean();
-echo $_prefixVariable52;?>
+$_prefixVariable58 = ob_get_clean();
+echo $_prefixVariable58;?>
  <?php ob_start();
 echo date("D",strtotime("+7 days"));
-$_prefixVariable53 = ob_get_clean();
-echo $_prefixVariable53;?>
+$_prefixVariable59 = ob_get_clean();
+echo $_prefixVariable59;?>
  (Next 7 Days)
                             </div>
                         </div>
                     </div>
                     <div class="dash-card-box-content">
+                      <?php if (count($_smarty_tpl->tpl_vars['bithaday']->value) > 0) {?>
                         <div class="dash-card-box-content-inner">
-                           
                             <div class="birthday-list-block">
                                 <div class="wrapper-cnt d-flex mt-3">
+                                  
                                     <div class="db-emp-thumb-list">
                                         <ul>
                                           <?php
@@ -248,16 +249,16 @@ $_smarty_tpl->tpl_vars['employee']->do_else = false;
                                             <li>
                                                 <div class="emp-thumb tooltips" title="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['employee']->value['first_name'];
-$_prefixVariable54 = ob_get_clean();
-echo $_prefixVariable54;?>
+$_prefixVariable60 = ob_get_clean();
+echo $_prefixVariable60;?>
  <?php ob_start();
 echo $_smarty_tpl->tpl_vars['employee']->value['middle_name'];
-$_prefixVariable55 = ob_get_clean();
-echo $_prefixVariable55;?>
+$_prefixVariable61 = ob_get_clean();
+echo $_prefixVariable61;?>
  <?php ob_start();
 echo $_smarty_tpl->tpl_vars['employee']->value['last_name'];
-$_prefixVariable56 = ob_get_clean();
-echo $_prefixVariable56;?>
+$_prefixVariable62 = ob_get_clean();
+echo $_prefixVariable62;?>
 ">
                                                     <img
                                                         alt=""
@@ -265,24 +266,24 @@ echo $_prefixVariable56;?>
                                                         height="50"
                                                         src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable57 = ob_get_clean();
-echo $_prefixVariable57;?>
+$_prefixVariable63 = ob_get_clean();
+echo $_prefixVariable63;?>
 public/img/uploads/employee_profile/<?php ob_start();
 echo $_smarty_tpl->tpl_vars['employee']->value['profile_image'];
-$_prefixVariable58 = ob_get_clean();
-echo $_prefixVariable58;?>
+$_prefixVariable64 = ob_get_clean();
+echo $_prefixVariable64;?>
 "
                                                     />
                                                 </div>
 
                                                 <span class="text"><?php ob_start();
 echo date("d",strtotime($_smarty_tpl->tpl_vars['employee']->value['dob']));
-$_prefixVariable59 = ob_get_clean();
-echo $_prefixVariable59;?>
+$_prefixVariable65 = ob_get_clean();
+echo $_prefixVariable65;?>
  <?php ob_start();
 echo date("M",strtotime($_smarty_tpl->tpl_vars['employee']->value['dob']));
-$_prefixVariable60 = ob_get_clean();
-echo $_prefixVariable60;?>
+$_prefixVariable66 = ob_get_clean();
+echo $_prefixVariable66;?>
 </span>
                                             </li>
                                             <?php
@@ -293,6 +294,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </div>
                             </div>
                         </div>
+                      <?php } else { ?>
+                        <div class="birthday-list-block">
+                          <div class="wrapper-cnt d-flex mt-2">
+                          <div class="db-emp-thumb-list text-center mt-0 no-birthday-block">
+                            <div class="mb-1">
+                              <img
+                                  alt=""
+                                  width="35"
+                                  height="35"
+                                  src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable67 = ob_get_clean();
+echo $_prefixVariable67;?>
+public/assets/images/images/no_birthaday.png"
+                              />
+                            </div>
+                            <strong >No Birthday Found!</strong>
+                          </div>
+                          </div>
+                        </div>
+                                  <?php }?>
                     </div>
                 </div>
 
@@ -322,8 +344,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                       </div>
                       <div class="features-img"> <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable61 = ob_get_clean();
-echo $_prefixVariable61;?>
+$_prefixVariable68 = ob_get_clean();
+echo $_prefixVariable68;?>
 public/assets/images/images/holiday-img.png" alt=""> </div>
                       <div class="bottom-action today-highlight w-100">
                         <p><?php echo $_smarty_tpl->tpl_vars['holiday']->value['holiday_name'];?>
@@ -337,8 +359,8 @@ public/assets/images/images/holiday-img.png" alt=""> </div>
                         <div class="mt-3"> 
                          <div class="mb-3"> <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable62 = ob_get_clean();
-echo $_prefixVariable62;?>
+$_prefixVariable69 = ob_get_clean();
+echo $_prefixVariable69;?>
 public/assets/images/images/no_holiday_dash.png" alt="" width="60" height="60"> </div>
                         <span class="">No Holiday found!</span> 
                       </div>
@@ -623,8 +645,8 @@ public/assets/images/images/no_holiday_dash.png" alt="" width="60" height="60"> 
               <div class="position-relative">
                 <a href="javascript:void(0)"><img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable63 = ob_get_clean();
-echo $_prefixVariable63;?>
+$_prefixVariable70 = ob_get_clean();
+echo $_prefixVariable70;?>
 public/assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
@@ -647,8 +669,8 @@ public/assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."><
               <div class="position-relative">
                 <a href="javascript:void(0)"><img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable64 = ob_get_clean();
-echo $_prefixVariable64;?>
+$_prefixVariable71 = ob_get_clean();
+echo $_prefixVariable71;?>
 public/assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
@@ -671,8 +693,8 @@ public/assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."><
               <div class="position-relative">
                 <a href="javascript:void(0)"><img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable65 = ob_get_clean();
-echo $_prefixVariable65;?>
+$_prefixVariable72 = ob_get_clean();
+echo $_prefixVariable72;?>
 public/assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">
@@ -695,8 +717,8 @@ public/assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."><
               <div class="position-relative">
                 <a href="javascript:void(0)"><img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable66 = ob_get_clean();
-echo $_prefixVariable66;?>
+$_prefixVariable73 = ob_get_clean();
+echo $_prefixVariable73;?>
 public/assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
                 <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
               <div class="card-body pt-3 p-4">

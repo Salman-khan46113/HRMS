@@ -1,6 +1,5 @@
 var table = '';
 $(document).ready(function(){
-
     employee_salary_structure.init();
     
 })
@@ -9,6 +8,54 @@ var employee_salary_structure = {
 	init : function(){
 		this.iniateDataTable();
 		this.initiatePlagin();
+		let that = this;
+		$(document).off('change','.default-check');
+        $(document).on('change','.default-check',function(){
+            if($(this).is(":checked")){
+                let id = $(this).attr('id');
+                $(`.default-check:not(#${id})`).prop('checked',false);
+            }
+         })
+		 $('.set-default-structure').off('click');
+		 $('.set-default-structure').on('click',function(e){
+
+			that.setdefaultStructure(e);
+		 });
+	},
+	setdefaultStructure:function(e){
+		if($('.default-check:checked').length == 0){
+			toaster("fails",'Please select atleast one Default Structure');
+			return 0;
+		}
+		let id = $('.default-check:checked').attr('data-structure-id');
+		let params = {};
+		params['id'] = id;
+		params['e_id'] = $('.default-check:checked').attr('data-employee_id');
+		$.ajax({
+			type: "POST",
+			url: "salary/updateDefaultStructure",
+			data: params,
+			success: function (response) {
+				response = response ?? '';
+				if (response == '') return 0;
+				var responseObject = JSON.parse(response);
+				var msg = responseObject.msg;
+				var success = responseObject.success;
+				setTimeout(function(){
+				hide_loader();
+				if (parseInt(success) == 1) {
+					// toaster.success(msg);
+					toaster("success",msg);
+					setTimeout(function () {
+					window.location.reload();
+					}, 2000);
+				} else {
+					// toastr.error(msg);
+				//   toaster("fails",msg);
+				}
+				},1000)
+			},
+		  })
 	},
 	initiatePlagin: function(){
 		$("#year_drop_down").select2();
