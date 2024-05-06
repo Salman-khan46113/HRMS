@@ -82,7 +82,7 @@
                         {{else}}
                             <tr >
                                 <td colspan="10">
-                                    <div class="mb-5 ">
+                                    <div class="mb-5 no-data-found-block">
                                      <img
                                         alt=""
                                         src="{{$base_url}}public/assets/images/images/no_data_found_new.png"
@@ -113,7 +113,7 @@
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Leave Reuqest</h5>
+            <h5 class="modal-title" id="exampleModalToggleLabel">Leave Request</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

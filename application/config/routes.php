@@ -81,6 +81,8 @@ $route['leave-list.html'] = 'leave/leave_list_summary';
 $route['leave-management-list.html'] = 'leave/leave_management';
 $route['leave-allocation.html'] = 'leave/leave_allocation';
 $route['send_email.html'] = 'user/send_email';
+$route['combo-off.html'] = 'leave/combo_off';
+$route['combo-off-request.html'] = 'leave/combo_off_list';
 
 /* holiday and designation */
 $route['holiday-management.html'] = 'holiday/holiday_management';
@@ -109,6 +111,7 @@ $route['announcement_details.html'] = 'activities/announcement_details';
 $route['daily-log'] = 'notification/daily_attendance_log';
 $route['send_email'] = 'user/send_email';
 $route['auto-out-log'] = 'notification/auto_out_log';
+$route['send-notification'] = 'notification/send_notifiction';
 
 /* salary */
 $route['salary-component.html'] = 'salary';

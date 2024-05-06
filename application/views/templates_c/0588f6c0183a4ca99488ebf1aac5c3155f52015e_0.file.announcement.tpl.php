@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 19:39:40
+/* Smarty version 4.3.2, created on 2024-04-28 13:43:35
   from '/var/www/html/extra_work/HRMS/application/views/templates/announcement.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661940a4168531_83227456',
+  'unifunc' => 'content_662e052fc67111_14189279',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0588f6c0183a4ca99488ebf1aac5c3155f52015e' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/announcement.tpl',
-      1 => 1712930858,
+      1 => 1714126298,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661940a4168531_83227456 (Smarty_Internal_Template $_smarty_tpl) {
+function content_662e052fc67111_14189279 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
   <div class="sub-header att-sub-header">
     <div class="sub-header-left pull-left">

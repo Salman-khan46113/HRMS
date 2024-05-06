@@ -132,9 +132,9 @@ const company_address = {
 
          })
 
-         $(document).off('click','.update-file-block');
-         $(document).on('click','.update-file-block',function(){
-            // $("#fileInput").trigger("click");
+         $(document).off('click','.image-upload-block-box');
+         $(document).on('click','.image-upload-block-box',function(){
+            $("#fileInput").trigger("click");
          })
 
 
@@ -164,34 +164,34 @@ const company_address = {
         $('#bank_name_'+index).rules('add', {
             required: true,
             messages: {
-                required: "Please Enter Bank Name"
+                required: "Please enter bank name."
             }
         });
         $('#bank_address_'+index).rules('add', {
             required: true,
             messages: {
-                required: "Please enter Bank Address."
+                required: "Please enter bank address."
             }
         });
         $('#ifsc_code_'+index).rules('add', {
             required: true,
             regex:/^[A-Z]{4}0[A-Z0-9]{6}$/,
             messages: {
-                required: "Please enter IFSC Code",
-                regex: "Please enter valid IFSC Code"
+                required: "Please enter ifsc code",
+                regex: "Please enter valid ifsc code."
             }
         });
         $('#acc_type_'+index).rules('add', {
             required: true,
             messages: {
-                required: "Please select Account Type",
+                required: "Please select account type.",
                 
             }
         });
         $('#acc_numner_'+index).rules('add', {
             required: true,
             messages: {
-                required: "Please enter Account Number",
+                required: "Please enter account number.",
                 
             }
         });
@@ -199,8 +199,8 @@ const company_address = {
             required: true,
             regex: /^[a-zA-Z\s]+$/,
             messages: {
-                required: "Please enter Account Holder",
-                regex: "Please enter valid Account Number"
+                required: "Please enter account holder.",
+                regex: "Please enter valid account number."
               
             }
         });
@@ -225,7 +225,7 @@ const company_address = {
                 // $(`.step_top[data-step="${index}"]`).addClass('active_step');
             }
             else if(cur_index == index){
-                $(this).addClass('active_step');
+                $(this).addClass('active_step active');
             }
             else{
                 
@@ -339,54 +339,54 @@ const company_address = {
             messages: {
                 
                 company_name: {
-                    required: "Please enter company name"
+                    required: "Please enter company name."
                 },
                 contact_person: {
-                    required: "Please enter contact name"
+                    required: "Please enter contact name."
                 },
                 company_logo:{
-                    required: "Please select company logo",
+                    required: "Please select company logo.",
                 },
                 company_email: {
-                    required: "Please enter a valid email address",
-                    email: "Please enter a valid email address"
+                    required: "Please enter a valid email address.",
+                    email: "Please enter a valid email address."
                 },
                 contact_number: {
-                    required: 'Please Enter Contact Number'
+                    required: 'Please enter contact number.'
                 },
                 country: {
-                    required: "Please select Country"
+                    required: "Please select country."
                 },
                 state: {
-                    required: "Please select State"
+                    required: "Please select state."
                 },
                
                 address:{
-                    required: "Please enter Address"
+                    required: "Please enter address."
                 },
                 zipcode:{
-                    required: "Please enter Zipcode",
-                    regex:"Please enter valid Zipcode",
+                    required: "Please enter zipcode.",
+                    regex:"Please enter valid zipcode.",
                 },
                 gst_number: {
-                    required: "Please enter GST Number",
-                    regex:"Please enter valid GST Number"
+                    required: "Please enter gst number.",
+                    regex:"Please enter valid gst number."
                 },
                 founding_date:{
-                    required:"Please select Founding Date"
+                    required:"Please select founding date."
                 },
                 description:{
-                    required:"Please enter discription"
+                    required:"Please enter discription."
                 },
                 pan_number:{
-                    required:"Please enter Pan Number",
-                    regex: 'Please enter a valid PAN number'
+                    required:"Please enter pan number.",
+                    regex: 'Please enter a valid pan number.'
                 },
                 attendance_pin:{
-                    required:"Please enter Attendence Pin"
+                    required:"Please enter attendence pin."
                 },
                 company_prefix:{
-                    required:"Please enter Company Prefix"
+                    required:"Please enter company prefix."
                 },
                 
             },

@@ -89,7 +89,13 @@
                                     <strong>Secondary Mobile Number </strong>
                                  </div>
                                  <div>
-                                    <span>{$data[0].secondary_mobile_code} {$data[0].secondary_mobile_number}</span>
+                                    <span>
+                                       {if $data[0].secondary_mobile_number neq ''}
+                                          {$data[0].secondary_mobile_code} {$data[0].secondary_mobile_number}
+                                       {else}
+                                          {display_no_character()}
+                                       {/if}
+                                    </span>
                                  </div>
                               </div>
                               <div class="col-3">
@@ -273,6 +279,61 @@
                                  </div>
                               </div>
                               
+                           </div>
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <p class="lead fw-normal mb-2 ms-1">Shift Details</p>
+                        <div class="p-4 rounded-2" style="background-color: #ecedef;">
+                           <div class="row">
+                              {if is_valid_array($shift_details)}
+                              <div class="col-3 mb-2">
+                                 <div class="title-div">
+                                    <strong>Shift Name</strong>
+                                 </div>
+                                 <div>
+                                    <span>{$shift_details.shift_name}</span>
+                                 </div>
+                              </div>
+                              <div class="col-3 mb-2">
+                                 <div class="title-div">
+                                    <strong>Shift Start Date</strong>
+                                 </div>
+                                 <div>
+                                    <span>{$shift_details.start_date}</span>
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift End Date</strong>
+                                 </div>
+                                 <div>
+                                    <span>{$shift_details.end_date}</span>
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift Start Time</strong>
+                                 </div>
+                                 <div>
+                                    <span>{display_no_character($shift_details.start_time)}</span>
+                                 </div>
+                              </div>
+                               <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift End Time</strong>
+                                 </div>
+                                 <div>
+                                    <span>{display_no_character($shift_details.end_time)}</span>
+                                 </div>
+                              </div>
+                              {else}
+                                 <div class="col-12 text-center no-data-found-block">
+                                       <img alt="" src="http://localhost/extra_work/HRMS/public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-3">
+                                       <br>
+                                       <span class="mb-4 no-data-found-message">No shift data found!</span>
+                                   </div>
+                              {/if}
                            </div>
                         </div>
                      </div>
@@ -493,6 +554,7 @@
    .fw-normal {
    font-weight: 500 !important;
    font-size: 20px;
+   font-family: 'GilroySemibold', sans-serif !important;
    }
    .card .name-block h2{
    color: #fff;
@@ -590,6 +652,18 @@
   .employee-profile-box .nav-tabs .nav-link.active {
       color: #206DFF;
   }
+  .no-data-found-message {
+    color: var(--body-text-color) !important;
+    font-size: var(--x_normalFont) !important;
+       color: black;
+       margin-bottom: 0px !important;
+       font-size: 18px !important;
+   }
+   .no-data-found-block img {
+    width: 7% !important;
+       height: 70% !important;
+       -webkit-filter: invert(20%) !important;
+   }
 
 </style>
 {include file="footer.tpl" }

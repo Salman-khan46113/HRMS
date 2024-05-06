@@ -81,7 +81,7 @@ class Leave extends MY_controller
                     $leave_list[$key]["action"] =
                     '<i class="la-edit ti ti-edit" data-start-date="' .
                     $start_date_value .
-                    '" data-end-date="' .
+                    '" datsa-end-date="' .
                     $end_date_value .
                     '" data-leave-request-id="' .
                     $value["leave_id"] .
@@ -99,7 +99,7 @@ class Leave extends MY_controller
             $interval = (array) $end_date->diff($start_date);
 
             $leave_list[$key]["applied_days"] =
-                $interval["days"] == 0 ? 1 : $interval["days"] + 1;
+            $interval["days"] = 0 ? 1 : $interval["days"] + 1;
         }
         $currentYear = date("Y"); // Get the current year
         $januaryFirst = date("$currentYear-01-01"); // Format January 1st of the current year
@@ -354,7 +354,7 @@ class Leave extends MY_controller
         ];
         $column[] = [
             "data" => "employee_name",
-            "title" => "Name",
+            "title" => "Employe Name",
             "width" => "12%",
             "className" => "dt-left",
         ];
@@ -408,7 +408,7 @@ class Leave extends MY_controller
         $ajax_json["is_ordering"] = true;
         $ajax_json["is_heading_color"] = "#a18f72";
         $ajax_json["no_data_message"] =
-            '<div class="p-3"><img class="p-2" src="' .
+            '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No leave request data found..!</div>';
         $ajax_json["is_top_searching_enable"] = true;
@@ -435,18 +435,6 @@ class Leave extends MY_controller
             }
         }
 
-        $condition_arr["order_by"] = $order_by;
-        $condition_arr["start"] = $post_data["start"];
-        $condition_arr["length"] = $post_data["length"];
-        $order_by = "";
-        foreach ($post_data["order"] as $key => $val) {
-            if ($key == 0) {
-                $order_by .= $column_index[$val["column"]] . " " . $val["dir"];
-            } else {
-                $order_by .=
-                    "," . $column_index[$val["column"]] . " " . $val["dir"];
-            }
-        }
         $condition_arr["order_by"] = $order_by;
         $condition_arr["start"] = $post_data["start"];
         $condition_arr["length"] = $post_data["length"];
@@ -614,7 +602,7 @@ class Leave extends MY_controller
           ' title="Delete"><i class=" la-trash ti ti-trash"></i></span>';
 
         }
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No leave allocation data found..!</div>';
 
@@ -642,13 +630,13 @@ class Leave extends MY_controller
         } else {
           $id = "";
         }
-
+        $total_leave  = $this->input->post("sick_leave")+$this->input->post("paid_leave")+$this->input->post("casual_leave");
         if ($id == "") {
-
           $data = [
             "sick_leave" => $this->input->post("sick_leave"),
             "paid_leave" => $this->input->post("paid_leave"),
             "casual_leave" => $this->input->post("casual_leave"),
+            "total_leave"=>$total_leave,
             "department_id" => $this->input->post("department_id"),
             "designation_id" => $this->input->post("designation_id"),
             "added_by" => 0,
@@ -661,6 +649,7 @@ class Leave extends MY_controller
             "sick_leave" => $this->input->post("sick_leave"),
             "paid_leave" => $this->input->post("paid_leave"),
             "casual_leave" => $this->input->post("casual_leave"),
+            "total_leave"=>$total_leave,
             "department_id" => $this->input->post("department_id"),
             "designation_id" => $this->input->post("designation_id"),
             "updated_by" => 0,
@@ -708,6 +697,336 @@ class Leave extends MY_controller
         echo json_encode($return_arr);
         exit();
       }
+
+      // combo_off
+      public function combo_off(){
+        $company_id = getCompanyId();
+        $company_config = $this->leave_model->get_company_config($company_id);
+        $valid_dates = $this->config->item("default_combo_off_days");
+        if(is_valid_array($company_config)){
+            $company_config_arr = array_column($company_config,"value","name");
+            $valid_dates = $company_config_arr['combo_off_valid_day'] > 0 ? $company_config_arr['combo_off_valid_day'] : $this->config->item("default_combo_off_days");
+        }
+        $id = $this->session->userdata("employee_id");
+        $combo_off_detail_arr = [];
+        $combo_off_detail_arr['employee_data'] = $this->leave_model->get_employee_details($id);
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $startDate = date('Y-m-01', strtotime("$currentYear-$currentMonth-01"));
+        $currentDate = date('Y-m-d');
+        $startDate = date('Y-m-d', strtotime("-$valid_dates days", strtotime($currentDate)));
+        $combo_off_detail_arr['startDate'] = $startDate;
+        $combo_off_detail_arr['endDate'] = $currentDate;
+        $shift_details = $this->leave_model->get_employee_shift_details($id,$startDate,$currentDate);
+        $currentDate = date('Y-m-d');
+        $attendance = $this->leave_model->get_employee_attendance($id,$startDate,$currentDate,$currentDate);
+        $applied_combo_off = $this->leave_model->get_combo_off_data($id);
+        $aplied_pending_cobo_off = [];
+        foreach ($applied_combo_off as $key => $value) {
+            $applied_combo_off[$key]['action'] = "--";
+
+            if($value['status'] == "Pending"){
+                $applied_combo_off[$key]['action'] = '<i class="la-edit ti ti-edit edit-combo-off" data-combo-off-id="' .$value['employee_combo_off_id'] .'" data-reference-date="'.getDatePickerFormat($value['reference_date']).'" data-combo-off-date="'.getDatePickerFormat($value['combo_off_date']).'" title="Edit"></i>';
+            }
+
+            if($value['status'] != "Reject"){
+                array_push($aplied_pending_cobo_off, $value);
+            }
+        }
+        $combo_off_detail_arr['applied_combo_off'] = $applied_combo_off;
+        $applied_combo_off_dates = array_column($aplied_pending_cobo_off, "reference_date");
+        $overall_combo_off_dates = array_column($aplied_pending_cobo_off, "combo_off_date");
+        
+        $overtimes_date = [];
+        foreach ($attendance as $key => $value) {
+            $dateToCheck = $value['attendance_date'];
+            
+            if(!in_array($dateToCheck, $applied_combo_off_dates)){
+                foreach ($shift_details as $key_val => $val) {
+                    // Start and end dates
+                    $startDate = $val['start_date'];
+                    $endDate = $val['end_date'];
+                    // Convert dates to timestamps
+                    $dateToCheckTimestamp = strtotime($dateToCheck);
+                    $startDateTimestamp = strtotime($startDate);
+                    $endDateTimestamp = strtotime($endDate);
+                    // Check if the date falls between the start and end dates
+                    if ($dateToCheckTimestamp >= $startDateTimestamp && $dateToCheckTimestamp <= $endDateTimestamp) {
+                        $shift_time = $this->getmintBetweenTwoTime($val['start_time'],$val['end_time']);
+                        $attendance_time = $this->getMintBetweenTwoDatetime($value['attendance_in_time'],$value['attendance_out_time']);
+
+                        if($shift_time < $attendance_time){
+                            $difference_time = $attendance_time - $shift_time;
+                            $min = ($difference_time % 60) ;
+                            $hours = ($difference_time - $min) / 60;
+                            $over_time = str_pad($hours, 2, '0', STR_PAD_LEFT)."h ".str_pad($min, 2, '0', STR_PAD_LEFT)."m";
+                            $date_arr = ["date"=>$dateToCheck,"formated_date" => getDatePickerFormat($dateToCheck),"over_time"=>$over_time];
+                            array_push($overtimes_date, $date_arr);
+                            
+                        }
+                        array_push($overall_combo_off_dates, $dateToCheck);
+
+                    }
+                }
+            }else{
+                array_push($overall_combo_off_dates, $dateToCheck);
+            }
+        }
+        $combo_off_detail_arr['overtimes_date'] = $overtimes_date;
+        $combo_off_detail_arr['overall_combo_off_dates'] = $overall_combo_off_dates;
+        $this->smarty->view("employee_combo_off.tpl",$combo_off_detail_arr);
+      }
+      public function getmintBetweenTwoTime($time1 = '', $time2 = '')
+        {
+            // Convert the times to 24-hour format
+            $time1_24 = date("H:i", strtotime($time1));
+            $time2_24 = date("H:i", strtotime($time2));
+            // $diff_hours = round(abs(strtotime($time2_24) - strtotime($time1_24)) / 3600, 2);
+            $diff_minutes = round(abs(strtotime($time2_24) - strtotime($time1_24)) / 60);
+
+            return $diff_minutes;
+        }
+
+      public function getMintBetweenTwoDatetime($datetime1 = '', $datetime2 = '')
+      {
+                // Create DateTime objects from the input datetime strings
+                $dt1 = new DateTime($datetime1);
+                $dt2 = new DateTime($datetime2);
+
+            // Calculate the difference between the two DateTime objects
+            $interval = $dt1->diff($dt2);
+
+            // Calculate total hours between the two datetimes
+            $total_minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
+
+            return $total_minutes;
+      }
+      public function add_update_combo_off()
+      {
+            $post_data = $this->input->post();
+            // pr($post_data,1);
+            $employee_id = $this->session->userdata("employee_id");
+            $combo_off_date = mysqlFormat($post_data['combo_off_date']);
+            $combo_off_reason = $post_data['combo_off_reason'];
+
+            // check exit combooff date
+            $message = "some thing went wrong";
+            $success = 0;
+            $combo_off_data = $this->leave_model->check_combo_off_date($combo_off_date,$post_data['employee_combo_off_id']);
+            if(!(count($combo_off_data) > 0)){
+                $current_date = date("Y-m-d H:i:s");
+                if($post_data['mode'] == 'Add'){
+                    $reference_date = mysqlFormat($post_data['reference_date']);
+                    $insert_arr = ["employee_id"=>$employee_id,"combo_off_date"=>$combo_off_date,"reference_date"=>$reference_date,"added_reason"=>$combo_off_reason,"over_time"=>$post_data['overtime_hours'],"status"=>"Pending","added_by"=>$employee_id,"added_date"=>$current_date];
+                    $insert_id = $this->leave_model->insert_combo_off($insert_arr);
+                    if($insert_id > 0){
+                        $message = "Combo off added successfully.";
+                        $success = 1;
+                    }
+                }else{
+                    $employee_combo_off_id = $post_data['employee_combo_off_id'];
+                    $update_arr = ["combo_off_date"=>$combo_off_date,"added_reason"=>$combo_off_reason,"updated_by"=>$employee_id,"updated_date"=>$current_date];
+                    $affetced_id = $this->leave_model->update_combo_off($update_arr,$employee_combo_off_id);
+                    if($affetced_id > 0){
+                        $message = "Combo off updated successfully.";
+                        $success = 1;
+                    }                }
+            }else{
+                $message = "Combo off already added for the date $combo_off_date.";
+                $success = 0;
+            }
+            
+            $return_arr["message"] = $message;
+            $return_arr["success"] = $success;
+            // pr($return_arr,1);
+            echo json_encode($return_arr);
+            exit();
+            
+      }
+
+      public function combo_off_list(){
+        $column[] = [
+            "data" => "image",
+            "title" => "Image",
+            "width" => "10%",
+            "className" => "dt-center img-box",
+        ];
+        $column[] = [
+            "data" => "employee_name",
+            "title" => "Employee Name",
+            "width" => "12%",
+            "className" => "dt-left",
+        ];
+        $column[] = [
+            "data" => "employee_code",
+            "title" => "Employee Code",
+            "width" => "10%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "reference_date",
+            "title" => "Reference Date",
+            "width" => "12%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "combo_off_date",
+            "title" => "Combo Off Date",
+            "width" => "12%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "combo_off_reason",
+            "title" => "Combo Off Reason",
+            "width" => "13%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "update_reason",
+            "title" => "Approve/Reject Reason",
+            "width" => "13%",
+            "className" => "dt-center",
+        ];
+        $column[] = [
+            "data" => "status",
+            "title" => "Status",
+            "width" => "10%",
+            "className" => "dt-center status-row",
+        ];
+        $column[] = [
+            "data" => "action",
+            "title" => "Action",
+            "width" => "8%",
+            "className" => "dt-center",
+        ];
+
+        $ajax_json["data"] = $column;
+        $ajax_json["is_searching_enable"] = false;
+        $ajax_json["is_paging_enable"] = true;
+        $ajax_json["is_serverSide"] = true;
+        $ajax_json["is_ordering"] = true;
+        $ajax_json["is_heading_color"] = "#a18f72";
+        $ajax_json["no_data_message"] =
+            '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No combo off request data found..!</div>';
+        $ajax_json["is_top_searching_enable"] = true;
+        $ajax_json["sorting_column"] = json_encode([]);
+        $ajax_json["page_length_arr"] = $this->config->item("page_length");
+        $ajax_json["base_url"] = base_url();
+        $ajax_json['status_arr'] = [['id'=>'Pending','val'=>'Pending'],['id'=>'Approve','val'=>'Approve'],['id'=>'Reject','val'=>'Reject']];
+        // pr($ajax_json['status_arr'],1);
+        $this->smarty->view("combo_off_Request.tpl", $ajax_json);
+      }
+
+     // combo off list
+
+    public function get_combo_off_request(){
+        $post_data = $this->input->post();
+
+        $column_index = array_column($post_data["columns"], "data");
+        $order_by = "";
+        foreach ($post_data["order"] as $key => $val) {
+            if ($key == 0) {
+                $order_by .= $column_index[$val["column"]] . " " . $val["dir"];
+            } else {
+                $order_by .=
+                    "," . $column_index[$val["column"]] . " " . $val["dir"];
+            }
+        }
+
+        $condition_arr["order_by"] = $order_by;
+        $condition_arr["start"] = $post_data["start"];
+        $condition_arr["length"] = $post_data["length"];
+        $order_by = "";
+        foreach ($post_data["order"] as $key => $val) {
+            if ($key == 0) {
+                $order_by .= $column_index[$val["column"]] . " " . $val["dir"];
+            } else {
+                $order_by .=
+                    "," . $column_index[$val["column"]] . " " . $val["dir"];
+            }
+        }
+        $condition_arr["order_by"] = $order_by;
+        $condition_arr["start"] = $post_data["start"];
+        $condition_arr["length"] = $post_data["length"];
+        $base_url = $this->config->item("base_url");
+        /* filter params */
+        $filter_arr = [];
+        if (array_key_exists("search", $post_data)) {
+            $serch_params = $post_data["search"];
+            $filter_arr["status"] = $serch_params["status"];
+            $filter_arr["employee_name"] = $serch_params["employee_name"];
+            $filter_arr["employee_code"] = $serch_params["employee_code"];
+            if ($serch_params["reference_date"] != "") {
+                $serch_params["reference_date"] = mysqlFormat($serch_params["reference_date"]);
+            }
+            if ($serch_params["combo_off_date"] != "") {
+                $serch_params["combo_off_date"] = mysqlFormat($serch_params["combo_off_date"]);
+            }
+            $filter_arr["combo_off_date"] = $serch_params["combo_off_date"];
+            $filter_arr["reference_date"] = $serch_params["reference_date"];
+            $filter_arr["combo_off_reason"] = $serch_params["combo_off_reason"];
+            $filter_arr["comment"] = $serch_params["comment"];
+        }
+
+        $employee_combo_off_list = $this->leave_model->get_employee_combo_off_list($condition_arr,$filter_arr);
+        // pr($employee_combo_off_list,1);
+        foreach ($employee_combo_off_list as $key => $value) {
+            $employee_combo_off_list[$key]['image_url']= $value['image'] = get_entiry_url('employee_profile','',$value['image']);
+            $employee_combo_off_list[$key]['image'] = "<img src=" .$value['image']." alt='' width='70' height='70' class='rounded-circle'>";
+            $employee_combo_off_list[$key]['employee_name'] = "<a href='".get_entiry_url('employee','View',$value['employee_id'])."' title='".$value['employee_name']."''>".$value['employee_name']."</a>";
+            $employee_combo_off_list[$key]['update_reason'] = display_no_character($value['update_reason']);
+            $employee_combo_off_list[$key]['status'] = '<span class="'.strtolower($value['status']).'">'.$value['status'].'</span>';
+            $employee_combo_off_list[$key]['status_text'] = $value['status'];
+            
+            $employee_combo_off_list[$key]['action'] = '--';
+            $employee_combo_off_list[$key]["other_Action"] = "";
+            if($value['status'] == 'Pending'){
+                $employee_data = ["employee_name"=>$value['employee_name'],"employee_code"=>$value['employee_code'],"location"=>$value['location'],"designation_name"=>$value['designation_name'],"department_name"=>$value['department_name'],"employee_week_off"=>$value['employee_week_off'],"image"=>$value['image'],"over_time"=>$value['over_time'],"combo_off_date"=>$value['combo_off_date'],"reference_date"=>$value['reference_date'],"reason"=>$value['combo_off_reason']];
+                $employee_data = base64_encode(json_encode($employee_data));
+                $employee_combo_off_list[$key]['action'] = "<i class='ti ti-circle-check approve-combo-off'
+                data-employee='$employee_data' data-combo-off-id='".$value['employee_combo_off_id']."'
+                ' title='Approve'></i>";
+
+                $extra_par = "data-employee='$employee_data' data-combo-off-id='".$value['employee_combo_off_id']."'";
+                $action_btn_arr[] = ["class"=>"approve-combo-off","title"=>"Approve","extra_par"=>$extra_par,"href"=>"javascript:void(0)"];
+                $employee_combo_off_list[$key]["other_Action"] = getGridButton($action_btn_arr);
+                // pr($employee_combo_off_list[$key]["other_Action"]1,1);
+
+            }
+            // $employee_details ["image"]
+        }
+        $data["data"] = $employee_combo_off_list;
+        $total_record = $this->leave_model->get_employee_combo_off_list([],$filter_arr);
+        $data["recordsTotal"] = count($total_record);
+        $data["recordsFiltered"] = count($total_record);
+        echo json_encode($data);
+        exit();
+    }
+
+    public function update_combo_off_status(){
+        $post_data = $this->input->post();
+        $message = "some thing went wrong";
+        $success = 0;
+        $combo_off_request_id = $post_data['combo_off_request_id'];
+        if($combo_off_request_id > 0){
+            $id = $this->session->userdata("employee_id");
+            $update_reason = $post_data['combo_off_comment'];
+            $updated_date = date("Y-m-d H:i:s");
+            $status = $post_data['slected_status'] == "approve" ? "Approve" : "Reject";
+            $update_arr = ["status"=>$status,"update_reason"=>'',"update_reason"=>$update_reason,"updated_by"=>$id,"updated_date"=>$updated_date];
+            $affected_row = $this->leave_model->update_combo_off($update_arr,$combo_off_request_id);
+            if($affected_row > 0){
+                $message = "Combo off request ".$post_data['slected_status']." successfully.";
+                $success = 1;
+            }
+        }
+        $return_arr["message"] = $message;
+        $return_arr["success"] = $success;
+        echo json_encode($return_arr);
+        exit();
+    }
 
 
 }

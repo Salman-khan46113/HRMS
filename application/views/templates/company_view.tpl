@@ -27,7 +27,7 @@
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
             <div class="ms-4 mt-5 detail-img-block" >
-              <img src="http://localhost/extra_work/employee/public/img/uploads/company_logo/{$company_data['company_logo']}"
+              <img src="public/img/uploads/company_logo/{$company_data['company_logo']}"
                 alt="Generic placeholder image" class=" mt-4 mb-2"
                 >
               <!-- <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"

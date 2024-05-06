@@ -140,7 +140,7 @@ class Bank extends MY_controller
         $ajax_json["is_ordering"] = true;
         $ajax_json["is_heading_color"] = "#a18f72";
         $ajax_json["no_data_message"] =
-            '<div class="p-3"><img class="p-2" src="' .
+            '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No bank data found..!</div>';
         $ajax_json["is_top_searching_enable"] = true;

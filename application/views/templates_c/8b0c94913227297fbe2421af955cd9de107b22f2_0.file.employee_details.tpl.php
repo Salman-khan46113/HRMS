@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 19:18:29
+/* Smarty version 4.3.2, created on 2024-05-04 12:37:22
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_details.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66193bad83dfd1_53528456',
+  'unifunc' => 'content_6635deaaa831f4_72327373',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8b0c94913227297fbe2421af955cd9de107b22f2' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_details.tpl',
-      1 => 1712929708,
+      1 => 1714805916,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66193bad83dfd1_53528456 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6635deaaa831f4_72327373 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRMS/application/third_party/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="main-middle-container">
@@ -55,12 +55,12 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRM
                <div class="ms-4 mt-5 detail-img-block" >
                   <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable1 = ob_get_clean();
-echo $_prefixVariable1;?>
+$_prefixVariable29 = ob_get_clean();
+echo $_prefixVariable29;?>
 public/img/uploads/employee_profile/<?php ob_start();
 echo $_smarty_tpl->tpl_vars['data']->value[0]['profile_image'];
-$_prefixVariable2 = ob_get_clean();
-echo $_prefixVariable2;?>
+$_prefixVariable30 = ob_get_clean();
+echo $_prefixVariable30;?>
 "
                      alt="Generic placeholder image" class=" mt-4 mb-2"
                      >
@@ -134,9 +134,16 @@ echo $_prefixVariable2;?>
                                     <strong>Secondary Mobile Number </strong>
                                  </div>
                                  <div>
-                                    <span><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['secondary_mobile_code'];?>
+                                    <span>
+                                       <?php if ($_smarty_tpl->tpl_vars['data']->value[0]['secondary_mobile_number'] != '') {?>
+                                          <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['secondary_mobile_code'];?>
  <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['secondary_mobile_number'];?>
-</span>
+
+                                       <?php } else { ?>
+                                          <?php echo display_no_character();?>
+
+                                       <?php }?>
+                                    </span>
                                  </div>
                               </div>
                               <div class="col-3">
@@ -241,14 +248,14 @@ echo $_prefixVariable2;?>
                                     <span><a href="<?php echo get_entiry_url('company','View',$_smarty_tpl->tpl_vars['data']->value[0]['company_id']);?>
 "><?php ob_start();
 echo $_smarty_tpl->tpl_vars['data']->value[0]['company_name'];
-$_prefixVariable3 = ob_get_clean();
-echo $_prefixVariable3;?>
+$_prefixVariable31 = ob_get_clean();
+echo $_prefixVariable31;?>
 </a></span>
                                     <?php } else { ?>
                                     <span><?php ob_start();
 echo $_smarty_tpl->tpl_vars['data']->value[0]['company_name'];
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
+$_prefixVariable32 = ob_get_clean();
+echo $_prefixVariable32;?>
 </span>
                                     <?php }?>
                                  </div>
@@ -292,8 +299,8 @@ echo $_prefixVariable4;?>
                               </div>
                               <?php ob_start();
 if ($_smarty_tpl->tpl_vars['data']->value[0]['reporting_manager'] > 0) {
-$_prefixVariable5 = ob_get_clean();
-echo $_prefixVariable5;?>
+$_prefixVariable33 = ob_get_clean();
+echo $_prefixVariable33;?>
 
                               <div class="col-3">
                                  <div class="title-div">
@@ -307,8 +314,8 @@ echo $_prefixVariable5;?>
 
                               <?php ob_start();
 }
-$_prefixVariable6 = ob_get_clean();
-echo $_prefixVariable6;?>
+$_prefixVariable34 = ob_get_clean();
+echo $_prefixVariable34;?>
 
                               <div class="col-3">
                                  <div class="title-div">
@@ -357,6 +364,66 @@ echo $_prefixVariable6;?>
                                  </div>
                               </div>
                               
+                           </div>
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <p class="lead fw-normal mb-2 ms-1">Shift Details</p>
+                        <div class="p-4 rounded-2" style="background-color: #ecedef;">
+                           <div class="row">
+                              <?php if (is_valid_array($_smarty_tpl->tpl_vars['shift_details']->value)) {?>
+                              <div class="col-3 mb-2">
+                                 <div class="title-div">
+                                    <strong>Shift Name</strong>
+                                 </div>
+                                 <div>
+                                    <span><?php echo $_smarty_tpl->tpl_vars['shift_details']->value['shift_name'];?>
+</span>
+                                 </div>
+                              </div>
+                              <div class="col-3 mb-2">
+                                 <div class="title-div">
+                                    <strong>Shift Start Date</strong>
+                                 </div>
+                                 <div>
+                                    <span><?php echo $_smarty_tpl->tpl_vars['shift_details']->value['start_date'];?>
+</span>
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift End Date</strong>
+                                 </div>
+                                 <div>
+                                    <span><?php echo $_smarty_tpl->tpl_vars['shift_details']->value['end_date'];?>
+</span>
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift Start Time</strong>
+                                 </div>
+                                 <div>
+                                    <span><?php echo display_no_character($_smarty_tpl->tpl_vars['shift_details']->value['start_time']);?>
+</span>
+                                 </div>
+                              </div>
+                               <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Shift End Time</strong>
+                                 </div>
+                                 <div>
+                                    <span><?php echo display_no_character($_smarty_tpl->tpl_vars['shift_details']->value['end_time']);?>
+</span>
+                                 </div>
+                              </div>
+                              <?php } else { ?>
+                                 <div class="col-12 text-center no-data-found-block">
+                                       <img alt="" src="http://localhost/extra_work/HRMS/public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-3">
+                                       <br>
+                                       <span class="mb-4 no-data-found-message">No shift data found!</span>
+                                   </div>
+                              <?php }?>
                            </div>
                         </div>
                      </div>
@@ -599,6 +666,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
    .fw-normal {
    font-weight: 500 !important;
    font-size: 20px;
+   font-family: 'GilroySemibold', sans-serif !important;
    }
    .card .name-block h2{
    color: #fff;
@@ -696,6 +764,18 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
   .employee-profile-box .nav-tabs .nav-link.active {
       color: #206DFF;
   }
+  .no-data-found-message {
+    color: var(--body-text-color) !important;
+    font-size: var(--x_normalFont) !important;
+       color: black;
+       margin-bottom: 0px !important;
+       font-size: 18px !important;
+   }
+   .no-data-found-block img {
+    width: 7% !important;
+       height: 70% !important;
+       -webkit-filter: invert(20%) !important;
+   }
 
 </style>
 <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

@@ -263,41 +263,41 @@ class User extends MY_controller
 
     public function send_email()
     {
-        $category_arr = [];
-        $cat_data = $this->user_model->get_cat();
-        $final_html = "";
-        foreach ($cat_data as $key => $value) {
-            $html = "";
-            if ($value["parent_id"] == 0) {
-                $html .=
-                    "<ul> <li class='category_" .
-                    $value["id"] .
-                    "'>" .
-                    $value["category_name"] .
-                    "</li>";
-                $child = $this->get_child($cat_data, $value["id"]);
+        // $category_arr = [];
+        // $cat_data = $this->user_model->get_cat();
+        // $final_html = "";
+        // foreach ($cat_data as $key => $value) {
+        //     $html = "";
+        //     if ($value["parent_id"] == 0) {
+        //         $html .=
+        //             "<ul> <li class='category_" .
+        //             $value["id"] .
+        //             "'>" .
+        //             $value["category_name"] .
+        //             "</li>";
+        //         $child = $this->get_child($cat_data, $value["id"]);
 
-                $category = [
-                    "category" => $value["category_name"],
-                    "id" => $value["id"],
-                    "child" => $child,
-                    "html" => $html,
-                ];
-                if (count($child) > 0) {
-                    foreach ($child as $key_val => $val) {
-                        if (array_key_exists("html", $child[$key_val])) {
-                            $html .= $child[$key_val]["html"];
-                        }
-                    }
-                }
-                $html .= "</ul>";
-                $category["html"] = $html;
-                $final_html .= $html;
-                array_push($category_arr, $category);
-            }
-        }
-        $category_arr["html"] = $final_html;
-        pr($category_arr, 1);
+        //         $category = [
+        //             "category" => $value["category_name"],
+        //             "id" => $value["id"],
+        //             "child" => $child,
+        //             "html" => $html,
+        //         ];
+        //         if (count($child) > 0) {
+        //             foreach ($child as $key_val => $val) {
+        //                 if (array_key_exists("html", $child[$key_val])) {
+        //                     $html .= $child[$key_val]["html"];
+        //                 }
+        //             }
+        //         }
+        //         $html .= "</ul>";
+        //         $category["html"] = $html;
+        //         $final_html .= $html;
+        //         array_push($category_arr, $category);
+        //     }
+        // }
+        // $category_arr["html"] = $final_html;
+        // pr($category_arr, 1);
         $data["name"] = "Aarbaj Mulla";
         $data["email"] = "mullaaarbaj10@yopmail.com";
         $data["subject"] = $data["title"] = "Sign In";
@@ -771,7 +771,7 @@ class User extends MY_controller
         $data["role"] = $_SESSION['role'];
 
         // pr($data,1);
-        $data['employement_type'] = [0 => ["id"=>"employee","val"=>"Employee"],1 => ["id"=>"manager","val"=>"Manager"],2 => ["id"=>"admin","val"=>"Admin"],3 => ["id"=>"arom","val"=>"AROM"],4 => ["id"=>"admin","val"=>"Admin"]];
+        $data['employement_type'] = [0 => ["id"=>"employee","val"=>"Employee"],1 => ["id"=>"manager","val"=>"Manager"],2 => ["id"=>"admin","val"=>"Admin"],3 => ["id"=>"arom","val"=>"AROM"]];
 
         // pr($data,1);
         $this->smarty->view("employee_add_update.tpl",$data);

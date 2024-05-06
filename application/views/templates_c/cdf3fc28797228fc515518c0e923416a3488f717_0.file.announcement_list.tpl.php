@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 19:37:31
+/* Smarty version 4.3.2, created on 2024-04-26 15:42:10
   from '/var/www/html/extra_work/HRMS/application/views/templates/announcement_list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66194023733fb0_28080985',
+  'unifunc' => 'content_662b7dfa421a07_01252063',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cdf3fc28797228fc515518c0e923416a3488f717' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/announcement_list.tpl',
-      1 => 1712930841,
+      1 => 1714126329,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66194023733fb0_28080985 (Smarty_Internal_Template $_smarty_tpl) {
+function content_662b7dfa421a07_01252063 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRMS/application/third_party/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="main-middle-container">
@@ -39,7 +39,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRM
 					</button> -->
           <a href="announcement.html" class="btn btn-primary add-leave add-action">
 						<i class="ti ti-plus"></i>
-						<span>Add announcement</span>
+						<span>Add Announcement</span>
 					</a>
 				</div>
 			</div>

@@ -29,5 +29,5 @@
 	{/foreach} 
 
 {else}
-	<tr class="odd"><td valign="top" colspan="5" class="dataTables_empty"><div class="p-3"><img class="p-2" src="http://localhost/extra_work/HRMS/public/assets/images/images/no_data_found_new.png" height="100" width="100"><br> No component data found..!</div></td></tr>
+	<tr class="odd"><td valign="top" colspan="5" class="dataTables_empty"><div class="p-3 no-data-found-block"><img class="p-2" src="http://localhost/extra_work/HRMS/public/assets/images/images/no_data_found_new.png" height="100" width="100"><br> No component data found..!</div></td></tr>
 {/if}

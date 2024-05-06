@@ -22,13 +22,15 @@ class Salary extends MY_controller
             array_push($year_arr, $i);
         }
         $data["year_arr"] = $year_arr;
-        $salary_component = $this->salary_model->get_salary_component();
-        foreach ($salary_component as $key => $value) {
-            $salary_component[$key]['action'] = '<span class="edit_salary_componet me-2 text-secondary cursor" data-id="' . $value['salary_component_id'] . '" title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
-        }
-        $data["salary_components"] = $salary_component;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
-        base_url() .
+
+    	$salary_component = $this->salary_model->get_salary_component();
+    	foreach ($salary_component as $key => $value) {
+    		$salary_component[$key]['action'] = '<span class="edit_salary_componet me-2 text-secondary cursor" data-id="'.$value['salary_component_id'].'" title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
+    	}
+    	$data["salary_components"] = $salary_component;
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
+            base_url() .
+
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary component data found..!</div>';
         $data["company_details"] = $this->salary_model->get_companies();
         $data["selected_company"] = getCompanyId();
@@ -148,8 +150,9 @@ class Salary extends MY_controller
             $designation = $this->salary_model->get_designation($department_ids);
         }
         $data["designation"] = $designation;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
-        base_url() .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
+            base_url() .
+
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary structure data found..!</div>';
 
         $data["salary_strucuture"] = $this->salary_model->get_designation_salary_structure_list($data["selected_company"]);
@@ -365,8 +368,10 @@ class Salary extends MY_controller
         }
         $data['employee_id'] = $get_data['id'];
         $data["year_arr"] = $year_arr;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
-        base_url() . 'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee salary structure data found..!</div>';
+
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
+            base_url() .'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee salary structure data found..!</div>';
+
         $get_employee_details = $this->salary_model->get_employee_details($get_data['id']);
         $designation_salary_structure = $this->salary_model->get_designation_salary_structure($get_employee_details['department'], $get_employee_details['designation'], $get_employee_details['company_id']);
 
@@ -510,6 +515,7 @@ class Salary extends MY_controller
         $base_directory = FCPATH . "public/uploads/salary_slip";
         $employee_path = $base_directory . '/' . $data['employee_id'];
 
+
         if (!is_dir($employee_path)) {
             mkdir($employee_path, 0777);
         }
@@ -528,6 +534,7 @@ class Salary extends MY_controller
         $file_path = $year_month_directory . 'salary_pdf.pdf';
         $htm_str = $this->smarty->fetch("salary_slip.tpl", $data);
         pr($htm_str);
+
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetMargins(0, 7, 7, 0);
@@ -539,6 +546,7 @@ class Salary extends MY_controller
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
         $pdf->writeHTML($htm_str, true, false, true, false, '');
+
         $file_path = $month_path . '/salary_slip.pdf';
         $output = $pdf->Output($file_path, 'F');
 
@@ -768,6 +776,7 @@ class Salary extends MY_controller
             );
         }
         return $caculated_array;
+
 
     }
 

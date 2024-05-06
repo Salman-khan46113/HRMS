@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-16 14:50:25
+/* Smarty version 4.3.2, created on 2024-05-05 16:01:58
   from '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661e42d91273d5_95089753',
+  'unifunc' => 'content_6637601e22ebf0_46107177',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6cad605d831d85edeb156290add8bfa433416976' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/leave_management.tpl',
-      1 => 1713253160,
+      1 => 1714905116,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661e42d91273d5_95089753 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6637601e22ebf0_46107177 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
 <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -62,7 +62,7 @@ function content_661e42d91273d5_95089753 (Smarty_Internal_Template $_smarty_tpl)
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Name</span>
+                                            <span class="hide-menu">Employee Name</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">

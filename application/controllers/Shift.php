@@ -35,7 +35,7 @@ class Shift extends MY_controller
               }
 
         }
-         $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+         $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Shift Management data found..!</div>';
         $data["company_details"] = $this->Shift_model->get_companies();
@@ -186,7 +186,7 @@ class Shift extends MY_controller
     $data["selected_company"] = getCompanyId();
     $data["departments"] = $this->Shift_model->get_department($data["selected_company"]);
     $data["no_data_message"] =
-            '<div class="p-3"><img class="p-2" src="' .
+            '<div class="p-3"><img class="p-2 no-data-found-block" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No shift groups data found..!</div>';
     $data["shift_type_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];

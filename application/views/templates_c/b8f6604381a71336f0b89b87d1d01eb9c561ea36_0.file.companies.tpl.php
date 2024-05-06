@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-16 11:36:08
+/* Smarty version 4.3.2, created on 2024-05-05 22:24:48
   from '/var/www/html/extra_work/HRMS/application/views/templates/companies.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661e1550a623b1_07385995',
+  'unifunc' => 'content_6637b9d8aebe95_72822847',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b8f6604381a71336f0b89b87d1d01eb9c561ea36' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/companies.tpl',
-      1 => 1713247498,
+      1 => 1714804893,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661e1550a623b1_07385995 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6637b9d8aebe95_72822847 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <style>
 	.dataTables_wrapper.no-footer .dt-buttons {
@@ -169,7 +169,11 @@ function content_661e1550a623b1_07385995 (Smarty_Internal_Template $_smarty_tpl)
                         </button>
                     </div>
             </div>
-                <button id="downloadPDFBtn">PDF</button>
+               
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('arom'))) {
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
 
 			<div class="timesheet-summary">
 				<div class="timesheet-summary-lst">
@@ -180,6 +184,11 @@ function content_661e1550a623b1_07385995 (Smarty_Internal_Template $_smarty_tpl)
                 </a>
 				</div>
 			</div>
+			<?php ob_start();
+}
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+
 			</div>
 		</div>
 
@@ -197,7 +206,17 @@ function content_661e1550a623b1_07385995 (Smarty_Internal_Template $_smarty_tpl)
 							<th scope="col">Email</th>
 							<th scope="col">Date of Founding</th>
 							<th scope="col">GST Number</th>
+							 <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('arom'))) {
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+
 							<th scope="col">Action</th>
+							<?php ob_start();
+}
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+
 							
 						</tr>
 					</thead>
@@ -222,8 +241,18 @@ $_smarty_tpl->tpl_vars['val']->do_else = false;
 </td> 
 							<td><?php echo $_smarty_tpl->tpl_vars['val']->value['gst_number'];?>
 </td> 
+							<?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('arom'))) {
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+
 							<td><a href = "update-company.html?id=<?php echo $_smarty_tpl->tpl_vars['val']->value['company_id'];?>
 "><i class="la-edit ti ti-edit"></a></i></td>
+							<?php ob_start();
+}
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+
 			  			</tr>
 						<?php
 }
@@ -248,26 +277,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
 <link rel="stylesheet" href="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable1 = ob_get_clean();
-echo $_prefixVariable1;?>
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
 public/css/attendance_sheet.css" />
 <link rel="stylesheet" href="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable2 = ob_get_clean();
-echo $_prefixVariable2;?>
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
 public/css/leave.css" />
 <?php echo '<script'; ?>
 >
     var no_data_message =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
-$_prefixVariable3 = ob_get_clean();
-echo $_prefixVariable3;?>
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
 ;
     var base_url = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['base_url']->value);
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
 ;
+    var role = <?php ob_start();
+echo json_encode($_smarty_tpl->tpl_vars['role']->value);
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
+
 <?php echo '</script'; ?>
 >
 

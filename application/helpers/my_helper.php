@@ -40,6 +40,20 @@ function get_entiry_url($module_name = '',$mode = '',$id=""){
 					break;
 			}
 			break;
+		case 'announcement':
+			switch ($mode) {
+				case 'View':
+					$url = base_url()."announcement_details.html?id=".$id;
+					break;
+			}
+			break;
+		case 'employee_leave':
+			switch ($mode) {
+				case 'List':
+					$url = base_url()."leave-allocation.html";
+					break;
+			}
+			break;
 		case 'salary_structure':
 			switch ($mode) {
 				case 'Add':
@@ -79,6 +93,9 @@ function get_entiry_url($module_name = '',$mode = '',$id=""){
 					$url = base_url()."employee-salary-structure-update.html?id=".$id;
 					break;
 			}
+			break;
+		case 'employee_profile':
+			$url = base_url()."public/img/uploads/employee_profile/".$id;
 			break;
 	}
 	if($url == '' || $url == null){

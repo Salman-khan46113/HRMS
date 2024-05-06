@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-12 19:24:27
+/* Smarty version 4.3.2, created on 2024-05-01 14:52:26
   from '/var/www/html/extra_work/HRMS/application/views/templates/company_view.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66193d1352a3d6_28798922',
+  'unifunc' => 'content_663209d28f0ee1_84133585',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8d62965ad1a6750f482c6b068de6fa5fa9ccbd5e' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/company_view.tpl',
-      1 => 1712930031,
+      1 => 1714555345,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_66193d1352a3d6_28798922 (Smarty_Internal_Template $_smarty_tpl) {
+function content_663209d28f0ee1_84133585 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRMS/application/third_party/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="main-middle-container">
@@ -54,7 +54,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/extra_work/HRM
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
             <div class="ms-4 mt-5 detail-img-block" >
-              <img src="http://localhost/extra_work/employee/public/img/uploads/company_logo/<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_logo'];?>
+              <img src="public/img/uploads/company_logo/<?php echo $_smarty_tpl->tpl_vars['company_data']->value['company_logo'];?>
 "
                 alt="Generic placeholder image" class=" mt-4 mb-2"
                 >

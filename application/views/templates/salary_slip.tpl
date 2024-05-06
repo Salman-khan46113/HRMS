@@ -458,7 +458,7 @@
                                             <td align="left" width="48%">
                                                 <font style="font-size: 14px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Signature:&nbsp;</strong></font>
                                                 <font style="font-size: 15px; display: inline-block;" align="left" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                    <img align="left" src="http://mrs-inventory-staging.s3.amazonaws.com/waybill_signatures/5453/local_destination_signature.png" height="16px" width="180px" />
+
                                                                 </font>
                                             </td>
                                         </tr>

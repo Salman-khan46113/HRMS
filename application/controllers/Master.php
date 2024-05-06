@@ -14,7 +14,7 @@ class Master extends MY_controller
     public function department(){
     	$department = $this->master_model->get_department();
     	$data["department"] = $department;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No department data found..!</div>';
         $data["company_details"] = $this->master_model->get_companies();
@@ -66,7 +66,7 @@ class Master extends MY_controller
     /* holiday and designation */
     public function designation()
     {
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No designation data found..!</div>';
         $data["grads_data"] = [["id"=>"I","val"=>"I"],["id"=>"II","val"=>"II"],["id"=>"III","val"=>"III"]];

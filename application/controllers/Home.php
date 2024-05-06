@@ -23,7 +23,7 @@ class Home extends MY_Controller
     }
     public function home()
     {
-        $user = $this->home_model->get_user_details($_SESSION["employee_id"]);
+        $user = $employment_details_arr = $this->home_model->get_user_details($_SESSION["employee_id"]);
         $date1 = new DateTime();
         $date2 = new DateTime($user["employment_date"]);
 
@@ -83,14 +83,230 @@ class Home extends MY_Controller
         $next_date = date("Y-m-d", strtotime("+7 days"));
         $interval["bithaday"] = $this->home_model->get_employee_birthdays(
             $current_date,
-            $next_date
+            $next_date,
+            $current_year
         );
-        // pr($interval["bithaday"],1);
+
+        /* next 7 day work anniversary  */
+        $interval["work_anniversary"] = $this->home_model->get_employee_work_aniversary(
+            $current_date,
+            $next_date,
+            $current_year
+        );
+
+        /* get laeve count */
+        $designation_id = $this->session->userdata("designation");
+        $department_id = $this->session->userdata("department");
+        $company_id = getCompanyId();
+        $interval["pending_leave"] = 0;
+        $allocated_leave = $this->home_model->get_allocated_leave($company_id,$designation_id,$department_id);
+
+        if(isset($allocated_leave['total_leave'])){
+            if($allocated_leave['total_leave'] > 0){
+                $employee_id = $this->session->userdata("employee_id");
+                $applied_leave = $this->home_model->get_applied_leave($employee_id);
+
+                $total_applied_leave = 0;
+                if(count($applied_leave) > 0){
+                    foreach ($applied_leave as $key => $value) {
+                        $start_date = new DateTime($value["leave_start_date"]);
+                        $end_date = new DateTime($value["leave_end_date"]);
+                        $interval_day = (array) $end_date->diff($start_date);
+                        $total_applied_leave_val = 0 ? 1 : (int) $interval_day["days"] + 1;
+                        if($value['leave_type'] == "half_day"){
+                            $total_applied_leave_val = $total_applied_leave_val/2;
+                        }
+                        $total_applied_leave += $total_applied_leave_val;
+
+                    }
+                }
+                
+                $allocated_leave = $allocated_leave['total_leave'] - $total_applied_leave;
+                $interval["pending_leave"] = $allocated_leave < 0 ? 0 : $allocated_leave;
+            }
+        }
+
+        $interval["apply_leave_url"] = get_entiry_url("employee_leave","List",'');
+        
+        /* attendance summary */
+        $interval["attendance_summary"] = ["current_month_leave" => 0,"total_present_date" => 0,"total_absent_date" => 0];
+        $current_month = date("m");
+        $current_month_leave = $this->home_model->get_current_month_leave($employee_id,$current_month);
+        $current_month_last_day = date("Y-m-t");
+        $total_applied_leave = 0;
+               foreach ($current_month_leave as $key => $value) {
+            $date1 = strtotime($current_month_last_day);
+            $date2 = strtotime($value['leave_end_date']);
+            if ($date1 < $date2) {
+                $start_date = new DateTime($value["leave_end_date"]);
+                $end_date = new DateTime($current_month_last_day);
+                $interval_day = (array) $end_date->diff($start_date);
+                $total_leave_val = 0 ? 1 : (int) $interval_day["days"] + 1;
+            } else{
+                $start_date = new DateTime($value["leave_start_date"]);
+                $end_date = new DateTime($value["leave_end_date"]);
+                $interval_day = (array) $end_date->diff($start_date);
+                $total_leave_val = 0 ? 1 : (int) $interval_day["days"] + 1;
+            }
+            if($value['leave_type'] == "half_day"){
+                    $total_leave_val = $total_leave_val/2;
+            }
+            $total_applied_leave += $total_leave_val;
+            if($total_applied_leave > 0){
+                $interval["attendance_summary"]['current_month_leave'] =  $total_applied_leave;
+            }
+            
+            // echo $total_applied_leave;
+            // pr($value);
+        }
+        
+        
+        $week_off = $employment_details_arr["employee_week_off"] != "" && $employment_details_arr["employee_week_off"] != null ? explode(",", $employment_details_arr["employee_week_off"]) : [];
+        $current_date = date("Y-m-d");
+        $employee_id = $this->session->userdata("employee_id");
+        $current_month = date("m");
+        $attendance_summary = $this->home_model->get_attendance_summary($employee_id,$current_date,$current_month);
+        $attendance_presnt_count = 0;
+        $attendance_absent_count = 0;
+        $total_week_off_date = 0;
+        $total_hours = 0;
+        $total_min = 0;
+        foreach ($attendance_summary as $key => $value) {
+            $date = new DateTime($value["attendance_date"]);
+            $dayName = $date->format("l");
+            if (!in_array($dayName, $week_off)) {
+                $flag = 0;
+                $type = '';
+                foreach ($current_month_leave as $key_val => $val) {
+                        $leave_start = strtotime($val['leave_start_date']);
+                        $leave_end = strtotime($val['leave_end_date']);
+                        $attendance_date_value = strtotime($value['attendance_date']);
+                        if ($leave_start <= $attendance_date_value && $leave_end >= $attendance_date_value) {
+                            if($val['leave_type'] == 'full_day'){
+                                $flag = 1;
+                            }else{
+                                $type = 'half_day';
+                            }
+                            
+                        }
+                }
+                if($flag == 0){
+                    if($value['attendance_in_time'] != null && $value['attendance_in_time'] != '0000-00-00 00:00:00' && $value['attendance_out_time'] != null && $value['attendance_out_time'] != '0000-00-00 00:00:00' ){
+                            $start_attendance_time = new DateTime($value['attendance_in_time']);
+                            $end_attendance_time = new DateTime($value['attendance_out_time']);
+                            $diffrence_interval = $start_attendance_time->diff($end_attendance_time);
+                            $total_hours += $diffrence_interval->format('%h');
+                            $total_min += $diffrence_interval->format('%i');
+                            if($total_min >= 60){
+                                $total_min++;
+                                $total_actual_min = $total_min;
+                                $total_min = $total_min%60;
+                                $total_hours += ($total_actual_min - $total_min)/60;
+                            }
+                        if($type == 'half_day'){
+                            $attendance_presnt_count += 0.5;
+                        }else{
+                            $attendance_presnt_count += 1;
+                        }
+                    }else{
+
+                        if($type == ''){
+                            $attendance_absent_count++;
+                        }
+                        
+                    }
+                }
+            }else{
+                $total_week_off_date++;
+            }
+            
+        }
+        $interval["attendance_summary"][''] = $total_week_off_date;
+        $total_working_hours = "00:00";
+        if($total_hours > 0 || $total_min > 0){
+            $total_working_hours = $total_hours.":".$total_min;
+        }
+        $interval["attendance_summary"]['total_working_hours'] = $total_working_hours;
+        // pr($interval,1);
+        $actual_total_present_date = $attendance_presnt_count+$attendance_absent_count;
+        $total_present_date =  $attendance_presnt_count - $total_applied_leave;
+        $interval["attendance_summary"]['total_present_date'] = $attendance_presnt_count;
+        $interval["attendance_summary"]['total_absent_date'] = $attendance_absent_count;
+        $attendance_percentage = 0;
+        if($actual_total_present_date > 0 && $total_present_date > 0){
+            $attendance_percentage = ($attendance_presnt_count/$actual_total_present_date)*100;
+        }
+        $interval["attendance_summary"]['attendance_percentage'] = getNumberFormate($attendance_percentage)."%";
+        $interval["attendance_summary"]['attendance_month'] =date("F Y");
+
+        /* get current year notificaction */
+        $current_year = date("Y");
+        $company_id = getCompanyId();
+        $notification_data = $this->home_model->get_notification_data($current_year,$company_id);
+        $notification_details_arr = [];
+        foreach ($notification_data as $key => $value) {
+            $notification_details_arr[$key]['redirect_url'] = get_entiry_url("announcement","View",$value['id']);
+            $notification_details_arr[$key]['title'] = $value['title'];
+        }
+        $interval['notification_details'] = $notification_details_arr;
+        // pr($interval,1);
+        /* get my department department data */
+        $company_id = getCompanyId();
+        $department_id = $this->session->userdata("department");
+        $employee_id = $this->session->userdata("employee_id");
+        $reporting_manager = $this->session->userdata("reporting_manager");
+        // $current_date = "2024-04-23";
+        $department_member = $this->home_model->get_department_member($company_id,$department_id,$employee_id,$current_date);
+        
+        foreach ($department_member as $key => $value) {
+            $department_member[$key]['team_meber_title'] = "Team Member";
+            $department_member[$key]['team_meber_class'] = "apl-badge-teammate";
+
+
+            if($value['employee_id'] == $reporting_manager){
+                $department_member[$key]['team_meber_title'] = "Manager";
+                $department_member[$key]['team_meber_class'] = "apl-badge-manager";
+            }
+
+            if($value['attendance_in_time'] != "" && $value['attendance_in_time'] != "0000-00-00 00:00:00" && $value['attendance_in_time'] != null){
+                $dateTimeIn = new DateTime($value["attendance_in_time"]);
+                $dateTimeIn = $dateTimeIn->format("g:i A");
+                $department_member[$key]['attendance_in_time'] = $dateTimeIn;
+                if($value['attendance_out_time'] != "" && $value['attendance_out_time'] != "0000-00-00 00:00:00" && $value['attendance_out_time'] != null){
+                    $dateTimeIn = new DateTime($value["attendance_out_time"]);
+                    $dateTimeIn = $dateTimeIn->format("g:i A");
+                    $department_member[$key]['attendance_out_time'] = $dateTimeIn;
+                    $department_member[$key]['attendance_status'] = "Away";
+                    $department_member[$key]['attendance_status_class'] = "away";
+                }else{
+                    $department_member[$key]['attendance_status'] = "Present";
+                    $department_member[$key]['attendance_status_class'] = "present";
+                }
+            }else{
+                if($value['leave_id'] > 0){
+                    $department_member[$key]['attendance_status'] = "On Leave";
+                    $department_member[$key]['attendance_status_class'] = "onleave";
+                }else{
+                    $department_member[$key]['attendance_status'] = "Absent";
+                    $department_member[$key]['attendance_status_class'] = "absent";
+                }
+            }
+            $department_member[$key]['profile_image'] = get_entiry_url("employee_profile",'',$value['profile_image']);
+            
+        }
+        
+        // Extract the 'age' column to sort by
+        $manager = array_column($department_member, 'team_meber_title');
+        // Sort $people based on 'age'
+        array_multisort($manager, SORT_ASC, $department_member);
+        $interval["department_member"] = $department_member;
+
+        // pr($interval,1);
         // $interval['holiday'] = [];
         $interval["attendance_in_time"] = $InTime;
         $interval["attendance_out_time"] = $OutTime;
         $interval["working_time"] = $working_time;
-
+        $interval["current_year"] = date('Y');
         $this->smarty->view("home.tpl", $interval);
     }
 
@@ -105,11 +321,12 @@ class Home extends MY_Controller
             }
         }
         $data["data"] = $this->home_model->get_employee_details($id);
+        // pr($data,1);
         if(count($data["data"]) > 0 && $image != ''){
             $data["data"][0]['profile_image'] = $image;
         }
-        
-        
+        $current_date = date("Y-m-d");
+        $data['shift_details'] = $this->home_model->get_employee_shift_details($id,$current_date);
         $data["bank_data"] = $this->home_model->get_bank_details($id);
         $data["employee_id"] = $id;
         $this->smarty->view("employee_details.tpl", $data);
@@ -187,7 +404,7 @@ class Home extends MY_Controller
         $ajax_json["is_ordering"] = true;
         $ajax_json["is_heading_color"] = "#a18f72";
         $ajax_json["no_data_message"] =
-            '<div class="p-3"><img class="p-2" src="' .
+            '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No Employee data found..!</div>';
         $ajax_json["is_top_searching_enable"] = true;
