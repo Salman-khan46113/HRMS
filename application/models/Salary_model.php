@@ -301,7 +301,7 @@ class Salary_model extends CI_Model
     public function getEmployeeData($month_name = ''){
         // $company_id = $this->session->userData('company_id');
         $this->db->select('em.employee_id,em.designation,em.department,c.company_name,d.departmen_name,ds.designation_name,co.country_name,s.vState,bm.bank_name,bm.account_no,CONCAT(if(em.city is null,"",em.city)," ", s.vState," ", co.country_name) as address
-        ,concat(em.first_name," ",em.last_name) as full_name,em.employee_code,em.employment_date,em.pf_number,ew.employee_week_off as week_off');
+        ,concat(em.first_name," ",em.last_name) as full_name,em.employee_code,em.employment_date,em.pf_number,ew.employee_week_off as week_off,em.over_time_allow,em.overtime_rate_per_hour');
         $this->db->from('employee_master em');
         $this->db->join('companies c','c.company_id = em.company_id');
         $this->db->join('department_master d','d.department_id = em.department');
@@ -393,16 +393,33 @@ class Salary_model extends CI_Model
         $this->db->where('et.attendance_date <=',$date_arr['end_date']);
         $query = $this->db->get();
         $attendencde_dates_raw = is_object($query) ? $query->result_array() : [];
-        $attendence_data = [];
+        $attendence_data = $attendence_date_comp = [];
         if(is_valid_array($attendencde_dates_raw)){
             foreach($attendencde_dates_raw as $key=>$value){
                 if($value['attendance_in_time'] != '0000-00-00 00:00:00' && $value['attendance_out_time'] != '0000-00-00 00:00:00'){
                     $attendence_data[$value['employee_id']] []= $value['attendance_date'];
+                    $attendence_date_comp[$value['employee_id']][$value['attendance_date']]['in_time'] = $value['attendance_in_time'];
+                    $attendence_date_comp[$value['employee_id']][$value['attendance_date']]['out_time'] = $value['attendance_out_time'];
                 }
             }
         }
-        
-        return $attendence_data;
+        $return_arr['attendence_data'] = $attendence_data;
+        $return_arr['in_out_employee_data'] = $attendence_date_comp;
+        return $return_arr;
+    }
+
+    public function getEmployeeShiftData($employee_id = 0,$date_arr = []){
+        $start_date = $date_arr['start_date'];
+        $end_date = $date_arr['end_date'];
+        $this->db->select('sm.start_time,sm.end_time,es.employee_ids,es.start_date,es.end_date');
+        $this->db->from('employee_shift es');
+        $this->db->join('shift_master sm','es.shift_id = sm.id','left');
+        $this->db->where("FIND_IN_SET($employee_id, es.employee_ids) >" ,0);
+        $this->db->where("es.start_date >= '$start_date' AND es.start_date <= '$end_date'");
+        $this->db->where("es.end_date <= '$end_date'");
+        $query = $this->db->get();
+        $employee_shift_wise_data = is_object($query) ? $query->result_array() : [];
+        return $employee_shift_wise_data;
     }
 }
 
