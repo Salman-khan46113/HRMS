@@ -83,7 +83,7 @@
                 {{else}}
                     <tr >
                         <td colspan="8">
-                            <div class="mb-5 ">
+                            <div class="mb-5 no-data-found-block">
                              <img
                                 alt=""
                                 src="{{$base_url}}public/assets/images/images/no_data_found_new.png"

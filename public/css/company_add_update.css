@@ -4,7 +4,7 @@
     display: inline-block; */
         display: inline;
         width: 100%;
-        padding: 8px 16px;
+        /*padding: 8px 16px;*/
         font-size: 0.875rem;
         font-weight: 400;
         line-height: 1.5;
@@ -86,8 +86,8 @@
     .update-file-block label {
         /* width: 14% !important; */
         cursor: pointer;
-        border-radius: 5px 0px 0px 5px !important;
-        background: #f3eaf5 !important;
+        /*border-radius: 5px 0px 0px 5px !important;*/
+        /*background: #f3eaf5 !important;*/
     }
 
     .update-file-block input {
@@ -96,7 +96,7 @@
         height: 39px;
     }
     .update-file-block label {
-        border-radius: 5px 0px 0px 5px !important;
+        /*border-radius: 5px 0px 0px 5px !important;*/
     }
 
     .cursor {
@@ -117,4 +117,51 @@
     color: #206DFF !important;
     margin-right: 9px;
     border-radius: 4px;
+}
+#company_form .row .col label.form-label,#company_form .row .col-6 label.form-label{
+      width: 100%;
+    color: #555555;
+    font-size: 15px !important;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+}
+#company_form .row .col input.form-control,#company_form  .row .col-6 input.form-control{
+    border-radius: 5px;
+    height: 48px ;
+    padding: 0px 11px;
+    width: 100% ;
+        font-size: 16px !important;
+}
+#company_form .row .col input.form-check-input {
+    width: 1.588em;
+    height: 1.588em;
+}
+#company_form .row .col .form-check-label {
+     padding: 4px 0px 2px 2px;
+    font-size: 16px;
+    margin-left: 8px;
+    margin-right: 2px;
+}
+#company_form .update-file-block input{
+        height: 47px;
+  width: 85% !important;
+}
+#company_form .update-file-block label{
+  
+  /*padding: 12px 16px;*/
+}
+
+#company_form #profile_image_name{
+      /*padding: 8px 16px !important;*/
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 2.5;
+        
+}
+.address-block .title-block label{
+        padding-top: 20px;
+    margin-bottom: 0px !important;
+}
+.title-block label {
+    width: 90%;
 }

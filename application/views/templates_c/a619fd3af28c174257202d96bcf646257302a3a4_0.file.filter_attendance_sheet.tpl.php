@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-13 22:29:39
+/* Smarty version 4.3.2, created on 2024-05-04 12:14:47
   from '/var/www/html/extra_work/HRMS/application/views/templates/filter_attendance_sheet.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661ab9fb97ebe7_92315930',
+  'unifunc' => 'content_6635d95f31f213_93228186',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a619fd3af28c174257202d96bcf646257302a3a4' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/filter_attendance_sheet.tpl',
-      1 => 1713002220,
+      1 => 1714804973,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_661ab9fb97ebe7_92315930 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6635d95f31f213_93228186 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 if (count($_smarty_tpl->tpl_vars['attendance_sheet']->value) > 0) {
 $_prefixVariable1 = ob_get_clean();
@@ -86,7 +86,7 @@ echo $_prefixVariable10;?>
 
 <tr>
     <td colspan="8">
-        <div class="mb-5">
+        <div class="mb-5 no-data-found-block">
             <img alt="" src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
 $_prefixVariable11 = ob_get_clean();

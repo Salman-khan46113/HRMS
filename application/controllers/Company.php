@@ -13,9 +13,10 @@ class Company extends MY_controller
     public function index(){
         $company_data = $this->company_model->getCompanies();
         $render_arr['data'] = $company_data;
-        $render_arr['no_data_message'] = '<div class="p-3"><img class="p-2" src="' .
+        $render_arr['no_data_message'] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No company data found..!</div>';
+        $render_arr['role'] = $this->session->userdata('role');
         $this->smarty->view("companies.tpl",$render_arr);
     }
 
@@ -63,9 +64,9 @@ class Company extends MY_controller
             //Email validation stars.
             $company_id = array_key_exists('company_id',$post_data) ? $post_data['company_id'] : ''; 
             $email_count = $this->company_model->getEmailCount($post_data['company_email'],$company_id);
-            if($email_count > 0){
-                throw new Exception('Email already Exits.');
-            }
+            // if($email_count > 0){
+            //     throw new Exception('Email already Exits.');
+            // }
             // Email validation ends.
             if(is_valid_array($_FILES) && $_FILES['company_logo']['name'] != ''){
                 $upload_data = $this->uplaodFile();
@@ -280,6 +281,7 @@ class Company extends MY_controller
 
     public function prepareCompanyConfig($company_config = [],$company_id){
         $default_config = $this->config->item('company_cofigs');
+       
         foreach($default_config as $key => $config){
             $default_config[$key]['company_id'] = $company_id;
         }

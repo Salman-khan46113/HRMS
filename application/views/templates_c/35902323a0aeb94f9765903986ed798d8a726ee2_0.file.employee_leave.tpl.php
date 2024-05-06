@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-17 00:03:31
+/* Smarty version 4.3.2, created on 2024-05-05 01:10:03
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661ec47b5e1dd9_02448135',
+  'unifunc' => 'content_66368f132dca18_63047383',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35902323a0aeb94f9765903986ed798d8a726ee2' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave.tpl',
-      1 => 1713290642,
+      1 => 1714851069,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661ec47b5e1dd9_02448135 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66368f132dca18_63047383 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<div class="sub-header att-sub-header">
@@ -188,7 +188,7 @@ echo $_prefixVariable16;?>
 
                             <tr >
                                 <td colspan="10">
-                                    <div class="mb-5 ">
+                                    <div class="mb-5 no-data-found-block">
                                      <img
                                         alt=""
                                         src="<?php ob_start();
@@ -227,7 +227,7 @@ echo $_prefixVariable18;?>
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Leave Reuqest</h5>
+            <h5 class="modal-title" id="exampleModalToggleLabel">Leave Request</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

@@ -48,195 +48,206 @@
                     <input id="mode" value="{$mode}" type="hidden" name="mode">
                     <input id="country_code" value="{$company_data['country_code']}" type="hidden" name="country_code">
                   <div class="details-block step-1 step-form">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="company_name" class="form-label">Company Name <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{$company_data['company_name']}">
-                            </div>
-                        
-                            <div class="col">
-                                <label for="company_email" class="form-label">Email <span class="star_required">*</span></label>
-                                <input type="text" value="{$company_data['company_email']}"" class="form-control" id="company_email" name="company_email" placeholder="Email">
-                                
-                            </div>
-
-
+                        <div class="row mb-3 title-block">
+                            <label class="h3">Personal Details</label>
                         </div>
+                        <div class="form-contain">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="company_name" class="form-label">Company Name <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{$company_data['company_name']}">
+                                </div>
+                            
+                                <div class="col">
+                                    <label for="company_email" class="form-label">Email <span class="star_required">*</span></label>
+                                    <input type="text" value="{$company_data['company_email']}"" class="form-control" id="company_email" name="company_email" placeholder="Email">
+                                    
+                                </div>
 
-                        {if $mode eq "Add"}
-                        <div class="row mb-3">
-                          <div class="col">
-                              <label for="company_prefix" class="form-label">Prefix <span class="star_required">*</span></label>
-                              <input type="text" class="form-control" id="company_prefix" name="company_prefix" placeholder="Please enter Company Prefix" value="">
+
+                            </div>
+
+                            {if $mode eq "Add"}
+                            <div class="row mb-3">
+                              <div class="col">
+                                  <label for="company_prefix" class="form-label">Prefix <span class="star_required">*</span></label>
+                                  <input type="text" class="form-control" id="company_prefix" name="company_prefix" placeholder="Please enter Company Prefix" value="">
+                              </div>
+                          
+                              <div class="col">
+                                  <label for="attendance_pin" class="form-label">Attendence Pin <span class="star_required">*</span></label>
+                                  <input type="text" value="" class="form-control" id="attendance_pin" name="attendance_pin" placeholder="Please enter Attendence Pin">
+                                  
+                              </div>
+
+
                           </div>
-                      
-                          <div class="col">
-                              <label for="attendance_pin" class="form-label">Attendence Pin <span class="star_required">*</span></label>
-                              <input type="text" value="" class="form-control" id="attendance_pin" name="attendance_pin" placeholder="Please enter Attendence Pin">
-                              
-                          </div>
+                            {/if}
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="company_code" class="form-label">Company Code </label>
+                                    <input type="text" value ="{$company_data['company_code']}" class="form-control" id="company_code" name="company_code" style="text-transform: uppercase;">
+                                </div>
+                                <div class="col">
+                                    <label for="company_logo" class="form-label">Company Logo<span class="star_required">*</span></label>
+                                    <div class="file-input-wrapper">
+                                        <input type="file" class="form-control" id="fileInput" onchange="updateFileName(this)" name="company_logo" style="display:none" value="">
+
+                                        <div class="update-file-block cursor don1" id="fileInputName">
+                                          <!-- <label class='input-group-text fileInputBox' for="fileInput" style="border-radius: 5px 0px 0px 5px !important;">Choose file</label>   -->
+                                          <input type="text"  id="profile_image_name" class="form-control cursor  ignoreThisClass image_input" value="{if $company_data['company_logo'] neq ''} {$company_data['company_logo']}{else}No file choosen{/if}"  style="border-radius: 0px 5px 5px 0px !important;">
+                                          <!-- <span class="don">
+                                            {if $company_data['company_logo'] neq ''}
+                                            {$company_data['company_logo']}
+                                            {else}
+                                             No file choosen
+                                            {/if}
+                                          </span> -->
+                                           <label for="file" class="btn image-upload-block-box" >
+                                                            <i class="ti ti-upload"></i>
+                                                            <span class="js-fileName">Upload a file</span>
+                                                            <span tooltip="Valid extensions : gif, png, jpg, jpeg, jpe, bmp, ico.&#xa;Valid size : Less than (<) 5 MB.&#xa;" flow="left" class="tooltip-icon float-right"><i class="ti ti-info-square-rounded cursor"></i></span>
+                                                          </label>
+                                        </div>
+                                        <div id="imageContainer">
+                                          {if $mode eq 'Update' && $company_data['company_logo'] neq ''}<img src="{$company_data['log_url']}/{$company_data['company_logo']}">{/if}
+                                        </div>
+                                      </div>
+
+                                    <!-- <label for="company_logo" class="form-label">Company Logo</label>
+                                    <input type="file" class="form-control" id="company_logo" name="company_logo" placeholder="*******"> -->
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+
+                                    <label for="contact_person" class="form-label">Contact Person <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" value="{$company_data['contact_person']}" id="contact_person" name="contact_person" placeholder=" Please enter Contact Person">
+
+                                </div>
+                                <div class="col mobile_number">
+                                    <div class="form-group mb-1">
+                                        <label for="contact_number" class="w-100 form-label"> Contact Number <span class="star_required">*</span></label>
+                                        <input type="text" class="form-control tel-input" value="{$company_data['contact_number']}" id="contact_number" name="contact_number" placeholder=" Please enter Contact Number">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            
+                            
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="country" class="form-label">Country <span class="star_required">*</span></label>
+                                    <select class="form-select form-control custom_error" name="country" id="country" >
+                                    <option value="">Select Country</option>
+
+                                    {foreach from=$country item=countryname}
+                                    <option value="{$countryname.id}" {if $countryname.id eq $company_data['country'] } selected {elseif $countryname.country_code eq $default_company && $mode eq 'Add'}selected{/if} >{$countryname.country_name}</option>
+                                    {/foreach}
+
+                                    </select>
+                                    
+                                </div>
+                                <div class="col">
+                                    <label for="state" class="form-label">State <span class="star_required">*</span></label>
+                                    <select class="form-select form-control custom_error" name="state" id="state">
+                                    <option value="">Select State</option>
+
+                                    {foreach from=$state item=stateName}
+                                    <option value="{$stateName.iStateId}" {if $stateName.iStateId eq $company_data['state'] } selected {/if}>{$stateName.vState}</option>
+                                    {/foreach}
+
+                                    </select>
+                                    
+                                </div>
 
 
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="city" class="form-label">City </label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Please enter City" value="{$company_data['city']}">
+                                </div>
+                                <div class="col">
+                                    <label for="address" class="form-label">Address <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Please enter Address" value="{$company_data['company_address']}">
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="zipcode" class="form-label">Zipcode <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Please enter Zipcode" value="{$company_data['zip_code']}">
+                                </div>
+                                <div class="col">
+                                    <label for="website" class="form-label">Website </label>
+                                    <input type="text" class="form-control" id="website" name="website" placeholder="Please enter Website" value="{$company_data['website']}">
+                                    
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="gst_number" class="form-label">GST Number <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" id="gst_number" name="gst_number" placeholder="Please enter GST Number" value="{$company_data['gst_number']}">
+                                </div>
+                                <div class="col">
+                                    <label for="founding_date" class="form-label">Date of Founding<span class="star_required">*</span></label>
+                                    
+                                    <div class="input-group">
+                                    <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="{$company_data['date_founded']}">
+                                    <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
+                                    
+                                    </div>
+                                    
+                                    <!-- <label id="founding_date-err" class="error" for="founding_date"></label> -->
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="tan_number" class="form-label">TAN Number </label>
+                                    <input type="text" class="form-control" id="tan_number" name="tan_number" placeholder="Please enter TAN Nuber" value="{$company_data['tan_number']}">
+                                </div>
+                                <div class="col">
+                                    <label for="pan_number" class="form-label">PAN Number <span class="star_required">*</span></label>
+                                    <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Please enter Pan Number" value="{$company_data['pan_number']}"> 
+                                    
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                
+                                <div class="col-6">
+                                    <label for="description" class="form-label">Description </label>
+                                    <textarea type="text" class="form-control" id="description" name="description" placeholder="Plese enter discription" value="">{$company_data['description']} </textarea>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        </div>
+                        <div class="address-block step-2 step-form hide" >
+                           <div class="row mb-4 title-block">
+                                                    <label class="h3">Bank Detail</label>
+                                                    <button type="button" name="add_bank" class="btn btn-primary w-45 add-action add_bank"><i class="ti ti-plus"></i><span>Add Banks</span></button>
+                                                </div>
+                           
+                           
+                            {include file='address.tpl'}
+                         </div>
+
+              
+                      <div class="button-block text-center mt-4" >
+                        <button type="button" name="next" class="btn btn-primary w-45 py-8 fs-4 mb-4 rounded-2 next me-3" data-current="">Next</button>
+                        <button type="button" name="back" class="btn btn-outline-secondary w-45 py-8 fs-4 mb-4 rounded-2 back hide me-3">Back</button>
+                        <button type="button" id="submit_button" name="submit" class="btn btn-primary w-45 py-8 fs-4 mb-4 rounded-2 submit hide me-3">Submit</button>
+                        <a href="company.html"><button type="button" name="discard" class="btn btn-outline-danger  w-45 py-8 fs-4 mb-4 rounded-2 discard">Discard</button></aa>
                       </div>
-                        {/if}
-                        <div class="row mb-0">
-                            <div class="col">
-                                <label for="company_code" class="form-label">Company Code </label>
-                                <input type="text" value ="{$company_data['company_code']}" class="form-control" id="company_code" name="company_code" style="text-transform: uppercase;">
-                            </div>
-                            <div class="col">
-                                <label for="company_logo" class="form-label">Company Logo<span class="star_required">*</span></label>
-                                <div class="file-input-wrapper">
-                                    <input type="file" class="form-control" id="fileInput" onchange="updateFileName(this)" name="company_logo" style="display:none" value="">
-
-                                    <div class="input-group  update-file-block cursor don1" id="fileInputName">
-                                      <label class='input-group-text fileInputBox' for="fileInput" style="border-radius: 5px 0px 0px 5px !important;">Choose file</label>
-                                      <input type="text"  id="profile_image_name" class="form-control cursor  ignoreThisClass" value="{if $company_data['company_logo'] neq ''} {$company_data['company_logo']}{else}No file choosen{/if}"  style="border-radius: 0px 5px 5px 0px !important;">
-                                      <!-- <span class="don">
-                                        {if $company_data['company_logo'] neq ''}
-                                        {$company_data['company_logo']}
-                                        {else}
-                                         No file choosen
-                                        {/if}
-                                      </span> -->
-                                    </div>
-                                    <div id="imageContainer">
-                                      {if $mode eq 'Update' && $company_data['company_logo'] neq ''}<img src="{$company_data['log_url']}/{$company_data['company_logo']}">{/if}
-                                    </div>
-                                  </div>
-
-                                <!-- <label for="company_logo" class="form-label">Company Logo</label>
-                                <input type="file" class="form-control" id="company_logo" name="company_logo" placeholder="*******"> -->
-                            </div>
-
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col">
-
-                                <label for="contact_person" class="form-label">Contact Person <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" value="{$company_data['contact_person']}" id="contact_person" name="contact_person" placeholder=" Please enter Contact Person">
-
-                            </div>
-                            <div class="col mobile_number">
-                                <div class="form-group mb-1">
-                                    <label for="contact_number" class="w-100 form-label"> Contact Number <span class="star_required">*</span></label>
-                                    <input type="text" class="form-control tel-input" value="{$company_data['contact_number']}" id="contact_number" name="contact_number" placeholder=" Please enter Contact Number">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        
-                        
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="country" class="form-label">Country <span class="star_required">*</span></label>
-                                <select class="form-select form-control custom_error" name="country" id="country" >
-                                <option value="">Select Country</option>
-
-                                {foreach from=$country item=countryname}
-                                <option value="{$countryname.id}" {if $countryname.id eq $company_data['country'] } selected {elseif $countryname.country_code eq $default_company && $mode eq 'Add'}selected{/if} >{$countryname.country_name}</option>
-                                {/foreach}
-
-                                </select>
-                                
-                            </div>
-                            <div class="col">
-                                <label for="state" class="form-label">State <span class="star_required">*</span></label>
-                                <select class="form-select form-control custom_error" name="state" id="state">
-                                <option value="">Select State</option>
-
-                                {foreach from=$state item=stateName}
-                                <option value="{$stateName.iStateId}" {if $stateName.iStateId eq $company_data['state'] } selected {/if}>{$stateName.vState}</option>
-                                {/foreach}
-
-                                </select>
-                                
-                            </div>
-
-
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="city" class="form-label">City </label>
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Please enter City" value="{$company_data['city']}">
-                            </div>
-                            <div class="col">
-                                <label for="address" class="form-label">Address <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Please enter Address" value="{$company_data['company_address']}">
-                            </div>
-
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="zipcode" class="form-label">Zipcode <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Please enter Zipcode" value="{$company_data['zip_code']}">
-                            </div>
-                            <div class="col">
-                                <label for="website" class="form-label">Website </label>
-                                <input type="text" class="form-control" id="website" name="website" placeholder="Please enter Website" value="{$company_data['website']}">
-                                
-                            </div>
-
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="gst_number" class="form-label">GST Number <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="gst_number" name="gst_number" placeholder="Please enter GST Number" value="{$company_data['gst_number']}">
-                            </div>
-                            <div class="col">
-                                <label for="founding_date" class="form-label">Date of Founding<span class="star_required">*</span></label>
-                                
-                                <div class="input-group">
-                                <input type="text" class="form-control custom_error" id="founding_date" name="founding_date" placeholder="Select date of birth" value="{$company_data['date_founded']}">
-                                <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
-                                
-                                </div>
-                                
-                                <label id="founding_date-err" class="error" for="founding_date"></label>
-                            </div>
-
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="tan_number" class="form-label">TAN Number </label>
-                                <input type="text" class="form-control" id="tan_number" name="tan_number" placeholder="Please enter TAN Nuber" value="{$company_data['tan_number']}">
-                            </div>
-                            <div class="col">
-                                <label for="pan_number" class="form-label">PAN Number <span class="star_required">*</span></label>
-                                <input type="text" class="form-control" id="pan_number" name="pan_number" placeholder="Please enter Pan Number" value="{$company_data['pan_number']}"> 
-                                
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            
-                            <div class="col-6">
-                                <label for="description" class="form-label">Description </label>
-                                <textarea type="text" class="form-control" id="description" name="description" placeholder="Plese enter discription" value="">{$company_data['description']} </textarea>
-                            </div>
-                            
-
-                        </div>
-                    </div>
-                    <div class="address-block step-2 step-form hide" >
-                       <div class="row mb-4 title-block">
-                                                <label class="h3">Bank Detail</label>
-                                                <button type="button" name="add_bank" class="btn btn-primary w-45 add-action add_bank"><i class="ti ti-plus"></i><span>Add Banks</span></button>
-                                            </div>
-                       
-                       
-                        {include file='address.tpl'}
-            </div>
-
-          
-                  <div class="button-block text-center mt-4" >
-                    <button type="button" name="next" class="btn btn-primary w-45 py-8 fs-4 mb-4 rounded-2 next me-3" data-current="">Next</button>
-                    <button type="button" name="back" class="btn btn-outline-secondary w-45 py-8 fs-4 mb-4 rounded-2 back hide me-3">Back</button>
-                    <button type="button" id="submit_button" name="submit" class="btn btn-primary w-45 py-8 fs-4 mb-4 rounded-2 submit hide me-3">Submit</button>
-                    <a href="company.html"><button type="button" name="discard" class="btn btn-outline-danger  w-45 py-8 fs-4 mb-4 rounded-2 discard">Discard</button></aa>
-                  </div>
+                      </div>
                 </form>
                
               </div>

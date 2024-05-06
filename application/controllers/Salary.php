@@ -21,7 +21,7 @@ class Salary extends MY_controller
     		$salary_component[$key]['action'] = '<span class="edit_salary_componet me-2 text-secondary cursor" data-id="'.$value['salary_component_id'].'" title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
     	}
     	$data["salary_components"] = $salary_component;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary component data found..!</div>';
         $data["company_details"] = $this->salary_model->get_companies();
@@ -139,7 +139,7 @@ class Salary extends MY_controller
             $designation = $this->salary_model->get_designation($department_ids);
         }
         $data["designation"] = $designation;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary structure data found..!</div>';
 
@@ -352,7 +352,7 @@ class Salary extends MY_controller
         }
         $data['employee_id'] = $get_data['id'];
         $data["year_arr"] = $year_arr;
-        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
             base_url() .'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee salary structure data found..!</div>';
         $get_employee_details = $this->salary_model->get_employee_details($get_data['id']);
         $designation_salary_structure = $this->salary_model->get_designation_salary_structure($get_employee_details['department'],$get_employee_details['designation'],$get_employee_details['company_id']);
@@ -491,8 +491,23 @@ class Salary extends MY_controller
         include "application/libraries/fpdf/fpdf.php";
         require_once(APPPATH.'libraries/tcpdf/tcpdf.php');
 
+        $directoryName = FCPATH."public/upload/3";
+        if (!is_dir($directoryName)) {
+            mkdir($directoryName, 0777);
+        }
+
+        $directoryName .="/2024";
+        if (!is_dir($directoryName)) {
+            mkdir($directoryName, 0777);
+        }
+
+        $directoryName .="/April";
+        if (!is_dir($directoryName)) {
+            mkdir($directoryName, 0777);
+        }
+
                
-        $file_path = "test.pdf";
+        $file_path = $directoryName."/test.pdf";
         $htm_str = $this->smarty->fetch("salary_slip.tpl");
         // pr($htm_str,1);
         // create new PDF document
@@ -508,7 +523,7 @@ class Salary extends MY_controller
         $pdf->AddPage();
         $pdf->writeHTML($htm_str, true, false, true, false, '');
         
-        $pdf->Output($file_path, 'I');
+        $pdf->Output($file_path, 'D');
     }
 
 }

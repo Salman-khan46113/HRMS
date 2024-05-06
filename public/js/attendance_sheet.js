@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
     $("#month_drop_down").select2({
           placeholder: "Select Country",
-          allowClear: true,
+          // allowClear: true,
           minimumResultsForSearch: 0,
           	autocomplete:'off',
   	});

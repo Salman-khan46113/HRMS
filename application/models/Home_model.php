@@ -58,7 +58,7 @@ class Home_model extends CI_Model
         return $ret_data;
     }
 
-    public function get_employee_details($id)
+    public function get_employee_details($id = '')
     {
         $this->db->select("em.*,s.*,c.*,d.departmen_name as departmen_name,d.department_code as department_code,ds.designation_name as designation_name,CONCAT(re.first_name,' ',re.last_name) as manager,cm.company_name as company_name");
         $this->db->from("employee_master as em");
@@ -68,12 +68,24 @@ class Home_model extends CI_Model
         $this->db->join("designation_master as ds","ds.id = em.designation","left");
         $this->db->join("employee_master as re","re.employee_id = em.reporting_manager","left");
         $this->db->join("companies as cm","cm.company_id = em.company_id","left");
+        // $this->db->join("employee_shift as es","FIND_IN_SET(em.employee_id, es.employee_ids)","left");
+        // $this->db->join("shift_master as sm","sm.id = es.shift_id","left");
         $this->db->where("em.employee_id", $id);
         $this->db->where("em.sys_record_delete !=", 1);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         // pr($this->db->last_query(),1);
 
+        return $ret_data;
+    }
+
+    public function get_employee_shift_details($id = '',$current_date = ''){
+        $this->db->select("es.*,sm.*");
+        $this->db->from("employee_shift as es");
+        $this->db->join("shift_master as sm","sm.id = es.shift_id","left");
+        $this->db->where("FIND_IN_SET($id, es.employee_ids) AND es.start_date <= '$current_date' AND es.end_date >= '$current_date'");
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
         return $ret_data;
     }
 
@@ -291,7 +303,7 @@ class Home_model extends CI_Model
         $this->db->select("e.*");
         $this->db->from("employee_master as e");
         $this->db->group_start();
-        $this->db->where("(DAY(e.dob) >=".date('d', strtotime($current_date))." AND MONTH(e.dob) >= ".date('m', strtotime($current_date)).") OR (MONTH(e.dob) <= ".date('m', strtotime($next_date))." AND DAY(e.dob) <= ".date('d', strtotime($next_date)).") ");
+        $this->db->where("(DAY(e.dob) >=".date('d', strtotime($current_date))." AND MONTH(e.dob) = ".date('m', strtotime($current_date)).") OR (MONTH(e.dob) = ".date('m', strtotime($next_date))." AND DAY(e.dob) <= ".date('d', strtotime($next_date)).") ");
         $this->db->group_end();
         $this->db->where("e.sys_record_delete !=", 1);
         $company_id = getCompanyId();
@@ -301,6 +313,26 @@ class Home_model extends CI_Model
         $this->db->limit(5);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function get_employee_work_aniversary($current_date = "", $next_date = "")
+    {
+        $this->db->select("e.*");
+        $this->db->from("employee_master as e");
+        $this->db->group_start();
+        $this->db->where('e.employment_date >=',$current_date);
+        $this->db->where('e.employment_date <=',$next_date);
+        // $this->db->where("(DAY(e.employment_date) >=".date('d', strtotime($current_date))." AND MONTH(e.employment_date) = ".date('m', strtotime($current_date)).") OR (MONTH(e.employment_date) = ".date('m', strtotime($next_date))." AND DAY(e.employment_date) <= ".date('d', strtotime($next_date)).") ");
+        $this->db->group_end();
+        $this->db->where("e.sys_record_delete !=", 1);
+        $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("e.company_id", $company_id);
+        }
+        $this->db->limit(5);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        // pr($this->db->last_query(),1);
         return $ret_data;
     }
 
@@ -419,5 +451,95 @@ class Home_model extends CI_Model
         return $ret_data;
     }   
 
-} ?>
+    /* get my department department data */
+    public function get_department_member($company_id = '',$department_id = '',$employee_id = '',$current_date = ''){
+        $this->db->select("CONCAT(em.first_name,' ',IF(em.middle_name != '', CONCAT(em.middle_name,' '), ''),em.last_name) as full_name,ea.attendance_in_time as attendance_in_time,ea.attendance_out_time as attendance_out_time,el.leave_id as leave_id,CONCAT(dm.departmen_name,'(',dm.department_code,')') as department_name,dn.designation_name as designation_name,em.employee_id as employee_id,em.profile_image as profile_image");
+        $this->db->from("employee_master as em");
+        $this->db->join(
+            "employee_attendance as ea",
+            "ea.employee_id = em.employee_id AND ea.attendance_date = '$current_date'",
+            "left"
+        );
+        $this->db->join(
+            "employee_leave as el",
+            "el.employee_id = em.employee_id AND '$current_date' >= el.leave_start_date  AND el.leave_end_date >= '$current_date'",
+            "left"
+        );
+        $this->db->join(
+            "department_master as dm",
+            "dm.department_id = em.department",
+            "left"
+        );
+        $this->db->join(
+            "designation_master as dn",
+            "dn.id = em.designation",
+            "left"
+        );
+        $this->db->where("em.company_id ",$company_id);
+        $this->db->where("em.department ",$department_id);
+        $this->db->where("em.employee_id !=",$employee_id);
+        $this->db->where("em.status != 'Inactive'");
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        // pr($this->db->last_query());
+        return $ret_data;
+    }
+
+    /* get allocated leave */
+    public function get_allocated_leave($company_id = '',$designation_id = '',$department_id = ''){
+        $this->db->select("la.total_leave as total_leave");
+        $this->db->from("leave_allocation as la");
+        $this->db->where("la.designation_id",$designation_id);
+        $this->db->where("la.department_id ",$department_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+        return $ret_data;
+    } 
+    public function get_applied_leave($employee_id = ''){
+        $this->db->select("la.*");
+        $this->db->from("employee_leave as la");
+        $this->db->where("la.employee_id",$employee_id);
+        $this->db->where("la.status",'approve');
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function get_attendance_summary($employee_id = '',$current_date = '',$current_month = ''){
+        $this->db->select("ea.*");
+        $this->db->from("employee_attendance as ea");
+        $this->db->where("ea.employee_id",$employee_id);
+        $this->db->where("ea.attendance_date !=",$current_date);
+        $this->db->where("MONTH(ea.attendance_date) =",$current_month);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    } 
+    public function get_current_month_leave($employee_id='',$current_month = ''){
+        $this->db->select("el.*");
+        $this->db->from("employee_leave as el");
+        $this->db->where("el.employee_id",$employee_id);
+        $this->db->where("MONTH(el.leave_start_date)",$current_month);
+        $this->db->where("el.status",'approve');
+        $this->db->where("el.leave_start_date <= ",date("Y-m-d"));
+        $this->db->where("el.leave_end_date <= ",date("Y-m-d"));
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    } 
+    public function get_notification_data($current_year = '',$company_id = "") {
+        $this->db->select("am.*");
+        $this->db->from("announcement_master as am");
+        $this->db->where("YEAR(am.announcement_date)", $current_year);
+        $this->db->where("am.email_sent", 'Yes');
+        if($company_id > 0){    
+            $this->db->where("am.company_id", $company_id);
+        }
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        // pr($this->db->last_query(),1);
+        return $ret_data;
+    }
+
+} 
+?>
 

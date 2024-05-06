@@ -162,7 +162,7 @@
 					{else}
 					<tr>
 						<td colspan="4">
-							<div class="mb-5">
+							<div class="mb-5 no-data-found-block">
 								<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
 								<br />
 								<span class="mb-4 no-data-found-message">No designation data found!</span>

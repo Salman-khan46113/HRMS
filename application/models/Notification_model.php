@@ -6,7 +6,7 @@ class Notification_model extends CI_Model
         parent::__construct();
     }
 
-    public function get_all_attendance($current_date)
+    public function get_all_attendance($current_date = '')
     {
         $this->db->select("ea.*,em.*");
         $this->db->from("employee_master as em");
@@ -29,11 +29,21 @@ class Notification_model extends CI_Model
         }
         return $insert_id;
     }
-    public function get_all_attendance_in_data($date)
+    public function get_all_attendance_in_data($current_date = '')
     {
-        $this->db->select("ea.*");
+        $this->db->select("ea.*,es.*,sm.start_time,sm.end_time");
         $this->db->from("employee_attendance as ea");
-        $this->db->where("ea.attendance_date", $date);
+        $this->db->join(
+            "employee_shift as es",
+            "FIND_IN_SET(ea.employee_id, es.employee_ids) AND es.start_date <= '$current_date' AND es.end_date >= '$current_date'",
+            "left"
+        );
+        $this->db->join(
+            "shift_master as sm",
+            "sm.id = es.shift_id",
+            "left"
+        );
+        $this->db->where("ea.attendance_date", $current_date);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
@@ -49,6 +59,14 @@ class Notification_model extends CI_Model
             );
         }
         return $affected_row;
+    }
+    public function get_current_notification($current_date = ''){
+        $this->db->select("am.*");
+        $this->db->from("announcement_master as am");
+        $this->db->where("am.announcement_date", $current_date);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
     }
 }
 ?>

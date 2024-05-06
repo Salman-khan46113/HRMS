@@ -50,6 +50,10 @@
   <link rel="stylesheet" href="public/css/plugin/loader.css" />
   <!-- loader -->
 
+  <!-- tool tip css -->
+  <link rel="stylesheet" href="public/css/plugin/tooltip/tooltip.css" />
+  <!-- tool tip css -->
+
   <!-- swal alert css -->
     <link rel="stylesheet" href="public/css/plugin/swal_alert/animate.css" />
     <link rel="stylesheet" href="public/css/plugin/swal_alert/sweetalert2.css" />
@@ -139,18 +143,16 @@
             </li>
           
            <div class="sub-menu">
-            {{if in_array($role,['arom'])}}
+            
             <li class="sidebar-item">
               <a class="sidebar-link" href="./company.html" aria-expanded="false">
                 <span>
-                  <i class="ti ti-businessplan"></i>
+                  <i class="ti ti-building-skyscraper"></i>
 
                 </span>
                 <span class="hide-menu">Companies</span>
               </a>
-            </li>
-            {{/if}}
-            <li class="sidebar-item">
+            </li>            <li class="sidebar-item">
               <a class="sidebar-link" href="./department.html" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
@@ -283,6 +285,23 @@
          </li>
             {{/if}}
            </div>
+
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Combo off</span>
+            </li>
+            <div class="sub-menu">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./combo-off.html" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-hourglass-empty"></i>
+                  </span>
+                  <span class="hide-menu">Combo off</span>
+                </a>
+              </li>
+            </div>
+
+
 
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -459,21 +478,23 @@
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="./announcement_list.html" title="Annoucement">
+              <a class="nav-link nav-icon-hover icon-block" href="./holiday.html" title="Holiday">
+                <i class="ti ti-calendar-month" style="font-size: 22px;"></i>
+              </a>
+            </li> 
+              <li class="nav-item">
+              <a class="nav-link nav-icon-hover icon-block" href="./announcement_list.html" title="Annoucement">
                 <i class="ti ti-bell-ringing"></i>
                 <div class="notification bg-primary rounded-circle"></div>
               </a>
             </li>
-            {*
-              <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="./holiday.html" title="Holiday">
-                <i class="ti ti-calendar-month" style="font-size: 22px;"></i>
-              </a>
-            </li> *}
+            
+              
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <img src="{{$base_url}}public/img/uploads/employee_profile/{{$user_data['profile_image']}}" alt="" width="45" height="45" class="rounded-circle">
+                  <span class="active-dot"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up profile-drop-down p-0" aria-labelledby="drop2">
                   <div class="profile-block-div">
@@ -508,7 +529,7 @@
                   </div>
                 </div>
               </li>
-              <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block">{{$user_data['first_name']}} {{$user_data['middle_name']}} {{$user_data['last_name']}}</a>
+              <!-- <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block">{{$user_data['first_name']}}</a> -->
               <div class="modal fade leave-popup-block" id="reset_Password_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered ">
                   <div class="modal-content">

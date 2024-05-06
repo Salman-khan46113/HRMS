@@ -14,7 +14,7 @@ function pr($data,$exit = 0)
         echo("<pre>");
 
         print_r($data);
-        echo("<pre>");
+        echo("</pre>");
 
         if($exit == 1){
         	exit;
@@ -37,6 +37,20 @@ function get_entiry_url($module_name = '',$mode = '',$id=""){
 			switch ($mode) {
 				case 'View':
 					$url = base_url()."employee-details.html?id=".$id;
+					break;
+			}
+			break;
+		case 'announcement':
+			switch ($mode) {
+				case 'View':
+					$url = base_url()."announcement_details.html?id=".$id;
+					break;
+			}
+			break;
+		case 'employee_leave':
+			switch ($mode) {
+				case 'List':
+					$url = base_url()."leave-allocation.html";
 					break;
 			}
 			break;
@@ -79,6 +93,9 @@ function get_entiry_url($module_name = '',$mode = '',$id=""){
 					$url = base_url()."employee-salary-structure-update.html?id=".$id;
 					break;
 			}
+			break;
+		case 'employee_profile':
+			$url = base_url()."public/img/uploads/employee_profile/".$id;
 			break;
 	}
 	if($url == '' || $url == null){

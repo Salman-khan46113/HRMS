@@ -13,7 +13,7 @@
 					</button> -->
           <a href="announcement.html" class="btn btn-primary add-leave add-action">
 						<i class="ti ti-plus"></i>
-						<span>Add announcement</span>
+						<span>Add Announcement</span>
 					</a>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
         {/foreach}
 
         {else}
-        <div class="no-data">
+        <div class="no-data no-data-found-block">
         <div class="d-flex justify-content-center">
           <img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
         </div>

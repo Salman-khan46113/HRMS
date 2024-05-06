@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-13 15:25:09
+/* Smarty version 4.3.2, created on 2024-05-04 12:14:45
   from '/var/www/html/extra_work/HRMS/application/views/templates/attendance_sheet.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661a567dde9026_77912216',
+  'unifunc' => 'content_6635d95d2e4d22_22237600',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '349a857a93ce8e0119a2136680b50c3fde17c73d' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/attendance_sheet.tpl',
-      1 => 1713002076,
+      1 => 1714804882,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661a567dde9026_77912216 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6635d95d2e4d22_22237600 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="main-middle-container">
@@ -185,7 +185,7 @@ echo $_prefixVariable15;?>
 
                     <tr >
                         <td colspan="8">
-                            <div class="mb-5 ">
+                            <div class="mb-5 no-data-found-block">
                              <img
                                 alt=""
                                 src="<?php ob_start();

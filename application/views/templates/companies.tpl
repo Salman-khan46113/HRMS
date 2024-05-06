@@ -145,8 +145,8 @@
                         </button>
                     </div>
             </div>
-                <button id="downloadPDFBtn">PDF</button>
-
+               
+            {{if in_array($role,['arom'])}}
 			<div class="timesheet-summary">
 				<div class="timesheet-summary-lst">
 					<a href="add-company.html"><button type="button" class="btn btn-primary add-designation add-leave add-action">
@@ -156,6 +156,7 @@
                 </a>
 				</div>
 			</div>
+			{{/if}}
 			</div>
 		</div>
 
@@ -173,7 +174,9 @@
 							<th scope="col">Email</th>
 							<th scope="col">Date of Founding</th>
 							<th scope="col">GST Number</th>
+							 {{if in_array($role,['arom'])}}
 							<th scope="col">Action</th>
+							{{/if}}
 							
 						</tr>
 					</thead>
@@ -186,13 +189,15 @@
 							<td>{$val['company_email']}</td>
 							<td>{$val['date_founded']}</td> 
 							<td>{$val['gst_number']}</td> 
+							{{if in_array($role,['arom'])}}
 							<td><a href = "update-company.html?id={$val['company_id']}"><i class="la-edit ti ti-edit"></a></i></td>
+							{{/if}}
 			  			</tr>
 						{/foreach}
 					
 				{*	<tr>
 						<td colspan="4">
-							<div class="mb-5">
+							<div class="mb-5 no-data-found-block">
 								<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
 								<br />
 								<span class="mb-4 no-data-found-message">No Companies found!</span>
@@ -222,6 +227,7 @@
 <script>
     var no_data_message =  {{$no_data_message|json_encode}};
     var base_url = {{$base_url|json_encode}};
+    var role = {{$role|json_encode}}
 </script>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>

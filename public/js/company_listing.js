@@ -30,6 +30,14 @@ const data_table_obj = {
 
     },
     makeTable:function(){
+      let sort_arr = [{ "sortable": false, "targets": 0 }]
+      let  width_arr = ['24%', '24%', '19%', '13%','22%'];
+      if(role == 'arom'){
+         sort_arr = [{ "sortable": false, "targets": 0 },{ "sortable": false, "targets": 6 }]
+           width_arr = ['19%', '19%', '13%', '13%','15%', '15%'];
+        
+      }
+      console.log(sort_arr)
         table =  new DataTable("#company_table", {
             dom: 'Bfrtilp',
             buttons: [
@@ -62,7 +70,7 @@ const data_table_obj = {
                       customize: function (doc) {
                           doc.content[0].text = 'Company List';
                           doc.content[0].color = '#5d87ff';
-                          doc.content[1].table.widths = ['19%', '19%', '13%', '13%','15%', '15%'];
+                          doc.content[1].table.widths = width_arr;
                           doc.content[1].table.body[0].forEach(function(cell) {
                               cell.fillColor = '#5d87ff';
                           });
@@ -80,14 +88,7 @@ const data_table_obj = {
               ],
               searching : true,
               fixedHeader: true,
-              "columnDefs": [
-                { "sortable": false, "targets": 0 },
-                { "sortable": true, "targets": 1},
-                { "sortable": true, "targets": 2 },
-                { "sortable": true, "targets": 3 },
-                { "sortable": true, "targets": 4 },
-                { "sortable": true, "targets": 5 },
-                { "sortable": false, "targets": 6 }],
+              "columnDefs": sort_arr,
               language: {
                   loadingRecords: "&nbsp;",
                   processing: '<div class="spinner"></div>',

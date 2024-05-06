@@ -20,6 +20,7 @@ class Activities extends MY_controller
                 $id
             );
             $data["announcement"] = $announcement[0];
+            $data["announcement"]["announcement_date"] = getDatePickerFormat($data["announcement"]["announcement_date"]);
             
         }
             $this->smarty->view("announcement.tpl",$data);
@@ -44,7 +45,7 @@ class Activities extends MY_controller
         foreach ($data["announcement"] as $key => $value) {
             $currentDate = new DateTime();
             $announcementDate = DateTime::createFromFormat(
-                "m/d/Y",
+                "Y-m-d",
                 $value["announcement_date"]
             );
 
@@ -118,7 +119,7 @@ class Activities extends MY_controller
             $data = [
                 "title" => $this->input->post("title"),
                 "content" => $this->input->post("content"),
-                "announcement_date" => $this->input->post("announcement_date"),
+                "announcement_date" => mysqlFormat($this->input->post("announcement_date")),
                 "company_id"=>$_SESSION['company_id'],
                 "added_by" => 0,
                 "added_on" => date("Y-m-d H:i:s"),
@@ -128,7 +129,7 @@ class Activities extends MY_controller
                 "id" => $id,
                 "title" => $this->input->post("title"),
                 "content" => $this->input->post("content"),
-                "announcement_date" => $this->input->post("announcement_date"),
+                "announcement_date" => mysqlFormat($this->input->post("announcement_date")),
                 "updated_by" => 0,
                 "updated_on" => date("Y-m-d H:i:s"),
             ];

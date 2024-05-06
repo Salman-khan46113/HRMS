@@ -13,12 +13,14 @@ class MY_Controller extends CI_Controller
     
     $route_arr = $this->router->routes;
     $route_arr = array_keys($route_arr);
-    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit","pdf.html"];
+    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit","pdf.html","daily-log","send_email","auto-out-log","send-notification"];
     $current_route = '';
     if(array_key_exists('PATH_INFO',$_SERVER)){
       // $current_route = str_replace("/","", $_SERVER['PATH_INFO']);
       $current_route = explode('/',$_SERVER['PATH_INFO'])[1];
     }
+
+    
     if(in_array($current_route, $route_arr)){
     	if(!in_array($current_route, $authentication_arr)){
     		if(!array_key_exists("login",$_SESSION)){
@@ -61,6 +63,7 @@ class MY_Controller extends CI_Controller
 
   }
   public function email_sender($data = array()){
+    // pr($data,1);
     $data['base_url']  = $this->config->item('base_url');
     $mail = $this->phpmailer_lib->load();
     $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -82,8 +85,8 @@ class MY_Controller extends CI_Controller
     $html = $this->smarty->fetch($data['templete'],$data);
     $mail->Body    = $html;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
     if($this->config->item("email_notification") == "Yes"){
+        // pr($mail->send(),1);
         if(!$mail->send()) {
           $message =  'Message could not be sent.';
             // echo 'Mailer Error: ' . $mail->ErrorInfo;

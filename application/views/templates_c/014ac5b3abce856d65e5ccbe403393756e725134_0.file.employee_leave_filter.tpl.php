@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-04 18:57:52
+/* Smarty version 4.3.2, created on 2024-05-04 12:53:48
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave_filter.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660eaad86d26b6_42011519',
+  'unifunc' => 'content_6635e2844d8b87_19161722',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '014ac5b3abce856d65e5ccbe403393756e725134' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_leave_filter.tpl',
-      1 => 1712237269,
+      1 => 1714804947,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_660eaad86d26b6_42011519 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6635e2844d8b87_19161722 (Smarty_Internal_Template $_smarty_tpl) {
 ?>	<?php ob_start();
 if (count($_smarty_tpl->tpl_vars['leave_list']->value) > 0) {
 $_prefixVariable1 = ob_get_clean();
@@ -99,7 +99,7 @@ echo $_prefixVariable13;?>
 
                     <tr >
                         <td colspan="10">
-                            <div class="mb-5 ">
+                            <div class="mb-5 no-data-found-block">
                              <img
                                 alt=""
                                 src="<?php ob_start();

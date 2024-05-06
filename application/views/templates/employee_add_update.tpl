@@ -165,23 +165,32 @@
                                                 <div class="row mb-3">
                                                     <div class="col-6 col">
                                                         <label for="profile_image" class="form-label">Profile Image <span class="star_required">*</span></label>
-                                                        <input type="file" class="form-control" id="profile_image" name="profile_image" value="{$employee_data['profile_image']}" {if $mode=="Update"}style="display: none;"{/if} />
+                                                        <input type="file" class="form-control image_input" id="profile_image" name="profile_image" value="{$employee_data['profile_image']}" {if $mode=="Update"}style="display: none;"{/if} />
+                                                        <label for="file" class="btn image-upload-block-box  mt-1" {if $mode=="Update"}style="display: none;"{/if}>
+                                                            <i class="ti ti-upload"></i>
+                                                            <span class="js-fileName">Upload a file</span>
+                                                            <span tooltip="Valid extensions : gif, png, jpg, jpeg, jpe, bmp, ico.&#xa;Valid size : Less than (<) 5 MB.&#xa;" flow="right" class="tooltip-icon float-right"><i class="ti ti-info-square-rounded cursor"></i></span>
+                                                          </label>
                                                         {if $mode=="Update"}
-                                                        <div class="input-group mb-3 update-file-block cursor" id="customFileInput">
-                                                          <span class="input-group-text" id="basic-addon1" style="border-radius: 5px 0px 0px 5px !important;
-  background: #f3eaf5 !important;">Choose file</span>
-                                                          <input type="text" name="profile_image_name" class="form-control cursor"  aria-describedby="basic-addon1" >
+                                                        <div class="input-group mb-1 update-file-block cursor" id="customFileInput">
+                                                          <input type="text" name="profile_image_name" class="form-control cursor image_input"  aria-describedby="basic-addon1" >
+                                                          <label for="file" class="btn image-upload-block-box  mt-1" >
+                                                            <i class="ti ti-upload"></i>
+                                                            <span class="js-fileName">Upload a file</span>
+                                                            <span tooltip="Valid extensions : gif, png, jpg, jpeg, jpe, bmp, ico.&#xa;Valid size : Less than (<) 5 MB.&#xa;" flow="right" class="tooltip-icon float-right"><i class="ti ti-info-square-rounded cursor"></i></span>
+                                                          </label>
                                                         </div>
                                                         {/if}
-                                                       
-                                                    </div>
-                                                    <div class="col-2 col update-imeg-file"  {if $mode=="Add"}style="display: none;"{/if}>
-                                                        <label class="form-label"></label>
-                                                        <div >
+                                                        <div class="col-2 col update-imeg-file ps-0 mb-2"  {if $mode=="Add"}style="display: none;"{/if}>
+                                                        <div class="mt-2">
 
-                                                            <img src="{{$base_url}}public/img/uploads/employee_profile/{{$employee_data['profile_image']}}" >
+                                                            <img src="{{$base_url}}public/img/uploads/employee_profile/{{$employee_data['profile_image']}}" width="100">
                                                         </div>
                                                     </div>
+
+                                                    
+                                                    </div>
+                                                    
                                                     
                                                 </div>
 
@@ -207,7 +216,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
-                                                    <div class="col-6">
+                                                    <div class="col">
                                                         <label for="department" class="form-label">Department <span class="star_required">*</span></label>
                                                         <select class="form-select form-control" name="department" id="department">
                                                             <option value="">Select Department</option>
@@ -223,7 +232,7 @@
                                                         
                                                     </div>
 
-                                                    <div class="col-6">
+                                                    <div class="col">
                                                         <label for="designation" class="form-label">Designation <span class="star_required">*</span></label>
                                                         <select class="form-select form-control" name="designation" id="designation">
                                                             <option value="">Select Designation</option>

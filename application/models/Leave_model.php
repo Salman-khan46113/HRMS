@@ -322,6 +322,150 @@ class Leave_model extends CI_Model
       }
       return $allocated_leaves;
     }
+
+    // combo off
+    public function get_employee_attendance($employee_id = '',$start_date = '',$end_date ='',$current_date = '')
+    {
+      $this->db->select("ea.*");
+      $this->db->from("employee_attendance as ea");
+      $this->db->where("ea.employee_id", $employee_id);
+      $this->db->where("ea.attendance_date >=", $start_date);
+      $this->db->where("ea.attendance_date <=", $end_date);
+      $this->db->where("ea.attendance_date !=", $current_date);
+      $result_obj = $this->db->get();
+      $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+      return $ret_data;
+    }
+    public function get_employee_shift_details($id = '',$start_date = '',$end_date =''){
+        $this->db->select("es.*,sm.*");
+        $this->db->from("employee_shift as es");
+        $this->db->join("shift_master as sm","sm.id = es.shift_id","left");
+        $this->db->where("FIND_IN_SET($id, es.employee_ids) AND es.start_date >= '$start_date' AND es.end_date >= '$end_date' AND es.start_date < '$end_date'");
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function get_combo_off_data($employee_id = ''){
+        $this->db->select("ec.*");
+        $this->db->from("employee_combo_off as ec");
+        $this->db->where("ec.employee_id",$employee_id);
+        // $this->db->where("ec.status != 'Reject'");  
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function check_combo_off_date($combo_off_date = '',$employee_combo_off_id = ''){
+        $this->db->select("ec.employee_combo_off_id");
+        $this->db->from("employee_combo_off as ec");
+        $this->db->where("ec.combo_off_date",$combo_off_date);
+        if($employee_combo_off_id > 0){
+           $this->db->where("ec.employee_combo_off_id != ",$employee_combo_off_id);
+        }
+        $this->db->where("ec.status != 'Reject'");  
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function insert_combo_off($data)
+    {
+        $this->db->insert("employee_combo_off", $data);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
+
+    public function update_combo_off($data = [],$employee_combo_off_id = ''){
+      $affected_row = 0;
+      if($employee_combo_off_id > 0 && is_valid_array($data)){
+        $this->db->where("employee_combo_off_id", $employee_combo_off_id);
+        $this->db->update("employee_combo_off", $data);
+        $affected_row = $this->db->affected_rows();
+        $affected_row = $affected_row == 0 ? 1 : $affected_row;
+      }
+      return $affected_row;
+    }
+
+    public function get_employee_combo_off_list(
+        $condition_arr = [],
+        $search_params = []
+    ) {
+        $this->db->select(
+            'ec.employee_combo_off_id as employee_combo_off_id,CONCAT(em.first_name," ",em.last_name) as employee_name,em.profile_image as image,em.employee_code as employee_code,CONCAT(dm.designation_name,"(",dm.grads,")") as designation_name,CONCAT(dp.departmen_name,"(",dp.department_code,")") as department_name,em.employee_week_off as employee_week_off,em.city as location,em.email as email,em.employee_id as employee_id,ec.combo_off_date as combo_off_date,ec.reference_date as reference_date,ec.added_reason as combo_off_reason,ec.update_reason as update_reason,ec.status as status,em.employee_week_off as employee_week_off,ec.over_time as over_time'
+        );
+        $this->db->from("employee_combo_off as ec");
+        $this->db->join(
+            "employee_master as em",
+            "em.employee_id = ec.employee_id",
+            "left"
+        );
+        $this->db->join("department_master as dp", "dp.department_id = em.department ");
+        $this->db->join("designation_master as dm", "dm.id = em.designation ");
+        $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("em.company_id", $company_id);
+        }
+        if (is_array($search_params) && count($search_params) > 0) {
+            if ($search_params["status"] != "") {
+                $this->db->where("ec.status", $search_params["status"]);
+            }
+            if ($search_params["employee_name"] != "") {
+                $this->db->like("CONCAT(em.first_name,' ',em.last_name)",
+                    $search_params["employee_name"]
+                );
+            }
+            if ($search_params["employee_code"] != "") {
+                $this->db->like(
+                    "em.employee_code",
+                    $search_params["employee_code"]
+                );
+            }
+            if ($search_params["combo_off_date"] != "") {
+                $this->db->where(
+                    "ec.combo_off_date ",
+                    $search_params["combo_off_date"]
+                );
+            }
+            if ($search_params["reference_date"] != "") {
+                $this->db->where(
+                    "ec.reference_date",
+                    $search_params["reference_date"]
+                );
+            }
+            if ($search_params["combo_off_reason"] != "") {
+                $this->db->like(
+                    "ec.added_reason",
+                    $search_params["combo_off_reason"]
+                );
+            }
+            if ($search_params["comment"] != "") {
+                $this->db->like(
+                    "ec.update_reason",
+                    $search_params["comment"]
+                );
+            }
+
+        }
+        if (count($condition_arr) > 0) {
+            $this->db->limit($condition_arr["length"], $condition_arr["start"]);
+            if ($condition_arr["order_by"] != "") {
+                $this->db->order_by($condition_arr["order_by"]);
+            }
+        }
+        $this->db->where("em.sys_record_delete !=", 1);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+
+        return $ret_data;
+    }
+    
+    public function get_company_config($company_id = ''){
+        $this->db->select("cv.*");
+        $this->db->from("company_variables as cv");
+        $this->db->where("cv.company_id",$company_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    
 }
 
 ?>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-16 14:07:18
+/* Smarty version 4.3.2, created on 2024-05-05 01:24:50
   from '/var/www/html/extra_work/HRMS/application/views/templates/leave_allocation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_661e38bea55af9_31579139',
+  'unifunc' => 'content_6636928a785d15_66709539',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4aff8df4ac85b392c1cf5f6c9b6deaf20f683531' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/leave_allocation.tpl',
-      1 => 1713256637,
+      1 => 1714805036,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_661e38bea55af9_31579139 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6636928a785d15_66709539 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="main-middle-container">
 	<aside class="right-sidebar">
@@ -248,7 +248,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 						<?php } else { ?>
 						<tr>
 							<td colspan="7">
-								<div class="mb-5">
+								<div class="mb-5 no-data-found-block">
 									<img alt="" src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
 $_prefixVariable1 = ob_get_clean();

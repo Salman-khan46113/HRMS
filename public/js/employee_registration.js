@@ -10,8 +10,12 @@ $(document).ready(function () {
 
 
        
-    }
-
+    }else{
+        $(".image-upload-block-box").click(function () {
+            $("#profile_image").click();
+        });
+    }   
+    
      // Update custom file input text when a file is selected
     $("#profile_image").change(function () {
         var fileName = $(this).val().split("\\").pop(); // Get the file name
@@ -220,11 +224,11 @@ $(document).ready(function () {
     $("#dob,#employement_date").datepicker({ showButtonPanel: true, changeMonth: true, changeYear: true, showOtherMonths: true, selectOtherMonths: true, yearRange: "c-100:c+100" });
     $("#state").select2({
         placeholder: "Select State",
-        allowClear: true,
+        // allowClear: true,
     });
     $("#country").select2({
         placeholder: "Select Country",
-        allowClear: true,
+        // allowClear: true,
     });
     $("#week_off").select2({
         placeholder: "Select Week Off",

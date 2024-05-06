@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-21 13:07:07
+/* Smarty version 4.3.2, created on 2024-05-02 00:04:26
   from '/var/www/html/extra_work/HRMS/application/views/templates/employee_add_update.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_6624c223c83a32_53727808',
+  'unifunc' => 'content_66328b3206cc75_50003314',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a3f28f8a8ce579009afc1510d4348305f67a0051' => 
     array (
       0 => '/var/www/html/extra_work/HRMS/application/views/templates/employee_add_update.tpl',
-      1 => 1713685010,
+      1 => 1714588463,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6624c223c83a32_53727808 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66328b3206cc75_50003314 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css" />
 <link rel="stylesheet" href="public/css/employee.css" />
@@ -248,20 +248,25 @@ echo $_prefixVariable12;?>
                                                 <div class="row mb-3">
                                                     <div class="col-6 col">
                                                         <label for="profile_image" class="form-label">Profile Image <span class="star_required">*</span></label>
-                                                        <input type="file" class="form-control" id="profile_image" name="profile_image" value="<?php echo $_smarty_tpl->tpl_vars['employee_data']->value['profile_image'];?>
+                                                        <input type="file" class="form-control image_input" id="profile_image" name="profile_image" value="<?php echo $_smarty_tpl->tpl_vars['employee_data']->value['profile_image'];?>
 " <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Update") {?>style="display: none;"<?php }?> />
+                                                        <label for="file" class="btn image-upload-block-box  mt-1" <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Update") {?>style="display: none;"<?php }?>>
+                                                            <i class="ti ti-upload"></i>
+                                                            <span class="js-fileName">Upload a file</span>
+                                                            <span tooltip="Valid extensions : gif, png, jpg, jpeg, jpe, bmp, ico.&#xa;Valid size : Less than (<) 5 MB.&#xa;" flow="right" class="tooltip-icon float-right"><i class="ti ti-info-square-rounded cursor"></i></span>
+                                                          </label>
                                                         <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Update") {?>
-                                                        <div class="input-group mb-3 update-file-block cursor" id="customFileInput">
-                                                          <span class="input-group-text" id="basic-addon1" style="border-radius: 5px 0px 0px 5px !important;
-  background: #f3eaf5 !important;">Choose file</span>
-                                                          <input type="text" name="profile_image_name" class="form-control cursor"  aria-describedby="basic-addon1" >
+                                                        <div class="input-group mb-1 update-file-block cursor" id="customFileInput">
+                                                          <input type="text" name="profile_image_name" class="form-control cursor image_input"  aria-describedby="basic-addon1" >
+                                                          <label for="file" class="btn image-upload-block-box  mt-1" >
+                                                            <i class="ti ti-upload"></i>
+                                                            <span class="js-fileName">Upload a file</span>
+                                                            <span tooltip="Valid extensions : gif, png, jpg, jpeg, jpe, bmp, ico.&#xa;Valid size : Less than (<) 5 MB.&#xa;" flow="right" class="tooltip-icon float-right"><i class="ti ti-info-square-rounded cursor"></i></span>
+                                                          </label>
                                                         </div>
                                                         <?php }?>
-                                                       
-                                                    </div>
-                                                    <div class="col-2 col update-imeg-file"  <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Add") {?>style="display: none;"<?php }?>>
-                                                        <label class="form-label"></label>
-                                                        <div >
+                                                        <div class="col-2 col update-imeg-file ps-0 mb-2"  <?php if ($_smarty_tpl->tpl_vars['mode']->value == "Add") {?>style="display: none;"<?php }?>>
+                                                        <div class="mt-2">
 
                                                             <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
@@ -271,9 +276,13 @@ public/img/uploads/employee_profile/<?php ob_start();
 echo $_smarty_tpl->tpl_vars['employee_data']->value['profile_image'];
 $_prefixVariable14 = ob_get_clean();
 echo $_prefixVariable14;?>
-" >
+" width="100">
                                                         </div>
                                                     </div>
+
+                                                    
+                                                    </div>
+                                                    
                                                     
                                                 </div>
 
@@ -310,7 +319,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
-                                                    <div class="col-6">
+                                                    <div class="col">
                                                         <label for="department" class="form-label">Department <span class="star_required">*</span></label>
                                                         <select class="form-select form-control" name="department" id="department">
                                                             <option value="">Select Department</option>
@@ -339,7 +348,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                                         
                                                     </div>
 
-                                                    <div class="col-6">
+                                                    <div class="col">
                                                         <label for="designation" class="form-label">Designation <span class="star_required">*</span></label>
                                                         <select class="form-select form-control" name="designation" id="designation">
                                                             <option value="">Select Designation</option>
