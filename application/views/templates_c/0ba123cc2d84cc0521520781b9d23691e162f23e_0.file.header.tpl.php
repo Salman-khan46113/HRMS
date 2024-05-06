@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-01 23:04:35
+/* Smarty version 4.3.2, created on 2024-04-23 10:10:21
   from '/var/www/html/HRMS/application/views/templates/header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660af02bf39402_33844769',
+  'unifunc' => 'content_66273bb53c1ba3_61482553',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0ba123cc2d84cc0521520781b9d23691e162f23e' => 
     array (
       0 => '/var/www/html/HRMS/application/views/templates/header.tpl',
-      1 => 1711990903,
+      1 => 1713846708,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66273bb53c1ba3_61482553 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!--  -->
 <!doctype html>
 <html lang="en">
@@ -28,11 +28,11 @@ function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl)
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize</title>
+  <title>HRMS</title>
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
   <link href="public/css/plugin/line_awesome/line_awesome.css" rel="stylesheet" />
-  
+
   <!-- <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/css/all.min.css"
@@ -40,7 +40,9 @@ function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl)
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
   /> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" />
+  <!-- chosen -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" /> -->
+  <link rel="stylesheet" href="public/css/plugin/chosen/chosen.css" />
   <!--  tabler css -->
   <link rel="stylesheet" href="public/css/plugin/tabler_css/tabler_icons.css" />
   <!--  tabler css -->
@@ -95,7 +97,7 @@ function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl)
  type="text/javascript" src="public/js/plugin/datatable/jquery.dataTables.min.js"><?php echo '</script'; ?>
 >
   <!-- datatable -->
-  
+
   <!-- slect2 -->
   <?php echo '<script'; ?>
  src="public/js/plugin/select2/select2.min.js"><?php echo '</script'; ?>
@@ -119,7 +121,7 @@ function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl)
  src="public/js/plugin/time_picker.js"><?php echo '</script'; ?>
 >
   <!-- time picker -->
-     
+
   <?php echo '<script'; ?>
  src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"><?php echo '</script'; ?>
 >
@@ -144,9 +146,12 @@ function content_660af02bf39402_33844769 (Smarty_Internal_Template $_smarty_tpl)
 >
 
   <!-- chosen  -->
-  <?php echo '<script'; ?>
- src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"><?php echo '</script'; ?>
+   <?php echo '<script'; ?>
+ src="public/js/plugin/chosen/chosen.js"><?php echo '</script'; ?>
 >
+  <!-- <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"><?php echo '</script'; ?>
+> -->
 </head>
 
 <body>
@@ -197,7 +202,13 @@ echo $_prefixVariable2;?>
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
             </li>
+          
            <div class="sub-menu">
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('arom'))) {
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="./company.html" aria-expanded="false">
                 <span>
@@ -207,6 +218,11 @@ echo $_prefixVariable2;?>
                 <span class="hide-menu">Companies</span>
               </a>
             </li>
+            <?php ob_start();
+}
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="./department.html" aria-expanded="false">
                 <span>
@@ -251,13 +267,48 @@ echo $_prefixVariable2;?>
             </li>
 
           </div>
+          <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
 
-            
+          <div>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Salary</span>
+            </li>
+            <div class="sub-menu">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./salary-component.html" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-layers-subtract"></i>
+
+                  </span>
+                  <span class="hide-menu">Salary component  </span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./salary-structure.html" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-license"></i>
+                  </span>
+                  <span class="hide-menu">Salary Structure</span>
+                </a>
+              </li>
+            </div>
+          </div>
+          <?php ob_start();
+}
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+
+
+
 
             <?php ob_start();
 }
-$_prefixVariable3 = ob_get_clean();
-echo $_prefixVariable3;?>
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
 
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -274,8 +325,8 @@ echo $_prefixVariable3;?>
             </li>
             <?php ob_start();
 if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="./employee-list.html" aria-expanded="false">
@@ -285,13 +336,13 @@ echo $_prefixVariable4;?>
                 <span class="hide-menu">Employee Listing</span>
               </a>
             </li>
-           
+
             <?php ob_start();
 }
-$_prefixVariable5 = ob_get_clean();
-echo $_prefixVariable5;?>
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
 
-        
+
           </div>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -308,8 +359,8 @@ echo $_prefixVariable5;?>
             </li>
             <?php ob_start();
 if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
-$_prefixVariable6 = ob_get_clean();
-echo $_prefixVariable6;?>
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
 
                <li class="sidebar-item">
               <a class="sidebar-link" href="./leave-management-list.html" aria-expanded="false">
@@ -319,10 +370,18 @@ echo $_prefixVariable6;?>
                 <span class="hide-menu">Leave Management</span>
               </a>
             </li>
+            <li class="sidebar-item">
+           <a class="sidebar-link" href="./leave-allocation.html" aria-expanded="false">
+             <span>
+               <i class="ti ti-browser-plus"></i>
+             </span>
+             <span class="hide-menu">Leave Allocation</span>
+           </a>
+         </li>
             <?php ob_start();
 }
-$_prefixVariable7 = ob_get_clean();
-echo $_prefixVariable7;?>
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
 
            </div>
 
@@ -341,8 +400,8 @@ echo $_prefixVariable7;?>
             </li>
             <?php ob_start();
 if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
-$_prefixVariable8 = ob_get_clean();
-echo $_prefixVariable8;?>
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="./holiday-management.html" aria-expanded="false">
@@ -354,8 +413,8 @@ echo $_prefixVariable8;?>
             </li>
             <?php ob_start();
 }
-$_prefixVariable9 = ob_get_clean();
-echo $_prefixVariable9;?>
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
 
 
           </div>
@@ -372,15 +431,52 @@ echo $_prefixVariable9;?>
                 <span class="hide-menu">Time Sheet</span>
               </a>
             </li>
+            <?php ob_start();
+if ($_smarty_tpl->tpl_vars['config']->value['company_prifix'] != '') {
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
+
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./attendance.html" aria-expanded="false">
+              <a class="sidebar-link" href="./attendance.html?prefix=<?php echo base64_encode($_smarty_tpl->tpl_vars['config']->value['company_prifix']);?>
+" aria-expanded="false">
                 <span>
                   <i class="ti ti-calendar-time"></i>
                 </span>
                 <span class="hide-menu">Attendance In Out</span>
               </a>
             </li>
+            <?php }?>
+            <?php ob_start();
+if (in_array($_smarty_tpl->tpl_vars['role']->value,array('admin','arom'))) {
+$_prefixVariable15 = ob_get_clean();
+echo $_prefixVariable15;?>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./attendance-correction.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-calendar-check"></i>
+                </span>
+                <span class="hide-menu">Attendance Correction</span>
+              </a>
+            </li>
+            <?php }?>
             </div>
+
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Settings</span>
+            </li>
+            <div class="sub-menu">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="./company-settings" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-settings"></i>
+                  </span>
+                  <span class="hide-menu">Company Settings</span>
+                </a>
+              </li>
+            </div>
+
             <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
                 <span>
@@ -453,7 +549,7 @@ echo $_prefixVariable9;?>
               </a>
             </li> -->
           </ul>
-          
+
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -469,11 +565,11 @@ echo $_prefixVariable9;?>
             <a href="./home.html" class="text-nowrap logo-img">
             <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable10 = ob_get_clean();
-echo $_prefixVariable10;?>
+$_prefixVariable16 = ob_get_clean();
+echo $_prefixVariable16;?>
 public/assets/images/logos/dark-logo.svg" width="140" alt="">
             </a>
-    
+
           </div>
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -495,12 +591,12 @@ public/assets/images/logos/dark-logo.svg" width="140" alt="">
                   aria-expanded="false">
                   <img src="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable11 = ob_get_clean();
-echo $_prefixVariable11;?>
+$_prefixVariable17 = ob_get_clean();
+echo $_prefixVariable17;?>
 public/img/uploads/employee_profile/<?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
-$_prefixVariable12 = ob_get_clean();
-echo $_prefixVariable12;?>
+$_prefixVariable18 = ob_get_clean();
+echo $_prefixVariable18;?>
 " alt="" width="45" height="45" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up profile-drop-down p-0" aria-labelledby="drop2">
@@ -509,75 +605,25 @@ echo $_prefixVariable12;?>
                         <div class="profile-img">
                             <img width="40" height="40" class="profile-initial company-logo-top" alt="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
-$_prefixVariable13 = ob_get_clean();
-echo $_prefixVariable13;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
-$_prefixVariable14 = ob_get_clean();
-echo $_prefixVariable14;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
-$_prefixVariable15 = ob_get_clean();
-echo $_prefixVariable15;?>
-" src="<?php ob_start();
-echo $_smarty_tpl->tpl_vars['base_url']->value;
-$_prefixVariable16 = ob_get_clean();
-echo $_prefixVariable16;?>
-public/img/uploads/employee_profile/<?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
-$_prefixVariable17 = ob_get_clean();
-echo $_prefixVariable17;?>
-" title="<?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
-$_prefixVariable18 = ob_get_clean();
-echo $_prefixVariable18;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
 $_prefixVariable19 = ob_get_clean();
 echo $_prefixVariable19;?>
  <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
 $_prefixVariable20 = ob_get_clean();
 echo $_prefixVariable20;?>
-">   
-                        </div>
-                        <div class="user-name">
-                        <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
-$_prefixVariable21 = ob_get_clean();
-echo $_prefixVariable21;?>
- <?php ob_start();
-echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
-$_prefixVariable22 = ob_get_clean();
-echo $_prefixVariable22;?>
  <?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable21 = ob_get_clean();
+echo $_prefixVariable21;?>
+" src="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['base_url']->value;
+$_prefixVariable22 = ob_get_clean();
+echo $_prefixVariable22;?>
+public/img/uploads/employee_profile/<?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['profile_image'];
 $_prefixVariable23 = ob_get_clean();
 echo $_prefixVariable23;?>
-
-                        </div>
-                      </div>
-                    <div class="message-body">
-                      <a href="./employee-details.html" class="d-flex align-items-center gap-2 dropdown-item mt-2 mb-2">
-                        <i class="ti ti-user fs-6"></i>
-                        <p class="mb-0 fs-3">My Profile</p>
-                      </a>
-                      <div class="logout-block" title="Reset Attendance Pin">
-                         <a href="javascript:void(0)" class="reset-attendance-pin-btn">Reset Attendance Pin <i class="ti ti-calendar-cog"></i></a>
-                      </div>
-                      <div class="logout-block" title="Reset Password">
-                         <a href="javascript:void(0)" class="Reset-pasword-btn">Reset Password <i class="ti ti-lock"></i>
-</i></a>
-                      </div>
-                      <div class="logout-block" title="Logout">
-                         <a href="javascript:void(0)" class="sign-out-btn">Logout <i class="ti ti-login-2"></i></a>
-                      </div>
-                     
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block"><?php ob_start();
+" title="<?php ob_start();
 echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
 $_prefixVariable24 = ob_get_clean();
 echo $_prefixVariable24;?>
@@ -589,6 +635,59 @@ echo $_prefixVariable25;?>
 echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
 $_prefixVariable26 = ob_get_clean();
 echo $_prefixVariable26;?>
+">
+                        </div>
+                        <div class="user-name">
+                        <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable27 = ob_get_clean();
+echo $_prefixVariable27;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable28 = ob_get_clean();
+echo $_prefixVariable28;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable29 = ob_get_clean();
+echo $_prefixVariable29;?>
+
+                        </div>
+                      </div>
+                    <div class="message-body">
+                      <!-- <a href="./employee-details.html" class="d-flex align-items-center gap-2 dropdown-item mt-2 mb-2">
+                        <i class="ti ti-user fs-6"></i>
+                        <p class="mb-0 fs-3">My Profile</p>
+                      </a> -->
+                      <div class="logout-block" title="My Profile">
+                         <a href="./employee-details.html" class="">My Profile <i class="ti ti-user-square-rounded"></i></a>
+                      </div>
+                      <div class="logout-block" title="Reset Attendance Pin">
+                         <a href="javascript:void(0)" class="reset-attendance-pin-btn">Reset Attendance Pin <i class="ti ti-calendar-cog"></i></a>
+                      </div>
+                      <div class="logout-block" title="Reset Password">
+                         <a href="javascript:void(0)" class="Reset-pasword-btn">Reset Password <i class="ti ti-lock"></i>
+</i></a>
+                      </div>
+                      <div class="logout-block" title="Logout">
+                         <a href="javascript:void(0)" class="sign-out-btn">Logout <i class="ti ti-login-2"></i></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <a href="javascript:void(0)"  data-bs-toggle="dropdown" class="user-name-block"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['first_name'];
+$_prefixVariable30 = ob_get_clean();
+echo $_prefixVariable30;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['middle_name'];
+$_prefixVariable31 = ob_get_clean();
+echo $_prefixVariable31;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['user_data']->value['last_name'];
+$_prefixVariable32 = ob_get_clean();
+echo $_prefixVariable32;?>
 </a>
               <div class="modal fade leave-popup-block" id="reset_Password_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered ">
@@ -603,13 +702,32 @@ echo $_prefixVariable26;?>
 
                             <div class="card mb-3 leave-box">
                               <div class="row g-0 m-3">
-                                <div class="mb-3">
-                                  <label for="designationName" class="form-label">New Password</label>
-                                  <input type="text" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
+                                <div class="mb-3 password-box">
+                                  <label for="designationName" class="form-label">Old Password</label>
+                                  <div class="input-group">
+                                      <input type="password" class="form-control old_pass" id="old_pass" name="old_pass"  placeholder="Enter Old Password">
+                                      <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 password-box">
+                                  <label for="designationName" class="form-label">New Password</label>
+                                  <div class="input-group">
+                                      <input type="password" class="form-control new_pass" id="new_pass" name="new_pass"  placeholder="Enter New Password">
+                                      <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
+                                </div>
+                                <div class="mb-3 password-box">
                                   <label for="designationName" class="form-label">Confirm Password</label>
-                                  <input type="text" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
+                                  <div class="input-group">
+                                      <input type="password" class="form-control confirm_pass" id="confirm_pass" name="confirm_pass"  placeholder="Enter Confirm Password">
+                                   <span class="input-group-text date-picker-addon">
+                                        <i class=" ti ti-eye password-icon cursor"  style=""></i>
+                                      </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -666,9 +784,5 @@ echo $_prefixVariable26;?>
       </header>
       <!--  Header End -->
       <div class="container-fluid ">
-
-       
-        
-      
-  <?php }
+<?php }
 }

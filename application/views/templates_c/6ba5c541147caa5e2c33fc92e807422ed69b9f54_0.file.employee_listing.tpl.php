@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-03 09:57:43
+/* Smarty version 4.3.2, created on 2024-04-23 14:49:39
   from '/var/www/html/HRMS/application/views/templates/employee_listing.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_660cdabf44dca9_59953243',
+  'unifunc' => 'content_66277d2bf06574_44328397',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6ba5c541147caa5e2c33fc92e807422ed69b9f54' => 
     array (
       0 => '/var/www/html/HRMS/application/views/templates/employee_listing.tpl',
-      1 => 1712118103,
+      1 => 1713846708,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_660cdabf44dca9_59953243 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66277d2bf06574_44328397 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main-middle-container">
     <aside class="right-sidebar">
     <!-- Sidebar scroll-->
@@ -91,7 +91,7 @@ function content_660cdabf44dca9_59953243 (Smarty_Internal_Template $_smarty_tpl)
                                         <li class="sidebar-item">
                                             <div class="input-group ">
                                               <input type="text" class="form-control" id="join_date_search"  placeholder="Joining Date">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                               <span class="input-group-text time-picker-addon date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -113,8 +113,34 @@ function content_660cdabf44dca9_59953243 (Smarty_Internal_Template $_smarty_tpl)
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="department_search"  placeholder="Department">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <!-- <input type="text" class="form-control" id="department_search"  placeholder="Department"> -->
+                                              <select class="form-select form-control" name="department_search" id="department_search" value="">
+                                                    <!-- <option value="" >Select Department</option> -->
+                                                    <option value=""></option>
+                                                    <?php ob_start();
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['department']->value, 'department_val', false, 'key_val');
+$_smarty_tpl->tpl_vars['department_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key_val']->value => $_smarty_tpl->tpl_vars['department_val']->value) {
+$_smarty_tpl->tpl_vars['department_val']->do_else = false;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+
+                                                        <option value="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['department_val']->value['department_id'];
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+" ><?php ob_start();
+echo $_smarty_tpl->tpl_vars['department_val']->value['department'];
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+</option>
+                                                    <?php ob_start();
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+
+                                                </select>
                                             </div>
                                         </li>
                                     </div>
@@ -125,8 +151,34 @@ function content_660cdabf44dca9_59953243 (Smarty_Internal_Template $_smarty_tpl)
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group ">
-                                              <input type="text" class="form-control" id="designation_search"  placeholder="Designation">
-                                              <!-- <span class="input-group-text"><i class="las la-calendar-alt"></i></span> -->
+                                              <!-- <input type="text" class="form-control" id="designation_search"  placeholder="Designation">  -->
+                                              <select class="form-select form-control" name="designation_search" id="designation_search">
+                                                    <option value="" ></option>
+                                                    
+                                                    <?php ob_start();
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['designation']->value, 'designation_val', false, 'key_val');
+$_smarty_tpl->tpl_vars['designation_val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key_val']->value => $_smarty_tpl->tpl_vars['designation_val']->value) {
+$_smarty_tpl->tpl_vars['designation_val']->do_else = false;
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+
+                                                        <option value="<?php ob_start();
+echo $_smarty_tpl->tpl_vars['designation_val']->value['designation_id'];
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+" ><?php ob_start();
+echo $_smarty_tpl->tpl_vars['designation_val']->value['designation'];
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
+</option>
+                                                    <?php ob_start();
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
+
+                                                </select>
                                             </div>
                                         </li>
                                     </div>
@@ -155,6 +207,20 @@ function content_660cdabf44dca9_59953243 (Smarty_Internal_Template $_smarty_tpl)
         </div>
         <div class="sub-header-right pull-right">
           <div class="timesheet-summary icon-box">
+          <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
             <div class="timesheet-summary-lst">
                 <div class="dropdown grid-drop-down">
                   <button class="btn btn-secondary top-btn-row" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -217,19 +283,19 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 $_smarty_tpl->tpl_vars['val']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
 $_smarty_tpl->tpl_vars['val']->do_else = false;
-$_prefixVariable1 = ob_get_clean();
-echo $_prefixVariable1;?>
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
 
                             <th><b>Search <?php ob_start();
 echo $_smarty_tpl->tpl_vars['val']->value['title'];
-$_prefixVariable2 = ob_get_clean();
-echo $_prefixVariable2;?>
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
 </b></th>
                             <?php ob_start();
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
-$_prefixVariable3 = ob_get_clean();
-echo $_prefixVariable3;?>
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
 
                         </tr>
                     </thead>
@@ -335,62 +401,69 @@ echo $_prefixVariable3;?>
 >
     var column_details =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['data']->value);
-$_prefixVariable4 = ob_get_clean();
-echo $_prefixVariable4;?>
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
 ;
     var page_length_arr = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['page_length_arr']->value);
-$_prefixVariable5 = ob_get_clean();
-echo $_prefixVariable5;?>
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
 
     var is_searching_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_searching_enable']->value);
-$_prefixVariable6 = ob_get_clean();
-echo $_prefixVariable6;?>
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
 ;
     var is_top_searching_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_top_searching_enable']->value);
-$_prefixVariable7 = ob_get_clean();
-echo $_prefixVariable7;?>
+$_prefixVariable15 = ob_get_clean();
+echo $_prefixVariable15;?>
 ;
     var is_paging_enable =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_paging_enable']->value);
-$_prefixVariable8 = ob_get_clean();
-echo $_prefixVariable8;?>
+$_prefixVariable16 = ob_get_clean();
+echo $_prefixVariable16;?>
 ;
     var is_serverSide =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_serverSide']->value);
-$_prefixVariable9 = ob_get_clean();
-echo $_prefixVariable9;?>
+$_prefixVariable17 = ob_get_clean();
+echo $_prefixVariable17;?>
 ;
     var no_data_message =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['no_data_message']->value);
-$_prefixVariable10 = ob_get_clean();
-echo $_prefixVariable10;?>
+$_prefixVariable18 = ob_get_clean();
+echo $_prefixVariable18;?>
 ;
     var is_ordering =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['is_ordering']->value);
-$_prefixVariable11 = ob_get_clean();
-echo $_prefixVariable11;?>
+$_prefixVariable19 = ob_get_clean();
+echo $_prefixVariable19;?>
 ;
     var sorting_column = <?php ob_start();
 echo $_smarty_tpl->tpl_vars['sorting_column']->value;
-$_prefixVariable12 = ob_get_clean();
-echo $_prefixVariable12;?>
+$_prefixVariable20 = ob_get_clean();
+echo $_prefixVariable20;?>
 
     var api_name =  <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['api_name']->value);
-$_prefixVariable13 = ob_get_clean();
-echo $_prefixVariable13;?>
+$_prefixVariable21 = ob_get_clean();
+echo $_prefixVariable21;?>
 ;
     var page_name = 'teacher_page';
     var base_url = <?php ob_start();
 echo json_encode($_smarty_tpl->tpl_vars['base_url']->value);
-$_prefixVariable14 = ob_get_clean();
-echo $_prefixVariable14;?>
+$_prefixVariable22 = ob_get_clean();
+echo $_prefixVariable22;?>
 ;
 <?php echo '</script'; ?>
 >
+<?php echo '<script'; ?>
+ type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"><?php echo '</script'; ?>
+>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <?php echo '<script'; ?>
  src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"><?php echo '</script'; ?>
 >

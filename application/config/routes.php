@@ -123,6 +123,7 @@ $route['employee-salary-structure.html'] = 'salary/employee_salary_strucuture';
 $route['employee-salary-structure-extend.html'] = 'salary/employee_salary_strucuture_action';
 $route['employee-salary-structure-update.html'] = 'salary/employee_salary_strucuture_update_action';
 $route['pdf.html'] = 'salary/generate_pdf';
+$route['salary-calc'] = 'salary/employeeSalaryCalculation';
 
 
 /* API */

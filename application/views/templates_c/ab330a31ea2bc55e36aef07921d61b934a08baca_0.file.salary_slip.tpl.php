@@ -1,4 +1,27 @@
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<?php
+/* Smarty version 4.3.2, created on 2024-04-28 14:46:08
+  from '/var/www/html/HRMS/application/views/templates/salary_slip.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.2',
+  'unifunc' => 'content_662e13d857f5b8_86292429',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'ab330a31ea2bc55e36aef07921d61b934a08baca' => 
+    array (
+      0 => '/var/www/html/HRMS/application/views/templates/salary_slip.tpl',
+      1 => 1714295725,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_662e13d857f5b8_86292429 (Smarty_Internal_Template $_smarty_tpl) {
+?><table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tbody>
         <tr>
             <td>
@@ -22,7 +45,15 @@
                                                                 </font>
                                                                 <br />
                                                                  <font color="#222222" face="Arial, Helvetica, sans-serif">
-                                                                    <span style="color: #222; font-size: 16px; padding: 0px; position: relative; display: inline-block;"><strong>{{$month}} {{$year}}</strong></span>
+                                                                    <span style="color: #222; font-size: 16px; padding: 0px; position: relative; display: inline-block;"><strong><?php ob_start();
+echo $_smarty_tpl->tpl_vars['month']->value;
+$_prefixVariable1 = ob_get_clean();
+echo $_prefixVariable1;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['year']->value;
+$_prefixVariable2 = ob_get_clean();
+echo $_prefixVariable2;?>
+</strong></span>
                                                                 </font>
                                                             </td>
                                                         </tr>
@@ -74,7 +105,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Emploayee Name  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                                <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['full_name']}}</font>
+                                                                                <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['full_name'];
+$_prefixVariable3 = ob_get_clean();
+echo $_prefixVariable3;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -82,7 +117,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Company Name  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['company_name']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['company_name'];
+$_prefixVariable4 = ob_get_clean();
+echo $_prefixVariable4;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -90,7 +129,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Department  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['departmen_name']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['departmen_name'];
+$_prefixVariable5 = ob_get_clean();
+echo $_prefixVariable5;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -98,7 +141,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Date of Joining  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['employment_date']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['employment_date'];
+$_prefixVariable6 = ob_get_clean();
+echo $_prefixVariable6;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -106,7 +153,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>PF  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['pf_number']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['pf_number'];
+$_prefixVariable7 = ob_get_clean();
+echo $_prefixVariable7;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -114,7 +165,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>A/C No.  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['account_no']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['account_no'];
+$_prefixVariable8 = ob_get_clean();
+echo $_prefixVariable8;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         
@@ -139,7 +194,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Employee Code  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['employee_code']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['employee_code'];
+$_prefixVariable9 = ob_get_clean();
+echo $_prefixVariable9;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -147,7 +206,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Location  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['address']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['address'];
+$_prefixVariable10 = ob_get_clean();
+echo $_prefixVariable10;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -155,7 +218,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Designation  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                                <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['designation_name']}}</font>
+                                                                                <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['designation_name'];
+$_prefixVariable11 = ob_get_clean();
+echo $_prefixVariable11;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -163,7 +230,15 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Pay Period  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$month}} {{$year}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['month']->value;
+$_prefixVariable12 = ob_get_clean();
+echo $_prefixVariable12;?>
+ <?php ob_start();
+echo $_smarty_tpl->tpl_vars['year']->value;
+$_prefixVariable13 = ob_get_clean();
+echo $_prefixVariable13;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
@@ -179,7 +254,11 @@
                                                                                 <font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;"><strong>Mode of Pay  :</strong></font>
                                                                             </td>
                                                                             <td height="20" align="left" valign="top">
-                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;">{{$employee_data['bank_name']}}</font>
+                                                                            	<font color="#222222" face="Arial, Helvetica, sans-serif" style="font-size: 13px;font-weight: 400;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['employee_data']->value['bank_name'];
+$_prefixVariable14 = ob_get_clean();
+echo $_prefixVariable14;?>
+</font>
                                                                             </td>
                                                                         </tr>
                                                                         
@@ -210,26 +289,32 @@
                                         <tr >
                                             
                                             <th width="33.33%"  height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Working Days : </strong>{$working_days}</font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Working Days : </strong><?php echo $_smarty_tpl->tpl_vars['working_days']->value;?>
+</font>
                                             </th>
                                             <th width="33.33%" height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Public Holiday : </strong>{$holidays} Days</font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Public Holiday : </strong><?php echo $_smarty_tpl->tpl_vars['holidays']->value;?>
+ Days</font>
                                             </th>
                                             <th width="33.33%"  height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;    margin-left: 114px;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Week Off : </strong>{$week_off} Days</font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Week Off : </strong><?php echo $_smarty_tpl->tpl_vars['week_off']->value;?>
+ Days</font>
                                             </th>
                                             
                                         </tr>
                                         <tr style="border: 1px solid #d6d3d3;">
                                             <th width="33.33%"  height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;    margin-left: 114px;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Leaves : </strong>{$leaves}</font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Leaves : </strong><?php echo $_smarty_tpl->tpl_vars['leaves']->value;?>
+</font>
                                             </th>
                                             
                                             <th width="33.33%"  height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Present Days : </strong>{$present_days} </font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Present Days : </strong><?php echo $_smarty_tpl->tpl_vars['present_days']->value;?>
+ </font>
                                             </th>
                                             <th width="33.33%" height="20" valign="middle" align="center" style="text-align: center; border: 1px solid #d6d3d3;">
-                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Absent Days : </strong>{$absent_days} </font>
+                                                <font style="font-size: 15px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Absent Days : </strong><?php echo $_smarty_tpl->tpl_vars['absent_days']->value;?>
+ </font>
                                             </th>
                                             
                                         </tr>
@@ -283,18 +368,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {foreach $income_arr as $key => $val}
+                                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['income_arr']->value, 'val', false, 'key');
+$_smarty_tpl->tpl_vars['val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->do_else = false;
+?>
                                                    
                                                         <tr>
                                                             <td width="40%" height="30" valign="middle" align="left" style="text-align: left;">
                                                                 <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                    {$val.component_name}
+                                                                    <?php echo $_smarty_tpl->tpl_vars['val']->value['component_name'];?>
+
                                                                 </font>
                                                             </td>
 
                                                             <td width="30%" height="30" valign="middle" align="right" style="text-align: right;">
                                                                 <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                    {number_format($val.component_value, 2)}
+                                                                    <?php echo number_format($_smarty_tpl->tpl_vars['val']->value['component_value'],2);?>
+
                                                                 </font>
                                                             </td>
 
@@ -305,7 +397,9 @@
                                                             </td>
                                                         </tr>
                                                  
-                                                {/foreach}
+                                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                                 <tr>
                                                     <td width="40%" height="30" valign="middle" align="left" style="text-align: left;">
                                                         <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
@@ -315,7 +409,8 @@
 
                                                     <td width="30%" height="30" valign="middle" align="right" style="text-align: right;">
                                                         <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                            <strong>{number_format($total_income,2)}</strong>
+                                                            <strong><?php echo number_format($_smarty_tpl->tpl_vars['total_income']->value,2);?>
+</strong>
                                                         </font>
                                                     </td>
 
@@ -364,17 +459,24 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     
-                                                                    {foreach $deduction_arr as $key => $val}
+                                                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['deduction_arr']->value, 'val', false, 'key');
+$_smarty_tpl->tpl_vars['val']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->do_else = false;
+?>
                                                                            <tr>
                                                                             <td width="40%" height="30" valign="middle" align="left" style="text-align: left;">
                                                                                 <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                                    {$val.component_name}
+                                                                                    <?php echo $_smarty_tpl->tpl_vars['val']->value['component_name'];?>
+
                                                                                 </font>
                                                                             </td>
                                                                 
                                                                             <td width="30%" height="30" valign="middle" align="right" style="text-align: right;">
                                                                                 <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                                    {number_format($val.component_value, 2)}
+                                                                                    <?php echo number_format($_smarty_tpl->tpl_vars['val']->value['component_value'],2);?>
+
                                                                                 </font>
                                                                             </td>
                                                                 
@@ -385,7 +487,9 @@
                                                                             </td>
                                                                         </tr>
                                                                   
-                                                                {/foreach}
+                                                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
                                                                 </tbody>
                                                                 <thead >
@@ -395,7 +499,8 @@
                                                 </font>
                                                                         </th>
                                                                         <th width="42%" height="20" valign="middle" align="left" style="text-align: right; border-bottom: 1px dashed #d6d3d3;" bgcolor="#cef0ff">
-                                                                            <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>{$total_net_amount}</strong></font>
+                                                                            <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong><?php echo $_smarty_tpl->tpl_vars['total_net_amount']->value;?>
+</strong></font>
                                                                         </th>
                                                                         
                                                                         
@@ -421,7 +526,8 @@
                                     <tbody>
                                         <tr>
                                             <td align="center">
-                                                <font style="font-size: 18px;font-weight: 900;" face="Arial, Helvetica, sans-serif" color="#000" >Total Net Payable <strong style="font-weight: 900;">{$total_net_amount}</strong> <span style="font-size: 15px">(Eight-seven Thousand Three Hundred Only)</span>
+                                                <font style="font-size: 18px;font-weight: 900;" face="Arial, Helvetica, sans-serif" color="#000" >Total Net Payable <strong style="font-weight: 900;"><?php echo $_smarty_tpl->tpl_vars['total_net_amount']->value;?>
+</strong> <span style="font-size: 15px">(Eight-seven Thousand Three Hundred Only)</span>
                                                 </font>
                                             </td>
                                         </tr>
@@ -458,7 +564,7 @@
                                             <td align="left" width="48%">
                                                 <font style="font-size: 14px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Signature:&nbsp;</strong></font>
                                                 <font style="font-size: 15px; display: inline-block;" align="left" face="Arial, Helvetica, sans-serif" color="#222222">
-
+                                                                    <img align="left" src="http://mrs-inventory-staging.s3.amazonaws.com/waybill_signatures/5453/local_destination_signature.png" height="16px" width="180px" />
                                                                 </font>
                                             </td>
                                         </tr>
@@ -475,4 +581,5 @@
         
        
     </tbody>
-</table>
+</table><?php }
+}

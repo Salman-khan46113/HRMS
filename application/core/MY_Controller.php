@@ -5,6 +5,7 @@ class MY_Controller extends CI_Controller
   function __construct()
   {
     parent::__construct();
+    
        
         
    // pr($this->config);
@@ -13,7 +14,8 @@ class MY_Controller extends CI_Controller
     
     $route_arr = $this->router->routes;
     $route_arr = array_keys($route_arr);
-    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit","pdf.html","daily-log","send_email","auto-out-log","send-notification"];
+    $authentication_arr = ["login.html","signup.html","attendance.html","forgot.html","check_company_exit","pdf.html","daily-log","send_email","auto-out-log","send-notification","salary-calc"];
+
     $current_route = '';
     if(array_key_exists('PATH_INFO',$_SERVER)){
       // $current_route = str_replace("/","", $_SERVER['PATH_INFO']);
@@ -50,8 +52,8 @@ class MY_Controller extends CI_Controller
 		    // pr($ajax_json);
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $ajax_json = $this->session->userdata();
-            $config = (array) $this->config;
-            $ajax_json['config'] = $config['config'];
+        $config = (array) $this->config;
+        $ajax_json['config'] = $config['config'];
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $html = $this->smarty->fetch("header.tpl",$ajax_json);
 	    	echo $html;
