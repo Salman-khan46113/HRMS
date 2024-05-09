@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-04-28 14:46:08
+/* Smarty version 4.3.2, created on 2024-05-06 22:17:14
   from '/var/www/html/HRMS/application/views/templates/salary_slip.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_662e13d857f5b8_86292429',
+  'unifunc' => 'content_66390992351d47_97416273',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ab330a31ea2bc55e36aef07921d61b934a08baca' => 
     array (
       0 => '/var/www/html/HRMS/application/views/templates/salary_slip.tpl',
-      1 => 1714295725,
+      1 => 1715014003,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_662e13d857f5b8_86292429 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66390992351d47_97416273 (Smarty_Internal_Template $_smarty_tpl) {
 ?><table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tbody>
         <tr>
@@ -564,7 +564,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                             <td align="left" width="48%">
                                                 <font style="font-size: 14px;" face="Arial, Helvetica, sans-serif" color="#222222"><strong>Signature:&nbsp;</strong></font>
                                                 <font style="font-size: 15px; display: inline-block;" align="left" face="Arial, Helvetica, sans-serif" color="#222222">
-                                                                    <img align="left" src="http://mrs-inventory-staging.s3.amazonaws.com/waybill_signatures/5453/local_destination_signature.png" height="16px" width="180px" />
+
                                                                 </font>
                                             </td>
                                         </tr>
