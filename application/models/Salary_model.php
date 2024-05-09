@@ -326,13 +326,15 @@ class Salary_model extends CI_Model
         return $designation_wise_data;
     }
 
-    public function getEmployeeComponenetData($emp_ids = []){
+    public function getEmployeeComponenetData($emp_ids = [],$date_arr = []){
         // $company_id = $this->session->userData('company_id');
         $this->db->select('em.employee_id,em.ctc_value,esc.*,"Employee" as type');
         $this->db->from('employee_extended_salary_structure em');
         $this->db->join('employee_extended_salary_structure_component esc','em.employee_extended_salary_structure_id = esc.employee_extended_salary_structure_id');
         // $this->db->where_in('em.employee_id',$emp_ids);
         $this->db->where('em.is_default',"Yes");
+        $this->db->where('em.effective_from >=',$date_arr['start_date']);
+        $this->db->where("em.effective_to <=" ,$date_arr['end_date']);
         $query = $this->db->get();
         $employee_wise_data = is_object($query) ? $query->result_array() : [];
         return $employee_wise_data;
@@ -360,6 +362,7 @@ class Salary_model extends CI_Model
         $this->db->from('employee_leave el');
         $this->db->where("el.leave_start_date >= '$start_date' AND el.leave_end_date <= '$end_date'");
         $this->db->where_in('el.employee_id',$employee_ids);
+        $this->db->where('el.status','approve');
         // $this->db->group_by('el.employee_id');
         $query = $this->db->get();
         $employee_wise_data = is_object($query) ? $query->result_array() : [];
@@ -367,7 +370,7 @@ class Salary_model extends CI_Model
     }
 
     public function getAllocatedLeaves($deparment_ids = [],$designation_ids = []){
-        $this->db->select('la.designation_id,la.department_id,la.total_leaves');
+        $this->db->select('la.designation_id,la.department_id,la.total_leave');
         $this->db->from('leave_allocation la');
         $this->db->where_in('la.designation_id',$designation_ids);
         $this->db->where_in('la.department_id',$deparment_ids);
@@ -421,6 +424,18 @@ class Salary_model extends CI_Model
         $employee_shift_wise_data = is_object($query) ? $query->result_array() : [];
         return $employee_shift_wise_data;
     }
+    public function getComboffData($date_arr){
+        $this->db->select('ec.employee_id,ec.combo_off_date');
+        $this->db->from('employee_combo_off ec');
+        $this->db->where('ec.combo_off_date >=',$date_arr['start_date']);
+        $this->db->where('ec.combo_off_date <=',$date_arr['end_date']);
+        $this->db->where('ec.status','Approve');
+        $query = $this->db->get();
+        $employee_combo_off = is_object($query) ? $query->result_array() : [];
+        return $employee_combo_off;
+    }
 }
+
+
 
 ?>

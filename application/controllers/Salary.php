@@ -5,6 +5,7 @@ class Salary extends MY_controller
 {
     public $holiday_arr = [];
     public $working_day_arr = [];
+    public $combo_off = [];
     public function __construct()
     {
         parent::__construct();
@@ -22,15 +23,13 @@ class Salary extends MY_controller
             array_push($year_arr, $i);
         }
         $data["year_arr"] = $year_arr;
-
-    	$salary_component = $this->salary_model->get_salary_component();
-    	foreach ($salary_component as $key => $value) {
-    		$salary_component[$key]['action'] = '<span class="edit_salary_componet me-2 text-secondary cursor" data-id="'.$value['salary_component_id'].'" title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
-    	}
-    	$data["salary_components"] = $salary_component;
-        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
-            base_url() .
-
+        $salary_component = $this->salary_model->get_salary_component();
+        foreach ($salary_component as $key => $value) {
+            $salary_component[$key]['action'] = '<span class="edit_salary_componet me-2 text-secondary cursor" data-id="' . $value['salary_component_id'] . '" title="Edit"><i class=" la-edit ti ti-edit"></i></span>';
+        }
+        $data["salary_components"] = $salary_component;
+        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary component data found..!</div>';
         $data["company_details"] = $this->salary_model->get_companies();
         $data["selected_company"] = getCompanyId();
@@ -150,9 +149,8 @@ class Salary extends MY_controller
             $designation = $this->salary_model->get_designation($department_ids);
         }
         $data["designation"] = $designation;
-        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
-            base_url() .
-
+        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        base_url() .
             'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No salary structure data found..!</div>';
 
         $data["salary_strucuture"] = $this->salary_model->get_designation_salary_structure_list($data["selected_company"]);
@@ -368,10 +366,8 @@ class Salary extends MY_controller
         }
         $data['employee_id'] = $get_data['id'];
         $data["year_arr"] = $year_arr;
-
-        $data["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
-            base_url() .'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee salary structure data found..!</div>';
-
+        $data["no_data_message"] = '<div class="p-3"><img class="p-2" src="' .
+        base_url() . 'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No employee salary structure data found..!</div>';
         $get_employee_details = $this->salary_model->get_employee_details($get_data['id']);
         $designation_salary_structure = $this->salary_model->get_designation_salary_structure($get_employee_details['department'], $get_employee_details['designation'], $get_employee_details['company_id']);
 
@@ -515,7 +511,6 @@ class Salary extends MY_controller
         $base_directory = FCPATH . "public/uploads/salary_slip";
         $employee_path = $base_directory . '/' . $data['employee_id'];
 
-
         if (!is_dir($employee_path)) {
             mkdir($employee_path, 0777);
         }
@@ -534,7 +529,6 @@ class Salary extends MY_controller
         $file_path = $year_month_directory . 'salary_pdf.pdf';
         $htm_str = $this->smarty->fetch("salary_slip.tpl", $data);
         pr($htm_str);
-
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetMargins(0, 7, 7, 0);
@@ -546,7 +540,6 @@ class Salary extends MY_controller
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
         $pdf->writeHTML($htm_str, true, false, true, false, '');
-
         $file_path = $month_path . '/salary_slip.pdf';
         $output = $pdf->Output($file_path, 'F');
 
@@ -554,11 +547,22 @@ class Salary extends MY_controller
 
     public function employeeSalaryCalculation()
     {
+        /*
+            if want to make company wise date changes need to change in getMonthStartEndDatea and getpreviousmonth 
+        */
+
         $designation_filter_data = $component_data = $employee_filter_data = $allocated_leaves = $filtered_allocerted_leave = $calulated_array = $leaves_dates = $employee_shift_arr = [];
         // $cur_date = new DateTime('now');
         // $last_day_of_month = $cur_date->modify('last day of this month');
         // $formated_last_date = $last_day_of_month->format('Y-m-d');
         $date_arr = $this->getMonthStartEndDate();
+        $combo_arr_raw = $this->salary_model->getComboffData($date_arr);
+        if (is_valid_array($combo_arr_raw)) {
+            foreach ($combo_arr_raw as $com_key => $com_val) {
+                $combo_dates[$com_val['employee_id']][] = $com_val['combo_off_date'];
+            }
+            $this->combo_off = $combo_dates;
+        }
         $date_month_arr = explode('-', $date_arr['start_date']);
         $month_name = date("F", mktime(0, 0, 0, $date_month_arr[1], 10));
         $employee_data = $this->salary_model->getEmployeeData($month_name);
@@ -573,11 +577,11 @@ class Salary extends MY_controller
         // $leaves_assoc = array_column($leaves_data_raw,'leaves','employee_id');
         if (is_valid_array($leaves_data_raw)) {
             foreach ($leaves_data_raw as $leave_key => $leav_val) {
-                $leaves_dates[$leav_val['employee_id']] = $leav_val;
+                $leaves_dates[$leav_val['employee_id']][] = $leav_val;
             }
         }
         $designation_wise_raw_data = $this->salary_model->getDesignationComponenetData();
-        $employee_wise_raw_data = $this->salary_model->getEmployeeComponenetData($employee_ids_main);
+        $employee_wise_raw_data = $this->salary_model->getEmployeeComponenetData($employee_ids_main,$date_arr);
         $employee_ids = is_valid_array($employee_wise_raw_data) ? array_unique(array_column($employee_wise_raw_data, 'employee_id')) : [];
         if (is_valid_array($designation_wise_raw_data)) {
             //designation and department wise component
@@ -596,11 +600,13 @@ class Salary extends MY_controller
 
         if (is_valid_array($employee_data)) {
             foreach ($employee_data as $key => $val) {
+                
                 $income_arr = $deduction_arr = [];
                 $over_time_amount_min_wise = $total_income = $total_deduction = $over_time_min = $leaves_days = $absent_days_count = 0;
                 $over_time_allowed = $val['over_time_allow'];
                 $over_time_per_min = $val['overtime_rate_per_hour'] / 60;
-                $working_days_data = $this->getWorkingDays(explode(',', $val['week_off']));
+                $combo_arrs = array_key_exists($val['employee_id'],$this->combo_off) ? $this->combo_off[$val['employee_id']] : [];
+                $working_days_data = $this->getWorkingDays(explode(',', $val['week_off']),$combo_arrs);
                 $week_off_count = $working_days_data['week_off_count'];
                 $working_data_arr = $working_days_data['working_arr'];
                 $employee_shift_arr_raw = $this->salary_model->getEmployeeShiftData($val['employee_id'],$date_arr);
@@ -633,8 +639,9 @@ class Salary extends MY_controller
                         if (array_key_exists($val['employee_id'], $attandence_data) && !in_array($working_value, $attandence_data[$val['employee_id']])) {
                             $leave_data_temp = array_key_exists($val['employee_id'], $leaves_dates) ? $leaves_dates[$val['employee_id']] : [];
                             $atotal_incomebsent_flag = $this->compareThreeDatas($leave_data_temp, $working_value);
-                            if (!$atotal_incomebsent_flag) {
-                                $absent_days_count += 1;
+                            if (!$atotal_incomebsent_flag['absent_flag']) {
+                                $tem_count = $atotal_incomebsent_flag['type'] == 'half' ? 0.5 : 1;
+                                $absent_days_count += $tem_count;
                             }
                         }
 
@@ -672,8 +679,10 @@ class Salary extends MY_controller
                         $total_deduction += $val_in['component_value'];
                     }
                 }
+                
                 if (is_valid_array($leaves_dates) && array_key_exists($val['employee_id'], $leaves_dates)) {
-                    foreach ($leaves_dates as $l_date_k => $l_date_val) {
+                    foreach ($leaves_dates[$val['employee_id']] as $l_date_k => $l_date_val) {
+                        
                         $leaves_days += $this->calculateDaysBetweenDates($l_date_val['leave_start_date'], $l_date_val['leave_end_date'], $l_date_val['leave_type']);
                     }
                 }
@@ -696,7 +705,6 @@ class Salary extends MY_controller
                 $pdf_data['holidays'] = count($this->holiday_arr);
                 $pdf_data['week_off'] = $week_off_count;
                 $pdf_data['absent_days'] = $absent_days_count;
-                
                 $this->generate_pdf($pdf_data);
 
             }
@@ -713,17 +721,27 @@ class Salary extends MY_controller
         if (!is_valid_array($leaves_dates) || $work_date == '') {
             return 0;
         }
-
+        $absent_flag = false;
+        $type = 'full';
         foreach ($leaves_dates as $date_k => $date_v) {
             $w_day = new DateTime($work_date);
             $st_leave_date = new DateTime($date_v['leave_start_date']);
             $e_leave_date = new DateTime($date_v['leave_end_date']);
             if ($w_day >= $st_leave_date && $w_day <= $e_leave_date) {
-                return true;
+                if($st_leave_date == $e_leave_date && $date_v['leave_type'] == 'half_day'){
+                    $type = 'half';
+                }
+                else{
+                    $type = 'full';
+                    $absent_flag = true;
+                }
+                
+                break;
             }
         }
-
-        return false;
+        $ret_arr['type'] =  $type;
+        $ret_arr['absent_flag'] = $absent_flag;
+        return $ret_arr;
     }
 
     public function calculateDaysBetweenDates($s_date = '', $e_date = '', $type = '')
@@ -777,7 +795,6 @@ class Salary extends MY_controller
         }
         return $caculated_array;
 
-
     }
 
     public function updateDefaultStructure()
@@ -824,10 +841,15 @@ class Salary extends MY_controller
         return $previousMonth;
     }
 
-    public function getWorkingDays($week_off_days = [])
+    public function getWorkingDays($week_off_days = [],$combo_off = [])
     {
         $month = $this->getPriviousMonth();
-        $year = date('Y');
+        // get year code starts.
+        $date = new DateTime();
+        $date->sub(new DateInterval('P1M'));
+        $year = $date->format('Y');
+        // getting year code ends.
+        // $year = date('Y');
         $workingDays = 0;
         $working_arr = [];
         $date_arr = $this->getMonthStartEndDate();
@@ -835,7 +857,7 @@ class Salary extends MY_controller
         $this->holiday_arr = $holidays_raw_arr;
         $week_off_arr = $this->dateByday($year, $month, $week_off_days);
         $holidays = array_column($holidays_raw_arr, 'holiday_date');
-        $week_off_holiday = array_unique(array_merge($holidays, $week_off_arr));
+        $week_off_holiday = array_unique(array_merge($holidays, $week_off_arr,$combo_off));
         $firstDay = new DateTime("{$year}-{$month}-01");
         $lastDay = clone $firstDay;
         $lastDay = $lastDay->modify('+1 month -1 day');
@@ -857,7 +879,6 @@ class Salary extends MY_controller
         $return_arr['week_off_arr'] = $week_off_arr;
         $return_arr['week_off_holiday'] = $week_off_holiday;
         $return_arr['days_in_month'] = $days_in_month;
-        // pr($return_arr);
         return $return_arr;
     }
 
