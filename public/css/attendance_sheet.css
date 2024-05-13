@@ -292,6 +292,13 @@ body.dashboard-page-body .main-middle-container .sub-header{
     color: #f71919 !important;
     cursor: pointer;
 }
+
+.container-fluid i.ti-download {
+  font-size: 33px !important;
+    color: #0080FF !important;
+    cursor: pointer;
+}
+
 .container-fluid i.ti-license {
   font-size: 33px !important;
     color: #f71919 !important;

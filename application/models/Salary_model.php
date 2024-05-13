@@ -298,7 +298,7 @@ class Salary_model extends CI_Model
         return $affected_row;
     }
 
-    public function getEmployeeData($month_name = ''){
+    public function getEmployeeData($month_name = '',$employee_id = ''){
         // $company_id = $this->session->userData('company_id');
         $this->db->select('em.employee_id,em.designation,em.department,c.company_name,d.departmen_name,ds.designation_name,co.country_name,s.vState,bm.bank_name,bm.account_no,CONCAT(if(em.city is null,"",em.city)," ", s.vState," ", co.country_name) as address
         ,concat(em.first_name," ",em.last_name) as full_name,em.employee_code,em.employment_date,em.pf_number,ew.employee_week_off as week_off,em.over_time_allow,em.overtime_rate_per_hour');
@@ -310,6 +310,9 @@ class Salary_model extends CI_Model
         $this->db->join('state_master s','s.iStateId = em.state');
         $this->db->join('bank_master bm','bm.entity_type = "Employee" AND bm.entity_id = em.employee_id');
         $this->db->join('employee_week_off ew',"ew.employee_id = em.employee_id AND ew.month = '$month_name'",'left');
+        if($employee_id != ''){
+           $this->db->where('em.employee_id',$employee_id); 
+        }
         // $this->db->where('em.company_id',$company_id);
         $query = $this->db->get();
         $employee_data = is_object($query) ? $query->result_array() : [];
@@ -389,11 +392,14 @@ class Salary_model extends CI_Model
         return $holiday_list;
     }
 
-    public function getAttancedence($date_arr = []){
+    public function getAttancedence($date_arr = [],$employee_id = ''){
         $this->db->select('et.attendance_date,et.employee_id,et.attendance_in_time,et.attendance_out_time');
         $this->db->from('employee_attendance et');
         $this->db->where('et.attendance_date >=',$date_arr['start_date']);
         $this->db->where('et.attendance_date <=',$date_arr['end_date']);
+        if($employee_id != ''){
+            $this->db->where('et.employee_id',$employee_id);
+        }
         $query = $this->db->get();
         $attendencde_dates_raw = is_object($query) ? $query->result_array() : [];
         $attendence_data = $attendence_date_comp = [];
@@ -424,12 +430,15 @@ class Salary_model extends CI_Model
         $employee_shift_wise_data = is_object($query) ? $query->result_array() : [];
         return $employee_shift_wise_data;
     }
-    public function getComboffData($date_arr){
+    public function getComboffData($date_arr = [],$employee_id =''){
         $this->db->select('ec.employee_id,ec.combo_off_date');
         $this->db->from('employee_combo_off ec');
         $this->db->where('ec.combo_off_date >=',$date_arr['start_date']);
         $this->db->where('ec.combo_off_date <=',$date_arr['end_date']);
         $this->db->where('ec.status','Approve');
+        if($employee_id != ''){
+            $this->db->where('ec.employee_id',$employee_id);
+        }
         $query = $this->db->get();
         $employee_combo_off = is_object($query) ? $query->result_array() : [];
         return $employee_combo_off;
