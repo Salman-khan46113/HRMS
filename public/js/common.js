@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-
   // remove server advetisemnt block
   $('body').find('[style="text-align: right;position: fixed;z-index:9999999;bottom: 0;width: auto;right: 1%;cursor: pointer;line-height: 0;display:block !important;"]').remove()
   setTimeout(function(){
@@ -46,4 +45,14 @@ function setHeigt(){
   var height = $(".main-content").height();
   console.log(height)
   $(".footer-box").css("top","calc(103% - "+height+"px)").addClass("ok")
+}
+
+const getCurrenctDate = () => {
+  // below funciton is used to get the current date in y -m -d formate.
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
 }

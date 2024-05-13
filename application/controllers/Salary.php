@@ -6,6 +6,8 @@ class Salary extends MY_controller
     public $holiday_arr = [];
     public $working_day_arr = [];
     public $combo_off = [];
+    public $employee_last_date = '';
+    public $selected_employee = '';
     public function __construct()
     {
         parent::__construct();
@@ -13,6 +15,7 @@ class Salary extends MY_controller
         include "application/libraries/fpdf/fpdf.php";
         require_once APPPATH . 'libraries/tcpdf/tcpdf.php';
         $this->load->model("salary_model");
+        
     }
     public function index()
     {
@@ -528,7 +531,7 @@ class Salary extends MY_controller
         $year_month_directory = $employee_directory . $data['year'] . '/' . $data['month'] . '/';
         $file_path = $year_month_directory . 'salary_pdf.pdf';
         $htm_str = $this->smarty->fetch("salary_slip.tpl", $data);
-        pr($htm_str);
+        // pr($htm_str);
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetMargins(0, 7, 7, 0);
@@ -542,21 +545,22 @@ class Salary extends MY_controller
         $pdf->writeHTML($htm_str, true, false, true, false, '');
         $file_path = $month_path . '/salary_slip.pdf';
         $output = $pdf->Output($file_path, 'F');
+        $download_url = $this->config->item('base_url') ."public/uploads/salary_slip/". $data['employee_id'] . '/' . $data['year'] . '/' . $data['month'] . '/' .'salary_slip.pdf';
+        $return_arr['url'] = $download_url;
+        return  $return_arr;
 
     }
 
-    public function employeeSalaryCalculation()
+    public function employeeSalaryCalculation($employee_last_date = '',$selected_employee = '')
     {
         /*
             if want to make company wise date changes need to change in getMonthStartEndDatea and getpreviousmonth 
         */
-
+        $this->selected_employee =  $selected_employee != '' && $selected_employee > 0 ? $selected_employee : '';
+        $this->employee_last_date =  $employee_last_date != ''  ? $employee_last_date : '';
         $designation_filter_data = $component_data = $employee_filter_data = $allocated_leaves = $filtered_allocerted_leave = $calulated_array = $leaves_dates = $employee_shift_arr = [];
-        // $cur_date = new DateTime('now');
-        // $last_day_of_month = $cur_date->modify('last day of this month');
-        // $formated_last_date = $last_day_of_month->format('Y-m-d');
         $date_arr = $this->getMonthStartEndDate();
-        $combo_arr_raw = $this->salary_model->getComboffData($date_arr);
+        $combo_arr_raw = $this->salary_model->getComboffData($date_arr,$this->selected_employee);
         if (is_valid_array($combo_arr_raw)) {
             foreach ($combo_arr_raw as $com_key => $com_val) {
                 $combo_dates[$com_val['employee_id']][] = $com_val['combo_off_date'];
@@ -565,8 +569,8 @@ class Salary extends MY_controller
         }
         $date_month_arr = explode('-', $date_arr['start_date']);
         $month_name = date("F", mktime(0, 0, 0, $date_month_arr[1], 10));
-        $employee_data = $this->salary_model->getEmployeeData($month_name);
-        $attandence_data_raw = $this->salary_model->getAttancedence($date_arr);
+        $employee_data = $this->salary_model->getEmployeeData($month_name,$this->selected_employee);
+        $attandence_data_raw = $this->salary_model->getAttancedence($date_arr,$this->selected_employee);
         $attandence_data = $attandence_data_raw['attendence_data'];
         $employee_in_out_time = $attandence_data_raw['in_out_employee_data'];
         $employee_ids_main = array_column($employee_data, 'employee_id');
@@ -597,7 +601,7 @@ class Salary extends MY_controller
         }
 
         $allocated_leaves = $this->salary_model->getAllocatedLeaves($deparment_ids, $designation_ids);
-
+        
         if (is_valid_array($employee_data)) {
             foreach ($employee_data as $key => $val) {
                 
@@ -618,21 +622,14 @@ class Salary extends MY_controller
                     // will getting the data from designation
                     $component_data = isset($designation_filter_data[$val['designation']]) && isset($designation_filter_data[$val['designation']][$val['department']]) ? $designation_filter_data[$val['designation']][$val['department']] : [];
                 }
+                
                 if (!is_valid_array($component_data)) {
-                    return 0;
+                    continue;
                 }
 
                 $calulated_array = $this->getMonthlyCalculation($component_data, $date_arr);
 
-                $insert_array[] = array(
-                    'employee_id' => $val['employee_id'],
-                    'year' => $component_data[0]['year'],
-                    'month' => $date_month_arr[1],
-                    'salary_json' => json_encode($calulated_array),
-                    'type' => $component_data[0]['type'],
-                    'refrence_id' => $component_data[0]['type'] == 'Employee' ? $component_data[0]['employee_extended_salary_structure_id'] : $component_data[0]['designation_salary_structure_id'],
-                );
-
+                
                 //below code for calculating the absent days.
                 if (is_valid_array($working_data_arr)) {
                     foreach ($working_data_arr as $working_key => $working_value) {
@@ -705,15 +702,27 @@ class Salary extends MY_controller
                 $pdf_data['holidays'] = count($this->holiday_arr);
                 $pdf_data['week_off'] = $week_off_count;
                 $pdf_data['absent_days'] = $absent_days_count;
-                $this->generate_pdf($pdf_data);
+                $generated_pdf_data = $this->generate_pdf($pdf_data);
+                
+                $insert_array[] = array(
+                    'employee_id' => $val['employee_id'],
+                    'year' => $component_data[0]['year'],
+                    'month' => $date_month_arr[1],
+                    'salary_json' => json_encode($pdf_data),
+                    'type' => $component_data[0]['type'],
+                    'refrence_id' => $component_data[0]['type'] == 'Employee' ? $component_data[0]['employee_extended_salary_structure_id'] : $component_data[0]['designation_salary_structure_id'],
+                );
 
             }
+           
         }
-
-        if (is_valid_array($insert_array)) {
+        if (is_valid_array($insert_array) && $this->employee_last_date == '' && $this->selected_employee == '') {
             $this->db->insert_batch('employee_monthly_salary_log', $insert_array);
+            
         }
-
+        if($selected_employee > 0){
+            return $generated_pdf_data;
+        }
     }
 
     public function compareThreeDatas($leaves_dates = [], $work_date = '')
@@ -827,7 +836,7 @@ class Salary extends MY_controller
         $month = $this->getPriviousMonth();
         $year = date("Y");
         $firstDay = date("Y-m-01", mktime(0, 0, 0, $month, 1, $year));
-        $lastDay = date("Y-m-t", mktime(0, 0, 0, $month, 1, $year));
+        $lastDay = $this->employee_last_date != '' ? $this->employee_last_date : date("Y-m-t", mktime(0, 0, 0, $month, 1, $year));
         $return_arr['start_date'] = $firstDay;
         $return_arr['end_date'] = $lastDay;
         return $return_arr;
@@ -838,6 +847,10 @@ class Salary extends MY_controller
         $currentMonth = date('n');
         $previousMonth = $currentMonth - 1;
         $previousMonth = $previousMonth < 1 ? 12 : $previousMonth;
+        if($this->employee_last_date != ''){
+            $timestamp = strtotime($this->employee_last_date);
+            $previousMonth = date('m', $timestamp);
+        }
         return $previousMonth;
     }
 
@@ -926,5 +939,11 @@ class Salary extends MY_controller
 
         return $total_minutes;
 }
+
+ public function getpdfUrl(){
+    $post_data = $this->input->get_post(null,true);
+    $pdf_url = $this->employeeSalaryCalculation('',$post_data['id']);
+    echo json_encode($pdf_url);
+ }
 
 }

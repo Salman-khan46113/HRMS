@@ -195,6 +195,28 @@ $(document).ready(function () {
           makeTable('');
         }
     })
+
+    $(document).off('click','.pdf-download');
+    $(document).on('click','.pdf-download',function(e){
+      let id = $(this).attr('data-id');
+      let params = {id:id};
+      $.ajax({
+        type: "POST",
+        url: "salary/getpdfUrl",
+        data: params,
+        success: function (response) {
+            response = response ?? '';
+            if(response == '') return 0;
+            var responseObject = JSON.parse(response);
+            console.log(responseObject);
+              downloadPDF(responseObject.url);        
+            
+        },
+        error: function (error) {},
+        });
+    });
+    // })
+
     $(".submit-week-off").on("click",function(){
         var employee_id = $("#employee-id").val();
         var week_off = $("#week_off").val();
@@ -292,6 +314,26 @@ $(document).ready(function () {
 
 });
 
+
+// below function is used to force download file
+const downloadPDF = (pdfUrl) => {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', pdfUrl, true);
+  xhr.responseType = 'blob';
+
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          // Create a link element and trigger download
+          var blob = xhr.response;
+          var link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'salary_slip.pdf';
+          link.click();
+      }
+  };
+
+  xhr.send();
+}
 
 function makeTable(data) {
   loader()
