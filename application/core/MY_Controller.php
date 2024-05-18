@@ -49,11 +49,10 @@ class MY_Controller extends CI_Controller
 
 
 		    $ajax_json = $this->session->userdata();
-		    // pr($ajax_json);
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $ajax_json = $this->session->userdata();
-        $config = (array) $this->config;
-        $ajax_json['config'] = $config['config'];
+            $config = (array) $this->config;
+            $ajax_json['config'] = $config['config'];
 		    $this->smarty->assign("user_data", $ajax_json);
 		    $html = $this->smarty->fetch("header.tpl",$ajax_json);
 	    	echo $html;

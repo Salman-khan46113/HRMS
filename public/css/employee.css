@@ -108,7 +108,7 @@ label.error{
 .input-group .input-group-text{
     background: rgba(0, 0, 0, 0.05) ;
     border: var(--bs-border-width) solid #DFE5EF ;
-        border-radius: 0px 5px 5px 0px !important;
+        border-radius: 0px 5px 5px 0px ;
 }
 .input-group .input-group-text i{
       font-size: 19px;
@@ -373,3 +373,6 @@ span.select2-selection.select2-selection--multiple {
   width: 300px !important;
 }
 
+.overtime_rate #overtime_rate_per_hour{
+      border-radius: 0px 5px 5px 0px !important;
+}

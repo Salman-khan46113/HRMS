@@ -282,6 +282,11 @@ class Home_model extends CI_Model
                 $this->db->where("h.holiday_date >=", date("Y/m/d"));
             }
         }
+
+        $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("h.company_id", 20);
+        }
         $result_obj = $this->db->get();
         // pr($this->db->last_query(),1);
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];

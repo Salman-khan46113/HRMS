@@ -39,6 +39,14 @@ $(document).ready(function () {
             $(".update-imeg-file").hide();
         }
     });
+    $(".overtime-allow-box .form-check-input").on("change",function(){
+        var value = $(this).val();
+        if(value == "Yes"){
+            $(".overtime_rate").show();
+        }else{
+            $(".overtime_rate").hide();
+        } 
+    })
 
     $(".next").on("click", function () {
         var target = $(this).attr("data-target");
@@ -448,6 +456,20 @@ $(document).ready(function () {
             overtime_allow: {
                 required: true,
             },
+            overtime_rate_per_hour: {
+                required: {
+                    depends: function (element) {
+                        var valid = $(".overtime-allow-box [name='overtime_allow']:checked").val() == "Yes" ? true : false;
+                        return valid;
+                    },
+                },
+                min:  {
+                        depends: function (element) {
+                            var valid = removeFormatterNumber($("#overtime_rate_per_hour").val()) == 0 ? true : false;
+                            return valid;
+                        },
+                    },
+            },
             country: {
                 required: true,
             },
@@ -584,6 +606,10 @@ $(document).ready(function () {
             overtime_allow: {
                 required: "Please select marital status.",
             },
+            overtime_rate_per_hour: {
+                required: "Please enter overtime rate.",
+                min: "Overtime rate value should be greater than 0."
+            },
             country: {
                 required: "Please select country.",
             },
@@ -690,7 +716,7 @@ $(document).ready(function () {
             } else if (element[0]["localName"] == "select") {
                 var parents = $(element).parent(".col");
                 $(parents).find(".select2-container").after(error);
-            } else if(element[0]['name'] == 'password' || element[0]['name'] == 'confirm_password'){
+            } else if(element[0]['name'] == 'password' || element[0]['name'] == 'confirm_password'|| element[0]['name'] == 'overtime_rate_per_hour'){
                 $("#"+element[0]['id']).parents(".input-group").after(error)
             } else {
                 error.insertAfter(element);

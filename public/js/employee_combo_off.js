@@ -1,5 +1,6 @@
 var overtime_date = [];
 var myModal = '';
+var table = "";
 $(document).ready(function () {
 	myModal = new bootstrap.Modal(document.getElementById("employee_combo_off_popup"));
 	combo_off.init();
@@ -14,6 +15,7 @@ const combo_off = {
 		let that = this;
 		this.initiatePlugin();
 		this.validation();
+		this.dataTable();
 
 		// add combo off
 		$(".add-combo-off").on("click",function(){
@@ -167,5 +169,93 @@ const combo_off = {
 	            });
 	        },
 	    });
+	},
+	dataTable: function(){
+		table = $(".combo-off-list-table").DataTable({
+        dom: "Bfrtilp",
+        buttons: [
+            {
+                extend: "csv",
+                text: '<i class="ti ti-file-type-csv"></i>',
+                init: function (api, node, config) {
+                    $(node).attr("title", "Download CSV");
+                },
+                customize: function (csv) {
+                        var lines = csv.split('\n');
+                        var modifiedLines = lines.map(function(line) {
+                            var values = line.split(',');
+                            values.splice(6, 1);
+                            return values.join(',');
+                        });
+                        return modifiedLines.join('\n');
+                    },
+                    filename : 'combo_off_list'
+                },
+          
+            {
+                extend: "pdf",
+                text: '<i class="ti ti-file-type-pdf"></i>',
+                init: function (api, node, config) {
+                    $(node).attr("title", "Download Pdf");
+                },
+                filename: "combo_off_list",
+                customize: function (doc) {
+                    doc.pageMargins = [15, 15, 15, 15];
+                    doc.content[0].text = "Combo Off List";
+                    doc.content[0].color = "#5d87ff";
+                    doc.content[1].table.widths = ["19%", "19%", "13%", "16%", "18%", "15%"];
+                    doc.content[1].table.body[0].forEach(function (cell) {
+                        cell.fillColor = "#5d87ff";
+                    });
+                    doc.content[1].table.body.forEach(function (row, index) {
+                        row.splice(6, 1);
+                        row.forEach(function (cell) {
+                            // Set alignment for each cell
+                            cell.alignment = "center"; // Change to 'left' or 'right' as needed
+                        });
+                    });
+                },
+            },
+        ],
+        searching: true,
+        scrollX: true,
+        scrollY: true,
+        bScrollCollapse: true,
+        columnDefs: [{ sortable: false, targets: 6 }],
+        language: {
+            loadingRecords: "&nbsp;",
+            processing: '<div class="spinner"></div>',
+            emptyTable: no_data_message,
+            paginate: {
+                first: "<<",
+                last: ">>",
+                next: ">",
+                previous: "<",
+            },
+        },
+        infoCallback: function (settings, start, end, max, total, pre) {
+            // Get the count of visible rows after search
+            var api = this.api();
+            var rowCount = api.rows({ search: "applied" }).count();
+            if (rowCount == 0) {
+                $(".dataTables_empty").html(no_data_message);
+            }
+            // Construct the info string with the actual count
+            var info = "Showing " + start + " to " + end + " of " + rowCount + " entries";
+
+            // Optionally, you can append any other information you want to show
+            // For example: 'Showing 1 to 10 of 57 entries'
+
+            return info;
+        },
+    });
+
+    $(".dataTables_length")
+        .find("label")
+        .contents()
+        .filter(function () {
+            return this.nodeType === 3; // Filter out text nodes
+        })
+        .remove();
 	}
 }

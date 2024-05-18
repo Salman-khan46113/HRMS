@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'https://hrms-system.000webhostapp.com/employee/';
-$config['base_url'] = 'http://localhost/HRMS/';
+$config['base_url'] = 'http://localhost/extra_work/HRMS/';
 $config['site_path'] = '';
 
 
@@ -535,15 +535,13 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 /* custom cofig */
-$config['company_cofigs'] = array(['name'=>'email_notification','title' => 'Email Notification','value'=>'No', 'description' => 'This use for enable/disable notifications' ,'type' => 'check_box'],
-['name'=>'birthday_wishes_notification','title' => 'Birthday Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable birthday wishes email notifications' ,'type' => 'check_box'],
-['name'=>'anniversary_wishes_notification','title' => 'Anniversary Wishes Notification','value'=>'No', 'description' => 'This use for enable/disable anniversary wishes email notifications' ,'type' => 'check_box'],['name'=>'combo_off_valid_day','title' => 'Combo Off Valid Day','value'=>30, 'description' => 'This use for allow to add before combo off' ,'type' => 'input']);
+$config['company_cofigs'] = array(['name' => 'email_notification', 'title' => 'Email Notification', 'value' => 'No', 'description' => 'This use for enable/disable notifications', 'type' => 'check_box'], ['name' => 'birthday_wishes_notification', 'title' => 'Birthday Wishes Notification', 'value' => 'No', 'description' => 'This use for enable/disable birthday wishes email notifications', 'type' => 'check_box'], ['name' => 'anniversary_wishes_notification', 'title' => 'Anniversary Wishes Notification', 'value' => 'No', 'description' => 'This use for enable/disable anniversary wishes email notifications', 'type' => 'check_box'], ['name' => 'combo_off_valid_day', 'title' => 'Combo Off Valid Day', 'value' => 30, 'description' => 'This use for allow to add before combo off', 'type' => 'input'],['name' => 'shift_in_time', 'title' => 'Default Shift In Time', 'value' => '9:30 AM', 'description' => 'This use for set shift in time in case of employee shift not define', 'type' => 'input'],['name' => 'shift_out_time', 'title' => 'Default Shift out Time', 'value' => '7:30 PM', 'description' => 'This use for set shift out time in case of employee shift not define', 'type' => 'input']);
 
-$config['company_prifix'] = '';
-$config['shift_in_time'] = '9:30 AM';
-$config['shift_out_time'] = '7:30 PM';
-$config['email_notification'] = 'Yes';
-$config['attendance_pin'] = '569178';
+// $config['company_prefix'] = '';
+// $config['shift_in_time'] = '9:30 AM';
+// $config['shift_out_time'] = '7:30 PM';
+// $config['email_notification'] = 'Yes';
+// $config['attendance_pin'] = '569178';
 $config['page_length'] = [[10,50,100,200], [10,50,100,200]];
 $config['company_logo_path'] = "public/img/uploads/company_logo/";
 $config['default_company'] = 'IN';

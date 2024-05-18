@@ -228,6 +228,9 @@ $(document).ready(function () {
             },
         ],
         searching: true,
+        scrollX: true,
+        scrollY: true,
+        bScrollCollapse: true,
         columnDefs: [{ sortable: false, targets: 7 }],
         language: {
             loadingRecords: "&nbsp;",
@@ -256,7 +259,7 @@ $(document).ready(function () {
             return info;
         },
     });
-    serachParams()
+
 
     $(".dataTables_length")
         .find("label")
@@ -281,6 +284,7 @@ $(document).ready(function () {
         $(".close-filter-btn").trigger("click");
     });
     $(".reset-filter").on("click", function () {
+        console.log("k")
         resetFilter();
     });
 });

@@ -392,7 +392,7 @@ function makeTable(data) {
         lengthMenu: page_length_arr,
         // "sDom":is_top_searching_enable,
         columns: column_details,
-        processing: true,
+        processing: false,
         serverSide: is_serverSide,
         sordering: true,
         searching: is_searching_enable,
@@ -408,7 +408,6 @@ function makeTable(data) {
         info: true,
         autoWidth: true,
         lengthChange: true,
-        "scrollY": "68vh",
         ajax: {
             data: {'search':data},    
             url: "home/get_employee_listing_data",

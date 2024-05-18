@@ -37,7 +37,7 @@ class Notification extends MY_controller
                 ];
             }
         }
-
+        
         // pr($insert_attendance_arr,1);
         if (count($insert_attendance_arr) > 0) {
             $inser_id = $this->notification_model->insert_attendance_log(

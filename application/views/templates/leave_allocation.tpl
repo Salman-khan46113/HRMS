@@ -170,7 +170,7 @@
 						</tr>
 					</thead>
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{if count($data) > 0}
+						<!-- {if count($data) > 0} -->
 						{foreach $data as $data_index => $data_row}
 						<tr class="leave-request-row">
 							<td>{$data_row.departmen_name} ({$data_row.department_code})</td>
@@ -183,7 +183,7 @@
 
 						</tr>
 						{/foreach}
-						{else}
+						<!-- {else}
 						<tr>
 							<td colspan="7">
 								<div class="mb-5 no-data-found-block">
@@ -193,7 +193,7 @@
 								</div>
 							</td>
 						</tr>
-						{/if}
+						{/if} -->
 					</tbody>
 				</table>
 			</div>

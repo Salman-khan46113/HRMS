@@ -158,10 +158,15 @@ class Leave_model extends CI_Model
     // leave Allocation
     public function get_leave_allocation()
     {
+      $company_id = getCompanyId();
+      $company_id_where = "";
+      if($company_id > 0){
+            $company_id_where = "AND d.company_id = ".$company_id;
+      }
       $this->db->select("la.*,dm.designation_name,dm.grads,d.departmen_name,d.department_code");
       $this->db->from("leave_allocation as la");
       $this->db->join("designation_master as dm", "dm.id = la.designation_id ");
-      $this->db->join("department_master as d", "d.department_id = la.department_id ");
+      $this->db->join("department_master as d", "d.department_id = la.department_id $company_id_where");
       $result_obj = $this->db->get();
       $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
       return $ret_data;

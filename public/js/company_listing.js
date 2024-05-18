@@ -37,7 +37,6 @@ const data_table_obj = {
            width_arr = ['19%', '19%', '13%', '13%','15%', '15%'];
         
       }
-      console.log(sort_arr)
         table =  new DataTable("#company_table", {
             dom: 'Bfrtilp',
             buttons: [
@@ -88,6 +87,9 @@ const data_table_obj = {
               ],
               searching : true,
               fixedHeader: true,
+              scrollX: true,
+              scrollY: true,
+              bScrollCollapse: true,
               "columnDefs": sort_arr,
               language: {
                   loadingRecords: "&nbsp;",

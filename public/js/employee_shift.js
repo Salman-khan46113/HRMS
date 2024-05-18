@@ -401,6 +401,9 @@ $(document).ready(function () {
             },
         ],
         searching: true,
+        scrollX: true,
+        scrollY: true,
+        bScrollCollapse: true,
         columnDefs: [{ sortable: false, targets: 8 }],
         language: {
             loadingRecords: "&nbsp;",

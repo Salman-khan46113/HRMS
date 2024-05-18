@@ -63,6 +63,18 @@ class User extends MY_controller
                         );
                         /* update login attempt */
                         $user["login"] = true;
+                        $user["comapany_logo"] = base_url()."public/assets/images/logos/dark-logo.svg";
+                        if($user['company_id'] > 0){
+                            $company_data = $this->user_model->get_company_details($user['company_id']);
+                            $path = $this->config->item("company_logo_path");
+                            if($company_data['company_logo'] != '' && $company_data['company_logo'] != null){
+                                $user["comapany_logo"] = base_url().$path.$company_data['company_logo'];
+                            }
+                            $company_config  = $this->user_model->get_company_config($user['company_id']);
+                            $company_config = array_column($company_config, "value","name");
+                            // pr($company_config['company_prifix'],1);
+                            $this->config->set_item('company_prefix',$company_config['company_prefix']);
+                        }
                         $this->session->set_userdata($user);
                         $success = 1;
                         $message = "Login successfully!";
@@ -256,6 +268,13 @@ class User extends MY_controller
             $company_prifix["type"] = "Tab";
         }
         $company_prifix["prefix"] = base64_decode($type['prefix']);
+        $company_data = $this->user_model->get_company_logo($company_prifix['prefix']);
+        $comapany_logo = base_url()."public/assets/images/logos/dark-logo.svg";
+        $path = $this->config->item("company_logo_path");
+        if($company_data['company_logo'] != '' && $company_data['company_logo'] != null){
+            $comapany_logo = base_url().$path.$company_data['company_logo'];
+        }
+        $company_prifix["logo"] = $comapany_logo;
         $this->smarty->view("attendance.tpl", $company_prifix);
        
         
@@ -408,8 +427,8 @@ class User extends MY_controller
         $post_data  = $this->input->post();
         if ($upload_error == 0 && $post_data['mode'] == "Add") {
             $last_employee_code = $this->user_model->get_last_employee_code($post_data['company']);
-
             $company_prifix = $this->user_model->get_compnay_prefix($post_data['company']);
+            // pr($post_data['company'],1);
             $employee_code =
                 $company_prifix .
                 "-" .
@@ -450,6 +469,7 @@ class User extends MY_controller
                 "work_mobile_number" => $post_data["work_mobile_number"],
                 "work_email" => $post_data["work_email"],
                 "over_time_allow" => $post_data["overtime_allow"],
+                "overtime_rate_per_hour"=>removeNumberFormate($post_data['overtime_rate_per_hour']),
                 "education_degree" => $post_data["degree_name"],
                 "education_feild" => $post_data["education_field"],
                 "education_college" => $post_data["college_name"],
@@ -464,6 +484,7 @@ class User extends MY_controller
                 "created_by" => $_SESSION['employee_id'],
                 "created_on" => date("Y-m-d H:i:s"),
             ];
+
             $result = $this->user_model->insert_employee_data($data);
             if ($result < 0) {
                 $success = -1;
@@ -525,6 +546,7 @@ class User extends MY_controller
             if(count($upload_data) > 0){
                 $post_data['profile_image_name']  =  $upload_data["file_name"];
             }
+            $post_data['overtime_rate_per_hour'] = removeNumberFormate($post_data['overtime_rate_per_hour']);
             $update_arr = [];
             $old_emloyee_data =  $data["employee_data"] = $this->user_model->get_employee_details($post_data['employee_id']);
             unset($old_emloyee_data['edit_json']);

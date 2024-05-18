@@ -28,10 +28,10 @@
 					    	{if $company_setting.type == "check_box"}
 						      	<div class=" form-switch">
 		  						<input class="form-check-input" type="checkbox" role="switch" {if $company_setting.value == 'Yes'}checked{/if}>
-		  
 								</div>
 							{else if $company_setting.type == "input"}
-								<input type="text" class="form-control" placeholder="" value="{$company_setting.value}">
+
+								<input type="text" class="form-control " {{if $company_setting['name'] eq 'company_prefix'}}disabled{{/if}} placeholder="" value="{$company_setting.value}">
 							{/if}
 				    	</div>
     				</div>

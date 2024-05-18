@@ -147,7 +147,7 @@ class User_model extends CI_Model
         $this->db->select("c.*");
         $this->db->from("company_variables as c");
         $this->db->where("c.company_id", $company_id);
-        $this->db->where("c.name", "company_prifix");
+        $this->db->where("c.name", "company_prefix");
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
         return isset($ret_data['value']) ? $ret_data['value'] : '';
@@ -409,6 +409,24 @@ class User_model extends CI_Model
         $this->db->where("cv.value", $company_code);
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+    public function get_company_details($company_id = "")
+    {
+        $this->db->select("c.*");
+        $this->db->from("companies as c");
+        $this->db->where("c.company_id", $company_id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
+        return $ret_data;
+    }
+    public function get_company_logo($company_code = "")
+    {
+        $this->db->select("c.*");
+        $this->db->from("companies as c");
+        $this->db->join("company_variables as cv","cv.name = 'company_prefix' AND cv.value = '$company_code' && cv.company_id = c.company_id",'inner');
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->row_array() : [];
         return $ret_data;
     }
 

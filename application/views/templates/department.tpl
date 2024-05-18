@@ -192,6 +192,62 @@
 
 					</tr>
 					{/foreach}
+                    {foreach $department as $department_index => $department_row}
+                        <tr class="department-request-row">
+                            <!-- <td>{$designation_index + 1}</td> -->
+                            <td class="departmen_name">{$department_row.departmen_name}</td>
+                            <td class="department_code">{$department_row.department_code}</td>
+                            <td>{display_no_character($department_row.added_by_name)}</td>
+                            <td>{date_formater($department_row.added_date)}</td>
+                            <td>{display_no_character($department_row.updated_by_name)}</td>
+                            <td>{date_formater($department_row.updated_date)}</td>
+                            <td><span class="edit_department me-2 text-secondary cursor" data-id="{$department_row.department_id}" data-company-id="{$department_row.company_id}" title="Edit"><i class=" la-edit ti ti-edit"></i></span></td>
+                            
+
+                    </tr>
+                    {/foreach}
+                    {foreach $department as $department_index => $department_row}
+                        <tr class="department-request-row">
+                            <!-- <td>{$designation_index + 1}</td> -->
+                            <td class="departmen_name">{$department_row.departmen_name}</td>
+                            <td class="department_code">{$department_row.department_code}</td>
+                            <td>{display_no_character($department_row.added_by_name)}</td>
+                            <td>{date_formater($department_row.added_date)}</td>
+                            <td>{display_no_character($department_row.updated_by_name)}</td>
+                            <td>{date_formater($department_row.updated_date)}</td>
+                            <td><span class="edit_department me-2 text-secondary cursor" data-id="{$department_row.department_id}" data-company-id="{$department_row.company_id}" title="Edit"><i class=" la-edit ti ti-edit"></i></span></td>
+                            
+
+                    </tr>
+                    {/foreach}
+                    {foreach $department as $department_index => $department_row}
+                        <tr class="department-request-row">
+                            <!-- <td>{$designation_index + 1}</td> -->
+                            <td class="departmen_name">{$department_row.departmen_name}</td>
+                            <td class="department_code">{$department_row.department_code}</td>
+                            <td>{display_no_character($department_row.added_by_name)}</td>
+                            <td>{date_formater($department_row.added_date)}</td>
+                            <td>{display_no_character($department_row.updated_by_name)}</td>
+                            <td>{date_formater($department_row.updated_date)}</td>
+                            <td><span class="edit_department me-2 text-secondary cursor" data-id="{$department_row.department_id}" data-company-id="{$department_row.company_id}" title="Edit"><i class=" la-edit ti ti-edit"></i></span></td>
+                            
+
+                    </tr>
+                    {/foreach}
+                    {foreach $department as $department_index => $department_row}
+                        <tr class="department-request-row">
+                            <!-- <td>{$designation_index + 1}</td> -->
+                            <td class="departmen_name">{$department_row.departmen_name}</td>
+                            <td class="department_code">{$department_row.department_code}</td>
+                            <td>{display_no_character($department_row.added_by_name)}</td>
+                            <td>{date_formater($department_row.added_date)}</td>
+                            <td>{display_no_character($department_row.updated_by_name)}</td>
+                            <td>{date_formater($department_row.updated_date)}</td>
+                            <td><span class="edit_department me-2 text-secondary cursor" data-id="{$department_row.department_id}" data-company-id="{$department_row.company_id}" title="Edit"><i class=" la-edit ti ti-edit"></i></span></td>
+                            
+
+                    </tr>
+                    {/foreach}
 					
 					{/if}
 				</tbody>

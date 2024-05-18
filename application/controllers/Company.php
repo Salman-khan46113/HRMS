@@ -279,14 +279,14 @@ class Company extends MY_controller
         $this->smarty->view('company_view.tpl',$render_data);
     }
 
-    public function prepareCompanyConfig($company_config = [],$company_id){
+    public function prepareCompanyConfig($company_config = [],$company_id =""){
         $default_config = $this->config->item('company_cofigs');
        
         foreach($default_config as $key => $config){
             $default_config[$key]['company_id'] = $company_id;
         }
-        $default_config[] = array ('name'=>'attendence_pin','title'=>'Attendence pin','value' => $company_config['pin'],'description'=>'','type'=>'input','company_id'=>$company_id);
-        $default_config[] = array('name'=>'company_prefix','title'=>'Company pin','value' => $company_config['prefix'],'description'=>'','type'=>'input','company_id'=>$company_id);
+        $default_config[] = array ('name'=>'attendance_pin','title'=>'Attendence pin','value' => $company_config['pin'],'description'=>'This use for set default attendance pin for employee','type'=>'input','company_id'=>$company_id);
+        $default_config[] = array('name'=>'company_prefix','title'=>'Company prefix','value' => $company_config['prefix'],'description'=>'This is company prefix','type'=>'input','company_id'=>$company_id);
         $this->company_model->insertIntoCompanyConfig($default_config);
     }
 

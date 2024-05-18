@@ -8,10 +8,10 @@
 	</div>
 	<div class="inner-container mt-4" >
     <div class="timesheet-container">
-        <div class="custom-modal-content custom-content-table-with-fixed-column holiday-list-body ">
+        <div class="custom-modal-content custom-content-table-with-fixed-column holiday-list-body {if !(count($holiday_data) > 0)}no-table-box-effect{/if}">
             <table width="50" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
                 {{$count = 1}}
-                <tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
+                <tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;" >
                 	{if count($holiday_data) > 0}
 	                	{foreach $holiday_data as $holiday_index => $holiday_row}
 	                		<tr class="month-{{strtolower($holiday_index)}}">
@@ -61,7 +61,7 @@
 											<tr>
 						<td colspan="4">
 							<div class="mb-5">
-								<img alt="" src="http://localhost/extra_work/employee/public/assets/images/images/no_holiday_found.png" height="100" width="100" class="mt-5 mb-3">
+								<img alt="" src="{{$base_url}}public/assets/images/images/no_holiday_found.png" height="100" width="100" class="mt-5 mb-3 no-holiday-img">
 								<br>
 								<span class="mb-4 no-data-found-message">No holiday data found!</span>
 							</div>

@@ -99,10 +99,15 @@ class Attendance_model extends CI_Model
     }
     public function get_attendance_correction($condition_arr = [],$search_params = [])
     {
+        $company_id = getCompanyId();
+        $company_id_where = "";
+        if($company_id > 0){
+            $company_id_where = "AND e.company_id = $company_id";
+        }
         $this->db->select("ac.attendance_correction_id as attendance_id_val,ac.attendance_in_time as attendance_in_time_val,ac.attendance_out_time as attendance_out_time_val,ac.attendance_correction_in_time as correction_attendance_in_time,ac.attendance_correction_out_time as correction_attendance_out_time,ac.status as status,ea.attendance_date as attendance_date,CONCAT(e.first_name,' ',e.last_name) as name");
         $this->db->from("attendance_correction as ac");
         $this->db->join("employee_attendance as ea","ea.attendance_id = ac.attendance_id");
-        $this->db->join("employee_master as e","e.employee_id = ea.employee_id");
+        $this->db->join("employee_master as e","e.employee_id = ea.employee_id $company_id_where");
 
         if (is_valid_array($search_params)) {
             if ($search_params["status"] != "") {
