@@ -97,6 +97,9 @@ function get_entiry_url($module_name = '',$mode = '',$id=""){
 		case 'employee_profile':
 			$url = base_url()."public/img/uploads/employee_profile/".$id;
 			break;
+		case 'generate_pdf':
+			$url = base_url()."salary/getpdfUrl?id=".$id;
+			break;
 	}
 	if($url == '' || $url == null){
 		$url = 'javascript:void(0)';

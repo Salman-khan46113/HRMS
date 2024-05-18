@@ -590,7 +590,11 @@ class Home extends MY_Controller
                 $value["employee_id"] .
                 '"></i>';
 
-            $action_btn_arr[] = ["class"=>"extend","title"=>"Salary Structure","extra_par"=>'',"href"=>get_entiry_url("employee_salary_component","List",$value["employee_id"])];
+                $action_btn_arr[] = ["class"=>"extend","title"=>"Salary Structure","extra_par"=>'',"href"=>get_entiry_url("employee_salary_component","List",$value["employee_id"])];
+                $list_data[$key]["action"] .=
+                '<i class="ti ti-download pdf-download" title="download salary pdf" data-id="' .
+                $value["employee_id"] .
+                '"></i>';
             $list_data[$key]["action"] .='<a href="'.get_entiry_url("employee_salary_component","List",$value["employee_id"]).'"><i class="ti ti-license" title="Salary Structure" ></i></a>';
             
 
