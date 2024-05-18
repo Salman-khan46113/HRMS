@@ -8,6 +8,7 @@
   <title>HRMS</title>
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
+  <link rel="stylesheet" href="public/assets/css/responsive_page.css" />
   <link href="public/css/plugin/line_awesome/line_awesome.css" rel="stylesheet" />
 
   <!-- <link
@@ -113,7 +114,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./home.html" class="text-nowrap logo-img">
-            <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="" />
+            <img src="{{$user_data['comapany_logo']}}" width="120" height="90" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -286,20 +287,34 @@
             {{/if}}
            </div>
 
+           {{if $user_data['over_time_allow'] eq 'No' ||  in_array($role,['admin','arom'])}}
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Combo off</span>
             </li>
             <div class="sub-menu">
+              {{if in_array($role,['admin','arom'])}}
               <li class="sidebar-item">
-                <a class="sidebar-link" href="./combo-off.html" aria-expanded="false">
+                <a class="sidebar-link" href="./combo-off-request.html" aria-expanded="false">
                   <span>
-                    <i class="ti ti-hourglass-empty"></i>
+                    <i class="ti ti-hourglass"></i>
                   </span>
-                  <span class="hide-menu">Combo off</span>
+                  <span class="hide-menu">Combo Off Request</span>
                 </a>
               </li>
+              {{/if}}
+              {{if $user_data['over_time_allow'] eq 'No'}}
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="./combo-off.html" aria-expanded="false">
+                    <span>
+                      <i class="ti ti-hourglass-empty"></i>
+                    </span>
+                    <span class="hide-menu">Combo Off</span>
+                  </a>
+                </li>
+              {{/if}}
             </div>
+            {{/if}}
 
 
 
@@ -341,9 +356,9 @@
                 <span class="hide-menu">Time Sheet</span>
               </a>
             </li>
-            {{if $config['company_prifix'] != ''}}
+            {{if $config['company_prefix'] != ''}}
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./attendance.html?prefix={base64_encode($config['company_prifix'])}" aria-expanded="false">
+              <a class="sidebar-link" href="./attendance.html?prefix={base64_encode($config['company_prefix'])}" aria-expanded="false">
                 <span>
                   <i class="ti ti-calendar-time"></i>
                 </span>
@@ -362,7 +377,7 @@
             </li>
             {/if}
             </div>
-
+            {{if in_array($role,['admin'])}}
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Settings</span>
@@ -377,6 +392,7 @@
                 </a>
               </li>
             </div>
+            {{/if}}
 
             <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
@@ -464,7 +480,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div>
             <a href="./home.html" class="text-nowrap logo-img">
-            <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="">
+            <img src="{{$user_data['comapany_logo']}}" width="80" alt="">
             </a>
 
           </div>

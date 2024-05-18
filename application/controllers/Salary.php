@@ -391,9 +391,16 @@ class Salary extends MY_controller
             $employee_salary_structure[$key]['ctc_value'] = getNumberFormate($value['ctc_value']);
             $employee_salary_structure[$key]['status'] = strtolower($value['status']);
             $employee_salary_structure[$key]['action'] = '<a href="' . get_entiry_url('employee_salary_structure', "Update", $value['employee_extended_salary_structure_id']) . '"><i class="ti ti-edit" title="Edit"></i> </a>';
-            $employee_salary_structure[$key]['default'] = '<input type="checkbox" class="form-check-input default-check" id= "defaut_check_' . $value['employee_extended_salary_structure_id'] . '" name="default-box[]" value="Yes" data-structure-id = "' . $value['employee_extended_salary_structure_id'] . '"
-            data-employee_id = "' . $value['employee_id'] . '" ' . $is_checked . '>';
+
+            $current_date = strtotime(date("Y-m-d"));
+            $effective_to_date = strtotime($value['effective_to']);
+            $employee_salary_structure[$key]['default'] = display_no_character('');
+            if($effective_to_date > $current_date){
+                $employee_salary_structure[$key]['default'] = '<input type="checkbox" class="form-check-input default-check" id= "defaut_check_' . $value['employee_extended_salary_structure_id'] . '" name="default-box[]" value="Yes" data-structure-id = "' . $value['employee_extended_salary_structure_id'] . '"
+                data-employee_id = "' . $value['employee_id'] . '" ' . $is_checked . '>';
+            }
         }
+        // pr($employee_salary_structure,1);
         $data['employee_salary_structure'] = $employee_salary_structure;
         // pr($data,1);
         $this->smarty->view("employee_salary_structure.tpl", $data);
@@ -450,7 +457,7 @@ class Salary extends MY_controller
         if ($post_data['mode'] == "Update") {
             $employee_salary_structure_id = $post_data['id'];
         }
-        $existing_salary_structure_count = $this->salary_model->check_existing_employee_salary_structure_data($effective_date_from, $effective_date_to, $employee_salary_structure_id);
+        $existing_salary_structure_count = $this->salary_model->check_existing_employee_salary_structure_data($effective_date_from, $effective_date_to, $employee_salary_structure_id,$user_id);
 
         if ($post_data['mode'] == "Extended" && $existing_salary_structure_count == 0) {
             $employee_salary_structure_arr = [];
@@ -528,7 +535,7 @@ class Salary extends MY_controller
         $year_month_directory = $employee_directory . $data['year'] . '/' . $data['month'] . '/';
         $file_path = $year_month_directory . 'salary_pdf.pdf';
         $htm_str = $this->smarty->fetch("salary_slip.tpl", $data);
-        pr($htm_str);
+        // pr($htm_str);
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetMargins(0, 7, 7, 0);

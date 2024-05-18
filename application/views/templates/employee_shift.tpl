@@ -192,7 +192,7 @@
 					</thead>
 					
 					<tbody id="leave_data_body" tabindex="5001" style="overflow: hidden; outline: none;">
-						{if count($data) > 0}
+						
 						{foreach $data as $data_index => $data_row}
 						<tr class="leave-request-row">
 							<!-- <td>{$data_index + 1}</td> -->
@@ -208,17 +208,7 @@
 
 						</tr>
 						{/foreach}
-						{else}
-						<tr>
-							<td colspan="8">
-								<div class="mb-5 no-data-found-block">
-									<img alt="" src="{{$base_url}}public/assets/images/images/no_data_found_new.png" height="150" width="150" class="mt-5" />
-									<br />
-									<span class="mb-4 no-data-found-message">No data found!</span>
-								</div>
-							</td>
-						</tr>
-						{/if}
+						
 					</tbody>
 				</table>
 			</div>

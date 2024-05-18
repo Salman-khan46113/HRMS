@@ -7,7 +7,7 @@
     </div>
     <div class="sub-header-right pull-right">
         <div class="timesheet-summary">
-            
+            <div class="timesheet-summary icon-box">
             <!-- <div class="timesheet-summary-lst year-drop-down ">
                 <select class="form-select form-control" name="month_drop_down" id="month_drop_down">
                     {foreach from=$months key=key_val item=month}
@@ -20,10 +20,25 @@
                 </select>
             </div> -->
             <div class="timesheet-summary-lst">
-               <button type="button" class="btn btn-primary add-combo-off add-action">
-               	<i class="ti ti-plus"></i>
-               	<span>Apply Combo Off</span>
-           		</button>
+                <div class="dropdown grid-drop-down " title="Download CSV">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                            <i class="ti ti-file-type-csv" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+            <div class="timesheet-summary-lst">
+                <div class="dropdown grid-drop-down " title="Download PDF">
+                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                        </button>
+                </div>
+            </div>
+                <div class="timesheet-summary-lst">
+                   <button type="button" class="btn btn-primary add-combo-off add-action">
+                   	<i class="ti ti-plus"></i>
+                   	<span>Apply Combo Off</span>
+               		</button>
+                </div>
             </div>
         </div>
     </div>
@@ -33,7 +48,7 @@
     <div class="timesheet-container">
 
         <div class="custom-modal-content custom-content-table-with-fixed-column ">
-            <table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
+            <table width="100%" border="1" cellspacing="0" cellpadding="0" class="table combo-off-list-table" style="border-collapse: collapse;" border-color="#e1e1e1">
                 <thead>
                     <tr>
                         <th align="center" valign="middle" class="text-center att-date">Reference date</th>
@@ -208,7 +223,8 @@
 
     <script type="text/javascript" >
         var overtime_date_arr = {{$overtimes_date|json_encode}};
-        var overall_combo_off_dates = {{$overall_combo_off_dates|json_encode}}
+        var overall_combo_off_dates = {{$overall_combo_off_dates|json_encode}};
+        var no_data_message =  {{$no_data_message|json_encode}};
     </script>
      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="public/js/employee_combo_off.js"></script>

@@ -307,7 +307,22 @@
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                	<div class="col overtime-allow-box">
+                                                	
+                                                    <div class="col col-6 work_mobile_number">
+                                                        <div class="form-group mb-1">
+                                                            <label for="work_mobile_number" class="w-100 form-label">Work Mobile Number <span class="star_required">*</span></label>
+                                                            <input type="text" class="form-control tel-input" id="work_mobile_number" name="work_mobile_number" placeholder="Work Mobile Number" value="{$employee_data['work_mobile_number']}"/>
+                                                        </div>
+                                                    </div>
+                                                
+                                                	<div class="col col-6 ">
+                                                        <label for="work_email" class="form-label">Work Email <span class="star_required">*</span></label>
+                                                        <input type="email" class="form-control" id="work_email" name="work_email" placeholder="Work Email" value="{$employee_data['work_email']}"/>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col overtime-allow-box">
                                                         <div class="form-group mb-0">
                                                             <label for="overtime_allow" class="form-label">Overtime Allowed <span class="star_required">*</span></label><br />
                                                             <div class="form-check form-check-inline mt-2">
@@ -320,19 +335,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col work_mobile_number">
-                                                        <div class="form-group mb-1">
-                                                            <label for="work_mobile_number" class="w-100 form-label">Work Mobile Number <span class="star_required">*</span></label>
-                                                            <input type="text" class="form-control tel-input" id="work_mobile_number" name="work_mobile_number" placeholder="Work Mobile Number" value="{$employee_data['work_mobile_number']}"/>
+                                                    <div class="col col-6 overtime_rate" {{if $employee_data['over_time_allow'] == 'No'}}style="display: none;"{{/if}}>
+                                                        <label for="work_email" class="form-label">Overtime Rate (Per Hour) <span class="star_required">*</span></label>
+                                                        <div class="input-group ">
+                                                            <span class="input-group-text prefix-block"><i class="ti ti-currency-rupee"></i></span>
+                                                            <input type="text" class="form-control w-auto number-formatter" id="overtime_rate_per_hour" name="overtime_rate_per_hour" placeholder="Overtime Rate" value="{getNumberFormate($employee_data['overtime_rate_per_hour'])}"/>
+                                                            
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                	<div class="col-6 col">
-                                                        <label for="work_email" class="form-label">Work Email <span class="star_required">*</span></label>
-                                                        <input type="email" class="form-control" id="work_email" name="work_email" placeholder="Work Email" value="{$employee_data['work_email']}"/>
-                                                    </div>
-                                                    
                                                 </div>
                                             </div>
                                         </div>

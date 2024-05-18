@@ -16,7 +16,7 @@ class Shift extends MY_controller
     public function shift_management()
     {
         $data["data"] = $this->Shift_model->get_shift('');
-        if(count($data['data'] > 0)){
+        if(count($data['data']) > 0){
           $shift_ids = array_column($data['data'], "id");
           $user_shift = $this->Shift_model->get_all_employee_shift($shift_ids);
           if(count($user_shift) > 0){

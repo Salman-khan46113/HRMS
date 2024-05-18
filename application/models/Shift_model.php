@@ -123,6 +123,10 @@ class Shift_model extends CI_Model
     $this->db->select("*");
     $this->db->from("employee_shift as es");
     $this->db->join("shift_master as s", "s.id = es.shift_id");
+    $company_id = getCompanyId();
+        if($company_id > 0){
+            $this->db->where("s.company_id", $company_id);
+        }
     $result_obj = $this->db->get();
     $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
     return $ret_data;

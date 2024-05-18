@@ -67,6 +67,7 @@ class Home extends MY_Controller
         /* holiday */
         $current_year = date("Y");
         $holiday = $this->home_model->get_holiday($current_year, "dashbord");
+        $interval["holiday"] = [];
         if (count($holiday) > 0) {
             $date = $holiday[0]["holiday_date"];
             $monthAbbreviation = date("M", strtotime($date));
@@ -100,10 +101,10 @@ class Home extends MY_Controller
         $company_id = getCompanyId();
         $interval["pending_leave"] = 0;
         $allocated_leave = $this->home_model->get_allocated_leave($company_id,$designation_id,$department_id);
-
+        $employee_id = $this->session->userdata("employee_id");
         if(isset($allocated_leave['total_leave'])){
             if($allocated_leave['total_leave'] > 0){
-                $employee_id = $this->session->userdata("employee_id");
+                
                 $applied_leave = $this->home_model->get_applied_leave($employee_id);
 
                 $total_applied_leave = 0;
@@ -677,6 +678,7 @@ class Home extends MY_Controller
                     "work_mobile_number" => $post_data["work_mobile_number"],
                     "work_email" => $post_data["work_email"],
                     "over_time_allow" => $post_data["overtime_allow"],
+                    "overtime_rate_per_hour" => removeNumberFormate($post_data["overtime_rate_per_hour"]),
                     "education_degree" => $post_data["degree_name"],
                     "education_feild" => $post_data["education_field"],
                     "education_college" => $post_data["college_name"],
@@ -690,7 +692,7 @@ class Home extends MY_Controller
                     "updated_by" => $_SESSION['employee_id'],
                     "updated_on" => date("Y-m-d H:i:s"),
                 ];
-            
+            // pr($employee_updated_arr,1);
             if(count($post_data['deleted_bank'])){
                 $delted_bank_ids = implode(",", $post_data['deleted_bank']);
                 $this->home_model->delete_banks($delted_bank_ids);

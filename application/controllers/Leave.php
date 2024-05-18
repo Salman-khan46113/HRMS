@@ -774,6 +774,9 @@ class Leave extends MY_controller
         }
         $combo_off_detail_arr['overtimes_date'] = $overtimes_date;
         $combo_off_detail_arr['overall_combo_off_dates'] = $overall_combo_off_dates;
+        $combo_off_detail_arr["no_data_message"] = '<div class="p-3 no-data-found-block"><img class="p-2" src="' .
+            base_url() .
+            'public/assets/images/images/no_data_found_new.png" height="150" width="150"><br> No combo off data found..!</div>';
         $this->smarty->view("employee_combo_off.tpl",$combo_off_detail_arr);
       }
       public function getmintBetweenTwoTime($time1 = '', $time2 = '')

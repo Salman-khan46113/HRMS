@@ -24,85 +24,107 @@
                                     
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Component Name</span>
+                                            <span class="hide-menu">Employee Name</span>
 
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="component_name_search" class="form-control" placeholder="Component Name">
+                                              <input type="text" id="employee_name_search" class="form-control" placeholder="Employee Name">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Component Type</span>
+                                            <span class="hide-menu">Refrence Number</span>
+
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                               <select class="form-select " name="component_type_search" id="component_type_search">
-			                                        <option value="">Select Component Type</option>
-			                                        {foreach from=$component_type_arr item=component_type}
-			                                            <option value="{$component_type.id}">{$component_type.val}</option>
-			                                        {/foreach}
-			                                    </select>
+                                              <input type="text" id="reference_number_search" class="form-control" placeholder="Refrence Number">
                                             </div>
                                         </li>
                                     </div>
-                                    <div class="filter-row">
+                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Component Value</span>
+                                            <span class="hide-menu">CTC</span>
+
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <input type="text" id="component_value_search" class="form-control number-formatter" placeholder="Component Value">
+                                              <input type="text" id="ctc_search" class="form-control number-formatter" placeholder="CTC">
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Value Type</span>
+                                            <span class="hide-menu">Effective From</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                               <select class="form-select " name="type_search" id="type_search">
-			                                        <option value="">Select Value Type</option>
-			                                        {foreach from=$value_type_arr item=value_type}
-			                                            <option value="{$value_type.id}">{$value_type.val}</option>
-			                                            
-			                                        {/foreach}
-			                                    </select>
+                                              <input type="text" id="effective_from_search" class="form-control"  placeholder="Effective From">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Is Compulsory</span>
+                                            <span class="hide-menu">Effective To</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
                                             <div class="input-group">
-                                              <select class="form-select " name="is_compulsory_search" id="is_compulsory_search">
-			                                        <option value="">Select Is Compulsory</option>
-			                                        <option value="Yes">Yes</option>
-			                                        <option value="No">No</option>
-			                                        
-			                                    </select>
+                                              <input type="text" id="effective_to_search" class="form-control"  placeholder="Effective To">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
                                     <div class="filter-row">
                                         <li class="nav-small-cap">
-                                            <span class="hide-menu">Description</span>
+                                            <span class="hide-menu">Added By</span>
                                             <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
                                         </li>
                                         <li class="sidebar-item">
-                                            <div class="input-group ">
-                                              <input type="text" class="form-control" id="description_search"  placeholder="Description">
-                                              
+                                            <div class="input-group">
+                                              <input type="text" id="added_by_search" class="form-control " placeholder="Added By">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Added Date</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="added_date_search" class="form-control"  placeholder="Added Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Updated By</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="updated_by_search" class="form-control number-formatter" placeholder="Updated By">
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="filter-row">
+                                        <li class="nav-small-cap">
+                                            <span class="hide-menu">Updated Date</span>
+                                            <span class="search-show-hide float-right"><i class="ti ti-minus"></i></span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <div class="input-group">
+                                              <input type="text" id="updated_date_search" class="form-control"  placeholder="Updated Date">
+                                              <span class="input-group-text date-picker-addon"><i class="las la-calendar-alt"></i></span>
                                             </div>
                                         </li>
                                     </div>
@@ -131,12 +153,7 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
-                <div class="timesheet-summary-lst">
-					<a href="javascript:void(0)" class="btn btn-primary add-action set-default-structure">
-						<i class="ti ti-checks"></i>
-						<span>Set Default</span>
-					</a>
-				</div>
+                
 				 <div class="timesheet-summary-lst year-drop-down ">
                 <select class="form-select form-control" name="year_drop_down" id="year_drop_down">
                     {foreach from=$year_arr key=key_val item=year}
@@ -169,6 +186,7 @@
                         </button>
                     </div>
                 </div>
+
             <div class="timesheet-summary-lst">
                    <div class="dropdown grid-drop-down filter-popup" title="Filter">
                         <button class="btn btn-secondary top-btn-row" type="button"  >
@@ -176,6 +194,13 @@
                         </button>
                     </div>
             </div>
+            {{if is_valid_array($employee_salary_structure)}}
+            <div class="timesheet-summary-lst">
+                    <a href="javascript:void(0)" class="btn btn-primary add-action set-default-structure">
+                        <span>Set Default</span>
+                    </a>
+            </div>
+            {{/if}}
            {{if $extended_salary_structure_id gt 0}}
 			<div class="timesheet-summary-lst">
 					<a href="{get_entiry_url('employee_salary_structure','Extend',$employee_id)}" class="btn btn-primary add-department  add-action">
@@ -197,9 +222,9 @@
 				<table width="100%" border="1" cellspacing="0" cellpadding="0" class="table leave-list-table display" style="border-collapse: collapse;" border-color="#e1e1e1">
 					<thead>
 						<tr class="text-center">
-                            <th>Default</th>
+                            <th scope="col">Default</th>
 							<th scope="col">Employee Name</th>
-							<th scope="col">Refrence Name</th>
+							<th scope="col">Refrence Number</th>
 							<th scope="col">CTC</th>
 							<th scope="col">Effective From</th>
 							<th scope="col">Effective To</th>
@@ -207,7 +232,7 @@
 							<th scope="col">Added Date</th>
 							<th scope="col">Updated By</th>
 							<th scope="col">Updated Date</th>
-							<th scope="col">Status</th>
+							<!-- <th scope="col">Status</th> -->
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -227,7 +252,7 @@
 								<td>{{date_formater($employee_salary_structure_row.added_date)}}</td>
 								<td>{{display_no_character($employee_salary_structure_row.updated_by_name)}}</td>
 								<td>{{date_formater($employee_salary_structure_row.updated_date)}}</td>
-								<td class="status-row"><span class="{{$employee_salary_structure_row['status']}}">{{get_status($employee_salary_structure_row['status'])}}</span></td>
+								<!-- <td class="status-row"><span class="{{$employee_salary_structure_row['status']}}">{{get_status($employee_salary_structure_row['status'])}}</span></td> -->
 							<td>{$employee_salary_structure_row['action']}</td>
 								
 								

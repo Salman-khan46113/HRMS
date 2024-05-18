@@ -252,7 +252,7 @@ class Salary_model extends CI_Model
          $this->db->insert_batch('employee_extended_salary_structure_component', $component_arr);
         }
     }
-    public function check_existing_employee_salary_structure_data($effective_date_from = '',$effective_date_to = '',$employee_salary_structure_id = ''){
+    public function check_existing_employee_salary_structure_data($effective_date_from = '',$effective_date_to = '',$employee_salary_structure_id = '',$employee_id = ''){
         $this->db->select("es.*");
         $this->db->from("employee_extended_salary_structure as es");
         if($employee_salary_structure_id > 0){
@@ -260,6 +260,7 @@ class Salary_model extends CI_Model
         }
         $this->db->where("es.effective_from", $effective_date_from);
         $this->db->where("es.effective_to", $effective_date_to);
+        $this->db->where("es.employee_id", $employee_id);    
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return count($ret_data);
@@ -340,7 +341,7 @@ class Salary_model extends CI_Model
         return $employee_wise_data;
     }
 
-    public function UpdateDefaultStructure($id = '',$e_id){
+    public function UpdateDefaultStructure($id = '',$e_id=''){
         $id = $id ?? 0;
         if($id == 0) return 0;
         //change the structure to default no.

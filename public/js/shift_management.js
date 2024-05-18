@@ -174,7 +174,6 @@ $(document).ready(function () {
         },
 
         errorPlacement: function (error, element) {
-            console.log(element);
             if (element[0]["localName"] == "select") {
                 var parents = $(element).parent(".select-box");
                 $(parents).find(".chosen-container").after(error);
@@ -333,6 +332,9 @@ $(document).ready(function () {
             },
         ],
         searching: true,
+        scrollX: true,
+        scrollY: true,
+        bScrollCollapse: true,
         columnDefs: [{ sortable: false, targets: 3 }],
         language: {
             loadingRecords: "&nbsp;",

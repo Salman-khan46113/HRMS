@@ -131,44 +131,81 @@
 		</div>
 		<div class="sub-header-right pull-right">
 			<div class="timesheet-summary icon-box">
-				 <div class="timesheet-summary-lst year-drop-down ">
-                <select class="form-select form-control" name="year_drop_down" id="year_drop_down">
-                    {foreach from=$year_arr key=key_val item=year}
-					    {{if $key_val+1 == count($year_arr)}}
-					        <option value="{$year}" selected>{$year}</option>
-					    {{else}}
-							<option value="{$year}" >{$year}</option>
-					    {{/if}}
-					{/foreach}
-                </select>
-            </div>
-            <div class="timesheet-summary-lst">
-                <div class="dropdown grid-drop-down " title="Download CSV">
-                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
-                            <i class="ti ti-file-type-csv" style="color: black"></i> 
-                        </button>
+                <div class="timesheet-summary-lst year-drop-down icon-box-destop">
+                    <select class="form-select form-control" name="year_drop_down" id="year_drop_down">
+                        {foreach from=$year_arr key=key_val item=year}
+                            {{if $key_val+1 == count($year_arr)}}
+                                <option value="{$year}" selected>{$year}</option>
+                            {{else}}
+                                <option value="{$year}" >{$year}</option>
+                            {{/if}}
+                        {/foreach}
+                    </select>
                 </div>
-            </div>
-            <div class="timesheet-summary-lst">
-                <div class="dropdown grid-drop-down " title="Download PDF">
-                        <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
-                            <i class="ti ti-file-type-pdf" style="color: black"></i> 
-                        </button>
+    			<!-- <div class="timesheet-summary-lst year-drop-down icon-box-destop">
+                    <select class="form-select form-control" name="year_drop_down" id="year_drop_down">
+                        {foreach from=$year_arr key=key_val item=year}
+    					    {{if $key_val+1 == count($year_arr)}}
+    					        <option value="{$year}" selected>{$year}</option>
+    					    {{else}}
+    							<option value="{$year}" >{$year}</option>
+    					    {{/if}}
+    					{/foreach}
+                    </select>
                 </div>
-            </div>
-				<div class="timesheet-summary-lst">
-                   <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
-                        <button class="btn btn-secondary top-btn-row" type="button"  >
-                            <i class="ti ti-refresh " style="color: black"></i> 
-                        </button>
+                <div class="timesheet-summary-lst icon-box-destop">
+                    <div class="dropdown grid-drop-down " title="Download CSV">
+                            <button class="btn btn-secondary top-btn-row" type="button"  id="downloadCSVBtn">
+                                <i class="ti ti-file-type-csv" style="color: black"></i> 
+                            </button>
                     </div>
                 </div>
-            <div class="timesheet-summary-lst">
-                   <div class="dropdown grid-drop-down filter-popup" title="Filter">
-                        <button class="btn btn-secondary top-btn-row" type="button"  >
-                            <i class="ti ti-filter " style="color: black"></i> 
-                        </button>
+                <div class="timesheet-summary-lst icon-box-destop">
+                    <div class="dropdown grid-drop-down " title="Download PDF">
+                            <button class="btn btn-secondary top-btn-row" type="button"  id="downloadPDFBtn">
+                                <i class="ti ti-file-type-pdf" style="color: black"></i> 
+                            </button>
                     </div>
+                </div>
+    			<div class="timesheet-summary-lst icon-box-destop">
+                       <div class="dropdown grid-drop-down reset-filter" title="Reset Filter">
+                            <button class="btn btn-secondary top-btn-row" type="button"  >
+                                <i class="ti ti-refresh " style="color: black"></i> 
+                            </button>
+                        </div>
+                </div>
+                <div class="timesheet-summary-lst icon-box-destop">
+                       <div class="dropdown grid-drop-down filter-popup" title="Filter">
+                            <button class="btn btn-secondary top-btn-row" type="button"  >
+                                <i class="ti ti-filter " style="color: black"></i> 
+                            </button>
+                        </div>
+                </div> -->
+            <div class="other-actions-list-btn  mr-2 icon-box-responsive">
+                <a class=" btn view-btn  filter-popup" href="javascript:void(0)" type="button"  title="Filter" >
+                    <i class="ti ti-filter" style="color: black"></i> 
+                </a>
+                <div class="dropdown">
+                    <button class="dropdown-toggle  btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <ul class="dropdown-menu mt-2">
+                        <li>
+                            <a class="dropdown-item reset-filter icon-m-10"  href="javascript:void(0)" title="Reset Filter">
+                                <i class="ti ti-refresh " style="color: black"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item icon-m-10" id="downloadPDFBtn" title="PDF">
+                                <i class="ti ti-file-type-pdf" style="color: black"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item icon-m-10" id="downloadCSVBtn" title="CSV">
+                                <i class="ti ti-file-type-csv" style="color: black"></i>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
             </div>
            
 			<div class="timesheet-summary-lst">

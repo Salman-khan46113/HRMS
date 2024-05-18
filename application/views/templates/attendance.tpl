@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>HRMS</title>
   <link rel="shortcut icon" type="image/png" href="public/assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="public/assets/css/styles.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" rel="stylesheet" />
@@ -59,7 +59,7 @@
                 	
 						<div class="col-4 image-block">
 							<a href="javascript:void(0)" class="text-nowrap logo-img text-center d-block py-3 w-100 mb-4">
-                  <img src="{{$base_url}}public/assets/images/logos/dark-logo.svg" width="140" alt="">
+                  <img src="{{$logo}}" width="140" alt="">
                 </a>
 				            <div class="cover-image">
 				            	<img src="{{$base_url}}public/assets/images/cover.avif"  alt="" >

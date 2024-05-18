@@ -130,6 +130,12 @@
                                 <span class="title-box">Overtime Allowed</span>
                                 <span class="val-box">{$data['new_employe_data']['overtime_allow']}</span>
                             </div>
+                            {{if $data['new_employe_data']['overtime_allow'] eq 'Yes'}}
+                            <div class="col-3 p-1 to-date-block">
+                                <span class="title-box">Overtime Rate (Per Hour) </span>
+                                <span class="val-box">{getNumberFormate($data['new_employe_data']['overtime_rate_per_hour'])}</span>
+                            </div>
+                            {{/if}}
                             <div class="col-3 p-1 to-date-block">
                                 <span class="title-box">Work Mobile Numbe</span>
                                 <span class="val-box">{$data['new_employe_data']['work_mobile_number_code']} {$data['new_employe_data']['work_mobile_number']}</span>

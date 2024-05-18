@@ -262,6 +262,16 @@
                                     <span>{$data[0].over_time_allow}</span>
                                  </div>
                               </div>
+                              {if $data[0].over_time_allow eq 'Yes'}
+                              <div class="col-3">
+                                 <div class="title-div">
+                                    <strong>Overtime Rate (Per Hour) </strong>
+                                 </div>
+                                 <div>
+                                    <span>{getNumberFormate($data[0].overtime_rate_per_hour)}</span>
+                                 </div>
+                              </div>
+                              {/if}
                               <div class="col-3">
                                  <div class="title-div">
                                     <strong>Work Mobile Numbe </strong>
