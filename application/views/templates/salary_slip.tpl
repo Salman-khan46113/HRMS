@@ -386,7 +386,25 @@
                                                                         </tr>
                                                                   
                                                                 {/foreach}
-
+                                                                <tr>
+                                                                    <td width="40%" height="30" valign="middle" align="left" style="text-align: left;">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                            <strong>Total Dediuction</strong>
+                                                                         </font>
+                                                                    </td>
+                
+                                                                    <td width="30%" height="30" valign="middle" align="right" style="text-align: right;">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                            <strong>{number_format($total_deduction,2)}</strong>
+                                                                        </font>
+                                                                    </td>
+                
+                                                                    <td width="30%" height="30" valign="middle" align="right" style="text-align: right; ">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                           
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
                                                                 </tbody>
                                                                 <thead >
                                                                     <tr >
@@ -421,7 +439,7 @@
                                     <tbody>
                                         <tr>
                                             <td align="center">
-                                                <font style="font-size: 18px;font-weight: 900;" face="Arial, Helvetica, sans-serif" color="#000" >Total Net Payable <strong style="font-weight: 900;">{$total_net_amount}</strong> <span style="font-size: 15px">(Eight-seven Thousand Three Hundred Only)</span>
+                                                <font style="font-size: 18px;font-weight: 900;" face="Arial, Helvetica, sans-serif" color="#000" >Total Net Payable <strong style="font-weight: 900;">{$total_net_amount}</strong> <span style="font-size: 15px">({$tot_words_net_amount})</span>
                                                 </font>
                                             </td>
                                         </tr>

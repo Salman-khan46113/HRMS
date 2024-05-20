@@ -1,5 +1,6 @@
 <?php
 defined("BASEPATH") or exit("No direct script access allowed");
+use NumberToWords\NumberToWords;
 
 class Salary extends MY_controller
 {
@@ -531,7 +532,7 @@ class Salary extends MY_controller
         $year_month_directory = $employee_directory . $data['year'] . '/' . $data['month'] . '/';
         $file_path = $year_month_directory . 'salary_pdf.pdf';
         $htm_str = $this->smarty->fetch("salary_slip.tpl", $data);
-        // pr($htm_str);
+        pr($htm_str);
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetMargins(0, 7, 7, 0);
@@ -556,6 +557,9 @@ class Salary extends MY_controller
         /*
             if want to make company wise date changes need to change in getMonthStartEndDatea and getpreviousmonth 
         */
+        $numberToWords = new NumberToWords();
+        $numberTransformer = $numberToWords->getNumberTransformer('en');
+        
         $this->selected_employee =  $selected_employee != '' && $selected_employee > 0 ? $selected_employee : '';
         $this->employee_last_date =  $employee_last_date != ''  ? $employee_last_date : '';
         $designation_filter_data = $component_data = $employee_filter_data = $allocated_leaves = $filtered_allocerted_leave = $calulated_array = $leaves_dates = $employee_shift_arr = [];
@@ -702,6 +706,7 @@ class Salary extends MY_controller
                 $pdf_data['holidays'] = count($this->holiday_arr);
                 $pdf_data['week_off'] = $week_off_count;
                 $pdf_data['absent_days'] = $absent_days_count;
+                $pdf_data['tot_words_net_amount'] = ucwords($numberTransformer->toWords($net_amount_with_absent));
                 $generated_pdf_data = $this->generate_pdf($pdf_data);
                 
                 $insert_array[] = array(
@@ -942,6 +947,7 @@ class Salary extends MY_controller
 
  public function getpdfUrl(){
     $post_data = $this->input->get_post(null,true);
+    // $last_date = array_key_exists('last_date')
     $pdf_url = $this->employeeSalaryCalculation('',$post_data['id']);
     echo json_encode($pdf_url);
  }

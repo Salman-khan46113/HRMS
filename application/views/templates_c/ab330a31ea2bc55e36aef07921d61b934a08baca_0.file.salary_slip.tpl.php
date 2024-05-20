@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.2, created on 2024-05-06 22:17:14
+/* Smarty version 4.3.2, created on 2024-05-20 15:47:12
   from '/var/www/html/HRMS/application/views/templates/salary_slip.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.2',
-  'unifunc' => 'content_66390992351d47_97416273',
+  'unifunc' => 'content_664b2328e59983_87935593',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ab330a31ea2bc55e36aef07921d61b934a08baca' => 
     array (
       0 => '/var/www/html/HRMS/application/views/templates/salary_slip.tpl',
-      1 => 1715014003,
+      1 => 1716200231,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66390992351d47_97416273 (Smarty_Internal_Template $_smarty_tpl) {
+function content_664b2328e59983_87935593 (Smarty_Internal_Template $_smarty_tpl) {
 ?><table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tbody>
         <tr>
@@ -490,7 +490,26 @@ $_smarty_tpl->tpl_vars['val']->do_else = false;
                                                                 <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-
+                                                                <tr>
+                                                                    <td width="40%" height="30" valign="middle" align="left" style="text-align: left;">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                            <strong>Total Dediuction</strong>
+                                                                         </font>
+                                                                    </td>
+                
+                                                                    <td width="30%" height="30" valign="middle" align="right" style="text-align: right;">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                            <strong><?php echo number_format($_smarty_tpl->tpl_vars['total_deduction']->value,2);?>
+</strong>
+                                                                        </font>
+                                                                    </td>
+                
+                                                                    <td width="30%" height="30" valign="middle" align="right" style="text-align: right; ">
+                                                                        <font style="font-size: 12px;" face="Arial, Helvetica, sans-serif" color="#222222">
+                                                                           
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
                                                                 </tbody>
                                                                 <thead >
                                                                     <tr >
@@ -527,7 +546,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                         <tr>
                                             <td align="center">
                                                 <font style="font-size: 18px;font-weight: 900;" face="Arial, Helvetica, sans-serif" color="#000" >Total Net Payable <strong style="font-weight: 900;"><?php echo $_smarty_tpl->tpl_vars['total_net_amount']->value;?>
-</strong> <span style="font-size: 15px">(Eight-seven Thousand Three Hundred Only)</span>
+</strong> <span style="font-size: 15px">(<?php echo $_smarty_tpl->tpl_vars['tot_words_net_amount']->value;?>
+)</span>
                                                 </font>
                                             </td>
                                         </tr>
