@@ -709,6 +709,7 @@ class Salary extends MY_controller
                 $pdf_data['tot_words_net_amount'] = ucwords($numberTransformer->toWords($net_amount_with_absent));
                 $generated_pdf_data = $this->generate_pdf($pdf_data);
                 
+                
                 $insert_array[] = array(
                     'employee_id' => $val['employee_id'],
                     'year' => $component_data[0]['year'],
